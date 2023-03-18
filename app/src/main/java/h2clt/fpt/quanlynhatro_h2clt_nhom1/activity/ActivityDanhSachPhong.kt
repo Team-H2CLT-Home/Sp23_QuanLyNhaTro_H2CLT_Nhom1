@@ -1,9 +1,11 @@
-package h2clt.fpt.quanlynhatro_h2clt_home
+package quanlynhatro_h2clt_nhom1.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayoutMediator
-import h2clt.fpt.quanlynhatro_h2clt_home.databinding.ActivityDanhSachPhongBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.ViewpagerDanhSachPhongAdapter
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDanhSachPhongBinding
+
 
 class ActivityDanhSachPhong : AppCompatActivity() {
     private lateinit var binding: ActivityDanhSachPhongBinding

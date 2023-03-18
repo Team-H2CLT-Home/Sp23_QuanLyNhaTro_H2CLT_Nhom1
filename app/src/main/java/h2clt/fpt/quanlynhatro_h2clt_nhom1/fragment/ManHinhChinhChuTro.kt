@@ -1,4 +1,4 @@
-package h2clt.fpt.quanlynhatro_h2clt_home.ManHinhChinh
+package h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
-import h2clt.fpt.quanlynhatro_h2clt_home.R
-import h2clt.fpt.quanlynhatro_h2clt_home.ThemKhuTroActivity
-import h2clt.fpt.quanlynhatro_h2clt_home.databinding.ActivityManHinhChinhChuTroBinding
-import h2clt.fpt.quanlynhatro_h2clt_home.databinding.DialogDanhSachKhuTroBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ThemKhuTroActivity
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.ViewPager2ManHinhChinhAdapter
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityManHinhChinhChuTroBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogDanhSachKhuTroBinding
+
 
 class ManHinhChinhChuTro : AppCompatActivity() {
     private lateinit var binding: ActivityManHinhChinhChuTroBinding
@@ -25,7 +27,7 @@ class ManHinhChinhChuTro : AppCompatActivity() {
                 bottomSheetDialog.dismiss()
             }
             buil.btnThemKhuTro.setOnClickListener {
-                val intent = Intent(this,ThemKhuTroActivity::class.java)
+                val intent = Intent(this, ThemKhuTroActivity::class.java)
                 startActivity(intent)
             }
 

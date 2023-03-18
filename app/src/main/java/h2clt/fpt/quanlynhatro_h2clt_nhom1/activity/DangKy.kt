@@ -1,4 +1,4 @@
-package h2clt.fpt.quanlynhatro_h2clt_home
+package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,9 +6,9 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import h2clt.fpt.quanlynhatro_h2clt_home.dao.AdminDao
-import h2clt.fpt.quanlynhatro_h2clt_home.databinding.ActivityDangKyBinding
-import h2clt.fpt.quanlynhatro_h2clt_home.model.Admin
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDangKyBinding
+
 
 class DangKy : AppCompatActivity() {
     private lateinit var binding: ActivityDangKyBinding
