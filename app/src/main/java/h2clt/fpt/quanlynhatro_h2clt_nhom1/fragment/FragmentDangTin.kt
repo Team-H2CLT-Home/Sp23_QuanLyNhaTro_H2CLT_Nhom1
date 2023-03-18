@@ -21,8 +21,9 @@ class FragmentDangTin:Fragment() {
         binding.tvDangtin.setOnClickListener {
             val bundle = AlertDialog.Builder(context)
             val dialog = DialogDangtinBinding.inflate(LayoutInflater.from(context))
-
             bundle.setView(dialog.root)
+
+
             bundle.show()
 
         }
