@@ -32,7 +32,7 @@
 
                 <TextView
                     style="@style/textView_tabLayout"
-                    android:text="Tạo Hợp Đồng"
+                    android:text="Tạo hợp đồng"
                     />
             </LinearLayout>
 
@@ -61,7 +61,7 @@
 
                 <TextView
                     style="@style/textView_tabLayout"
-                    android:text="Trả phòng" />
+                    android:text="Xử lý" />
             </LinearLayout>
 
             <LinearLayout
