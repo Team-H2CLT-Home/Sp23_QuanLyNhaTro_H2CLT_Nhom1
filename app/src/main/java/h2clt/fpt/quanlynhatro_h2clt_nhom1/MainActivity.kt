@@ -8,7 +8,7 @@ class MainActivity : AppCompatActivity() {
         //heloLong
         // hihihi
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main2)
 
     }
 }
