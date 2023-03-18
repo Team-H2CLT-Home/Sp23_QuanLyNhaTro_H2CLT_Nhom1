@@ -4,11 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.DangKy
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityDangKy
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDangNhapBinding
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.ManHinhChinhChuTro
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.FramentManHinhChinhChuTro
 
-class DangNhap : AppCompatActivity() {
+class ActivityDangNhap : AppCompatActivity() {
     private lateinit var binding: ActivityDangNhapBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +16,7 @@ class DangNhap : AppCompatActivity() {
         setContentView(binding.root)
         binding.btnLuuDN.setOnClickListener {
             if (binding.edTenDangNhap.text.toString().isNotBlank()||binding.edMatKhau.text.toString().isNotBlank()){
-                val intent = Intent(this@DangNhap,ManHinhChinhChuTro::class.java)
+                val intent = Intent(this@ActivityDangNhap, FramentManHinhChinhChuTro::class.java)
                 startActivity(intent)
             }else{
                 Snackbar.make(it,"Không để trống",Snackbar.LENGTH_SHORT).show()
@@ -28,7 +28,7 @@ class DangNhap : AppCompatActivity() {
             binding.edCheckBox.isChecked = false
         }
         binding.linerDk.setOnClickListener {
-            val intent = Intent(this@DangNhap,DangKy::class.java)
+            val intent = Intent(this@ActivityDangNhap,ActivityDangKy::class.java)
             startActivity(intent)
         }
     }

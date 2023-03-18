@@ -6,14 +6,14 @@ import android.os.Bundle
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityHuongDanTaoKhuBinding
 
 
-class HuongDanTaoKhuActivity : AppCompatActivity() {
+class ActivityHuongDanTaoKhu : AppCompatActivity() {
     private lateinit var binding: ActivityHuongDanTaoKhuBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHuongDanTaoKhuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btnHuongDanTaoKhu.setOnClickListener {
-            val intent = Intent(this@HuongDanTaoKhuActivity, ThemKhuTroActivity::class.java)
+            val intent = Intent(this@ActivityHuongDanTaoKhu, ActivityThemKhuTro::class.java)
             startActivity(intent)
         }
         binding.imgHuongDanTaoKhu.setOnClickListener {

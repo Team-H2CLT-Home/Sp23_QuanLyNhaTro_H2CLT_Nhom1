@@ -8,7 +8,7 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityKetThucHopDongBind
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogGiaHanHdBinding
 
 
-class KetThucHopDongActivity : AppCompatActivity() {
+class ActivityKetThucHopDong : AppCompatActivity() {
     private lateinit var binding: ActivityKetThucHopDongBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

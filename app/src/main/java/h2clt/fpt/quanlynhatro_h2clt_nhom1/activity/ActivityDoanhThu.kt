@@ -6,7 +6,7 @@ import com.google.android.material.snackbar.Snackbar
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDoanhThuBinding
 
 
-class DoanhThuActivity : AppCompatActivity() {
+class ActivityDoanhThu : AppCompatActivity() {
     private lateinit var binding: ActivityDoanhThuBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

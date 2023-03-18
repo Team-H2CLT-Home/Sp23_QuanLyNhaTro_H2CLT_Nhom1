@@ -8,7 +8,7 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentTBKhac
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentTBTatCa
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentTBTien
 
-class ViewPager2ThongBaoAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle):
+class ViewPagerThongBaoAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle):
     FragmentStateAdapter(fragmentManager,lifecycle) {
     override fun getItemCount(): Int {
         return 3
