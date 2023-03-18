@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentQuanLy
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentTongQuan
 
-class ViewPager2TrangChuAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle):
+class ViewPagerTrangChuAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle):
     FragmentStateAdapter(fragmentManager,lifecycle) {
     override fun getItemCount(): Int {
         return 2

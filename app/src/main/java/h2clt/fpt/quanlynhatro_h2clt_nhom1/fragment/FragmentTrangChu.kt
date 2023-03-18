@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.ViewPager2TrangChuAdapter
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.ViewPagerTrangChuAdapter
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentTrangchuBinding
 
 class FragmentTrangChu:Fragment() {
@@ -18,7 +18,7 @@ class FragmentTrangChu:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTrangchuBinding.inflate(inflater, container, false)
-        val adapter = ViewPager2TrangChuAdapter(parentFragmentManager, lifecycle)
+        val adapter = ViewPagerTrangChuAdapter(parentFragmentManager, lifecycle)
         binding.viewPager2TrangChu.adapter = adapter
         TabLayoutMediator(binding.tabLayoutTrangChu, binding.viewPager2TrangChu) { tab, pos ->
             when (pos) {

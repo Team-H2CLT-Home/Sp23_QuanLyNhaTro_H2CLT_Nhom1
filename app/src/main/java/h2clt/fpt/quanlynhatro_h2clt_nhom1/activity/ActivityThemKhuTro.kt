@@ -1,13 +1,12 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityThemKhuTroBinding
 
 
-class ThemKhuTroActivity : AppCompatActivity() {
+class ActivityThemKhuTro : AppCompatActivity() {
     private lateinit var binding: ActivityThemKhuTroBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

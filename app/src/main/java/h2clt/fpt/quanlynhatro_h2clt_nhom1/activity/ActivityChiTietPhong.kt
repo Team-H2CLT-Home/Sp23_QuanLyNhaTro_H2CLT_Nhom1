@@ -8,7 +8,7 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.ViewPagerChiTietPhongAdapter
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityChiTietPhongBinding
 
 
-class ChiTietPhongActivity : AppCompatActivity() {
+class ActivityChiTietPhong : AppCompatActivity() {
     private lateinit var binding: ActivityChiTietPhongBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

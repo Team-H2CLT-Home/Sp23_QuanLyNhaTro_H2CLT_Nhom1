@@ -6,14 +6,14 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import h2clt.fpt.quanlynhatro_h2clt_home.DangNhap
+import h2clt.fpt.quanlynhatro_h2clt_home.ActivityDangNhap
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.AdminDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDangKyBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Admin
 
 
-class DangKy : AppCompatActivity() {
+class ActivityDangKy : AppCompatActivity() {
     private lateinit var binding: ActivityDangKyBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class DangKy : AppCompatActivity() {
                      ho_ten = binding.edHoVaTen.text.toString(),
                      mat_khau = binding.edMatKhauDangKy.text.toString()
                  )
-                 val dao = AdminDao(this@DangKy).insertAdmin(admin)
+                 val dao = AdminDao(this@ActivityDangKy).insertAdmin(admin)
                  if (dao>0){
                      Snackbar.make(it,"Lưu thành công",Toast.LENGTH_SHORT).show()
                      xoaTrang()
@@ -47,10 +47,9 @@ class DangKy : AppCompatActivity() {
         binding.btnHuyDK.setOnClickListener {
             xoaTrang()
         }
-
     }
     fun chuyenActivity(){
-        val intent = Intent(this@DangKy, DangNhap::class.java)
+        val intent = Intent(this@ActivityDangKy, ActivityDangNhap::class.java)
         startActivity(intent)
     }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
@@ -59,7 +58,6 @@ class DangKy : AppCompatActivity() {
             chuyenActivity();
         return super.onOptionsItemSelected(item);
     }
-
     fun validate(): Int {
         var check = -1
         if (binding.edHoVaTen.text.toString().isNotBlank() &&
@@ -70,7 +68,6 @@ class DangKy : AppCompatActivity() {
         }
         return check
     }
-
     fun xoaTrang(){
         binding.edHoVaTen.setText("")
         binding.edMatKhauDangKy.setText("")

@@ -17,7 +17,7 @@
 
 
         <activity
-            android:name=".activity.DoanhThuActivity"
+            android:name=".activity.ActivityDoanhThu"
             android:exported="false" />
         <activity
             android:name="quanlynhatro_h2clt_nhom1.activity.ActivityPhongDaCocGiuCho"
@@ -29,10 +29,10 @@
             android:name="quanlynhatro_h2clt_nhom1.activity.ActivityPhongChuaDongTien"
             android:exported="false" />
         <activity
-            android:name=".activity.PhongDangThueActivity"
+            android:name=".activity.ActivityPhongDangThue"
             android:exported="false" />
         <activity
-            android:name=".activity.PhongTrongActivity"
+            android:name=".activity.ActivityPhongTrong"
             android:exported="false" />
         <activity
             android:name=".activity.ActivitytaoHopDongMoi"
@@ -41,13 +41,13 @@
             android:name=".fragment.FragmentTaoHoaDon"
             android:exported="false" />
         <activity
-            android:name=".activity.DanhSachHopDongActivity"
+            android:name=".activity.ActivityDanhSachHopDong"
             android:exported="false" />
         <activity
-            android:name=".activity.KetThucHopDongActivity"
+            android:name=".activity.ActivityKetThucHopDong"
             android:exported="false" />
         <activity
-            android:name=".activity.XuLyPhongActivity"
+            android:name=".activity.ActivityXuLyPhong"
             android:exported="false" />
         <activity
             android:name="quanlynhatro_h2clt_nhom1.activity.ActivityDanhSachNguoiThue"
@@ -57,7 +57,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.ThemPhongActivity"
+            android:name=".activity.ActivityThemPhong"
             android:exported="false" />
         <activity
             android:name=".activity.ActivityDanhSachPhongChuaTaoHoaDon"
@@ -67,24 +67,24 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.ThemKhuTroActivity"
+            android:name=".activity.ActivityThemKhuTro"
             android:exported="false" />
         <activity
-            android:name=".fragment.ManHinhChinhChuTro"
+            android:name=".activity.ActivityManHinhChinhChuTro"
             android:exported="true">
         </activity>
         <activity
-            android:name=".activity.HuongDanTaoKhuActivity"
+            android:name=".activity.ActivityHuongDanTaoKhu"
             android:exported="false" />
         <activity
-            android:name=".activity.DangKy"
+            android:name=".activity.ActivityDangKy"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="h2clt.fpt.quanlynhatro_h2clt_home.DangNhap"
+            android:name="h2clt.fpt.quanlynhatro_h2clt_home.ActivityDangNhap"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -99,7 +99,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.ManHinhChao"
+            android:name=".activity.ActivityManHinhChao"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

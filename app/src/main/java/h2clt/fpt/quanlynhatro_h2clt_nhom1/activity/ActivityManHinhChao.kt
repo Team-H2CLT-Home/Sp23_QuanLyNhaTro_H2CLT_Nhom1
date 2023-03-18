@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 
-class ManHinhChao : AppCompatActivity() {
+class ActivityManHinhChao : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_man_hinh_chao)

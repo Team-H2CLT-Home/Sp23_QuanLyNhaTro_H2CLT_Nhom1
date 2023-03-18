@@ -9,7 +9,7 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentDangTin
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentThongBao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentTrangChu
 
-class ViewPager2ManHinhChinhAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle):
+class ViewPagerManHinhChinhAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle):
     FragmentStateAdapter(fragmentManager,lifecycle) {
     override fun getItemCount(): Int {
         return 4

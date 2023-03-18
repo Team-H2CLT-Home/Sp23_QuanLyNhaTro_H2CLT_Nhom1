@@ -5,10 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.ManHinhChinhChuTro
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDanhSachHopDongBinding
 
-class DanhSachHopDongActivity : AppCompatActivity() {
+class ActivityDanhSachHopDong : AppCompatActivity() {
     private lateinit var binding: ActivityDanhSachHopDongBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +20,7 @@ class DanhSachHopDongActivity : AppCompatActivity() {
         ab?.setDisplayHomeAsUpEnabled(true)
     }
     fun chuyenActivity(){
-        val intent = Intent(this@DanhSachHopDongActivity, ManHinhChinhChuTro::class.java)
+        val intent = Intent(this@ActivityDanhSachHopDong, FramentManHinhChinhChuTro::class.java)
         startActivity(intent)
     }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
