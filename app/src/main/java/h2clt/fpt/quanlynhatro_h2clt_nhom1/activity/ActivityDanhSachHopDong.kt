@@ -20,7 +20,7 @@ class ActivityDanhSachHopDong : AppCompatActivity() {
         ab?.setDisplayHomeAsUpEnabled(true)
     }
     fun chuyenActivity(){
-        val intent = Intent(this@ActivityDanhSachHopDong, FramentManHinhChinhChuTro::class.java)
+        val intent = Intent(this@ActivityDanhSachHopDong, ActivityManHinhChinhChuTro::class.java)
         startActivity(intent)
     }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {

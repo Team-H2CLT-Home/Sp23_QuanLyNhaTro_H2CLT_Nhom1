@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import h2clt.fpt.quanlynhatro_h2clt_home.ActivityDangNhap
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.AdminDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDangKyBinding
