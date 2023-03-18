@@ -12,6 +12,7 @@ class FragmentTaoHoaDon : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = FragmentTaoHoaDonBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.listViewTaoHoaDon.adapter
 
     }
 
