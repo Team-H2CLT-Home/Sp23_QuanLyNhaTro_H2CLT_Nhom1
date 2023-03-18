@@ -18,11 +18,24 @@
             android:exported="false" />
         <activity
             android:name=".activity.ActivityManHinhChinhChuTro"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.ActivityTaoHopDong"
+        android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+
+
 
         <activity
             android:name=".activity.ActivityDoanhThu"
@@ -38,9 +51,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.ActivityPhongDangThue"
-            android:exported="false" />
-        <activity
-            android:name=".activity.ActivityPhongTrong"
             android:exported="false" />
         <activity
             android:name=".activity.ActivitytaoHopDongMoi"
@@ -100,7 +110,12 @@
         </activity>
         <activity
             android:name=".activity.ActivityDanhSachPhong"
-            android:exported="false" />
+            android:exported="false" >
+        </activity>
+        <activity
+            android:name=".activity.ActivityDanhSachHoaDon"
+            android:exported="false" >
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="false" />

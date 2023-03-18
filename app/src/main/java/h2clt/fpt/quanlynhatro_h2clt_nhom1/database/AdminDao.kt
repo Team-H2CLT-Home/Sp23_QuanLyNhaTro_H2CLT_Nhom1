@@ -39,4 +39,17 @@ class AdminDao(context: Context) {
         }
         return list
     }
+    fun checkLogin(username:String, password:String):Boolean{
+        val sql="""
+            select *from ${Admin.TB_NAME} where ${Admin.CLM_TEN_DANG_NHAP}="$username"
+            and ${Admin.CLM_MAT_KHAU} = "$password"
+        """.trimIndent()
+        return try {
+            val cursor=db.rawQuery(sql, null)
+            cursor.moveToFirst()
+        }catch (e:java.lang.Exception ){
+            false
+        }
+
+    }
 }
