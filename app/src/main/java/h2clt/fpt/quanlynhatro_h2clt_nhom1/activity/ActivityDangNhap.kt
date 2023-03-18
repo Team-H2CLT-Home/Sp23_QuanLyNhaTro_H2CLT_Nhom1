@@ -36,12 +36,14 @@ class ActivityDangNhap : AppCompatActivity() {
         binding.btnLuuDN.setOnClickListener {
             val userName = binding.edTenDangNhap.text.toString()
             val passWord = binding.edMatKhau.text.toString()
+            val check = binding.edCheckBox
             if (userName.isNotBlank()&& passWord.isNotBlank()){
 
                 if (adminDao.checkLogin(userName,passWord)){
                     if (listKhuTro.size > 0){
                         val intent = Intent(this@ActivityDangNhap, ActivityManHinhChinhChuTro::class.java)
                         startActivity(intent)
+                        rememberUser(userName,passWord,check.isChecked)
                     }else{
                         val intent = Intent(this@ActivityDangNhap, ActivityHuongDanTaoKhu::class.java)
                         startActivity(intent)
