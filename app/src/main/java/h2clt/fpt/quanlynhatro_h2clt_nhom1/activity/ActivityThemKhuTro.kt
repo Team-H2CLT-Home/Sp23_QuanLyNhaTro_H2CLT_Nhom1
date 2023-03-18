@@ -11,7 +11,6 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityThemKhuTroBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.KhuTro
 import java.util.UUID
 
-
 class ActivityThemKhuTro : AppCompatActivity() {
     private lateinit var binding: ActivityThemKhuTroBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,9 +18,8 @@ class ActivityThemKhuTro : AppCompatActivity() {
         binding = ActivityThemKhuTroBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btnTiepTuc.setOnClickListener {
-            if(validate() < 1){
-                thongBaoLoi("dữ liệu chưa chính xác !!!")
-                return@setOnClickListener
+            if(!validate()){
+                thongBaoLoi("Dữ liệu chưa chính xác !!!")
             }else{
                 val id=UUID.randomUUID().toString()
                 val khuTro=KhuTro(
@@ -33,23 +31,19 @@ class ActivityThemKhuTro : AppCompatActivity() {
                 )
                 val dao=KhuTroDao(this@ActivityThemKhuTro).insertKhuTro(khuTro)
                 if(dao>0){
-                    thongBaoThanhCong("lưu thành công")
+                    thongBaoThanhCong("Lưu thành công")
                 }else{
                     thongBaoLoi("lưu thất bại")
                 }
             }
-            Snackbar.make(it,"Thêm thành công",Snackbar.LENGTH_SHORT).show()
         }
     }
 
-    fun validate():Int{
-        var check=-1
-        if(binding.edTenKhuTro.text.toString().isNotBlank()&&
-                binding.edSoPhong.text.toString().isNotBlank()&&
-                binding.edDiaChi.text.toString().isNotBlank()){
-            check=1
-        }
-        return check
+    fun validate():Boolean{
+        return (binding.edTenKhuTro.text.toString().isNotBlank()&&
+                (binding.edSoPhong.text.toString().toIntOrNull()!=null)&&
+                binding.edDiaChi.text.toString().isNotBlank())
+
     }
 
     fun thongBaoLoi(loi : String){
@@ -74,4 +68,5 @@ class ActivityThemKhuTro : AppCompatActivity() {
         })
         bundle.show()
     }
+
 }
