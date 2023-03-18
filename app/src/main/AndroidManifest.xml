@@ -17,7 +17,7 @@
 
 
         <activity
-            android:name=".DoanhThuActivity"
+            android:name="DoanhThuActivity"
             android:exported="false" />
         <activity
             android:name=".ActivityPhongDaCocGiuCho"
@@ -96,7 +96,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivityDanhSachHoaDon"
+            android:name="h2clt.fpt.quanlynhatro_h2clt_nhom1.ActivityDanhSachHoaDon"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

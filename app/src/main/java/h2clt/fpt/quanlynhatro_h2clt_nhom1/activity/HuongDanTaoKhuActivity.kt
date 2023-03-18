@@ -1,9 +1,10 @@
-package h2clt.fpt.quanlynhatro_h2clt_home
+package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import h2clt.fpt.quanlynhatro_h2clt_home.databinding.ActivityHuongDanTaoKhuBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityHuongDanTaoKhuBinding
+
 
 class HuongDanTaoKhuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHuongDanTaoKhuBinding

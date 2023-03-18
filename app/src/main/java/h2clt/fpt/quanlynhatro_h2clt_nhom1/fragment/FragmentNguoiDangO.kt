@@ -1,4 +1,4 @@
-package h2clt.fpt.quanlynhatro_h2clt_home
+package h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -6,8 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import h2clt.fpt.quanlynhatro_h2clt_home.databinding.DialogThemKhachThueBinding
-import h2clt.fpt.quanlynhatro_h2clt_home.databinding.FragmentNguoiDangOBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogThemKhachThueBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentNguoiDangOBinding
+
 
 class FragmentNguoiDangO : Fragment() {
      private lateinit var binding: FragmentNguoiDangOBinding

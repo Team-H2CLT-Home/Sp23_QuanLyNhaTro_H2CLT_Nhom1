@@ -1,9 +1,10 @@
-package h2clt.fpt.quanlynhatro_h2clt_home
+package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 
 class ManHinhChao : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,7 +12,7 @@ class ManHinhChao : AppCompatActivity() {
         setContentView(R.layout.activity_man_hinh_chao)
         val handler = Handler()
         handler.postDelayed(Runnable {
-            val intent = Intent(this,DangNhap::class.java)
+            val intent = Intent(this, DangNhap::class.java)
             startActivity(intent)
         },2000)
 

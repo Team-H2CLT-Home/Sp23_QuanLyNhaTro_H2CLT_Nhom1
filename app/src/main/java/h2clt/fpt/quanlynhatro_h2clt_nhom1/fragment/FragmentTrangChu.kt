@@ -1,4 +1,4 @@
-package h2clt.fpt.quanlynhatro_h2clt_home.ManHinhChinh
+package h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
-import h2clt.fpt.quanlynhatro_h2clt_home.databinding.FragmentTrangchuBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.ViewPager2TrangChuAdapter
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentTrangchuBinding
 
 class FragmentTrangChu:Fragment() {
 

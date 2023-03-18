@@ -1,11 +1,12 @@
-package h2clt.fpt.quanlynhatro_h2clt_home.ManHinhChinh
+package h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import h2clt.fpt.quanlynhatro_h2clt_home.databinding.FragmentCaNhanBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentCaNhanBinding
+
 
 class FragmentCaNhan:Fragment() {
     private lateinit var binding: FragmentCaNhanBinding
