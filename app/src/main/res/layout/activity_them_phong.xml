@@ -10,8 +10,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tbThemPhong"
             style="@style/toolBar"
-            app:title="@string/them_moi_khu_tro"
+            app:title="Thêm Phòng"
 
             />
         <com.google.android.material.textfield.TextInputLayout
@@ -32,7 +33,7 @@
         </com.google.android.material.textfield.TextInputLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="390dp"
+            android:layout_height="415dp"
             android:background="@drawable/boder_nen"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
@@ -47,6 +48,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
                     android:orientation="vertical">
@@ -66,17 +68,19 @@
                 </LinearLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="120dp"
-                    android:layout_height="30dp"
+                    android:layout_height="47dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:background="@color/white"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                     >
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edDienTichPhong"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
+                        android:paddingTop="10dp"
                         android:hint="Diện tích"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -86,18 +90,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="2dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="2dp"
                 android:background="#656464"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_gravity="center"
+
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
                     android:orientation="vertical">
@@ -117,7 +123,7 @@
                 </LinearLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="120dp"
-                    android:layout_height="30dp"
+                    android:layout_height="47dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -127,7 +133,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edGiaThue"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
+                        android:paddingTop="10dp"
                         android:hint="Giá thuê"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -137,19 +144,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="2dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="2dp"
                 android:background="#656464"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginLeft="20dp"
+                    android:layout_gravity="center"
+
                     android:layout_marginTop="5dp"
                     android:orientation="vertical">
                     <TextView
@@ -168,7 +177,7 @@
                 </LinearLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="120dp"
-                    android:layout_height="30dp"
+                    android:layout_height="47dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -178,7 +187,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edGiaDien"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
+                        android:paddingTop="10dp"
                         android:hint="Giá điện"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -194,13 +204,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginLeft="20dp"
+                    android:layout_gravity="center"
+
                     android:layout_marginTop="5dp"
                     android:orientation="vertical">
                     <TextView
@@ -219,7 +231,7 @@
                 </LinearLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="120dp"
-                    android:layout_height="30dp"
+                    android:layout_height="47dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -229,7 +241,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edGiaNuoc"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
+                        android:paddingTop="10dp"
                         android:hint="Giá nước"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
