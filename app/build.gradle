@@ -7,7 +7,7 @@ android {
     namespace 'h2clt.fpt.quanlynhatro_h2clt_nhom1'
     compileSdk 33
     buildFeatures{
-        viewBinding = true
+        viewBinding true
     }
 
     defaultConfig {

@@ -1,11 +1,12 @@
-package h2clt.fpt.quanlynhatro_h2clt_home
+package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import h2clt.fpt.quanlynhatro_h2clt_home.ManHinhChinh.ManHinhChinhChuTro
-import h2clt.fpt.quanlynhatro_h2clt_home.databinding.ActivityDangNhapBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDangNhapBinding
 
 class DangNhap : AppCompatActivity() {
     private lateinit var binding: ActivityDangNhapBinding
