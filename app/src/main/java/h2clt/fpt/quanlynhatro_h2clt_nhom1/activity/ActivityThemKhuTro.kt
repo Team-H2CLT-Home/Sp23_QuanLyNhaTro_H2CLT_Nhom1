@@ -1,6 +1,7 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -32,7 +33,7 @@ class ActivityThemKhuTro : AppCompatActivity() {
                 )
                 val dao=KhuTroDao(this@ActivityThemKhuTro).insertKhuTro(khuTro)
                 if(dao>0){
-                    thongBaoLoi("lưu thành công")
+                    thongBaoThanhCong("lưu thành công")
                 }else{
                     thongBaoLoi("lưu thất bại")
                 }
@@ -56,6 +57,19 @@ class ActivityThemKhuTro : AppCompatActivity() {
         bundle.setTitle("Thông Báo Lỗi")
         bundle.setMessage(loi)
         bundle.setNegativeButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
+    }
+    fun thongBaoThanhCong(loi : String){
+        val bundle = AlertDialog.Builder(this)
+        bundle.setTitle("Thông Báo")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            val intent = Intent(this@ActivityThemKhuTro,ActivityManHinhChinhChuTro::class.java)
+            startActivity(intent)
+        })
+        bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
             dialog.cancel()
         })
         bundle.show()

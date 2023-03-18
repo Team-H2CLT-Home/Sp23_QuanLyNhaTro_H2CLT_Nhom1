@@ -4,23 +4,34 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.KhuTroAdapter
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.ViewPagerManHinhChinhAdapter
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.KhuTroDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityManHinhChinhChuTroBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogDanhSachKhuTroBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.KhuTro
 
 
 class ActivityManHinhChinhChuTro : AppCompatActivity() {
     private lateinit var binding: ActivityManHinhChinhChuTroBinding
+    var listKhuTro:MutableList<KhuTro> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityManHinhChinhChuTroBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         binding.imgMenuManHinhChinh.setOnClickListener{
             val bottomSheetDialog =  BottomSheetDialog(this)
             val buil = DialogDanhSachKhuTroBinding.inflate(LayoutInflater.from(this))
+            listKhuTro=KhuTroDao(context = this@ActivityManHinhChinhChuTro).getAllInKhuTro() as MutableList<KhuTro>
+            val adapter=KhuTroAdapter(listKhuTro)
+            buil.rcyKhuTro.layoutManager=LinearLayoutManager(applicationContext)
+            buil.rcyKhuTro.adapter=adapter
+
             bottomSheetDialog.setContentView(buil.root)
             buil.icClose.setOnClickListener {
                 bottomSheetDialog.dismiss()
