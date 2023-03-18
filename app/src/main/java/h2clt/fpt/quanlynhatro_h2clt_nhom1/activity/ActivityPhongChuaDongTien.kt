@@ -1,4 +1,4 @@
-package quanlynhatro_h2clt_nhom1.activity
+package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
