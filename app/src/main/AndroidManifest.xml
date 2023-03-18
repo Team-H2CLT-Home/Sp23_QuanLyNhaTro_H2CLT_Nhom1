@@ -12,7 +12,92 @@
         android:theme="@style/Theme.QuanLyNhaTro_H2CLT_Nhom1"
         tools:targetApi="31">
         <activity
+            android:name=".DoanhThuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityPhongDaCocGiuCho"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityPhongSapHetHopDong"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityPhongChuaDongTien"
+            android:exported="false" />
+        <activity
+            android:name=".PhongDangThueActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PhongTrongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityTaoHopDong"
+            android:exported="false" />
+        <activity
+            android:name=".FragmentTaoHoaDon"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachHopDongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".KetThucHopDongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".XuLyPhongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityDanhSachNguoiThue"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ThemPhongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivitytaoHopDongMoi"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityDanhSachPhong"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ThemKhuTroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhChinh.ManHinhChinhChuTro"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".HuongDanTaoKhuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DangKy"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DangNhap"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ActivityDanhSachHoaDon"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhChao"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
