@@ -8,5 +8,6 @@ class MainActivity : AppCompatActivity() {
         //heloLong
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        // Hello Anh em
     }
 }
