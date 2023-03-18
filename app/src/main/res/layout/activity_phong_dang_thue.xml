@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/mauNenApp"
-    tools:context=".PhongDangThueActivity">
+    android:background="@color/mauNenApp">
     <androidx.appcompat.widget.Toolbar
         style="@style/toolBar"
         app:title="Phòng Đang Thuê"
