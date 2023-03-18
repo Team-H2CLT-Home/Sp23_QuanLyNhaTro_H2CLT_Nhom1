@@ -23,9 +23,6 @@ class ActivityDangNhap : AppCompatActivity() {
         binding = ActivityDangNhapBinding.inflate(layoutInflater)
         listKhuTro = KhuTroDao(context = this@ActivityDangNhap).getAllInKhuTro() as MutableList<KhuTro>
         val adminDao = AdminDao(this)
-        val admin = Admin
-
-
         setContentView(binding.root)
         binding.btnLuuDN.setOnClickListener {
             val userName = binding.edTenDangNhap.text.toString()
