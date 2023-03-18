@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/mauNenApp"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    >
+    <LinearLayout
+        android:id="@+id/layoutTenDichVu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mauChinhApp"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvDichVuPhong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="Dịch vụ phòng A101"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edMaLoaiDV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mã loại dịch vụ"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edTenLoaiDV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên loai dịch vu"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edGiaTienLoaiDV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Giá tiền"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <CheckBox
+        android:id="@+id/chkTrangThaiLoaiDV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Theo đầu người"
+        android:layout_marginLeft="10dp"
+        android:textSize="16dp"
+        android:padding="3dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        >
+        <Button
+            android:id="@+id/btnLuuLoaiDV"
+            style="@style/button"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/boder_tron"
+            android:text="Lưu" />
+
+        <Button
+            android:id="@+id/btnHuyLoaiDV"
+            style="@style/button"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/boder_tron"
+            android:text="Hủy" />
+    </LinearLayout>
+
+
+
+</LinearLayout>
