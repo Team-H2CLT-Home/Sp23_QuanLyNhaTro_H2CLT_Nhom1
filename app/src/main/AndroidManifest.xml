@@ -68,6 +68,9 @@
             android:name=".activity.ActivityThemPhong"
             android:exported="false" />
         <activity
+            android:name=".activity.ActivityDanhSachPhong"
+            android:exported="false" />
+        <activity
             android:name=".activity.ActivityDanhSachPhongChuaTaoHoaDon"
             android:exported="false">
             <meta-data
