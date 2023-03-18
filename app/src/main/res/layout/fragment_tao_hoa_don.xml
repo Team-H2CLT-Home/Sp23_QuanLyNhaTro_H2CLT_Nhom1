@@ -7,6 +7,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/mauNenApp"
     >
+    <androidx.appcompat.widget.Toolbar
+        style="@style/toolBar"
+        app:title="@string/tao_hoa_don"
+
+        />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,16 +21,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <androidx.appcompat.widget.Toolbar
-            style="@style/toolBar"
-            app:title="@string/tao_hoa_don"
 
-            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:background="@drawable/boder_nen"
             android:orientation="vertical">
             <TextView
@@ -53,15 +54,21 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
                     >
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edTenPhongTro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        />
+                        android:background="@color/white" />
                 </com.google.android.material.textfield.TextInputLayout>
-            </androidx.cardview.widget.CardView>
 
+            </androidx.cardview.widget.CardView>
+            <ListView
+                android:id="@+id/listViewTaoHoaDon"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="22dp"
+                />
         </LinearLayout>
 
         <LinearLayout
