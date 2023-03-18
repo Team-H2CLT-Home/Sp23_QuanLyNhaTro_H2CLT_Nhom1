@@ -59,7 +59,7 @@
                         android:layout_marginTop="5dp"
                         android:textSize="18dp"
                         android:textColor="@color/black"
-                        android:text="30 phòng"/>
+                        android:text="30 phòng trống"/>
                     <TextView
                         android:id="@+id/tvDiaChiKhuTro"
                         android:layout_width="200dp"
