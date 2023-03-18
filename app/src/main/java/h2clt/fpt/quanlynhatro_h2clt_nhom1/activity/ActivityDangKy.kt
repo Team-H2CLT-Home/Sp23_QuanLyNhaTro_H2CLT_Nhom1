@@ -1,9 +1,11 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
@@ -36,10 +38,12 @@ class ActivityDangKy : AppCompatActivity() {
                  )
                  val dao = AdminDao(this@ActivityDangKy).insertAdmin(admin)
                  if (dao>0){
-                     Snackbar.make(it,"Lưu thành công",Toast.LENGTH_SHORT).show()
+                     thongBaoThanhCong("Bạn đã tạo thành công tài khoản mới !!!")
                      xoaTrang()
+
+
                  }else{
-                     Snackbar.make(it,"Lưu không thành công",Toast.LENGTH_SHORT).show()
+                    thongBaoLoi("bạn đã tạo không thành công tài khoản mới !!!")
                  }
              }
         }
@@ -73,4 +77,28 @@ class ActivityDangKy : AppCompatActivity() {
         binding.edSoDienThoai.setText("")
         binding.edTenDangNhapDangKy.setText("")
     }
+    fun thongBaoLoi(loi : String){
+        val bundle = AlertDialog.Builder(this)
+        bundle.setTitle("Thông Báo Lỗi")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
+    }
+    fun thongBaoThanhCong(loi : String){
+        val bundle = AlertDialog.Builder(this)
+        bundle.setTitle("Thông Báo")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            val intent = Intent(this@ActivityDangKy,ActivityDangNhap::class.java)
+            startActivity(intent)
+        })
+        bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
+    }
+
+
 }
