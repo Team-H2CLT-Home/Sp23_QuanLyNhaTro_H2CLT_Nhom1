@@ -18,10 +18,12 @@
             android:exported="false" />
         <activity
             android:name=".activity.ActivityManHinhChinhChuTro"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -38,9 +40,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.ActivityPhongDangThue"
-            android:exported="false" />
-        <activity
-            android:name=".activity.ActivityPhongTrong"
             android:exported="false" />
         <activity
             android:name=".activity.ActivitytaoHopDongMoi"
@@ -60,9 +59,7 @@
         <activity
             android:name=".activity.ActivityDanhSachNguoiThue"
             android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+
         </activity>
         <activity
             android:name=".activity.ActivityThemPhong"
@@ -76,7 +73,12 @@
         </activity>
         <activity
             android:name=".activity.ActivityThemKhuTro"
-            android:exported="false" />
+            android:exported="true" />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
 
         <activity
             android:name=".activity.ActivityHuongDanTaoKhu"
@@ -84,34 +86,25 @@
         <activity
             android:name=".activity.ActivityDangKy"
             android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+
         </activity>
         <activity
             android:name=".activity.ActivityDangNhap"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false" >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity
             android:name=".activity.ActivityDanhSachPhong"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="MissingClass" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ActivityManHinhChao"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
