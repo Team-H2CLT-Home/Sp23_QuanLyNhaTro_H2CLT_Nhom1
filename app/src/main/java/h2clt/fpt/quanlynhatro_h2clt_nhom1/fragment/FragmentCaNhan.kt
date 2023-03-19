@@ -23,8 +23,7 @@ class FragmentCaNhan:Fragment() {
         binding = FragmentCaNhanBinding.inflate(inflater,container,false)
         binding.btnDangXuat.setOnClickListener {
             val intent = Intent(activity, ActivityDangNhap::class.java)
-            val srf=activity?.getSharedPreferences(THONG_TIN_DANG_NHAP, Context.MODE_PRIVATE)
-            srf?.edit()?.clear()
+            activity?.finish()
             startActivity(intent)
         }
         return binding.root

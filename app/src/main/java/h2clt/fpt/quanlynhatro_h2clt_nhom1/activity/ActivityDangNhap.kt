@@ -93,10 +93,10 @@ class ActivityDangNhap : AppCompatActivity() {
     }
     fun rememberUser(u : String , p : String, status : Boolean){
         val pref : SharedPreferences = getSharedPreferences(THONG_TIN_DANG_NHAP, MODE_PRIVATE)
-        val edit : SharedPreferences.Editor = pref.edit()
-            edit.putString(USERNAME_KEY,u)
-            edit.putString(PASSWORD_KEY,p)
-            edit.putBoolean(CHECKBOX_KEY,status)
+        val edit  = pref.edit()
+        edit.putString(USERNAME_KEY,u)
+        edit.putString(PASSWORD_KEY,p)
+        edit.putBoolean(CHECKBOX_KEY,status)
         edit.commit()
     }
 }
