@@ -22,10 +22,12 @@ class KhuTroDao(context: Context) {
     }
 
     @SuppressLint("Range")
-    fun getAllInKhuTro():List<KhuTro>{
+    fun getAllInKhuTroByAdmin(s:String):List<KhuTro>{
         val list= mutableListOf<KhuTro>()
-        val sql="select * from ${KhuTro.TB_NAME}"
-        val c=db.rawQuery(sql,null)
+        val sql="""
+            select * from ${KhuTro.TB_NAME} where ${KhuTro.CLM_TEN_DANG_NHAP}= "$s"
+        """
+        val c=db.rawQuery(sql, null)
         if(c.moveToFirst()){
             do {
                 val khuTro=KhuTro(

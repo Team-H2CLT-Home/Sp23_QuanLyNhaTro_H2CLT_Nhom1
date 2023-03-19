@@ -15,6 +15,7 @@ class ActivityHuongDanTaoKhu : AppCompatActivity() {
         binding.btnHuongDanTaoKhu.setOnClickListener {
             val intent = Intent(this@ActivityHuongDanTaoKhu, ActivityThemKhuTro::class.java)
             startActivity(intent)
+            finish()
         }
         binding.imgHuongDanTaoKhu.setOnClickListener {
             ////Nhớ tạo video hướng dẫn

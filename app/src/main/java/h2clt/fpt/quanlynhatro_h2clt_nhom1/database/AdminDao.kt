@@ -41,7 +41,7 @@ class AdminDao(context: Context) {
     }
     fun checkLogin(username:String, password:String):Boolean{
         val sql="""
-            select *from ${Admin.TB_NAME} where ${Admin.CLM_TEN_DANG_NHAP}="$username"
+            select *from ${Admin.TB_NAME} where ${Admin.CLM_TEN_DANG_NHAP}= "$username"
             and ${Admin.CLM_MAT_KHAU} = "$password"
         """.trimIndent()
         return try {

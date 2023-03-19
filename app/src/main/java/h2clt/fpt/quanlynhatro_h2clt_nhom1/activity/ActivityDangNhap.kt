@@ -12,39 +12,57 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDangNhapBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.KhuTro
 
 
-
+const val THONG_TIN_DANG_NHAP="Thon_tin_dang_nhap"
 const val USERNAME_KEY = "USERNAME"
 const val PASSWORD_KEY = "PASSWORD"
 const val CHECKBOX_KEY = "REMEMBER"
 class ActivityDangNhap : AppCompatActivity() {
     private lateinit var binding: ActivityDangNhapBinding
-    var listKhuTro = mutableListOf<KhuTro>()
+    private var listKhuTro = listOf<KhuTro>()
+
+    private var admin=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDangNhapBinding.inflate(layoutInflater)
-        val adminDao = AdminDao(this)
-        listKhuTro = KhuTroDao(context = this@ActivityDangNhap).getAllInKhuTro() as MutableList<KhuTro>
         setContentView(binding.root)
-        val pref : SharedPreferences = getSharedPreferences("My_file", MODE_PRIVATE)
+        val adminDao=AdminDao(applicationContext)
+        val khuTroDao=KhuTroDao(applicationContext)
+         val pref : SharedPreferences = getSharedPreferences(THONG_TIN_DANG_NHAP, MODE_PRIVATE)
+        admin =pref.getString(USERNAME_KEY,"")!!
         binding.edTenDangNhap.setText(pref.getString(USERNAME_KEY,""))
-        binding.edMatKhau.setText(pref.getString(PASSWORD_KEY,""))
-        binding.edCheckBox.isChecked= pref.getBoolean(CHECKBOX_KEY,false)
+        if (pref.getBoolean(CHECKBOX_KEY, false)) {
+            binding.edMatKhau.setText(pref.getString(PASSWORD_KEY, ""))
+            binding.edCheckBox.isChecked = pref.getBoolean(CHECKBOX_KEY, false)
+        }
+        else{
+            binding.edMatKhau.setText("")
+            binding.edCheckBox.isChecked =false
+        }
+        //tự động đăng nhập không cần ấn
+
         binding.btnLuuDN.setOnClickListener {
             val userName = binding.edTenDangNhap.text.toString()
             val passWord = binding.edMatKhau.text.toString()
             val check = binding.edCheckBox
+            if(admin!=null) admin=userName
+            listKhuTro=khuTroDao.getAllInKhuTroByAdmin(admin)
             if (userName.isNotBlank()&& passWord.isNotBlank()){
                 if (adminDao.checkLogin(userName,passWord)){
-                    if (listKhuTro.size > 0){
+                    if (listKhuTro.isNotEmpty()){
                         val intent = Intent(this@ActivityDangNhap, ActivityManHinhChinhChuTro::class.java)
                         startActivity(intent)
+                        finish()
                         rememberUser(userName,passWord,check.isChecked)
+
                     }else{
                         val intent = Intent(this@ActivityDangNhap, ActivityHuongDanTaoKhu::class.java)
                         startActivity(intent)
+                        finish()
+                        rememberUser(userName,passWord,check.isChecked)
+
                     }
                 }else{
-                    thongBaoLoi("Nhập sai dữ liệu")
+                    thongBaoLoi("Tên tài khoản hoặc mật khẩu không đúng")
                 }
             }
             else{
@@ -60,11 +78,13 @@ class ActivityDangNhap : AppCompatActivity() {
         binding.linerDk.setOnClickListener {
             val intent = Intent(this@ActivityDangNhap,ActivityDangKy::class.java)
             startActivity(intent)
+            finish()
+
         }
     }
     fun thongBaoLoi(loi : String){
         val bundle = AlertDialog.Builder(this)
-        bundle.setTitle("Thông Báo Lỗi")
+        bundle.setTitle("Lỗi đăng nhập")
         bundle.setMessage(loi)
         bundle.setNegativeButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
             dialog.cancel()
@@ -72,15 +92,11 @@ class ActivityDangNhap : AppCompatActivity() {
         bundle.show()
     }
     fun rememberUser(u : String , p : String, status : Boolean){
-        val pref : SharedPreferences = getSharedPreferences("My_file", MODE_PRIVATE)
+        val pref : SharedPreferences = getSharedPreferences(THONG_TIN_DANG_NHAP, MODE_PRIVATE)
         val edit : SharedPreferences.Editor = pref.edit()
-        if (!status){
-            edit.clear()
-        }else{
             edit.putString(USERNAME_KEY,u)
             edit.putString(PASSWORD_KEY,p)
             edit.putBoolean(CHECKBOX_KEY,status)
-        }
         edit.commit()
     }
 }

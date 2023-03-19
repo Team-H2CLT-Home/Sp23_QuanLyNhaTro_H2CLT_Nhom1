@@ -15,6 +15,17 @@
             app:title="Thêm Phòng"
 
             />
+        <CheckBox
+            android:id="@+id/cbTaoTuDong"
+            android:text="Tự động tạo phòng hàng loạt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chỉ cần nhập chữ cái đầu tên phòng trọ muốn đặt hệ thống sẽ tạo tự động"
+            android:textSize="13sp"/>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -172,7 +183,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Đơn giá điện mặc định"
+                        android:hint="Đơn giá điện mặc định "
                         />
                 </LinearLayout>
                 <com.google.android.material.textfield.TextInputLayout
@@ -273,17 +284,18 @@
             <Button
                 android:id="@+id/btnLuuThemPhong"
                 android:layout_width="150dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_margin="10dp"
                 android:text="Lưu" />
 
             <Button
+                android:layout_weight="1"
                 android:id="@+id/btnHuyThemPhong"
                 android:layout_width="150dp"
+                android:layout_margin="10dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="40dp"
+
                 android:text="Hủy" />
         </LinearLayout>
     </LinearLayout>

@@ -54,6 +54,7 @@ class ActivityDangKy : AppCompatActivity() {
     fun chuyenActivity(){
         val intent = Intent(this@ActivityDangKy, ActivityDangNhap::class.java)
         startActivity(intent)
+        finish()
     }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.getItemId();
@@ -93,6 +94,7 @@ class ActivityDangKy : AppCompatActivity() {
         bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
             val intent = Intent(this@ActivityDangKy,ActivityDangNhap::class.java)
             startActivity(intent)
+            finish()
         })
         bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
             dialog.cancel()
