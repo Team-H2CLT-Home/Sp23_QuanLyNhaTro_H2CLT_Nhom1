@@ -31,7 +31,7 @@ class KhuTroDao(context: Context) {
         if(c.moveToFirst()){
             do {
                 val khuTro=KhuTro(
-                ma_khu_tro = c.getString(c.getColumnIndex(KhuTro.CLM_MA_KHU_TRO)),
+                    ma_khu_tro = c.getString(c.getColumnIndex(KhuTro.CLM_MA_KHU_TRO)),
                     ten_khu_tro = c.getString(c.getColumnIndex(KhuTro.CLM_TEN_KHU_TRO)),
                     dia_chi = c.getString(c.getColumnIndex(KhuTro.CLM_DIA_CHI)),
                     so_luong_phong = c.getInt(c.getColumnIndex(KhuTro.CLM_SO_LUONG_PHONG)),
