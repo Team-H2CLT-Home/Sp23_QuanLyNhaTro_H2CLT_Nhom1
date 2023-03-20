@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityManHinhChinhChuTro
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.KhuTroDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemKhuTroBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.KhuTro
 
@@ -31,6 +32,23 @@ class  KhuTroViewHolder(
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TOP
             binding.root.context.startActivity(intent)
+        }
+        binding.btnXoaKhuTro.setOnClickListener {
+            val dao=KhuTroDao(binding.root.context)
+            if (dao.deleteKhuTro(khuTro)>0) {
+                Toast.makeText(binding.root.context, "xóa thành công", Toast.LENGTH_LONG).show()
+                val intent=Intent(binding.root.context, ActivityManHinhChinhChuTro::class.java)
+                intent.putExtra(MA_KHU_KEY, khuTro.ma_khu_tro)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TOP
+                binding.root.context.startActivity(intent)
+            }
+            else{
+                Toast.makeText(binding.root.context, "ko thành công", Toast.LENGTH_LONG).show()
+
+            }
+
         }
     }
 }

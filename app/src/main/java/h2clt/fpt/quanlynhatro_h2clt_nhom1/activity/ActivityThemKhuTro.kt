@@ -4,7 +4,9 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.KhuTroDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityThemKhuTroBinding
@@ -18,6 +20,13 @@ class ActivityThemKhuTro : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityThemKhuTroBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.tbThemKhuTro
+        setSupportActionBar(binding.tbThemKhuTro )
+        val ab = getSupportActionBar()
+        ab?.setHomeAsUpIndicator(R.drawable.black_left)
+        ab?.setDisplayHomeAsUpEnabled(true)
+
         val srf=getSharedPreferences(THONG_TIN_DANG_NHAP, MODE_PRIVATE)
         val admin=srf.getString(USERNAME_KEY, "")!!
         binding.btnTiepTuc.setOnClickListener {
@@ -72,6 +81,17 @@ class ActivityThemKhuTro : AppCompatActivity() {
             dialog.cancel()
         })
         bundle.show()
+    }
+    fun chuyenActivity(){
+        val intent = Intent(this@ActivityThemKhuTro, ActivityManHinhChinhChuTro::class.java)
+        startActivity(intent)
+        finish()
+    }
+    override fun  onOptionsItemSelected(item : MenuItem): Boolean {
+        val id : Int = item.getItemId();
+        if (id==android.R.id.home)
+            chuyenActivity();
+        return super.onOptionsItemSelected(item);
     }
 
 }
