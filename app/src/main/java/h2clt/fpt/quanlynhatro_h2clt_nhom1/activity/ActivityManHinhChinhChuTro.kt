@@ -31,7 +31,6 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
         setContentView(binding.root)
         val admin=getSharedPreferences(THONG_TIN_DANG_NHAP, MODE_PRIVATE).getString(USERNAME_KEY,"")!!
         listKhuTro=KhuTroDao(applicationContext).getAllInKhuTroByAdmin(admin)
-
         val pre = getSharedPreferences(FILE_NAME, MODE_PRIVATE)
 
         if(listKhuTro.isEmpty()){
@@ -96,9 +95,5 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
             }
         }.attach()
 
-        onDestroy()
     }
-
-
-
 }
