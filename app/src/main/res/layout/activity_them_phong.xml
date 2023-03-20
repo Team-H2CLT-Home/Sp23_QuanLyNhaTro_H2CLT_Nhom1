@@ -1,305 +1,367 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/mauNenApp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tbThemPhong"
-            style="@style/toolBar"
-            app:title="Thêm Phòng"
+ <ScrollView
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     >
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="vertical">
+         <androidx.appcompat.widget.Toolbar
+             android:id="@+id/tbThemPhong"
+             style="@style/toolBar"
+             app:title="Thêm Phòng"
 
-            />
-        <CheckBox
-            android:id="@+id/cbTaoTuDong"
-            android:text="Tự động tạo phòng hàng loạt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chỉ cần nhập chữ cái đầu tên phòng trọ muốn đặt hệ thống sẽ tạo tự động"
-            android:textSize="13sp"/>
+             />
+         <CheckBox
+             android:id="@+id/cbTaoTuDong"
+             android:layout_marginLeft="5dp"
+             android:text="Tự động tạo phòng hàng loạt"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"/>
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="10dp"
+             android:layout_marginRight="10dp"
+             android:text="Chỉ cần nhập chữ cái đầu tên phòng trọ muốn đặt hệ thống sẽ tạo tự động"
+             android:textSize="13sp"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/boder_nen"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edTenPhongTro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Tên phòng trọ"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="415dp"
-            android:background="@drawable/boder_nen"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+         <com.google.android.material.textfield.TextInputLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="10dp"
+             android:layout_marginLeft="10dp"
+             android:layout_marginRight="10dp"
+             android:background="@drawable/boder_nen"
+             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+             >
+             <com.google.android.material.textfield.TextInputEditText
+                 android:id="@+id/edTenPhongTro"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="Tên phòng trọ"
+                 />
+         </com.google.android.material.textfield.TextInputLayout>
+         <com.google.android.material.textfield.TextInputLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="10dp"
+             android:layout_marginLeft="10dp"
+             android:layout_marginRight="10dp"
+             android:background="@drawable/boder_nen"
+             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+             >
+             <com.google.android.material.textfield.TextInputEditText
+                 android:id="@+id/edSoPhongTro"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="Số phòng trọ"
+                 />
+         </com.google.android.material.textfield.TextInputLayout>
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="10dp"
+             android:layout_marginTop="10dp"
+             android:orientation="horizontal">
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textColor="#504E4E"
+                 android:textSize="16dp"
+                 android:text="Nhà tầng"/>
+             <Switch
+                 android:id="@+id/switchTuDongTang"
+                 android:layout_marginLeft="5dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"/>
+         </LinearLayout>
 
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Diện tích"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="Nhập diện tích phòng"
-                        />
-                </LinearLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="120dp"
-                    android:layout_height="47dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/white"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+         <com.google.android.material.textfield.TextInputLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="10dp"
+             android:layout_marginLeft="10dp"
+             android:layout_marginRight="10dp"
+             android:visibility="gone"
+             android:background="@drawable/boder_nen"
+             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+             >
+             <com.google.android.material.textfield.TextInputEditText
+                 android:id="@+id/edSoTang"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:visibility="gone"
+                 android:hint="Số tầng"
+                 />
+         </com.google.android.material.textfield.TextInputLayout>
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="415dp"
+             android:background="@drawable/boder_nen"
+             android:layout_marginTop="20dp"
+             android:layout_marginLeft="10dp"
+             android:layout_marginRight="10dp"
+             android:orientation="vertical">
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
 
-                    >
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edDienTichPhong"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:paddingTop="10dp"
-                        android:hint="Diện tích"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
+                 android:orientation="horizontal">
+                 <LinearLayout
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center"
+                     android:layout_marginLeft="20dp"
+                     android:layout_marginTop="5dp"
+                     android:orientation="vertical">
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Diện tích"
+                         android:textColor="@color/black"
+                         android:textSize="16dp"
+                         android:textStyle="bold"
+                         />
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:hint="Nhập diện tích phòng"
+                         />
+                 </LinearLayout>
+                 <com.google.android.material.textfield.TextInputLayout
+                     android:layout_width="120dp"
+                     android:layout_height="47dp"
+                     android:layout_marginTop="10dp"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginRight="10dp"
+                     android:background="@color/white"
+                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
-            </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="2dp"
-                android:background="#656464"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
+                     >
+                     <com.google.android.material.textfield.TextInputEditText
+                         android:id="@+id/edDienTichPhong"
+                         android:layout_width="match_parent"
+                         android:layout_height="45dp"
+                         android:paddingTop="10dp"
+                         android:hint="Diện tích"
+                         />
+                 </com.google.android.material.textfield.TextInputLayout>
 
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Giá thuê"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="Giá phòng tính theo đơn vị tháng"
-                        />
-                </LinearLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="120dp"
-                    android:layout_height="47dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/white"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    >
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edGiaThue"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:paddingTop="10dp"
-                        android:hint="Giá thuê"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
+             </LinearLayout>
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="1dp"
+                 android:layout_marginLeft="2dp"
+                 android:layout_marginTop="15dp"
+                 android:layout_marginRight="2dp"
+                 android:background="#656464"/>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                 android:orientation="horizontal">
+                 <LinearLayout
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center"
 
-            </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="2dp"
-                android:background="#656464"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:layout_gravity="center"
+                     android:layout_marginLeft="20dp"
+                     android:layout_marginTop="5dp"
+                     android:orientation="vertical">
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Giá thuê"
+                         android:textColor="@color/black"
+                         android:textSize="16dp"
+                         android:textStyle="bold"
+                         />
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:hint="Giá phòng tính theo đơn vị tháng"
+                         />
+                 </LinearLayout>
+                 <com.google.android.material.textfield.TextInputLayout
+                     android:layout_width="120dp"
+                     android:layout_height="47dp"
+                     android:layout_marginTop="10dp"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginRight="10dp"
+                     android:background="@color/white"
+                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                     >
+                     <com.google.android.material.textfield.TextInputEditText
+                         android:id="@+id/edGiaThue"
+                         android:layout_width="match_parent"
+                         android:layout_height="45dp"
+                         android:paddingTop="10dp"
+                         android:hint="Giá thuê"
+                         />
+                 </com.google.android.material.textfield.TextInputLayout>
 
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Giá điện"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="Đơn giá điện mặc định "
-                        />
-                </LinearLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="120dp"
-                    android:layout_height="47dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/white"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    >
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edGiaDien"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:paddingTop="10dp"
-                        android:hint="Giá điện"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
+             </LinearLayout>
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="1dp"
+                 android:layout_marginLeft="2dp"
+                 android:layout_marginTop="15dp"
+                 android:layout_marginRight="2dp"
+                 android:background="#656464"/>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                 android:orientation="horizontal">
+                 <LinearLayout
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_marginLeft="20dp"
+                     android:layout_gravity="center"
 
-            </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="2dp"
-                android:background="#656464"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:layout_gravity="center"
+                     android:layout_marginTop="5dp"
+                     android:orientation="vertical">
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Giá điện"
+                         android:textColor="@color/black"
+                         android:textSize="16dp"
+                         android:textStyle="bold"
+                         />
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:hint="Đơn giá điện mặc định "
+                         />
+                 </LinearLayout>
+                 <com.google.android.material.textfield.TextInputLayout
+                     android:layout_width="120dp"
+                     android:layout_height="47dp"
+                     android:layout_marginTop="10dp"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginRight="10dp"
+                     android:background="@color/white"
+                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                     >
+                     <com.google.android.material.textfield.TextInputEditText
+                         android:id="@+id/edGiaDien"
+                         android:layout_width="match_parent"
+                         android:layout_height="45dp"
+                         android:paddingTop="10dp"
+                         android:hint="Giá điện"
+                         />
+                 </com.google.android.material.textfield.TextInputLayout>
 
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Giá nước"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="Đơn giá nước"
-                        />
-                </LinearLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="120dp"
-                    android:layout_height="47dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/white"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    >
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edGiaNuoc"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:paddingTop="10dp"
-                        android:hint="Giá nước"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
+             </LinearLayout>
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="1dp"
+                 android:layout_marginLeft="2dp"
+                 android:layout_marginTop="10dp"
+                 android:layout_marginRight="2dp"
+                 android:background="#656464"/>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                 android:orientation="horizontal">
+                 <LinearLayout
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_marginLeft="20dp"
+                     android:layout_gravity="center"
 
-            </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="2dp"
-                android:background="#656464"/>
-            <Button
-                android:id="@+id/btnThemDichVu"
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_gravity="center"
-                android:text="Thêm dịch vụ"/>
-        </LinearLayout>
+                     android:layout_marginTop="5dp"
+                     android:orientation="vertical">
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Giá nước"
+                         android:textColor="@color/black"
+                         android:textSize="16dp"
+                         android:textStyle="bold"
+                         />
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:hint="Đơn giá nước"
+                         />
+                 </LinearLayout>
+                 <com.google.android.material.textfield.TextInputLayout
+                     android:layout_width="120dp"
+                     android:layout_height="47dp"
+                     android:layout_marginTop="10dp"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginRight="10dp"
+                     android:background="@color/white"
+                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                     >
+                     <com.google.android.material.textfield.TextInputEditText
+                         android:id="@+id/edGiaNuoc"
+                         android:layout_width="match_parent"
+                         android:layout_height="45dp"
+                         android:paddingTop="10dp"
+                         android:hint="Giá nước"
+                         />
+                 </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+             </LinearLayout>
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="1dp"
+                 android:layout_marginLeft="2dp"
+                 android:layout_marginTop="10dp"
+                 android:layout_marginRight="2dp"
+                 android:background="#656464"/>
+             <Button
+                 android:id="@+id/btnThemDichVu"
+                 android:layout_width="230dp"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="40dp"
+                 android:layout_gravity="center"
+                 android:text="Thêm dịch vụ"/>
+         </LinearLayout>
 
-            <Button
-                android:id="@+id/btnLuuThemPhong"
-                android:layout_width="150dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Lưu" />
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="20dp"
+             android:orientation="horizontal">
 
-            <Button
-                android:layout_weight="1"
-                android:id="@+id/btnHuyThemPhong"
-                android:layout_width="150dp"
-                android:layout_margin="10dp"
-                android:layout_height="wrap_content"
+             <Button
+                 android:id="@+id/btnLuuThemPhong"
+                 android:layout_width="150dp"
+                 android:layout_weight="1"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="10dp"
+                 android:text="Lưu" />
 
-                android:text="Hủy" />
-        </LinearLayout>
-    </LinearLayout>
+             <Button
+                 android:layout_weight="1"
+                 android:id="@+id/btnHuyThemPhong"
+                 android:layout_width="150dp"
+                 android:layout_margin="10dp"
+                 android:layout_height="wrap_content"
+
+                 android:text="Hủy" />
+         </LinearLayout>
+     </LinearLayout>
+
+ </ScrollView>
 
 
-
-</ScrollView>
+</LinearLayout>
