@@ -2,14 +2,17 @@ package h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter
 
 import android.app.Activity
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityManHinhChinhChuTro
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.KhuTroDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemKhuTroBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.KhuTro
 
@@ -31,7 +34,42 @@ class  KhuTroViewHolder(
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TOP
             binding.root.context.startActivity(intent)
+
         }
+        binding.btnXoaKhuTro.setOnClickListener {
+            val dao=KhuTroDao(binding.root.context)
+            if(dao.deleteKhuTro(khuTro)>0){
+                thongBaoThanhCong("Bạn đã xóa thành công !!!")
+            }else{
+                thongBaoLoi("Bạn xóa không thành công !!!")
+            }
+        }
+    }
+
+    fun thongBaoLoi(loi : String){
+        val bundle = AlertDialog.Builder(binding.root.context)
+        bundle.setTitle("Thông Báo Lỗi !!!")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
+    }
+    fun thongBaoThanhCong(loi: String){
+        val bundle = AlertDialog.Builder(binding.root.context)
+        bundle.setTitle("Thông Báo thành công !!!")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            val intent=Intent(binding.root.context, ActivityManHinhChinhChuTro::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TOP
+            binding.root.context.startActivity(intent)
+        })
+        bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
     }
 }
 

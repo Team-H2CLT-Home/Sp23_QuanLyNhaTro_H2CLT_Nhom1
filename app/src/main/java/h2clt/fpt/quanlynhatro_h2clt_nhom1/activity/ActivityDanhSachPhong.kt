@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import com.google.android.material.tabs.TabLayoutMediator
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.DanhSachPhongAdapter
+
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.ViewpagerDanhSachPhongAdapter
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDanhSachPhongBinding
