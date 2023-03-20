@@ -38,7 +38,6 @@ class  KhuTroViewHolder(
             if (dao.deleteKhuTro(khuTro)>0) {
                 Toast.makeText(binding.root.context, "xóa thành công", Toast.LENGTH_LONG).show()
                 val intent=Intent(binding.root.context, ActivityManHinhChinhChuTro::class.java)
-                intent.putExtra(MA_KHU_KEY, khuTro.ma_khu_tro)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TOP
