@@ -24,8 +24,6 @@
             android:name=".activity.ActivityTaoHopDong"
         android:exported="true" >
     </activity>
-
-
         <activity
             android:name=".activity.ActivityDoanhThu"
             android:exported="false" />
@@ -84,6 +82,9 @@
             android:name=".activity.ActivityHuongDanTaoKhu"
             android:exported="false" />
         <activity
+            android:name=".activity.ActivityDangNhap"
+            android:exported="false" />
+        <activity
             android:name=".activity.ActivityDangKy"
             android:exported="false">
             <meta-data
@@ -91,7 +92,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.ActivityDangNhap"
+            android:name=".activity.ActivityManHinhChao"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -108,15 +109,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-        <activity
-            android:name=".activity.ActivityManHinhChao"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
