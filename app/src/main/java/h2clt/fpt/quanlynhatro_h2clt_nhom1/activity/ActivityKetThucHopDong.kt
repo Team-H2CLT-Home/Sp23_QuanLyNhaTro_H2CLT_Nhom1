@@ -1,13 +1,14 @@
-package h2clt.fpt.quanlynhatro_h2clt_home
+package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
-import h2clt.fpt.quanlynhatro_h2clt_home.databinding.ActivityKetThucHopDongBinding
-import h2clt.fpt.quanlynhatro_h2clt_home.databinding.DialogGiaHanHdBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityKetThucHopDongBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogGiaHanHdBinding
 
-class KetThucHopDongActivity : AppCompatActivity() {
+
+class ActivityKetThucHopDong : AppCompatActivity() {
     private lateinit var binding: ActivityKetThucHopDongBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

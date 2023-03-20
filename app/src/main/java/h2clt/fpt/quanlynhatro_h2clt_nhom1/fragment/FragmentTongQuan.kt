@@ -1,4 +1,4 @@
-package h2clt.fpt.quanlynhatro_h2clt_home.ManHinhChinh.TrangChu
+package h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import h2clt.fpt.quanlynhatro_h2clt_home.*
-import h2clt.fpt.quanlynhatro_h2clt_home.databinding.TablayoutTongquanBinding
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityPhongSapHetHopDong
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.*
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.TablayoutTongquanBinding
 
 class FragmentTongQuan:Fragment() {
     private lateinit var binding: TablayoutTongquanBinding
@@ -19,11 +18,11 @@ class FragmentTongQuan:Fragment() {
     ): View? {
         binding = TablayoutTongquanBinding.inflate(layoutInflater)
         binding.phongTrong.setOnClickListener {
-            val intent = Intent(context,PhongTrongActivity::class.java)
+            val intent = Intent(context,ActivityPhongTrong::class.java)
             startActivity(intent)
         }
         binding.phongDangChoThue.setOnClickListener {
-            val intent = Intent(context,PhongDangThueActivity::class.java)
+            val intent = Intent(context,ActivityPhongDangThue::class.java)
             startActivity(intent)
         }
         binding.phongSapHetHan.setOnClickListener {
@@ -39,7 +38,7 @@ class FragmentTongQuan:Fragment() {
             startActivity(intent)
         }
         binding.doanhThu.setOnClickListener {
-            val intent = Intent(context,DoanhThuActivity::class.java)
+            val intent = Intent(context,ActivityDoanhThu::class.java)
             startActivity(intent)
         }
 

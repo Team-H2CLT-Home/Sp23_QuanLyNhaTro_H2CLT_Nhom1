@@ -59,7 +59,7 @@
                         android:layout_marginTop="5dp"
                         android:textSize="18dp"
                         android:textColor="@color/black"
-                        android:text="30 phòng"/>
+                        android:text="30 phòng trống"/>
                     <TextView
                         android:id="@+id/tvDiaChiKhuTro"
                         android:layout_width="200dp"
@@ -82,20 +82,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="15dp">
+                >
                 <Button
                     android:id="@+id/btnXoaKhuTro"
-                    style="@style/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#605F5F"
                     android:text="Xóa"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/boder_tron"
+                    android:textSize="15dp"
                     />
                 <Button
                     android:id="@+id/btnQuanLyKhuTro"
-                    style="@style/button_maudo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#605F5F"
                     android:text="Quản lý"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/boder_tron_maudo"
                     android:layout_marginLeft="10dp"
                     />
             </LinearLayout>

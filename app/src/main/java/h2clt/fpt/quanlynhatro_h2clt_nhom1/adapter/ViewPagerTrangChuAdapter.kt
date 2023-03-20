@@ -4,11 +4,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentNguoiDaO
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentNguoiDangO
-
-class ViewpagerDanhSachNguoiThueAdapter (fragmentManager: FragmentManager, lifecylce: Lifecycle):
-    FragmentStateAdapter(fragmentManager,lifecylce) {
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentTongQuan
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentQuanLy
+class ViewPagerTrangChuAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle):
+    FragmentStateAdapter(fragmentManager,lifecycle) {
     override fun getItemCount(): Int {
         return 2
     }
@@ -16,13 +15,13 @@ class ViewpagerDanhSachNguoiThueAdapter (fragmentManager: FragmentManager, lifec
     override fun createFragment(position: Int): Fragment {
         return when(position){
             0 -> {
-                FragmentNguoiDangO()
+                FragmentQuanLy()
             }
             1 -> {
-                FragmentNguoiDaO()
+                FragmentTongQuan()
             }
             else ->{
-                FragmentNguoiDangO()
+                FragmentQuanLy()
             }
         }
     }

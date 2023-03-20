@@ -29,23 +29,24 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textStyle="italic"
+
                 android:textSize="18dp"
                 android:text="Chọn một trong các danh sách khu trọ"
                 android:layout_marginLeft="15dp"/>
         </LinearLayout>
         <ImageView
             android:id="@+id/icClose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_close"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="14dp"/>
+            android:layout_marginStart="45dp"
+            android:layout_gravity="end|top"/>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcyKhuTro"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         />
 
     <Button

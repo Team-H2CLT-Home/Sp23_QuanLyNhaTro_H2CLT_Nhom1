@@ -1,16 +1,20 @@
-package h2clt.fpt.quanlynhatro_h2clt_home
+package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import h2clt.fpt.quanlynhatro_h2clt_home.dao.AdminDao
-import h2clt.fpt.quanlynhatro_h2clt_home.databinding.ActivityDangKyBinding
-import h2clt.fpt.quanlynhatro_h2clt_home.model.Admin
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.AdminDao
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDangKyBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Admin
 
-class DangKy : AppCompatActivity() {
+
+class ActivityDangKy : AppCompatActivity() {
     private lateinit var binding: ActivityDangKyBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,23 +36,25 @@ class DangKy : AppCompatActivity() {
                      ho_ten = binding.edHoVaTen.text.toString(),
                      mat_khau = binding.edMatKhauDangKy.text.toString()
                  )
-                 val dao = AdminDao(this@DangKy).insertAdmin(admin)
+                 val dao = AdminDao(this@ActivityDangKy).insertAdmin(admin)
                  if (dao>0){
-                     Snackbar.make(it,"Lưu thành công",Toast.LENGTH_SHORT).show()
+                     thongBaoThanhCong("Bạn đã tạo thành công tài khoản mới !!!")
                      xoaTrang()
+
+
                  }else{
-                     Snackbar.make(it,"Lưu không thành công",Toast.LENGTH_SHORT).show()
+                    thongBaoLoi("bạn đã tạo không thành công tài khoản mới !!!")
                  }
              }
         }
         binding.btnHuyDK.setOnClickListener {
             xoaTrang()
         }
-
     }
     fun chuyenActivity(){
-        val intent = Intent(this@DangKy, DangNhap::class.java)
+        val intent = Intent(this@ActivityDangKy, ActivityDangNhap::class.java)
         startActivity(intent)
+        finish()
     }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.getItemId();
@@ -56,7 +62,6 @@ class DangKy : AppCompatActivity() {
             chuyenActivity();
         return super.onOptionsItemSelected(item);
     }
-
     fun validate(): Int {
         var check = -1
         if (binding.edHoVaTen.text.toString().isNotBlank() &&
@@ -67,11 +72,35 @@ class DangKy : AppCompatActivity() {
         }
         return check
     }
-
     fun xoaTrang(){
         binding.edHoVaTen.setText("")
         binding.edMatKhauDangKy.setText("")
         binding.edSoDienThoai.setText("")
         binding.edTenDangNhapDangKy.setText("")
     }
+    fun thongBaoLoi(loi : String){
+        val bundle = AlertDialog.Builder(this)
+        bundle.setTitle("Thông Báo Lỗi")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
+    }
+    fun thongBaoThanhCong(loi : String){
+        val bundle = AlertDialog.Builder(this)
+        bundle.setTitle("Thông Báo")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            val intent = Intent(this@ActivityDangKy,ActivityDangNhap::class.java)
+            startActivity(intent)
+            finish()
+        })
+        bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
+    }
+
+
 }

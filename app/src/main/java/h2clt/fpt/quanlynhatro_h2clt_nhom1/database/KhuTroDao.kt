@@ -22,14 +22,16 @@ class KhuTroDao(context: Context) {
     }
 
     @SuppressLint("Range")
-    fun getAllInKhuTro():List<KhuTro>{
+    fun getAllInKhuTroByAdmin(s:String):List<KhuTro>{
         val list= mutableListOf<KhuTro>()
-        val sql="select * from ${KhuTro.TB_NAME}"
-        val c=db.rawQuery(sql,null)
+        val sql="""
+            select * from ${KhuTro.TB_NAME} where ${KhuTro.CLM_TEN_DANG_NHAP}= "$s"
+        """
+        val c=db.rawQuery(sql, null)
         if(c.moveToFirst()){
             do {
                 val khuTro=KhuTro(
-                ma_khu_tro = c.getString(c.getColumnIndex(KhuTro.CLM_MA_KHU_TRO)),
+                    ma_khu_tro = c.getString(c.getColumnIndex(KhuTro.CLM_MA_KHU_TRO)),
                     ten_khu_tro = c.getString(c.getColumnIndex(KhuTro.CLM_TEN_KHU_TRO)),
                     dia_chi = c.getString(c.getColumnIndex(KhuTro.CLM_DIA_CHI)),
                     so_luong_phong = c.getInt(c.getColumnIndex(KhuTro.CLM_SO_LUONG_PHONG)),

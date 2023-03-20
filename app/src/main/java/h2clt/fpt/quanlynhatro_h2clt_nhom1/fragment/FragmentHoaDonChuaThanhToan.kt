@@ -1,10 +1,11 @@
-package h2clt.fpt.quanlynhatro_h2clt_home
+package h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 
 
 class FragmentHoaDonChuaThanhToan : Fragment() {
