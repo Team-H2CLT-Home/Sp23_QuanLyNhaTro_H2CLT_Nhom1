@@ -88,6 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:backgroundTint="#605F5F"
                     android:text="Xóa"
                     android:layout_marginRight="10dp"
                     android:textSize="15dp"
@@ -97,6 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:backgroundTint="#605F5F"
                     android:text="Quản lý"
                     android:layout_marginLeft="10dp"
                     />
