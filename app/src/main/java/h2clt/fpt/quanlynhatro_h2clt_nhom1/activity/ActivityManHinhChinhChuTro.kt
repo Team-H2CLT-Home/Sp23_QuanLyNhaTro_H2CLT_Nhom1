@@ -1,6 +1,7 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -31,6 +32,8 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
         val admin=getSharedPreferences(THONG_TIN_DANG_NHAP, MODE_PRIVATE).getString(USERNAME_KEY,"")!!
         listKhuTro=KhuTroDao(applicationContext).getAllInKhuTroByAdmin(admin)
         val intent=intent
+        val pre = getSharedPreferences(FILE_NAME, MODE_PRIVATE)
+
     when{
         intent.getStringExtra(MA_KHU_KEY)==null ->{
             maKhu=listKhuTro[0].ma_khu_tro
@@ -40,7 +43,8 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
         }
     }
         val khuTro=listKhuTro.find { it.ma_khu_tro==maKhu }
-        binding.titleTenKhuTro.text=khuTro?.ten_khu_tro
+        binding.titleTenKhuTro.text=("Khu ")+ khuTro?.ten_khu_tro
+        pre.edit().putString(MA_KHU_KEY,maKhu).commit()
 
         binding.imgMenuManHinhChinh.setOnClickListener{
       val bottomSheetDialog =  BottomSheetDialog(this)
