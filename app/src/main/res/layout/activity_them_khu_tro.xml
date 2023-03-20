@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_themKhuTro"
             style="@style/toolBar"
             app:title="@string/them_moi_khu_tro"
 
