@@ -10,7 +10,7 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.*
 class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VERSION) {
     object H2CLT{
         const val DB_NAME="MyDB"
-        const val DB_VERSION=1
+        const val DB_VERSION=2
     }
     override fun onCreate(db: SQLiteDatabase?) {
         val admin="""
@@ -85,6 +85,7 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${NguoiDung.CLM_MA_NGUOI_DUNG} text PRIMARY key NOT NULL,
             ${NguoiDung.CLM_HO_TEN_NGUOI_DUNG} text NOT NULL,
             ${NguoiDung.CLM_CCCD} text NOT NULL,
+            ${NguoiDung.CLM_NAM_SINH} text not null,
             ${NguoiDung.CLM_SDT_NGUOI_DUNG} text unique NOT NULL,
             ${NguoiDung.CLM_MA_PHONG} text NOT NULL,
             ${NguoiDung.CLM_TRANG_THAI_O} integer not NULL,

@@ -19,7 +19,7 @@ class PhongTroViewHolder(
         binding.chkTrangThaiPhongDaCoc.isChecked= phong.trang_thai_phong==2
         binding.chkTrangThaiPhongTrong.isChecked=phong.trang_thai_phong==0
         binding.tvTenPhong.setOnClickListener {
-            val phong=PhongDao(binding.root.context).getAllInPhongById(phong.ma_phong)
+            val phong=PhongDao(binding.root.context).getPhongById(phong.ma_phong)
             val listLoaiDichVu= phong?.let { it1 ->
                 LoaiDichVuPhongDao(binding.root.context).getAllInLoaiDichVuById(
                     it1.ma_dich_vu)
@@ -43,4 +43,6 @@ class PhongTroAdapter(val listPhong: List<Phong>): RecyclerView.Adapter<PhongTro
             bind(phong)
         }
     }
+
+
 }
