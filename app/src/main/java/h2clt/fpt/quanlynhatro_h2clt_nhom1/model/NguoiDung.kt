@@ -8,7 +8,7 @@ data class NguoiDung(
     val sdt_nguoi_dung:String,
     val trang_thai_chu_hop_dong:Int,
     val trang_thai_o:Int,
-    val ma_phong:String){
+    val ma_phong:String)  {
     companion object{
         const val TB_NAME="nguoi_dung"
         const val CLM_MA_NGUOI_DUNG="ma_nguoi_dung"
@@ -21,3 +21,4 @@ data class NguoiDung(
         const val CLM_MA_PHONG="ma_phong"
     }
 }
+
