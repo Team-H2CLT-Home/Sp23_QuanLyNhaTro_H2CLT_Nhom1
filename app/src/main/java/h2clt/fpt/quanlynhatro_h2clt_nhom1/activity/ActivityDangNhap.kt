@@ -38,7 +38,7 @@ class ActivityDangNhap : AppCompatActivity() {
             binding.edMatKhau.setText("")
             binding.edCheckBox.isChecked =false
         }
-        //tự động đăng nhập không cần ấn
+        //tự động đăng nhập không cần ấn test
 
         binding.btnLuuDN.setOnClickListener {
             val userName = binding.edTenDangNhap.text.toString()

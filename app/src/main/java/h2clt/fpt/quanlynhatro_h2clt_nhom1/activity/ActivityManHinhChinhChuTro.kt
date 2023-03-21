@@ -34,11 +34,16 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
         bottomSheetDialog= BottomSheetDialog(this)
         val admin=getSharedPreferences(THONG_TIN_DANG_NHAP, MODE_PRIVATE).getString(USERNAME_KEY,"")!!
         listKhuTro=KhuTroDao(applicationContext).getAllInKhuTroByAdmin(admin)
-        val intent=intent
         val pre = getSharedPreferences(FILE_NAME, MODE_PRIVATE)
 
+        if(listKhuTro.isEmpty()){
+            val intent = Intent(this@ActivityManHinhChinhChuTro, ActivityHuongDanTaoKhu::class.java)
+            startActivity(intent)
+            finish()
+        }
     when{
         intent.getStringExtra(MA_KHU_KEY)==null ->{
+            if(listKhuTro.isNotEmpty())
             maKhu=listKhuTro[0].ma_khu_tro
         }
         intent.getStringExtra(MA_KHU_KEY)!=null->{
@@ -64,8 +69,8 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-            bottomSheetDialog.show()
 
+                bottomSheetDialog.show()
 
         }
         val adapter = ViewPagerManHinhChinhAdapter(supportFragmentManager,lifecycle)
