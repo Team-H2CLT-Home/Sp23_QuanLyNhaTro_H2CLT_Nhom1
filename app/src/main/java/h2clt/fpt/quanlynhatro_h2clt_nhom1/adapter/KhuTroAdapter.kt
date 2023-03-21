@@ -34,6 +34,7 @@ class  KhuTroViewHolder(
             intent.putExtra(MA_KHU_KEY, khuTro.ma_khu_tro)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.flags=Intent.FLAG_ACTIVITY_SINGLE_TOP
             intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TOP
             maKhuTro = khuTro.ma_khu_tro
             binding.root.context.startActivity(intent)

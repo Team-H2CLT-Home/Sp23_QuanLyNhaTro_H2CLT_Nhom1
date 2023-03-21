@@ -25,9 +25,11 @@ class PhongDao(context: Context) {
     }
 
     @SuppressLint("Range")
-    fun getAllInPhong():List<Phong>{
+    fun getAllInPhongByMaKhu(maKhu:String):List<Phong>{
         val list= mutableListOf<Phong>()
-        val sql="select * from ${Phong.TB_NAME}"
+        val sql="""
+           select * from ${Phong.TB_NAME} where ${Phong.CLM_MA_KHU} = "$maKhu" 
+        """.trimIndent()
         val c=db.rawQuery(sql,null)
 
         if(c.moveToFirst()){
@@ -47,5 +49,27 @@ class PhongDao(context: Context) {
         }
 
         return list
+    }
+    @SuppressLint("Range")
+    fun getAllInPhongById(id:String):Phong?{
+        val sql="""
+            select * from ${Phong.TB_NAME} where ${Phong.CLM_MA_PHONG}= "$id"
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+
+        if(c.moveToFirst()) {
+            return Phong(
+                ma_phong = c.getString(c.getColumnIndex(Phong.CLM_MA_PHONG)),
+                ten_phong = c.getString(c.getColumnIndex(Phong.CLM_TEN_PHONG)),
+                dien_tich = c.getInt(c.getColumnIndex(Phong.CLM_DIEN_TICH)),
+                gia_thue = c.getLong(c.getColumnIndex(Phong.CLM_GIA_THUE)),
+                so_nguoi_o = c.getInt(c.getColumnIndex(Phong.CLM_SO_NGUOI_O)),
+                trang_thai_phong = c.getInt(c.getColumnIndex(Phong.CLM_TRANG_THAI_PHONG)),
+                ma_khu = c.getString(c.getColumnIndex(Phong.CLM_MA_KHU)),
+                ma_dich_vu = c.getString(c.getColumnIndex(Phong.CLM_MA_DICH_VU))
+            )
+        }
+
+        return null
     }
 }
