@@ -1,32 +1,69 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityThemPhong
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityThemPhongBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.PhongTroAdapter
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentTatCaPhongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 
 
 class FragmentTatCaPhong : Fragment() {
-    private lateinit var binding: FragmentTatCaPhongBinding
+    private  var _binding: FragmentTatCaPhongBinding? = null
+    private val binding
+        get() = checkNotNull(_binding) {
+            ""
+        }
+
     var listPhong= listOf<Phong>()
+    var maKhu=""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentTatCaPhongBinding.inflate(LayoutInflater.from(context))
+        _binding = FragmentTatCaPhongBinding.inflate(LayoutInflater.from(context))
+        val phongDao= activity?.let { PhongDao(it) }!!
+        val srf=activity?.getSharedPreferences(FILE_NAME, AppCompatActivity.MODE_PRIVATE)
+        maKhu=srf?.getString(MA_KHU_KEY, "")!!
+        listPhong=phongDao.getAllInPhongByMaKhu(maKhu)
         binding.imgAddPhong.setOnClickListener {
             val intent= Intent(activity, ActivityThemPhong::class.java)
             startActivity(intent)
-
         }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val phongTroAdapter=PhongTroAdapter(listPhong)
+        binding.rcyTatCaPhong.adapter=phongTroAdapter
+        binding.rcyTatCaPhong.layoutManager=LinearLayoutManager(context)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+      _binding=null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        reload()
+    }
+    private fun reload(){
+        val phongDao= activity?.let { PhongDao(it) }!!
+        listPhong=phongDao.getAllInPhongByMaKhu(maKhu)
+        val phongTroAdapter=PhongTroAdapter(listPhong)
+        binding.rcyTatCaPhong.adapter=phongTroAdapter
+        binding.rcyTatCaPhong.layoutManager=LinearLayoutManager(context)
     }
 }

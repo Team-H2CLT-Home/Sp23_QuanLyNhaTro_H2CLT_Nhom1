@@ -51,11 +51,13 @@
                  />
          </com.google.android.material.textfield.TextInputLayout>
          <com.google.android.material.textfield.TextInputLayout
+             android:id="@+id/themSoPhongParrent"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:layout_marginTop="10dp"
              android:layout_marginLeft="10dp"
              android:layout_marginRight="10dp"
+             android:visibility="gone"
              android:background="@drawable/boder_nen"
              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
              >
@@ -63,6 +65,7 @@
                  android:id="@+id/edSoPhongTro"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
+                 android:inputType="number"
                  android:hint="Số phòng trọ"
                  />
          </com.google.android.material.textfield.TextInputLayout>
@@ -86,6 +89,7 @@
          </LinearLayout>
 
          <com.google.android.material.textfield.TextInputLayout
+             android:id="@+id/soTangParrent"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:layout_marginTop="10dp"
@@ -99,7 +103,7 @@
                  android:id="@+id/edSoTang"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
-                 android:visibility="gone"
+                 android:inputType="number"
                  android:hint="Số tầng"
                  />
          </com.google.android.material.textfield.TextInputLayout>
@@ -153,6 +157,7 @@
                          android:layout_width="match_parent"
                          android:layout_height="45dp"
                          android:paddingTop="10dp"
+                         android:inputType="number"
                          android:hint="Diện tích"
                          />
                  </com.google.android.material.textfield.TextInputLayout>
@@ -207,6 +212,7 @@
                          android:layout_width="match_parent"
                          android:layout_height="45dp"
                          android:paddingTop="10dp"
+                         android:inputType="number"
                          android:hint="Giá thuê"
                          />
                  </com.google.android.material.textfield.TextInputLayout>
@@ -261,6 +267,7 @@
                          android:layout_width="match_parent"
                          android:layout_height="45dp"
                          android:paddingTop="10dp"
+                         android:inputType="number"
                          android:hint="Giá điện"
                          />
                  </com.google.android.material.textfield.TextInputLayout>
@@ -315,6 +322,7 @@
                          android:layout_width="match_parent"
                          android:layout_height="45dp"
                          android:paddingTop="10dp"
+                         android:inputType="number"
                          android:hint="Giá nước"
                          />
                  </com.google.android.material.textfield.TextInputLayout>
