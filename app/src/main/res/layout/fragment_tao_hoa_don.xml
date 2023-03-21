@@ -8,6 +8,7 @@
     android:background="@color/mauNenApp"
     >
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbTaoHoaDon"
         style="@style/toolBar"
         app:title="@string/tao_hoa_don"
 

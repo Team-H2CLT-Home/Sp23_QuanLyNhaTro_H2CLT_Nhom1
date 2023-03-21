@@ -1,18 +1,30 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import com.google.android.material.tabs.TabLayoutMediator
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
+
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.ViewpagerDanhSachPhongAdapter
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDanhSachPhongBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 
 
 class ActivityDanhSachPhong : AppCompatActivity() {
     private lateinit var binding: ActivityDanhSachPhongBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDanhSachPhongBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.tbDanhSachPhong
+        setSupportActionBar(binding.tbDanhSachPhong)
+        val ab = getSupportActionBar()
+        ab?.setHomeAsUpIndicator(R.drawable.black_left)
+        ab?.setDisplayHomeAsUpEnabled(true)
         val adapter = ViewpagerDanhSachPhongAdapter(supportFragmentManager, lifecycle)
         binding.viewpagerDanhSachPhong.adapter = adapter
         TabLayoutMediator(binding.tabDanhSachPhong, binding.viewpagerDanhSachPhong) { tab, pos ->
@@ -26,5 +38,15 @@ class ActivityDanhSachPhong : AppCompatActivity() {
                 else -> tab.text = "Phòng đã ở"
             }
         }.attach()
+    }
+    fun chuyenActivity(){
+        val intent = Intent(this@ActivityDanhSachPhong, ActivityManHinhChinhChuTro::class.java)
+        startActivity(intent)
+    }
+    override fun  onOptionsItemSelected(item : MenuItem): Boolean {
+        val id : Int = item.getItemId();
+        if (id==android.R.id.home)
+            chuyenActivity();
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tbDanhSachPhong"
+        android:id="@+id/tabDSNguoiThue"
         style="@style/toolBar"
         app:title="@string/danh_sach_nguoi_thue"
         />
