@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,11 +25,13 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
     private lateinit var binding: ActivityManHinhChinhChuTroBinding
     private var listKhuTro = listOf<KhuTro>()
     private var maKhu=""
+    private lateinit var bottomSheetDialog :  BottomSheetDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityManHinhChinhChuTroBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        bottomSheetDialog= BottomSheetDialog(this)
         val admin=getSharedPreferences(THONG_TIN_DANG_NHAP, MODE_PRIVATE).getString(USERNAME_KEY,"")!!
         listKhuTro=KhuTroDao(applicationContext).getAllInKhuTroByAdmin(admin)
 
@@ -53,7 +56,6 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
         pre.edit().putString(MA_KHU_KEY,maKhu).commit()
 
         binding.imgMenuManHinhChinh.setOnClickListener{
-      val bottomSheetDialog =  BottomSheetDialog(this)
             val buil = DialogDanhSachKhuTroBinding.inflate(LayoutInflater.from(this))
             val adapter=KhuTroAdapter(listKhuTro)
             buil.rcyKhuTro.layoutManager=LinearLayoutManager(applicationContext)
@@ -68,8 +70,13 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
+<<<<<<<<< Temporary merge branch 1
 
                 bottomSheetDialog.show()
+=========
+            bottomSheetDialog.show()
+
+>>>>>>>>> Temporary merge branch 2
 
         }
         val adapter = ViewPagerManHinhChinhAdapter(supportFragmentManager,lifecycle)
@@ -96,9 +103,18 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
             }
         }.attach()
 
-
+<<<<<<<<< Temporary merge branch 1
+        onDestroy()
     }
 
+=========
+    }
+    override fun onPause() {
+        super.onPause()
+        bottomSheetDialog.dismiss()
+        Log.d("TAG", "onPause: called")
+    }
+>>>>>>>>> Temporary merge branch 2
 
 
 }
