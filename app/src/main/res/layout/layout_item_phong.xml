@@ -70,6 +70,7 @@
                         android:id="@+id/chkTrangThaiPhongTrong"
                         style="@style/chk_trang_thai"
                         android:text="Đang trống"
+                        android:clickable="false"
                         android:textColor="#0736DC"
                         />
                     <CheckBox
@@ -77,6 +78,7 @@
                         style="@style/chk_trang_thai"
                         android:text="Chưa cọc"
                         android:textColor="#DC0727"
+                        android:clickable="false"
                         android:layout_marginLeft="20dp"
 
                         />
