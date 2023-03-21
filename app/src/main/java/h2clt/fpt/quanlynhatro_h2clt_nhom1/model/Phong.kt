@@ -8,7 +8,8 @@ data class Phong(
     val so_nguoi_o:Int,
     val trang_thai_phong:Int,
     val ma_khu:String,
-    val ma_dich_vu:String){
+    val ma_dich_vu:String
+){
     companion object{
         const val TB_NAME="phong"
         const val CLM_MA_PHONG="ma_phong"

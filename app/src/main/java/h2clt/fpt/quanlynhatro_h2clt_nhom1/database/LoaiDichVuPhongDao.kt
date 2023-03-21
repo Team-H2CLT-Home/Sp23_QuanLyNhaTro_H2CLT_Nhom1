@@ -46,4 +46,30 @@ class LoaiDichVuPhongDao(context: Context) {
 
         return list
     }
+    @SuppressLint("Range")
+    fun getAllInLoaiDichVuById(idDichVuPhong:String):List<LoaiDichVu>{
+        val list= mutableListOf<LoaiDichVu>()
+        val sql="""
+            select * from ${LoaiDichVu.TB_NAME} where ${LoaiDichVu.CLM_MA_DICH_VU}= "$idDichVuPhong"
+            
+        """
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            do {
+                val loaiDichVu=LoaiDichVu(
+                    ma_loai_dich_vu = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_LOAI_DICH_VU)),
+                    ten_loai_dich_vu = c.getString(c.getColumnIndex(LoaiDichVu.CLM_TEN_LOAI_DICH_VU)),
+                    gia_dich_vu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_GIA_DICH_VU)),
+                    trang_thai_loai_dich_vu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_TRANG_THAI_LOAI_DICH_VU)),
+                    ma_dich_vu = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_DICH_VU))
+
+                )
+                list+=loaiDichVu
+
+            }while (c.moveToNext())
+        }
+
+
+        return list
+    }
 }
