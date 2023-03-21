@@ -96,7 +96,7 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
             }
         }.attach()
 
-        onDestroy()
+
     }
 
 
