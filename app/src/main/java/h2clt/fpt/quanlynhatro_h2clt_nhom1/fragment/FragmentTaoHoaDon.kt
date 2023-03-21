@@ -13,7 +13,7 @@ class FragmentTaoHoaDon : AppCompatActivity() {
         binding = FragmentTaoHoaDonBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.listViewTaoHoaDon.adapter
-
+///dkgkldng
     }
 
 }
