@@ -10,7 +10,7 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.*
 class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VERSION) {
     object H2CLT{
         const val DB_NAME="MyDB"
-        const val DB_VERSION=1
+        const val DB_VERSION=2
     }
     override fun onCreate(db: SQLiteDatabase?) {
         val admin="""
@@ -71,10 +71,12 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             CREATE table ${HoaDon.TB_NAME}(
             ${HoaDon.CLM_MA_HOA_DON} text PRIMARY KEY NOT NULL,
             ${HoaDon.CLM_NGAY_TAO_HOA_DON} text NOT NULL,
+            ${HoaDon.CLM_GIA_THUE} integer not null,
             ${HoaDon.CLM_SO_DIEN} integer NOT NULL,
             ${HoaDon.CLM_SO_NUOC} integer NOT NULL,
             ${HoaDon.CLM_TRANG_THAI_HOA_DON} integer NOT NULL,
-            ${HoaDon.CLM_MIEN_GIAM}integer NOT NULL,
+            ${HoaDon.CLM_MIEN_GIAM} integer NOT NULL,
+            ${HoaDon.CLM_GIA_DICH_VU} integer not null,
             ${HoaDon.CLM_MA_PHONG} text NOT NULL,
             FOREIGN KEY (${HoaDon.CLM_MA_PHONG} ) REFERENCES ${Phong.TB_NAME}(${Phong.CLM_MA_PHONG}));
         """.trimIndent()

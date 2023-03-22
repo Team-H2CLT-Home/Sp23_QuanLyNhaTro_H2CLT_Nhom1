@@ -69,13 +69,10 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-<<<<<<<<< Temporary merge branch 1
 
-                bottomSheetDialog.show()
-=========
             bottomSheetDialog.show()
 
->>>>>>>>> Temporary merge branch 2
+
 
         }
         val adapter = ViewPagerManHinhChinhAdapter(supportFragmentManager,lifecycle)
