@@ -29,6 +29,8 @@ class PhongDao(context: Context) {
         val list= mutableListOf<Phong>()
         val sql="""
            select * from ${Phong.TB_NAME} where ${Phong.CLM_MA_KHU} = "$maKhu" 
+           
+           select ${Phong.CLM_MA_PHONG},${Phong.CLM_GIA_THUE},${Phong.CLM_MA_DICH_VU} from ${Phong.TB_NAME}
         """.trimIndent()
         val c=db.rawQuery(sql,null)
 
