@@ -19,6 +19,7 @@ class HoaDonDaThanhToanViewHolder(
     fun bind(hoaDon: HoaDon){
         var sum = 0
         var tongItem = 0
+        ///
         if (hoaDon.trang_thai_hoa_don==1 ){
             binding.tvTrangThaiHoaDon.isChecked = true
             binding.tvTenPhong.text = hoaDon.ma_phong
