@@ -19,6 +19,7 @@ class NguoiDungDao(context: Context) {
             put(NguoiDung.CLM_CCCD,nguoiDung.cccd)
             put(NguoiDung.CLM_NAM_SINH,nguoiDung.nam_sinh)
             put(NguoiDung.CLM_SDT_NGUOI_DUNG,nguoiDung.sdt_nguoi_dung)
+            put(NguoiDung.CLM_QUE_QUAN_NGUOI_DUNG,nguoiDung.que_quan)
             put(NguoiDung.CLM_TRANG_THAI_CHU_HOP_DONG,nguoiDung.trang_thai_chu_hop_dong)
             put(NguoiDung.CLM_TRANG_THAI_O,nguoiDung.trang_thai_o)
             put(NguoiDung.CLM_MA_PHONG,nguoiDung.ma_phong)
@@ -41,6 +42,7 @@ class NguoiDungDao(context: Context) {
                     cccd = c.getString(c.getColumnIndex(NguoiDung.CLM_CCCD)),
                     nam_sinh = c.getString(c.getColumnIndex(NguoiDung.CLM_NAM_SINH)),
                     sdt_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_SDT_NGUOI_DUNG)),
+                    que_quan = c.getString(c.getColumnIndex(NguoiDung.CLM_QUE_QUAN_NGUOI_DUNG)),
                     trang_thai_chu_hop_dong = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_CHU_HOP_DONG)),
                     trang_thai_o = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_O)),
                     ma_phong = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_PHONG))
@@ -64,6 +66,7 @@ class NguoiDungDao(context: Context) {
                     cccd = c.getString(c.getColumnIndex(NguoiDung.CLM_CCCD)),
                     nam_sinh = c.getString(c.getColumnIndex(NguoiDung.CLM_NAM_SINH)),
                     sdt_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_SDT_NGUOI_DUNG)),
+                    que_quan = c.getString(c.getColumnIndex(NguoiDung.CLM_QUE_QUAN_NGUOI_DUNG)),
                     trang_thai_chu_hop_dong = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_CHU_HOP_DONG)),
                     trang_thai_o = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_O)),
                     ma_phong = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_PHONG))
@@ -89,6 +92,7 @@ class NguoiDungDao(context: Context) {
                     cccd = c.getString(c.getColumnIndex(NguoiDung.CLM_CCCD)),
                     nam_sinh = c.getString(c.getColumnIndex(NguoiDung.CLM_NAM_SINH)),
                     sdt_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_SDT_NGUOI_DUNG)),
+                    que_quan = c.getString(c.getColumnIndex(NguoiDung.CLM_QUE_QUAN_NGUOI_DUNG)),
                     trang_thai_chu_hop_dong = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_CHU_HOP_DONG)),
                     trang_thai_o = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_O)),
                     ma_phong = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_PHONG))
