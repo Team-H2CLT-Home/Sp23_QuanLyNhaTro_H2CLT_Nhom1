@@ -51,7 +51,7 @@ class PhongDao(context: Context) {
         return list
     }
     @SuppressLint("Range")
-    fun getPhongById(id:String):Phong?{
+    fun getAllInPhongById(id:String):Phong?{
         val sql="""
             select * from ${Phong.TB_NAME} where ${Phong.CLM_MA_PHONG}= "$id"
         """.trimIndent()
@@ -71,18 +71,5 @@ class PhongDao(context: Context) {
         }
 
         return null
-    }
-    @SuppressLint("Range")
-    fun getTenPhongById(id:String):String{
-        val sql="""
-            select ${Phong.CLM_TEN_PHONG} from ${Phong.TB_NAME} where ${Phong.CLM_MA_PHONG}= "$id"
-        """.trimIndent()
-        val c=db.rawQuery(sql,null)
-
-        if(c.moveToFirst()) {
-            return c.getString(c.getColumnIndex(Phong.CLM_TEN_PHONG))
-        }
-
-        return "null"
     }
 }

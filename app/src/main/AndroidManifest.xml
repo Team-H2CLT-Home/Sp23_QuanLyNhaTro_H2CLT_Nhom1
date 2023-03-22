@@ -85,9 +85,7 @@
         <activity
             android:name=".activity.ActivityHuongDanTaoKhu"
             android:exported="false" />
-        <activity
-            android:name=".activity.ActivityDangNhap"
-            android:exported="false" />
+
         <activity
             android:name=".activity.ActivityDangKy"
             android:exported="false">
@@ -106,6 +104,10 @@
 
         </activity>
 
+        <activity
+            android:name=".activity.ActivityDangNhap"
+            android:exported="false" >
+        </activity>
         <activity
             android:name=".activity.ActivityDanhSachHoaDon"
             android:exported="false" >

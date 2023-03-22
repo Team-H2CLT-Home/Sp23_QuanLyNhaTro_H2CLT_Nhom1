@@ -26,37 +26,13 @@ class HoaDonDao(context: Context) {
     }
 
     @SuppressLint("Range")
-    fun getAllInHoaDonByID(id:String):HoaDon?{
-        val sql="""
-            select * from ${HoaDon.TB_NAME} where ${HoaDon.CLM_MA_HOA_DON}= "$id"
-        """.trimIndent()
-        val c=db.rawQuery(sql,null)
-        if(c.moveToFirst()){
-
-                return HoaDon(
-                    ma_hoa_don = c.getString(c.getColumnIndex(HoaDon.CLM_MA_HOA_DON)),
-                    ngay_tao_hoa_don = c.getString(c.getColumnIndex(HoaDon.CLM_NGAY_TAO_HOA_DON)),
-                    trang_thai_hoa_don = c.getInt(c.getColumnIndex(HoaDon.CLM_TRANG_THAI_HOA_DON)),
-                    so_dien = c.getInt(c.getColumnIndex(HoaDon.CLM_SO_DIEN)),
-                    so_nuoc = c.getInt(c.getColumnIndex(HoaDon.CLM_SO_NUOC)),
-                    mien_giam = c.getInt(c.getColumnIndex(HoaDon.CLM_MIEN_GIAM)),
-                    ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG))
-                )
-        }
-        return null
-    }
-    @SuppressLint("Range")
     fun getAllInHoaDon():List<HoaDon>{
         val list= mutableListOf<HoaDon>()
-        val sql="""
-            select * from ${HoaDon.TB_NAME} 
-        """.trimIndent()
+        val sql="select * from ${HoaDon.TB_NAME}"
         val c=db.rawQuery(sql,null)
-
-            if(c.moveToFirst()){
-
-                do {
-                val hoaDon= HoaDon(
+        if(c.moveToFirst()){
+            do {
+                val hoaDon=HoaDon(
                     ma_hoa_don = c.getString(c.getColumnIndex(HoaDon.CLM_MA_HOA_DON)),
                     ngay_tao_hoa_don = c.getString(c.getColumnIndex(HoaDon.CLM_NGAY_TAO_HOA_DON)),
                     trang_thai_hoa_don = c.getInt(c.getColumnIndex(HoaDon.CLM_TRANG_THAI_HOA_DON)),
@@ -66,28 +42,8 @@ class HoaDonDao(context: Context) {
                     ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG))
                 )
                 list+=hoaDon
-
-                }while (c.moveToNext())
-            }
-
-
-        return list
-    }
-
-    fun deleteInHoaDon(hoaDon: HoaDon):Int{
-        return db.delete(HoaDon.TB_NAME,"${HoaDon.CLM_MA_HOA_DON}", arrayOf<String>(hoaDon.ma_hoa_don))
-    }
-    fun updateInHoaDon(hoaDon: HoaDon):Int{
-        val values=ContentValues()
-        values.apply {
-            put(HoaDon.CLM_MA_HOA_DON,hoaDon.ma_hoa_don)
-            put(HoaDon.CLM_NGAY_TAO_HOA_DON,hoaDon.ngay_tao_hoa_don)
-            put(HoaDon.CLM_TRANG_THAI_HOA_DON,hoaDon.trang_thai_hoa_don)
-            put(HoaDon.CLM_SO_DIEN,hoaDon.so_dien)
-            put(HoaDon.CLM_SO_NUOC,hoaDon.so_nuoc)
-            put(HoaDon.CLM_MIEN_GIAM,hoaDon.mien_giam)
-            put(HoaDon.CLM_MA_PHONG,hoaDon.ma_phong)
+            }while (c.moveToNext())
         }
-        return db.update(HoaDon.TB_NAME,values,"${HoaDon.CLM_MA_HOA_DON}", arrayOf(hoaDon.ma_hoa_don))
+        return list
     }
 }
