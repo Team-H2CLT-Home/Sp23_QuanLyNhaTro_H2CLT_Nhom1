@@ -82,7 +82,13 @@
             android:name=".activity.ActivityHuongDanTaoKhu"
             android:exported="false" />
 
-
+        <activity
+            android:name=".activity.ActivityDangKy"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".activity.ActivityManHinhChao"
             android:exported="true" >
@@ -94,6 +100,10 @@
 
         </activity>
 
+        <activity
+            android:name=".activity.ActivityDangNhap"
+            android:exported="false" >
+        </activity>
         <activity
             android:name=".activity.ActivityDanhSachHoaDon"
             android:exported="false" >
