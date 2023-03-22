@@ -41,7 +41,7 @@ class FragmentNguoiDangO: Fragment() {
         val srf = binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
         maKhu = srf.getString(MA_KHU_KEY, "")!!
         listNguoiDung=NguoiDungDao(requireActivity()).getAllInNguoiDungByMaKhu(maKhu)
-        Toast.makeText(activity, maKhu, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(activity, maKhu, Toast.LENGTH_SHORT).show()
         binding.imgAddNguoiThue.setOnClickListener {
             val dialog=DialogThemKhachThueBinding.inflate(LayoutInflater.from(activity))
             val build=AlertDialog.Builder(activity).create()
@@ -65,35 +65,42 @@ class FragmentNguoiDangO: Fragment() {
 
             }
             dialog.btnLuuThemNguoiDung.setOnClickListener {
-                val maNguoiDung = UUID.randomUUID().toString()
-                val nguoiDung = NguoiDung(
-                    ma_nguoi_dung = maNguoiDung,
-                    ho_ten_nguoi_dung = dialog.edHoTenThemNguoiDung.text.toString(),
-                    nam_sinh = dialog.edNgaySinhThemNguoiDung.text.toString(),
-                    sdt_nguoi_dung = dialog.edSDTThemNguoiDung.text.toString(),
-                    cccd = dialog.edCCCDThemNguoiDung.text.toString(),
-                    trang_thai_chu_hop_dong = 0,
-                    trang_thai_o = 1,
-                    ma_phong = maPhong
-                )
-                val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
-                if (dao > 0) {
-                    Snackbar.make(it, "Thêm người dùng thành công", Toast.LENGTH_SHORT).show()
-                } else {
-                    Snackbar.make(it, "Thêm không thành công", Toast.LENGTH_SHORT).show()
+                if(dialog.edHoTenThemNguoiDung.text.toString().isNotBlank()&&dialog.edNgaySinhThemNguoiDung.text.toString().isNotBlank()
+                    &&dialog.edSDTThemNguoiDung.text.toString().isNotBlank()&&dialog.edCCCDThemNguoiDung.text.toString().isNotBlank()
+                    &&dialog.edQueQuanThemNguoiDung.text.toString().isNotBlank()){
+                    val maNguoiDung = UUID.randomUUID().toString()
+                    val nguoiDung = NguoiDung(
+                        ma_nguoi_dung = maNguoiDung,
+                        ho_ten_nguoi_dung = dialog.edHoTenThemNguoiDung.text.toString(),
+                        nam_sinh = dialog.edNgaySinhThemNguoiDung.text.toString(),
+                        sdt_nguoi_dung = dialog.edSDTThemNguoiDung.text.toString(),
+                        que_quan = dialog.edQueQuanThemNguoiDung.text.toString(),
+                        cccd = dialog.edCCCDThemNguoiDung.text.toString(),
+                        trang_thai_chu_hop_dong = 0,
+                        trang_thai_o = 1,
+                        ma_phong = maPhong
+                    )
+                    val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
+                    if (dao > 0) {
+                        Snackbar.make(it, "Thêm người dùng thành công", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Snackbar.make(it, "Thêm không thành công", Toast.LENGTH_SHORT).show()
+                    }
+                    dialog.edHoTenThemNguoiDung.setText("")
+                    dialog.edSDTThemNguoiDung.setText("")
+                    dialog.edCCCDThemNguoiDung.setText("")
+                    dialog.edNgaySinhThemNguoiDung.setText("")
+                    dialog.edQueQuanThemNguoiDung.setText("")
+                }else{
+                    thongBaoLoi("Dữ liệu không được để trống!!!")
                 }
-                dialog.edHoTenThemNguoiDung.setText("")
-                dialog.edSDTThemNguoiDung.setText("")
-                dialog.edCCCDThemNguoiDung.setText("")
-                dialog.edNgaySinhThemNguoiDung.setText("")
-                dialog.edQueQuanThemNguoiDung.setText("")
+
 
             }
             dialog.btnHuyThemNguoiDung.setOnClickListener {
                 build.dismiss()
                 onResume()
             }
-
 
             build.setView(dialog.root)
             build.show()
@@ -129,54 +136,5 @@ class FragmentNguoiDangO: Fragment() {
         binding.rcyNguoiDangO.adapter=nguoiThueAdapter
         binding.rcyNguoiDangO.layoutManager=LinearLayoutManager(context)
     }
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        val nguoiThueAdapter= NguoiThueAdapter()
-//        binding.rcyTatCaPhong.adapter=phongTroAdapter
-//        binding.rcyTatCaPhong.layoutManager= LinearLayoutManager(context)
-//    }
-//    private fun laySpinnerPhong(){
-//        //khai bao list phong
-//        val list = mutableListOf<Phong>()
-//        val maPhongSpinner = MaPhongSpinner(binding.root.context,list)
-//
-//    }
 
-//    public LoaiThuSpinnerAdapter(@NonNull Context context, int resource, List<loaiThu> listLT) {
-////        super(context, resource,listLT);
-//    }
-//
-//    @NonNull
-//    @Override
-//    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//        convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loaithu_show,parent,false);
-//        TextView tv_item_loaithu_show = convertView.findViewById(R.id.tv_item_loaithu_show);
-//        loaiThu lt = this.getItem(position);
-//        if(lt!=null){
-//            tv_item_loaithu_show.setText(lt.getTenLoaiThu());
-//        }
-//        return convertView;
-//    }
-//    @Override
-//    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//        convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_selected,parent,false);
-//        TextView tv_selected = convertView.findViewById(R.id.tv_selected);
-//        loaiThu lt = this.getItem(position);
-//        if(lt!=null){
-//            tv_selected.setText(lt.getTenLoaiThu());
-//        }
-//        return convertView;
-//    }
-//}
-//    LoaiThuSpinnerAdapter adapterLoaiThu = new LoaiThuSpinnerAdapter(dialog.getContext(),R.layout.item_loaithu_show,getListLoaiThu(dialog));
-//        sp_loaithu.setAdapter(adapterLoaiThu);
-//
-//
-//    }
-//
-//    private List<loaiThu> getListLoaiThu(Dialog dialog) {
-//        List<loaiThu> list = new ArrayList<>();
-//        ltd = new loaiThuDAO(dialog.getContext());
-//        list = ltd.getAll();
-//        return list;
-//    }
 }

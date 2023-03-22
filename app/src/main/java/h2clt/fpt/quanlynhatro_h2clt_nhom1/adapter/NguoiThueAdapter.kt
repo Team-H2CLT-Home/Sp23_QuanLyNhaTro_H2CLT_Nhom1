@@ -1,9 +1,13 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogChiTietNguoiThueBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemNguoiThueBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemPhongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
@@ -14,9 +18,26 @@ class NguoiThueViewHolder(
 ):RecyclerView.ViewHolder(binding.root){
     fun bind(nguoiDung: NguoiDung){
        binding.tvTenPhong.text =PhongDao(binding.root.context).getTenPhongById(nguoiDung.ma_phong)
-        binding.tvSDT.text = nguoiDung.sdt_nguoi_dung.toString()
-        binding.tvTenNguoiThue.text = nguoiDung.ho_ten_nguoi_dung.toString()
+        binding.tvSDT.text = "SĐT: "+nguoiDung.sdt_nguoi_dung.toString()
+        binding.tvTenNguoiThue.text = "Họ tên: " +nguoiDung.ho_ten_nguoi_dung.toString()
         binding.edTrangThaiO.isChecked = nguoiDung.trang_thai_o==1
+
+        binding.layoutChuyenChiTietNguoiThue.setOnClickListener {
+            val dialog = DialogChiTietNguoiThueBinding.inflate(LayoutInflater.from(binding.root.context))
+            val builder = AlertDialog.Builder(binding.root.context).create()
+            builder.setView(dialog.root)
+            dialog.tvChiTietNguoiDungTenPhong.setText("Tên phòng: "+PhongDao(binding.root.context).getTenPhongById(nguoiDung.ma_phong))
+            dialog.tvChiTietNguoiThueHoTen.setText("Họ tên: "+nguoiDung.ho_ten_nguoi_dung)
+            dialog.tvChiTietNguoiThueSDT.setText("SĐT: "+nguoiDung.sdt_nguoi_dung)
+            dialog.tvChiTietNguoiThueNgaySinh.setText("Ngày sinh: "+nguoiDung.nam_sinh)
+            dialog.tvChiTietNguoiThueCCCD.setText("Số CCCD: "+nguoiDung.cccd)
+            dialog.tvChiTietNguoiThueQueQuan.setText("Quê quán: "+nguoiDung.que_quan)
+            dialog.btnDongChiTietNguoiThue.setOnClickListener {
+                builder.dismiss()
+            }
+            builder.show()
+
+        }
     }
 }
 class NguoiThueAdapter(

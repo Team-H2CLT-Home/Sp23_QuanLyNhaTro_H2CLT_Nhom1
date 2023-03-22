@@ -29,7 +29,7 @@
                 android:text="#PH29166"/>
             <ImageView
                 android:layout_width="130dp"
-                android:layout_height="150dp"
+                android:layout_height="130dp"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center"
                 android:src="@drawable/avatar"
@@ -84,9 +84,14 @@
         android:gravity="center"
         android:layout_marginLeft="2dp"
         android:textSize="20dp"
+        android:layout_marginRight="2dp"
         android:text="Quê quán: Thôn 1, Xã 1, Huyện Đông Triều, Thành phố Hạ Long, tỉnh Quảnh Ninh"/>
+
     <Button
         android:id="@+id/btnDongChiTietNguoiThue"
         style="@style/button"
-        android:text="Đóng"/>
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:text="Đóng" />
 </LinearLayout>
