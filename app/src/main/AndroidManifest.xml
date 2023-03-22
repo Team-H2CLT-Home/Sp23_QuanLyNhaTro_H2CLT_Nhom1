@@ -16,6 +16,10 @@
         <activity
             android:name=".activity.ActivityPhongTrong"
             android:exported="false" />
+
+        <activity
+            android:name=".activity.ActivityDanhSachPhong"
+            android:exported="false" />
         <activity
             android:name=".activity.ActivityManHinhChinhChuTro"
             android:exported="true">
@@ -64,9 +68,9 @@
         <activity
             android:name=".activity.ActivityThemPhong"
             android:exported="false" />
-        <activity
-            android:name=".activity.ActivityDanhSachPhong"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".activity.ActivityDanhSachPhong"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".activity.ActivityDanhSachPhongChuaTaoHoaDon"
             android:exported="false">

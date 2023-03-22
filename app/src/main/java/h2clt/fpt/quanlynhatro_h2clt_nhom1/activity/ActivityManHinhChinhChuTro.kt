@@ -70,9 +70,7 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
                 finish()
             }
 
-            bottomSheetDialog.show()
-
-
+                bottomSheetDialog.show()
 
         }
         val adapter = ViewPagerManHinhChinhAdapter(supportFragmentManager,lifecycle)

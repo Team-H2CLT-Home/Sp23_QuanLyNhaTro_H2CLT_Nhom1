@@ -26,13 +26,37 @@ class HopDongDao(context: Context) {
     }
 
     @SuppressLint("Range")
-    fun getAllInHopDong():List<HopDong>{
-        val list= mutableListOf<HopDong>()
-        val sql="select * from ${HopDong.TB_NAME}"
+    fun getAllInHopDongbyID(id:String):HopDong?{
+        val sql="""
+            select * from ${HopDong.TB_NAME} where ${HopDong.CLM_MA_HOP_DONG}= "$id"
+        """.trimIndent()
         val c=db.rawQuery(sql,null)
         if(c.moveToFirst()){
-            do {
-                val hopDong=HopDong(
+                return HopDong(
+                    ma_hop_dong = c.getString(c.getColumnIndex(HopDong.CLM_MA_HOP_DONG)),
+                    thoi_han = c.getInt(c.getColumnIndex(HopDong.CLM_THOI_HAN)),
+                    ngay_o = c.getString(c.getColumnIndex(HopDong.CLM_NGAY_O)),
+                    ngay_hop_dong = c.getString(c.getColumnIndex(HopDong.CLM_NGAY_HOP_DONG)),
+                    anh_hop_dong = c.getString(c.getColumnIndex(HopDong.CLM_ANH_HOP_DONG)),
+                    tien_coc = c.getInt(c.getColumnIndex(HopDong.CLM_TIEN_COC)),
+                    trang_thai_hop_dong = c.getInt(c.getColumnIndex(HopDong.CLM_TRANG_THAI_HOP_DONG)),
+                    ma_phong = c.getString(c.getColumnIndex(HopDong.CLM_MA_PHONG)),
+                    ma_nguoi_dung = c.getString(c.getColumnIndex(HopDong.CLM_MA_NGUOI_DUNG))
+                )
+        }
+        return null
+    }
+    @SuppressLint("Range")
+    fun getAllInHopDong():List<HopDong>{
+        val list= mutableListOf<HopDong>()
+        val sql="""
+            select * from ${HopDong.TB_NAME} 
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+
+            if(c.moveToFirst()){
+                do {
+                val hopDong= HopDong(
                     ma_hop_dong = c.getString(c.getColumnIndex(HopDong.CLM_MA_HOP_DONG)),
                     thoi_han = c.getInt(c.getColumnIndex(HopDong.CLM_THOI_HAN)),
                     ngay_o = c.getString(c.getColumnIndex(HopDong.CLM_NGAY_O)),
@@ -44,8 +68,9 @@ class HopDongDao(context: Context) {
                     ma_nguoi_dung = c.getString(c.getColumnIndex(HopDong.CLM_MA_NGUOI_DUNG))
                 )
                 list+=hopDong
-            }while (c.moveToNext())
-        }
+                }while (c.moveToNext())
+            }
+
 
         return list
     }
