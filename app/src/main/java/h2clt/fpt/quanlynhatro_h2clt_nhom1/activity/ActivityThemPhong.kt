@@ -1,5 +1,7 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
+import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -70,6 +72,7 @@ class ActivityThemPhong : AppCompatActivity() {
         binding.switchTuDongTang.setOnCheckedChangeListener { p0, p1 ->
             if (p1) {
                 binding.soTangParrent.visibility = View.VISIBLE
+
             }
             else{
                 binding.soTangParrent.visibility = View.GONE
@@ -106,9 +109,64 @@ class ActivityThemPhong : AppCompatActivity() {
                     ma_khu = maKhu
                 )
                 phongDao.insertPhong(phong)
+
             }
+
+
+
+        }
+
+        binding.btnHuyThemPhong.setOnClickListener {
+            this@ActivityThemPhong.finish()
         }
     }
+    fun thongBaoLoi(loi : String){
+        val bundle = AlertDialog.Builder(this)
+        bundle.setTitle("Thông Báo Lỗi")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
 
+        bundle.show()
+    }
+    fun thongBaoLuu(loi : String){
+        val bundle = AlertDialog.Builder(this)
+        bundle.setTitle("Thông Báo ")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+
+        bundle.show()
+    }
+    fun thongBaoThanhCong(loi: String){
+        val bundle = AlertDialog.Builder(this)
+        bundle.setTitle("Thông Báo")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            val intent = Intent(this@ActivityThemPhong,ActivityDanhSachPhong::class.java)
+            startActivity(intent)
+            finish()
+        })
+        bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
+    }
+    fun validate():Int{
+        var check = -1
+        if(binding.edTenPhongTro.text.toString().isNotBlank()&&
+                (binding.edSoPhongTro.text.toString().toIntOrNull()!=null)||
+                binding.edDienTichPhong.text.toString().toIntOrNull()!=null&&
+                binding.edGiaDien.text.toString().toIntOrNull()!=null&&
+                binding.edGiaNuoc.text.toString().toIntOrNull()!=null||
+                binding.edSoTang.text.toString().toIntOrNull()!=null
+                ){
+            check = 1
+        }
+        return check
+
+}
 
 }

@@ -16,6 +16,5 @@ class ActivityManHinhChao : AppCompatActivity() {
             startActivity(intent)
             finishAffinity()
         },2000)
-
     }
 }

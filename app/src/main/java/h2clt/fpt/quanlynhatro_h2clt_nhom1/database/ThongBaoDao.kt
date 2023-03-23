@@ -20,14 +20,16 @@ class ThongBaoDao(context: Context) {
         }
         return db.insert(ThongBao.TB_NAME,null,values)
     }
-
-    @SuppressLint("Range")
+    @SuppressLint("Range", "SuspiciousIndentation")
     fun getAllInThongBao():List<ThongBao>{
         val list= mutableListOf<ThongBao>()
-        val sql="select*from ${ThongBao.TB_NAME}"
+        val sql="""
+            select*from ${ThongBao.TB_NAME} 
+        """.trimIndent()
         val c=db.rawQuery(sql,null)
-        if(c.moveToFirst()){
-            do {
+
+            if(c.moveToFirst()){
+                do {
                 val thongBao=ThongBao(
                     ma_thong_bao = c.getString(c.getColumnIndex(ThongBao.CLM_MA_THONG_BAO)),
                     tieu_de = c.getString(c.getColumnIndex(ThongBao.CLM_TIEU_DE)),
@@ -35,8 +37,30 @@ class ThongBaoDao(context: Context) {
                     noi_dung = c.getString(c.getColumnIndex(ThongBao.CLM_NOI_DUNG))
                 )
                 list+=thongBao
-            }while (c.moveToNext())
-        }
+                }while (c.moveToNext())
+            }
+
+
         return list
+    }
+    @SuppressLint("Range")
+    fun getAllInThongBaoByID(id:String):ThongBao?{
+        val sql="""
+            select*from ${ThongBao.TB_NAME} where ${ThongBao.CLM_MA_THONG_BAO}="$id"
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+                val thongBao=ThongBao(
+                    ma_thong_bao = c.getString(c.getColumnIndex(ThongBao.CLM_MA_THONG_BAO)),
+                    tieu_de = c.getString(c.getColumnIndex(ThongBao.CLM_TIEU_DE)),
+                    ngay_thong_bao = c.getString(c.getColumnIndex(ThongBao.CLM_NGAY_THONG_BAO)),
+                    noi_dung = c.getString(c.getColumnIndex(ThongBao.CLM_NOI_DUNG))
+                )
+        }
+        return null
+    }
+
+    fun deleteInThongBao(thongBao: ThongBao):Int{
+        return db.delete(ThongBao.TB_NAME,"${ThongBao.CLM_MA_THONG_BAO}", arrayOf(thongBao.ma_thong_bao))
     }
 }
