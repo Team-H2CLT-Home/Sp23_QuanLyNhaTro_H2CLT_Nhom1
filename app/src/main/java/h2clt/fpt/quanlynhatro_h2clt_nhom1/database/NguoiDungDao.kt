@@ -74,6 +74,28 @@ class NguoiDungDao(context: Context) {
         }
         return null
     }
+    ////tìm kiem theo ten phong
+    @SuppressLint("Range")
+    fun getAllInNguoiDungByTenPhong(id:String):NguoiDung?{
+        val sql="""
+            select * from ${NguoiDung.TB_NAME} join ${Phong.TB_NAME} on ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_PHONG} = ${Phong.TB_NAME}.${Phong.CLM_MA_PHONG} where ${Phong.CLM_TEN_PHONG} ="$id"
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            return NguoiDung(
+                ma_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_NGUOI_DUNG)),
+                ho_ten_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_HO_TEN_NGUOI_DUNG)),
+                cccd = c.getString(c.getColumnIndex(NguoiDung.CLM_CCCD)),
+                nam_sinh = c.getString(c.getColumnIndex(NguoiDung.CLM_NAM_SINH)),
+                sdt_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_SDT_NGUOI_DUNG)),
+                que_quan = c.getString(c.getColumnIndex(NguoiDung.CLM_QUE_QUAN_NGUOI_DUNG)),
+                trang_thai_chu_hop_dong = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_CHU_HOP_DONG)),
+                trang_thai_o = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_O)),
+                ma_phong = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_PHONG))
+            )
+        }
+        return null
+    }
     @SuppressLint("Range")
     fun getAllInNguoiDungByMaKhu(id: String):List<NguoiDung>{
         val list= mutableListOf<NguoiDung>()
@@ -125,4 +147,5 @@ class NguoiDungDao(context: Context) {
 //        }
 //        return null
 //    }
+
 }
