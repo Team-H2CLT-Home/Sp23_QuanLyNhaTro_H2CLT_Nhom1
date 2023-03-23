@@ -18,15 +18,15 @@ class ActivityDanhSachHopDong : AppCompatActivity() {
         val ab = getSupportActionBar()
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
-    }
-    fun chuyenActivity(){
-        val intent = Intent(this@ActivityDanhSachHopDong, ActivityManHinhChinhChuTro::class.java)
-        startActivity(intent)
+        if (ab != null){
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setDisplayShowHomeEnabled(true);
+        }
     }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.getItemId();
         if (id==android.R.id.home)
-            chuyenActivity();
+           finish();
         return super.onOptionsItemSelected(item);
     }
 }
