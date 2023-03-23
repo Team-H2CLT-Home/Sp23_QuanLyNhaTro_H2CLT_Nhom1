@@ -86,6 +86,7 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${NguoiDung.CLM_HO_TEN_NGUOI_DUNG} text NOT NULL,
             ${NguoiDung.CLM_CCCD} text NOT NULL,
             ${NguoiDung.CLM_NAM_SINH} text not null,
+            ${NguoiDung.CLM_QUE_QUAN_NGUOI_DUNG} text not null,
             ${NguoiDung.CLM_SDT_NGUOI_DUNG} text unique NOT NULL,
             ${NguoiDung.CLM_MA_PHONG} text NOT NULL,
             ${NguoiDung.CLM_TRANG_THAI_O} integer not NULL,
@@ -100,6 +101,7 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${HopDong.CLM_THOI_HAN} integer NOT NULL,
             ${HopDong.CLM_NGAY_O} text NOT NULL,
             ${HopDong.CLM_NGAY_HOP_DONG} text NOT NULL,
+            ${HopDong.CLM_NGAY_LAP_HOP_DONG} text NOT NULL,
             ${HopDong.CLM_ANH_HOP_DONG}  text NOT NULL,
             ${HopDong.CLM_TIEN_COC} long NOT NULL,
             ${HopDong.CLM_TRANG_THAI_HOP_DONG} integer NOT NULL,
@@ -120,7 +122,6 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
         """.trimIndent()
         db?.execSQL(thong_bao)
     }
-
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         TODO("Not yet implemented")
     }

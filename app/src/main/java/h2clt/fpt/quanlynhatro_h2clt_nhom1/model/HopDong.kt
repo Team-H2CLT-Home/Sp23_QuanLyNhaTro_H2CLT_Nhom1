@@ -5,9 +5,10 @@ data class HopDong(
     val thoi_han:Int,
     val ngay_o:String,
     val ngay_hop_dong:String,
+    val ngay_lap_hop_dong:String,
     val anh_hop_dong:String,
     val tien_coc:Int,
-    val trang_thai_hop_dong:Int,
+    val trang_thai_hop_dong: Int,
     val ma_phong:String,
     val ma_nguoi_dung:String){
     companion object{
@@ -15,6 +16,7 @@ data class HopDong(
         const val CLM_MA_HOP_DONG="ma_hop_dong"
         const val CLM_THOI_HAN="thoi_han"
         const val CLM_NGAY_O="ngay_o"
+        const val CLM_NGAY_LAP_HOP_DONG="ngay_lap_hop_dong"
         const val CLM_NGAY_HOP_DONG="ngay_hop_dong"
         const val CLM_ANH_HOP_DONG="anh_hop_dong"
         const val CLM_TIEN_COC="tien_coc"
