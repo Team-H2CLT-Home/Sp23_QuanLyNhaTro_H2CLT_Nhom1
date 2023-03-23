@@ -20,7 +20,7 @@ class ThongBaoDao(context: Context) {
         }
         return db.insert(ThongBao.TB_NAME,null,values)
     }
-    @SuppressLint("Range")
+    @SuppressLint("Range", "SuspiciousIndentation")
     fun getAllInThongBao():List<ThongBao>{
         val list= mutableListOf<ThongBao>()
         val sql="""

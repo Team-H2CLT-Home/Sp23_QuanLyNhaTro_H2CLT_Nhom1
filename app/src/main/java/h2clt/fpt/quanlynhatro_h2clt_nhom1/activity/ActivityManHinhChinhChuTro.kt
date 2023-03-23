@@ -70,9 +70,13 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
+<<<<<<<<< Temporary merge branch 1
 
                 bottomSheetDialog.show()
+=========
+            bottomSheetDialog.show()
 
+>>>>>>>>> Temporary merge branch 2
 
         }
         val adapter = ViewPagerManHinhChinhAdapter(supportFragmentManager,lifecycle)
@@ -99,11 +103,18 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
             }
         }.attach()
 
+<<<<<<<<< Temporary merge branch 1
+        onDestroy()
     }
 
-   override fun onPause() {
-       super.onPause()
-       bottomSheetDialog.dismiss()
-       Log.d("TAG", "onPause: called")
-   }
+=========
+    }
+    override fun onPause() {
+        super.onPause()
+        bottomSheetDialog.dismiss()
+        Log.d("TAG", "onPause: called")
+    }
+>>>>>>>>> Temporary merge branch 2
+
+
 }
