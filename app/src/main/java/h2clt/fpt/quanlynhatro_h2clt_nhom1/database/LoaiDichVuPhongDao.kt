@@ -17,7 +17,7 @@ class LoaiDichVuPhongDao(context: Context) {
             put(LoaiDichVu.CLM_TEN_LOAI_DICH_VU,loaiDichVu.ten_loai_dich_vu)
             put(LoaiDichVu.CLM_GIA_DICH_VU,loaiDichVu.gia_dich_vu)
             put(LoaiDichVu.CLM_TRANG_THAI_LOAI_DICH_VU,loaiDichVu.trang_thai_loai_dich_vu)
-            put(LoaiDichVu.CLM_MA_DICH_VU,loaiDichVu.ma_dich_vu)
+            put(LoaiDichVu.CLM_MA_PHONG,loaiDichVu.ma_phong)
 
         }
         return db.insert(LoaiDichVu.TB_NAME,null,values)
@@ -35,7 +35,7 @@ class LoaiDichVuPhongDao(context: Context) {
                     ten_loai_dich_vu = c.getString(c.getColumnIndex(LoaiDichVu.CLM_TEN_LOAI_DICH_VU)),
                     gia_dich_vu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_GIA_DICH_VU)),
                     trang_thai_loai_dich_vu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_TRANG_THAI_LOAI_DICH_VU)),
-                    ma_dich_vu = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_DICH_VU))
+                    ma_phong = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_PHONG))
 
                 )
                 list+=loaiDichVu
@@ -47,10 +47,10 @@ class LoaiDichVuPhongDao(context: Context) {
         return list
     }
     @SuppressLint("Range")
-    fun getAllInLoaiDichVuById(idDichVuPhong:String):List<LoaiDichVu>{
+    fun getAllInLoaiDichVuByPhong(maPhong:String):List<LoaiDichVu>{
         val list= mutableListOf<LoaiDichVu>()
         val sql="""
-            select * from ${LoaiDichVu.TB_NAME} where ${LoaiDichVu.CLM_MA_DICH_VU}= "$idDichVuPhong"
+            select * from ${LoaiDichVu.TB_NAME} where ${LoaiDichVu.CLM_MA_PHONG}= "$maPhong"
             
         """
         val c=db.rawQuery(sql,null)
@@ -61,7 +61,7 @@ class LoaiDichVuPhongDao(context: Context) {
                     ten_loai_dich_vu = c.getString(c.getColumnIndex(LoaiDichVu.CLM_TEN_LOAI_DICH_VU)),
                     gia_dich_vu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_GIA_DICH_VU)),
                     trang_thai_loai_dich_vu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_TRANG_THAI_LOAI_DICH_VU)),
-                    ma_dich_vu = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_DICH_VU))
+                    ma_phong = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_PHONG))
 
                 )
                 list+=loaiDichVu

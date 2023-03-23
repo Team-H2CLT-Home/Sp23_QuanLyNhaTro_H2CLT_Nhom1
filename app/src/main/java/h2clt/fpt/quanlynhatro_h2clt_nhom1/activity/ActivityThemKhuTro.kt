@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
@@ -12,6 +13,9 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.KhuTroDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityThemKhuTroBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.KhuTro
 import java.util.UUID
+
+const val SO_LUONG_PHONG_KEY="So_luong_phong"
+const val MA_KHU_TU_TAO_KHU="ma khu khi tao khu"
 
 class ActivityThemKhuTro : AppCompatActivity() {
     private lateinit var binding: ActivityThemKhuTroBinding
@@ -23,15 +27,26 @@ class ActivityThemKhuTro : AppCompatActivity() {
 
         binding.tbThemKhuTro
         setSupportActionBar(binding.tbThemKhuTro )
-        val ab = getSupportActionBar()
+        val ab = supportActionBar
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
 
         val srf=getSharedPreferences(THONG_TIN_DANG_NHAP, MODE_PRIVATE)
         val admin=srf.getString(USERNAME_KEY, "")!!
+        binding.cbTaoTuDong.setOnCheckedChangeListener { compoundButton, b ->
+            if(b) {
+                binding.SoPhongParent.visibility = View.VISIBLE
+                binding.tvTuDongTaoPhong.visibility = View.VISIBLE
+            }
+            else{
+                binding.tvTuDongTaoPhong.visibility=View.GONE
+                binding.SoPhongParent.visibility=View.GONE
+                binding.edSoPhong.setText("")
+            }
+        }
         binding.btnTiepTuc.setOnClickListener {
             if(!validate()){
-                thongBaoLoi("Dữ liệu chưa chính xác !!!")
+                thongBaoLoi("Vui lòng nhập đủ thông tin!!!")
             }else{
                 val id=UUID.randomUUID().toString()
                 val khuTro=KhuTro(
@@ -43,12 +58,17 @@ class ActivityThemKhuTro : AppCompatActivity() {
                 )
                 val dao=KhuTroDao(this@ActivityThemKhuTro).insertKhuTro(khuTro)
                 if(dao>0){
-                    thongBaoThanhCong("Lưu thành công", id)
+                    val intent=Intent(this@ActivityThemKhuTro, ActivityTaoPhongKhiThemKhu::class.java)
+                    intent.putExtra(SO_LUONG_PHONG_KEY, binding.edSoPhong.text.toString().toInt())
+                    intent.putExtra(MA_KHU_TU_TAO_KHU, id)
+                    startActivity(intent)
+                    finishAffinity()
                 }else{
                     thongBaoLoi("lưu thất bại")
                 }
             }
         }
+
     }
 
     fun validate():Boolean{
