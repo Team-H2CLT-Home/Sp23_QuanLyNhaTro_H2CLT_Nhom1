@@ -19,7 +19,6 @@ class PhongDao(context: Context) {
             put(Phong.CLM_SO_NGUOI_O,phong.so_nguoi_o)
             put(Phong.CLM_TRANG_THAI_PHONG,phong.trang_thai_phong)
             put(Phong.CLM_MA_KHU,phong.ma_khu)
-            put(Phong.CLM_MA_DICH_VU,phong.ma_dich_vu)
         }
         return db.insert(Phong.TB_NAME,null,values)
     }
@@ -42,7 +41,6 @@ class PhongDao(context: Context) {
                     so_nguoi_o = c.getInt(c.getColumnIndex(Phong.CLM_SO_NGUOI_O)),
                     trang_thai_phong = c.getInt(c.getColumnIndex(Phong.CLM_TRANG_THAI_PHONG)),
                     ma_khu = c.getString(c.getColumnIndex(Phong.CLM_MA_KHU)),
-                    ma_dich_vu = c.getString(c.getColumnIndex(Phong.CLM_MA_DICH_VU))
                 )
                 list+=phong
             }while (c.moveToNext())
@@ -65,8 +63,7 @@ class PhongDao(context: Context) {
                 gia_thue = c.getLong(c.getColumnIndex(Phong.CLM_GIA_THUE)),
                 so_nguoi_o = c.getInt(c.getColumnIndex(Phong.CLM_SO_NGUOI_O)),
                 trang_thai_phong = c.getInt(c.getColumnIndex(Phong.CLM_TRANG_THAI_PHONG)),
-                ma_khu = c.getString(c.getColumnIndex(Phong.CLM_MA_KHU)),
-                ma_dich_vu = c.getString(c.getColumnIndex(Phong.CLM_MA_DICH_VU))
+                ma_khu = c.getString(c.getColumnIndex(Phong.CLM_MA_KHU))
             )
         }
 

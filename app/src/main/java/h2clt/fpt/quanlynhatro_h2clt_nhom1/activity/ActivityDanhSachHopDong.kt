@@ -30,6 +30,10 @@ class ActivityDanhSachHopDong : AppCompatActivity() {
         val ab = getSupportActionBar()
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
+        if (ab != null){
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setDisplayShowHomeEnabled(true);
+        }
         val srf = binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
         maKhu = srf.getString(MA_KHU_KEY, "")!!
         listHopDong = HopDongDao(this@ActivityDanhSachHopDong).getAllInHopDongByMaKhu(maKhu)
@@ -39,14 +43,12 @@ class ActivityDanhSachHopDong : AppCompatActivity() {
         binding.recyclerDanhSachHopDong.layoutManager= LinearLayoutManager(this)
     }
 
-    fun chuyenActivity(){
-        val intent = Intent(this@ActivityDanhSachHopDong, ActivityManHinhChinhChuTro::class.java)
-        startActivity(intent)
+
     }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.getItemId();
         if (id==android.R.id.home)
-            chuyenActivity();
+           finish();
         return super.onOptionsItemSelected(item);
     }
 

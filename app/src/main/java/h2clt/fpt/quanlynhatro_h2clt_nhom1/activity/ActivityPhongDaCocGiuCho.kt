@@ -17,19 +17,19 @@ class ActivityPhongDaCocGiuCho : AppCompatActivity() {
         setContentView(binding.root)
         binding.tbDanhSachPhong
         setSupportActionBar(binding.tbDanhSachPhong)
-        val ab = getSupportActionBar()
+        val ab = supportActionBar
+        if (ab != null){
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setDisplayShowHomeEnabled(true);
+        }
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
     }
-    fun chuyenActivity(){
-        val intent = Intent(this@ActivityPhongDaCocGiuCho, ActivityManHinhChinhChuTro::class.java)
-        startActivity(intent)
-        finish()
-    }
+
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id: Int = item.getItemId();
         if (id == android.R.id.home)
-            chuyenActivity();
+            finish();
         return super.onOptionsItemSelected(item);
     }
 
