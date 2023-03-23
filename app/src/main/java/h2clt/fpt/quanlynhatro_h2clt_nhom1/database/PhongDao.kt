@@ -30,7 +30,7 @@ class PhongDao(context: Context) {
         val sql="""
            select * from ${Phong.TB_NAME} where ${Phong.CLM_MA_KHU} = "$maKhu" 
            
-           select ${Phong.CLM_MA_PHONG},${Phong.CLM_GIA_THUE},${Phong.CLM_MA_DICH_VU} from ${Phong.TB_NAME}
+    
         """.trimIndent()
         val c=db.rawQuery(sql,null)
 
@@ -72,6 +72,40 @@ class PhongDao(context: Context) {
             )
         }
 
+        return null
+    }
+    @SuppressLint("Range")
+    fun getTenPhongById(id:String):String{
+        val sql="""
+            select ${Phong.CLM_TEN_PHONG} from ${Phong.TB_NAME} where ${Phong.CLM_MA_PHONG}= "$id"
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+
+        if(c.moveToFirst()) {
+            return c.getString(c.getColumnIndex(Phong.CLM_TEN_PHONG))
+        }
+
+        return "null"
+    }
+    @SuppressLint("Range")
+    fun getPhongById(id:String):Phong?{
+        val sql="""
+            select * from ${Phong.TB_NAME} where ${Phong.CLM_MA_PHONG}= "$id"
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+
+        if(c.moveToFirst()) {
+            return Phong(
+                ma_phong = c.getString(c.getColumnIndex(Phong.CLM_MA_PHONG)),
+                ten_phong = c.getString(c.getColumnIndex(Phong.CLM_TEN_PHONG)),
+                dien_tich = c.getInt(c.getColumnIndex(Phong.CLM_DIEN_TICH)),
+                gia_thue = c.getLong(c.getColumnIndex(Phong.CLM_GIA_THUE)),
+                so_nguoi_o = c.getInt(c.getColumnIndex(Phong.CLM_SO_NGUOI_O)),
+                trang_thai_phong = c.getInt(c.getColumnIndex(Phong.CLM_TRANG_THAI_PHONG)),
+                ma_khu = c.getString(c.getColumnIndex(Phong.CLM_MA_KHU)),
+                ma_dich_vu = c.getString(c.getColumnIndex(Phong.CLM_MA_DICH_VU))
+            )
+        }
         return null
     }
 }
