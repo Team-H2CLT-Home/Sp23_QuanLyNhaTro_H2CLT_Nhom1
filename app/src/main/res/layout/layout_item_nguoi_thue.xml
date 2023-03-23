@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="13dp"
         android:layout_marginLeft="13dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
         app:cardCornerRadius="10dp"
         >
@@ -124,17 +124,34 @@
                         android:textSize="18dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="13dp"/>
-                    <CheckBox
-                        android:id="@+id/edTrangThaiO"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Đang ở"
-                        android:layout_marginLeft="10dp"
-                        android:clickable="false"
-                        android:textColor="@color/mauDo"
-                        android:textSize="18dp"
-                        android:textStyle="italic"
-                        android:padding="3dp"/>
+                        android:orientation="horizontal">
+                        <CheckBox
+                            android:id="@+id/edTrangThaiO"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Đang ở"
+                            android:layout_marginLeft="10dp"
+                            android:clickable="false"
+                            android:textColor="@color/mauDo"
+                            android:textSize="18dp"
+                            android:textStyle="italic"
+                            android:padding="3dp"/>
+                        <CheckBox
+                            android:id="@+id/edTrangThaiChuHopDong"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chủ hợp đồng"
+                            android:layout_marginLeft="40dp"
+                            android:clickable="false"
+                            android:textColor="@color/mauDo"
+                            android:textSize="18dp"
+                            android:textStyle="italic"
+                            android:padding="3dp"/>
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

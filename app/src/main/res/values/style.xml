@@ -36,7 +36,12 @@
         <item name="android:layout_marginLeft">15dp</item>
         <item name="android:background">@drawable/boder_tron_colorwhite</item>
     </style>
-
+    <style name="search_view">
+        <item name="android:layout_width">180dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/boder_search_view</item>
+    </style>
     <style name="image_tabLayout">
         <item name="android:layout_width">100dp</item>
         <item name="android:layout_height">130dp</item>
