@@ -43,6 +43,8 @@ class HoaDonDao(context: Context) {
                 trang_thai_hoa_don = c.getInt(c.getColumnIndex(HoaDon.CLM_TRANG_THAI_HOA_DON)),
                 so_dien = c.getInt(c.getColumnIndex(HoaDon.CLM_SO_DIEN)),
                 so_nuoc = c.getInt(c.getColumnIndex(HoaDon.CLM_SO_NUOC)),
+                gia_thue = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_THUE)),
+                gia_dich_vu = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_DICH_VU)),
                 mien_giam = c.getInt(c.getColumnIndex(HoaDon.CLM_MIEN_GIAM)),
                 ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG))
             )
@@ -63,6 +65,8 @@ class HoaDonDao(context: Context) {
                 trang_thai_hoa_don = c.getInt(c.getColumnIndex(HoaDon.CLM_TRANG_THAI_HOA_DON)),
                 so_dien = c.getInt(c.getColumnIndex(HoaDon.CLM_SO_DIEN)),
                 so_nuoc = c.getInt(c.getColumnIndex(HoaDon.CLM_SO_NUOC)),
+                gia_thue = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_THUE)),
+                gia_dich_vu = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_DICH_VU)),
                 mien_giam = c.getInt(c.getColumnIndex(HoaDon.CLM_MIEN_GIAM)),
                 ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG))
             )
@@ -82,6 +86,8 @@ class HoaDonDao(context: Context) {
                     trang_thai_hoa_don = c.getInt(c.getColumnIndex(HoaDon.CLM_TRANG_THAI_HOA_DON)),
                     so_dien = c.getInt(c.getColumnIndex(HoaDon.CLM_SO_DIEN)),
                     so_nuoc = c.getInt(c.getColumnIndex(HoaDon.CLM_SO_NUOC)),
+                    gia_thue = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_THUE)),
+                    gia_dich_vu = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_DICH_VU)),
                     mien_giam = c.getInt(c.getColumnIndex(HoaDon.CLM_MIEN_GIAM)),
                     ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG))
                 )
