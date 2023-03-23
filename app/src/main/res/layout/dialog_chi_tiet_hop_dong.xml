@@ -78,6 +78,14 @@
                 android:textSize="16sp"
                 android:textColor="@color/black"/>
             <TextView
+                android:id="@+id/tvNgayLapHopDong"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_height="wrap_content"
+                android:text="Thời hạn: 6 tháng"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <TextView
                 android:id="@+id/tvChiTietHDTienCoc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,5 +108,6 @@
     <Button
         android:id="@+id/btnDongChiTietHopDong"
         style="@style/button"
-        android:text="Đóng"/>
+        android:text="Đóng"
+        android:layout_gravity="center"/>
 </LinearLayout>
