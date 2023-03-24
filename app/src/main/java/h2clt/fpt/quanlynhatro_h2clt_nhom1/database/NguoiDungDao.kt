@@ -124,8 +124,7 @@ class NguoiDungDao(context: Context) {
                     gia_thue = c.getLong(c.getColumnIndex(Phong.CLM_GIA_THUE)),
                     so_nguoi_o = c.getInt(c.getColumnIndex(Phong.CLM_SO_NGUOI_O)),
                     trang_thai_phong = c.getInt(c.getColumnIndex(Phong.CLM_TRANG_THAI_PHONG)),
-                    ma_khu = c.getString(c.getColumnIndex(Phong.CLM_MA_KHU)),
-                    ma_dich_vu = c.getString(c.getColumnIndex(Phong.CLM_MA_DICH_VU))
+                    ma_khu = c.getString(c.getColumnIndex(Phong.CLM_MA_KHU))
                 )
                 list+=phong
             }while (c.moveToNext())
@@ -148,8 +147,7 @@ class NguoiDungDao(context: Context) {
                 gia_thue = c.getLong(c.getColumnIndex(Phong.CLM_GIA_THUE)),
                 so_nguoi_o = c.getInt(c.getColumnIndex(Phong.CLM_SO_NGUOI_O)),
                 trang_thai_phong = c.getInt(c.getColumnIndex(Phong.CLM_TRANG_THAI_PHONG)),
-                ma_khu = c.getString(c.getColumnIndex(Phong.CLM_MA_KHU)),
-                ma_dich_vu = c.getString(c.getColumnIndex(Phong.CLM_MA_DICH_VU))
+                ma_khu = c.getString(c.getColumnIndex(Phong.CLM_MA_KHU))
             )
         }
 
@@ -183,8 +181,7 @@ class NguoiDungDao(context: Context) {
                 gia_thue = c.getLong(c.getColumnIndex(Phong.CLM_GIA_THUE)),
                 so_nguoi_o = c.getInt(c.getColumnIndex(Phong.CLM_SO_NGUOI_O)),
                 trang_thai_phong = c.getInt(c.getColumnIndex(Phong.CLM_TRANG_THAI_PHONG)),
-                ma_khu = c.getString(c.getColumnIndex(Phong.CLM_MA_KHU)),
-                ma_dich_vu = c.getString(c.getColumnIndex(Phong.CLM_MA_DICH_VU))
+                ma_khu = c.getString(c.getColumnIndex(Phong.CLM_MA_KHU))
             )
         }
         return null
