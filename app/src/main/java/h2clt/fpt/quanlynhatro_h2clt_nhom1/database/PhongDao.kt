@@ -28,8 +28,6 @@ class PhongDao(context: Context) {
         val list= mutableListOf<Phong>()
         val sql="""
            select * from ${Phong.TB_NAME} where ${Phong.CLM_MA_KHU} = "$maKhu" 
-           
-    
         """.trimIndent()
         val c=db.rawQuery(sql,null)
 
@@ -51,7 +49,7 @@ class PhongDao(context: Context) {
         return list
     }
     @SuppressLint("Range")
-    fun getAllInPhongById(id:String):Phong?{
+    fun getPhongById(id:String):Phong?{
         val sql="""
             select * from ${Phong.TB_NAME} where ${Phong.CLM_MA_PHONG}= "$id"
         """.trimIndent()
@@ -84,25 +82,33 @@ class PhongDao(context: Context) {
 
         return "null"
     }
+
     @SuppressLint("Range")
-    fun getPhongById(id:String):Phong?{
+    fun getPhongChuaCoHopDong(): List<Phong> {
+        val list= mutableListOf<Phong>()
         val sql="""
-            select * from ${Phong.TB_NAME} where ${Phong.CLM_MA_PHONG}= "$id"
+            SELECT DISTINCT *
+            FROM Phong
+            WHERE ma_phong NOT IN (SELECT ma_phong FROM Hop_Dong);
         """.trimIndent()
         val c=db.rawQuery(sql,null)
 
-        if(c.moveToFirst()) {
-            return Phong(
-                ma_phong = c.getString(c.getColumnIndex(Phong.CLM_MA_PHONG)),
-                ten_phong = c.getString(c.getColumnIndex(Phong.CLM_TEN_PHONG)),
-                dien_tich = c.getInt(c.getColumnIndex(Phong.CLM_DIEN_TICH)),
-                gia_thue = c.getLong(c.getColumnIndex(Phong.CLM_GIA_THUE)),
-                so_nguoi_o = c.getInt(c.getColumnIndex(Phong.CLM_SO_NGUOI_O)),
-                trang_thai_phong = c.getInt(c.getColumnIndex(Phong.CLM_TRANG_THAI_PHONG)),
-                ma_khu = c.getString(c.getColumnIndex(Phong.CLM_MA_KHU)),
-                ma_dich_vu = c.getString(c.getColumnIndex(Phong.CLM_MA_DICH_VU))
-            )
+        if(c.moveToFirst()){
+            do {
+                val phong= Phong(
+                    ma_phong = c.getString(c.getColumnIndex(Phong.CLM_MA_PHONG)),
+                    ten_phong = c.getString(c.getColumnIndex(Phong.CLM_TEN_PHONG)),
+                    dien_tich = c.getInt(c.getColumnIndex(Phong.CLM_DIEN_TICH)),
+                    gia_thue = c.getLong(c.getColumnIndex(Phong.CLM_GIA_THUE)),
+                    so_nguoi_o = c.getInt(c.getColumnIndex(Phong.CLM_SO_NGUOI_O)),
+                    trang_thai_phong = c.getInt(c.getColumnIndex(Phong.CLM_TRANG_THAI_PHONG)),
+                    ma_khu = c.getString(c.getColumnIndex(Phong.CLM_MA_KHU)),
+                    ma_dich_vu = c.getString(c.getColumnIndex(Phong.CLM_MA_DICH_VU))
+                )
+                list+=phong
+            }while (c.moveToNext())
         }
-        return null
+
+        return list
     }
 }
