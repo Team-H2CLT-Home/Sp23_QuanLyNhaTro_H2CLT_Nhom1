@@ -24,41 +24,43 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.KhuTro
 class ActivityManHinhChinhChuTro : AppCompatActivity() {
     private lateinit var binding: ActivityManHinhChinhChuTroBinding
     private var listKhuTro = listOf<KhuTro>()
-    private var maKhu=""
-    private lateinit var bottomSheetDialog :  BottomSheetDialog
+    private var maKhu = ""
+    private lateinit var bottomSheetDialog: BottomSheetDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityManHinhChinhChuTroBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        bottomSheetDialog= BottomSheetDialog(this)
-        val admin=getSharedPreferences(THONG_TIN_DANG_NHAP, MODE_PRIVATE).getString(USERNAME_KEY,"")!!
-        listKhuTro=KhuTroDao(applicationContext).getAllInKhuTroByAdmin(admin)
+        bottomSheetDialog = BottomSheetDialog(this)
+        val admin =
+            getSharedPreferences(THONG_TIN_DANG_NHAP, MODE_PRIVATE).getString(USERNAME_KEY, "")!!
+        listKhuTro = KhuTroDao(applicationContext).getAllInKhuTroByAdmin(admin)
+
         val pre = getSharedPreferences(FILE_NAME, MODE_PRIVATE)
 
-        if(listKhuTro.isEmpty()){
+        if (listKhuTro.isEmpty()) {
             val intent = Intent(this@ActivityManHinhChinhChuTro, ActivityHuongDanTaoKhu::class.java)
             startActivity(intent)
             finish()
         }
-    when{
-        intent.getStringExtra(MA_KHU_KEY)==null ->{
-            if(listKhuTro.isNotEmpty())
-            maKhu=listKhuTro[0].ma_khu_tro
+        when {
+            intent.getStringExtra(MA_KHU_KEY) == null -> {
+                if (listKhuTro.isNotEmpty())
+                    maKhu = listKhuTro[0].ma_khu_tro
+            }
+            intent.getStringExtra(MA_KHU_KEY) != null -> {
+                maKhu = intent.getStringExtra(MA_KHU_KEY)!!
+            }
         }
-        intent.getStringExtra(MA_KHU_KEY)!=null->{
-            maKhu=intent.getStringExtra(MA_KHU_KEY)!!
-        }
-    }
-        val khuTro=listKhuTro.find { it.ma_khu_tro==maKhu }
-        binding.titleTenKhuTro.text=("Khu ")+ khuTro?.ten_khu_tro
-        pre.edit().putString(MA_KHU_KEY,maKhu).commit()
+        val khuTro = listKhuTro.find { it.ma_khu_tro == maKhu }
+        binding.titleTenKhuTro.text = ("Khu ") + khuTro?.ten_khu_tro
+        pre.edit().putString(MA_KHU_KEY, maKhu).commit()
 
-        binding.imgMenuManHinhChinh.setOnClickListener{
+        binding.imgMenuManHinhChinh.setOnClickListener {
             val buil = DialogDanhSachKhuTroBinding.inflate(LayoutInflater.from(this))
-            val adapter=KhuTroAdapter(listKhuTro)
-            buil.rcyKhuTro.layoutManager=LinearLayoutManager(applicationContext)
-            buil.rcyKhuTro.adapter=adapter
+            val adapter = KhuTroAdapter(listKhuTro)
+            buil.rcyKhuTro.layoutManager = LinearLayoutManager(applicationContext)
+            buil.rcyKhuTro.adapter = adapter
 
             bottomSheetDialog.setContentView(buil.root)
             buil.icClose.setOnClickListener {
@@ -70,12 +72,19 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
                 finish()
             }
 
-                bottomSheetDialog.show()
+
+            bottomSheetDialog.show()
+
+            bottomSheetDialog.show()
+
 
         }
-        val adapter = ViewPagerManHinhChinhAdapter(supportFragmentManager,lifecycle)
+        val adapter = ViewPagerManHinhChinhAdapter(supportFragmentManager, lifecycle)
         binding.viewPager2ManHinhChinh.adapter = adapter
-        TabLayoutMediator(binding.tabLayoutManHinhChinh,binding.viewPager2ManHinhChinh) { tab, pos ->
+        TabLayoutMediator(
+            binding.tabLayoutManHinhChinh,
+            binding.viewPager2ManHinhChinh
+        ) { tab, pos ->
             when (pos) {
                 0 -> {
                     tab.setIcon(R.drawable.home_icon)
@@ -97,12 +106,15 @@ class ActivityManHinhChinhChuTro : AppCompatActivity() {
             }
         }.attach()
 
+
     }
+
+
     override fun onPause() {
         super.onPause()
         bottomSheetDialog.dismiss()
         Log.d("TAG", "onPause: called")
     }
 
-
 }
+

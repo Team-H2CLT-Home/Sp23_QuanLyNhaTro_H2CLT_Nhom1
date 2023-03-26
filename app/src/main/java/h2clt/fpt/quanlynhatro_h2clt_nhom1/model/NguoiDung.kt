@@ -21,6 +21,10 @@ data class NguoiDung(
         const val CLM_TRANG_THAI_CHU_HOP_DONG="trang_thai_chu_hop_dong"
         const val CLM_TRANG_THAI_O="trang_thai_o"
         const val CLM_MA_PHONG="ma_phong"
+        fun timkiemUser(list:List<NguoiDung>,s:String):List<NguoiDung>{
+            return list.filter { it.ho_ten_nguoi_dung.contains(s) }
+        }
     }
+
 }
 

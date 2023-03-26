@@ -4,22 +4,16 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.CompoundButton
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.google.android.material.snackbar.Snackbar
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.ListLoaiDichVuAdapter
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.DichVuPhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.LoaiDichVuPhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityThemPhongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogThemLoaiDichVuBinding
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.DichVuPhong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.LoaiDichVu
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 import java.util.UUID
@@ -29,29 +23,52 @@ class ActivityThemPhong : AppCompatActivity() {
     private var maKhu=""
     private var soPhong:Int?=null
     private  var soTang=""
-    private var loaiDichVuThem=LoaiDichVu(ma_loai_dich_vu ="",
-    ten_loai_dich_vu = "",
-    gia_dich_vu = 0,
-    trang_thai_loai_dich_vu = 0,
-    ma_dich_vu = "")
     override fun onCreate(savedInstanceState: Bundle?) {
         binding= ActivityThemPhongBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val phongDao=PhongDao(this)
         val loaiDichVuDao=LoaiDichVuPhongDao(this)
-        val dichVuPhongDao=DichVuPhongDao(this)
+        val listLoaiDichVu= mutableListOf(
+           LoaiDichVu(
+               gia_dich_vu = 3000,
+               ma_loai_dich_vu = UUID.randomUUID().toString(),
+               ma_phong = "",
+               ten_loai_dich_vu = "Tiền điện",
+               trang_thai_loai_dich_vu = 0,
+           ),LoaiDichVu(
+                gia_dich_vu = 20000,
+                ma_loai_dich_vu = UUID.randomUUID().toString(),
+                ma_phong = "",
+                ten_loai_dich_vu = "Tiền nước",
+                trang_thai_loai_dich_vu = 0,
+            ),
+            LoaiDichVu(
+                gia_dich_vu = 50000,
+                ma_loai_dich_vu = UUID.randomUUID().toString(),
+                ma_phong = "",
+                ten_loai_dich_vu = "Tiền mạng",
+                trang_thai_loai_dich_vu = 1,
+            ),
+            LoaiDichVu(
+                gia_dich_vu = 200000,
+                ma_loai_dich_vu = UUID.randomUUID().toString(),
+                ma_phong = "",
+                ten_loai_dich_vu = "Tiền điều hòa",
+                trang_thai_loai_dich_vu = 2,
+            )
+        )
         val srf=getSharedPreferences(FILE_NAME, MODE_PRIVATE)
         maKhu=srf.getString(MA_KHU_KEY, "")!!
-        binding.cbTaoTuDong.setOnCheckedChangeListener { compoundButton, b ->
-            if (b){
-                binding.themSoPhongParrent.visibility=View.VISIBLE
-            }
-            else{
-                binding.themSoPhongParrent.visibility=View.GONE
-                binding.edSoPhongTro.setText("")
-            }
-        }
+//        binding.setOnCheckedChangeListener { compoundButton, b ->
+//            if (b){
+//                binding.themSoPhongParrent.visibility=View.VISIBLE
+//            }
+//            else{
+//                binding.themSoPhongParrent.visibility=View.GONE
+//                binding.edSoPhongTro.setText("")
+//            }
+//        }
         binding.switchTuDongTang.setOnCheckedChangeListener { p0, p1 ->
             if (p1) {
                 binding.soTangParrent.visibility = View.VISIBLE
@@ -65,74 +82,34 @@ class ActivityThemPhong : AppCompatActivity() {
         binding.btnThemDichVu.setOnClickListener {
             val build = AlertDialog.Builder(this).create()
             val dialog = DialogThemLoaiDichVuBinding.inflate(LayoutInflater.from(this))
-            build.setView(dialog.root)
-            dialog.btnLuuLoaiDV.setOnClickListener {
-                if (dialog.edTenLoaiDV.text.toString()
-                        .isNotBlank() &&( dialog.edGiaTienLoaiDV.text.toString().toIntOrNull()!=null)
-                ) {
-                   loaiDichVuThem=loaiDichVuThem.copy(ten_loai_dich_vu = dialog.edTenLoaiDV.text.toString())
-                    loaiDichVuThem=loaiDichVuThem.copy(gia_dich_vu = dialog.edGiaTienLoaiDV.text.toString().toInt())
-                    thongBaoLuu("Bạn đã lưu thành công!!!")
-                    dialog.edTenLoaiDV.setText("")
-                    dialog.edGiaTienLoaiDV.setText("")
-                }else{
-                    thongBaoLoi("Bạn đã nhập sai dữ liệu mời nhập lại !!!")
-                }
+            val listLoaiDichVuAdapter=ListLoaiDichVuAdapter(listLoaiDichVu, this@ActivityThemPhong)
+            dialog.listLoaiDichVu.adapter=listLoaiDichVuAdapter
+            dialog.listLoaiDichVu.setOnItemClickListener { adapterView, view, i, l ->
+
             }
             dialog.btnHuyLoaiDV.setOnClickListener {
-                build.cancel()
+                build.dismiss()
             }
+                build.setView(dialog.root)
                 build.show()
         }
         binding.btnLuuThemPhong.setOnClickListener {
             soPhong=binding.edSoPhongTro.text.toString().toIntOrNull() ?: 1
             soTang=binding.edSoTang.text.toString()
+            repeat(soPhong!!){
+                val tenMacDinh=binding.edTenPhongTro.text.toString()
+                val maDichVuPhong=UUID.randomUUID().toString()
+                val phong=Phong(
+                    ma_phong = UUID.randomUUID().toString(),
+                    ten_phong = "$tenMacDinh$soTang${it+1}",
+                    dien_tich = binding.edDienTichPhong.text.toString().toInt(),
+                    gia_thue = binding.edGiaThue.text.toString().toLong(),
+                    so_nguoi_o = 0,
+                    trang_thai_phong = 0,
+                    ma_khu = maKhu
+                )
+                phongDao.insertPhong(phong)
 
-            if(validate()<1){
-                thongBaoLoi("bạn không được để trống !!!")
-            }else{
-                repeat(soPhong!!){
-                    val tenMacDinh=binding.edTenPhongTro.text.toString()
-                    val maDichVuPhong=UUID.randomUUID().toString()
-                    val phong=Phong(
-                        ma_phong = UUID.randomUUID().toString(),
-                        ten_phong = "$tenMacDinh$soTang${it+1}",
-                        dien_tich = binding.edDienTichPhong.text.toString().toInt(),
-                        gia_thue = binding.edGiaThue.text.toString().toLong(),
-                        so_nguoi_o = 0,
-                        trang_thai_phong = 0,
-                        ma_khu = maKhu,
-                        ma_dich_vu = maDichVuPhong
-                    )
-                    val dichVuPhong=DichVuPhong(
-                        ma_dich_vu = maDichVuPhong,
-                        ten_dich_vu = "$tenMacDinh$soTang${it+1}"
-                    )
-                    val giaDien=LoaiDichVu(
-                        ma_dich_vu = maDichVuPhong,
-                        ma_loai_dich_vu = UUID.randomUUID().toString(),
-                        gia_dich_vu = binding.edGiaDien.text.toString().toInt(),
-                        trang_thai_loai_dich_vu = 0,
-                        ten_loai_dich_vu = "Giá điện"
-                    )
-                    val giaNuoc=LoaiDichVu(
-                        ma_dich_vu = maDichVuPhong,
-                        ma_loai_dich_vu = UUID.randomUUID().toString(),
-                        gia_dich_vu = binding.edGiaNuoc.text.toString().toInt(),
-                        trang_thai_loai_dich_vu = 0,
-                        ten_loai_dich_vu = "Giá nươc"
-                    )
-                    val rep : Long =  phongDao.insertPhong(phong)
-                    val rep1: Long = dichVuPhongDao.insertDichVuPhong(dichVuPhong)
-                    val rep2:Long = loaiDichVuDao.insertLoaiDichVuPhong(giaDien)
-                    val rep3:Long = loaiDichVuDao.insertLoaiDichVuPhong(giaNuoc)
-                    if(rep>0 && rep1>0 && rep2>0 && rep3>0){
-                        thongBaoThanhCong("Bạn đã lưu thành công!!")
-                    }else{
-                        thongBaoLoi("Bạn lưu không thành công !!!")
-                    }
-
-                }
             }
 
 

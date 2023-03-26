@@ -18,9 +18,13 @@ class ActivityDanhSachNguoiThue : AppCompatActivity() {
         setContentView(binding.root)
         binding.tabDSNguoiThue
         setSupportActionBar(binding.tabDSNguoiThue)
-        val ab = getSupportActionBar()
+        val ab = supportActionBar
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
+        if (ab != null){
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setDisplayShowHomeEnabled(true);
+        }
         val adapter = ViewpagerDanhSachNguoiThueAdapter(supportFragmentManager, lifecycle)
         binding.viewpagerDanhSachNguoiThue.adapter = adapter
         TabLayoutMediator(binding.tabDanhSachNguoiThue, binding.viewpagerDanhSachNguoiThue) { tab, pos ->
@@ -35,14 +39,11 @@ class ActivityDanhSachNguoiThue : AppCompatActivity() {
             }
         }.attach()
     }
-    fun chuyenActivity(){
-        val intent = Intent(this@ActivityDanhSachNguoiThue, ActivityManHinhChinhChuTro::class.java)
-        startActivity(intent)
-    }
+
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.getItemId();
         if (id==android.R.id.home)
-            chuyenActivity();
+            finish();
         return super.onOptionsItemSelected(item);
     }
 }

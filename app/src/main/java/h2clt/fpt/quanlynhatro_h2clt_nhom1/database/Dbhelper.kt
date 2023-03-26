@@ -33,21 +33,15 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
         """.trimIndent()
         db?.execSQL(khu_tro)
 
-        val dich_vu_phong="""
-            CREATE TABLE ${DichVuPhong.TB_NAME}(
-            ${DichVuPhong.CLM_MA_DICH_VU} text PRIMARY KEY NOT NULL,
-            ${DichVuPhong.CLM_TEN_DICH_VU} text NOT NULL);
-        """.trimIndent()
-        db?.execSQL(dich_vu_phong)
 
         val loai_dich_vu="""
             CREATE TABLE ${LoaiDichVu.TB_NAME}(
             ${LoaiDichVu.CLM_MA_LOAI_DICH_VU} text PRIMARY KEY NOT NULL,
             ${LoaiDichVu.CLM_TEN_LOAI_DICH_VU} text  NOT NULL,
             ${LoaiDichVu.CLM_GIA_DICH_VU} integer NOT NULL,
-            ${LoaiDichVu.CLM_MA_DICH_VU} text NOT NULL ,
+            ${LoaiDichVu.CLM_MA_PHONG} text NOT NULL ,
             ${LoaiDichVu.CLM_TRANG_THAI_LOAI_DICH_VU} Integer NOT NULL,
-            FOREIGN KEY(${LoaiDichVu.CLM_MA_DICH_VU})REFERENCES ${DichVuPhong.TB_NAME}( ${DichVuPhong.CLM_MA_DICH_VU}));
+            FOREIGN KEY(${LoaiDichVu.CLM_MA_PHONG})REFERENCES ${Phong.TB_NAME}(${Phong.CLM_MA_PHONG}));
         """.trimIndent()
         db?.execSQL(loai_dich_vu)
 
@@ -60,9 +54,7 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${Phong.CLM_SO_NGUOI_O} integer NOT NULL,
             ${Phong.CLM_TRANG_THAI_PHONG} integer NOT NULL,
             ${Phong.CLM_MA_KHU} text NOT NULL,
-            ${Phong.CLM_MA_DICH_VU} text NOT NULL,
-            FOREIGN KEY(${Phong.CLM_MA_KHU})REFERENCES ${KhuTro.TB_NAME}(${KhuTro.CLM_MA_KHU_TRO}),
-            FOREIGN KEY (${Phong.CLM_MA_DICH_VU} ) REFERENCES ${DichVuPhong.TB_NAME}(${DichVuPhong.CLM_MA_DICH_VU} )); 
+            FOREIGN KEY(${Phong.CLM_MA_KHU})REFERENCES ${KhuTro.TB_NAME}(${KhuTro.CLM_MA_KHU_TRO})); 
         """.trimIndent()
         db?.execSQL(phong)
 
@@ -103,6 +95,7 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${HopDong.CLM_THOI_HAN} integer NOT NULL,
             ${HopDong.CLM_NGAY_O} text NOT NULL,
             ${HopDong.CLM_NGAY_HOP_DONG} text NOT NULL,
+            ${HopDong.CLM_NGAY_LAP_HOP_DONG} text NOT NULL,
             ${HopDong.CLM_ANH_HOP_DONG}  text NOT NULL,
             ${HopDong.CLM_TIEN_COC} long NOT NULL,
             ${HopDong.CLM_TRANG_THAI_HOP_DONG} integer NOT NULL,
@@ -123,7 +116,6 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
         """.trimIndent()
         db?.execSQL(thong_bao)
     }
-
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         TODO("Not yet implemented")
     }

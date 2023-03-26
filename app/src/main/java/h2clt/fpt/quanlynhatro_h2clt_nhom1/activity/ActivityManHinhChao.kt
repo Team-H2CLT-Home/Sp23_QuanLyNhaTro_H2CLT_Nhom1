@@ -14,7 +14,7 @@ class ActivityManHinhChao : AppCompatActivity() {
         handler.postDelayed(Runnable {
             val intent = Intent(this, ActivityDangNhap::class.java)
             startActivity(intent)
-        },3000)
-
+            finishAffinity()
+        },2000)
     }
 }

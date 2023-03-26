@@ -10,7 +10,7 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemPhongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 import kotlinx.coroutines.processNextEventInCurrentThread
 
-class PhongTroViewHolder(
+class PhongTroTaoHopDongViewHolder(
     val binding:LayoutItemPhongBinding
 ):RecyclerView.ViewHolder(binding.root){
     fun bind(phong: Phong){
@@ -28,21 +28,23 @@ class PhongTroViewHolder(
         }
     }
 }
-class PhongTroAdapter(val listPhong: List<Phong>): RecyclerView.Adapter<PhongTroViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhongTroViewHolder {
+class PhongTrotaoHopDongAdapter(val listPhong: List<Phong>, val onClick:PhongInteface): RecyclerView.Adapter<PhongTroTaoHopDongViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhongTroTaoHopDongViewHolder {
         val inflater= LayoutInflater.from(parent.context)
         val binding = LayoutItemPhongBinding.inflate(inflater,parent,false)
-        return  PhongTroViewHolder(binding)
+        return  PhongTroTaoHopDongViewHolder(binding)
     }
 
     override fun getItemCount()=listPhong.size
 
-    override fun onBindViewHolder(holder: PhongTroViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PhongTroTaoHopDongViewHolder, position: Int) {
         val phong=listPhong[position]
         holder.apply {
             bind(phong)
         }
+        holder.itemView.setOnClickListener {
+             onClick.OnCLickPhong(position)
+        }
+
     }
-
-
 }
