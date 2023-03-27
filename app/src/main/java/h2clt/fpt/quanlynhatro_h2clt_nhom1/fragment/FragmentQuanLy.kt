@@ -50,6 +50,10 @@ class FragmentQuanLy:Fragment() {
             val intent = Intent(context, ActivityDanhSachHopDong::class.java)
             startActivity(intent)
         }
+        binding.quanLyDichVu.setOnClickListener {
+            val intent = Intent(context, ActivityQuanLyDichVu::class.java)
+            startActivity(intent)
+        }
         return binding.root
     }
 }

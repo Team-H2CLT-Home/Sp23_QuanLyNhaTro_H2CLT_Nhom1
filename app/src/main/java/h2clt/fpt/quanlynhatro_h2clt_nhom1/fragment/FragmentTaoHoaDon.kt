@@ -33,7 +33,7 @@ class FragmentTaoHoaDon : AppCompatActivity() {
 
         binding.tbTaoHoaDon
         setSupportActionBar(binding.tbTaoHoaDon)
-        val ab = getSupportActionBar()
+        val ab = supportActionBar
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
 
@@ -126,7 +126,7 @@ class FragmentTaoHoaDon : AppCompatActivity() {
         finish()
     }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
-        val id : Int = item.getItemId();
+        val id : Int = item.itemId;
         if (id==android.R.id.home)
             chuyenActivity();
         return super.onOptionsItemSelected(item);
