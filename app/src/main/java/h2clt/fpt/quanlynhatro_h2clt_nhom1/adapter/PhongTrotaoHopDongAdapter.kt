@@ -21,8 +21,8 @@ class PhongTroTaoHopDongViewHolder(
         binding.tvTenPhong.setOnClickListener {
             val phong=PhongDao(binding.root.context).getPhongById(phong.ma_phong)
             val listLoaiDichVu= phong?.let { it1 ->
-                LoaiDichVuPhongDao(binding.root.context).getAllInLoaiDichVuById(
-                    it1.ma_dich_vu)
+                LoaiDichVuPhongDao(binding.root.context).getAllInLoaiDichVuByPhong(
+                    it1.ma_phong)
             }
             Toast.makeText(binding.root.context, listLoaiDichVu?.size.toString(), Toast.LENGTH_LONG).show()
         }

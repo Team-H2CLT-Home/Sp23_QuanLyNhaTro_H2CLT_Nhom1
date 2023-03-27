@@ -121,6 +121,7 @@
                        style="@style/image_tabLayout"
                        android:src="@drawable/icon_oclock_tq" />
                    <TextView
+                       android:id="@+id/tvPhongSapHetHanHD"
                        style="@style/textView_tabLayout"
                        android:textSize="40dp"
                        android:paddingLeft="20dp"

@@ -33,9 +33,12 @@ class FragmentTaoHoaDon : AppCompatActivity() {
 
         binding.tbTaoHoaDon
         setSupportActionBar(binding.tbTaoHoaDon)
-        val ab = supportActionBar
-        ab?.setHomeAsUpIndicator(R.drawable.black_left)
-        ab?.setDisplayHomeAsUpEnabled(true)
+        val ab = getSupportActionBar()
+        if (ab != null){
+            ab.setHomeAsUpIndicator(R.drawable.black_left)
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setDisplayShowHomeEnabled(true);
+        }
 
 //        binding.seachViewHoaDon.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
 //            android.widget.SearchView.OnQueryTextListener {
@@ -119,16 +122,10 @@ class FragmentTaoHoaDon : AppCompatActivity() {
         })
         bundle.show()
     }
-
-    fun chuyenActivity(){
-        val intent = Intent(this@FragmentTaoHoaDon, ActivityManHinhChinhChuTro::class.java)
-        startActivity(intent)
-        finish()
-    }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.itemId;
         if (id==android.R.id.home)
-            chuyenActivity();
+            finish()
         return super.onOptionsItemSelected(item);
     }
     fun seachView(list : List<Phong>, s : String):List<Phong>{
