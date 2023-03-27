@@ -20,4 +20,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="chi_tiet_phong">Chi tiết phòng</string>
     <string name="them_phong_tro">Thêm phòng trọ</string>
+    <string name="quan_ly_dich_vu">Quản lý dịch vụ</string>
+    <string name="them_ly_dich_vu">Thêm Dịch Vụ</string>
 </resources>

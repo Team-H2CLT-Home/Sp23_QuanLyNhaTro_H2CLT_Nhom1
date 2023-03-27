@@ -24,7 +24,6 @@ class ActivityXuLyPhong : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityXuLyPhongBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.tbXuLyPhong
         setSupportActionBar(binding.tbXuLyPhong)
         val ab = getSupportActionBar()
         ab?.setHomeAsUpIndicator(R.drawable.black_left)

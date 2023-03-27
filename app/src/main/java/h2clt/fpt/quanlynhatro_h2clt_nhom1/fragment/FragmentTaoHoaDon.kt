@@ -123,7 +123,7 @@ class FragmentTaoHoaDon : AppCompatActivity() {
         bundle.show()
     }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
-        val id : Int = item.getItemId();
+        val id : Int = item.itemId;
         if (id==android.R.id.home)
             finish()
         return super.onOptionsItemSelected(item);
