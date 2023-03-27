@@ -184,6 +184,7 @@
                         android:layout_width="match_parent"
                         android:hint="Thời hạn"
                         android:gravity="center"
+                        android:inputType="number"
                         android:layout_height="wrap_content"
                         android:background="@drawable/boder_tron_colorwhite"
                         />

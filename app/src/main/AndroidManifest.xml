@@ -23,7 +23,8 @@
             android:exported="true"></activity>
         <activity
             android:name=".activity.ActivityTaoHopDong"
-            android:exported="true"></activity>
+            android:exported="true"
+            ></activity>
         <activity
             android:name=".activity.ActivityDoanhThu"
             android:exported="false" />
@@ -103,10 +104,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.ActivityDangNhap"
-            android:exported="false" >
-        </activity>
+
         <activity
             android:name=".activity.ActivityDanhSachHoaDon"
             android:exported="false"></activity>

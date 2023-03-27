@@ -15,7 +15,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerXuLyPhong"
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 </LinearLayout>

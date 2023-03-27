@@ -17,19 +17,20 @@ class ActivityDoanhThu : AppCompatActivity() {
         setContentView(binding.root)
         binding.tbDoanhThu
         setSupportActionBar(binding.tbDoanhThu)
-        val ab = supportActionBar
-        if (ab != null){
-            ab.setDisplayHomeAsUpEnabled(true);
-            ab.setDisplayShowHomeEnabled(true);
-        }
+        val ab = getSupportActionBar()
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
     }
 
+    fun chuyenActivity(){
+        val intent = Intent(this@ActivityDoanhThu, ActivityManHinhChinhChuTro::class.java)
+        startActivity(intent)
+        finish()
+    }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.getItemId();
         if (id==android.R.id.home)
-            finish();
+            chuyenActivity();
         return super.onOptionsItemSelected(item);
     }
 }
