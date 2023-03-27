@@ -17,11 +17,7 @@ class ActivityDanhSachHoaDon : AppCompatActivity() {
         setContentView(binding.root)
         binding.tbDanhSachHoaDon
         setSupportActionBar(binding.tbDanhSachHoaDon)
-        val ab = supportActionBar
-        if (ab != null){
-            ab.setDisplayHomeAsUpEnabled(true);
-            ab.setDisplayShowHomeEnabled(true);
-        }
+        val ab = getSupportActionBar()
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
         val adapter = ViewpagerDanhSachHoaDonAdapter(supportFragmentManager, lifecycle)
@@ -38,11 +34,14 @@ class ActivityDanhSachHoaDon : AppCompatActivity() {
             }
         }.attach()
     }
-
+    fun chuyenActivity(){
+        val intent = Intent(this@ActivityDanhSachHoaDon, ActivityManHinhChinhChuTro::class.java)
+        startActivity(intent)
+    }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.getItemId();
         if (id==android.R.id.home)
-            finish();
+            chuyenActivity();
         return super.onOptionsItemSelected(item);
     }
 }

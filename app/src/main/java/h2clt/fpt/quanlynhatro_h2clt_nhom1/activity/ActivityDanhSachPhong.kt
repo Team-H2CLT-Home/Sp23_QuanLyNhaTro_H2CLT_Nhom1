@@ -23,8 +23,11 @@ class ActivityDanhSachPhong : AppCompatActivity() {
         binding.tbDanhSachPhong
         setSupportActionBar(binding.tbDanhSachPhong)
         val ab = supportActionBar
-        ab?.setHomeAsUpIndicator(R.drawable.black_left)
-        ab?.setDisplayHomeAsUpEnabled(true)
+        if (ab != null){
+            ab.setHomeAsUpIndicator(R.drawable.black_left)
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setDisplayShowHomeEnabled(true);
+        }
         if (ab != null){
             ab.setDisplayHomeAsUpEnabled(true);
             ab.setDisplayShowHomeEnabled(true);

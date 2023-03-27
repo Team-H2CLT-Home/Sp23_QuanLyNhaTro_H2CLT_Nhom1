@@ -28,8 +28,11 @@ class ActivityThemKhuTro : AppCompatActivity() {
         binding.tbThemKhuTro
         setSupportActionBar(binding.tbThemKhuTro )
         val ab = supportActionBar
-        ab?.setHomeAsUpIndicator(R.drawable.black_left)
-        ab?.setDisplayHomeAsUpEnabled(true)
+        if (ab != null){
+            ab.setHomeAsUpIndicator(R.drawable.black_left)
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setDisplayShowHomeEnabled(true);
+        }
 
         val srf=getSharedPreferences(THONG_TIN_DANG_NHAP, MODE_PRIVATE)
         val admin=srf.getString(USERNAME_KEY, "")!!
@@ -102,15 +105,11 @@ class ActivityThemKhuTro : AppCompatActivity() {
         })
         bundle.show()
     }
-    fun chuyenActivity(){
-        val intent = Intent(this@ActivityThemKhuTro, ActivityManHinhChinhChuTro::class.java)
-        startActivity(intent)
-        finish()
-    }
+
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.getItemId();
         if (id==android.R.id.home)
-            chuyenActivity();
+            finish();
         return super.onOptionsItemSelected(item);
     }
 
