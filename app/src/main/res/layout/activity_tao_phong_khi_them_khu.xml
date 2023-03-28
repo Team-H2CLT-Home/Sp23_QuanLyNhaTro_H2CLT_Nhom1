@@ -30,12 +30,12 @@
                 android:background="@drawable/boder_nen"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 >
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edTenPhongTro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Tên phòng trọ"
-                    />
+                    android:hint="Tên phòng trọ" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -69,13 +69,13 @@
                 android:background="@drawable/boder_nen"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 >
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edSoNguoiToiDa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
                     android:hint="Số người tối đa/phòng"
-                    />
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
                 android:layout_width="match_parent"

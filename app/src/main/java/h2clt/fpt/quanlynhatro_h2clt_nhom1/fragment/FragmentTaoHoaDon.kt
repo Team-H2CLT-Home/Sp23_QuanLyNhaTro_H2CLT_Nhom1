@@ -1,5 +1,6 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment
 
+
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
@@ -18,10 +19,20 @@ class FragmentTaoHoaDon : AppCompatActivity() {
     private lateinit var binding : FragmentTaoHoaDonBinding
 //    private var maKhu = ""
 //    private var list = listOf<HoaDon>()
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentTaoHoaDonBinding
+
+
+class FragmentTaoHoaDon : AppCompatActivity() {
+    private lateinit var binding: FragmentTaoHoaDonBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = FragmentTaoHoaDonBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
         val maPhong=intent.getStringExtra(MA_PHONG_HOA_DON_KEY)
         val phong = maPhong?.let { PhongDao(this).getPhongById(it) }!!
 //        val srf=binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
@@ -87,5 +98,7 @@ class FragmentTaoHoaDon : AppCompatActivity() {
             dialog.cancel()
         })
         bundle.show()
+    }
+
     }
 }

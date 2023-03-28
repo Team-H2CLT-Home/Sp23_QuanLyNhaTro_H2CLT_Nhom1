@@ -30,19 +30,15 @@ class ActivityTaoHopDong : AppCompatActivity() {
         setContentView(binding.root)
         binding.tbDanhSachPhong
         setSupportActionBar(binding.tbDanhSachPhong)
-        val ab = supportActionBar
-        if (ab != null){
-            ab.setDisplayHomeAsUpEnabled(true);
-            ab.setDisplayShowHomeEnabled(true);
-        }
+        val ab = getSupportActionBar()
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
         //=======================================
         val srf = binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
         maKhu = srf.getString(MA_KHU_KEY, "")!!
-        listMaPhong = HopDongDao(this@ActivityTaoHopDong).getMaPhongByHopDong()
-        listPhong = PhongDao(this@ActivityTaoHopDong).getAllInPhongByMaKhu(maKhu)
-        listPhongChuaCoHopDong = PhongDao(this@ActivityTaoHopDong).getPhongChuaCoHopDong() as MutableList<Phong>
+//        listMaPhong = HopDongDao(this@ActivityTaoHopDong).getMaPhongByHopDong()
+//        listPhong = PhongDao(this@ActivityTaoHopDong).getAllInPhongByMaKhu(maKhu)
+        listPhongChuaCoHopDong = PhongDao(this@ActivityTaoHopDong).getPhongChuaCoHopDong(maKhu) as MutableList<Phong>
 
 //        var count = 0
 //        if (listMaPhong.size==0){
@@ -77,10 +73,15 @@ class ActivityTaoHopDong : AppCompatActivity() {
         binding.rcyPhongTrongCanTaoHopDong.adapter = adapter
     }
 
+    fun chuyenActivity(){
+        val intent = Intent(this@ActivityTaoHopDong, ActivityManHinhChinhChuTro::class.java)
+        startActivity(intent)
+        finish()
+    }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.getItemId();
         if (id==android.R.id.home)
-            finish();
+            chuyenActivity();
         return super.onOptionsItemSelected(item);
     }
 }
