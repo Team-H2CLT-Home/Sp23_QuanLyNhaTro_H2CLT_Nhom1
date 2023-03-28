@@ -12,6 +12,9 @@
         android:theme="@style/Theme.QuanLyNhaTro_H2CLT_Nhom1"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ActivitySuaDichVu"
+            android:exported="false" />
+        <activity
             android:name=".activity.ActivityThemDichVu"
             android:exported="false" />
         <activity
@@ -20,7 +23,6 @@
         <activity
             android:name=".activity.ActivityPhongTrong"
             android:exported="false" />
-
         <activity
             android:name=".activity.ActivityDanhSachPhong"
             android:exported="false" />
@@ -29,8 +31,7 @@
             android:exported="true" />
         <activity
             android:name=".activity.ActivityTaoHopDong"
-            android:exported="true"
-            ></activity
+            android:exported="true" />
         <activity
             android:name=".activity.ActivityDoanhThu"
             android:exported="false" />
@@ -70,10 +71,9 @@
         </activity>
         <activity
             android:name=".activity.ActivityThemPhong"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".activity.ActivityDanhSachPhong"-->
-<!--            android:exported="false" />-->
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".activity.ActivityDanhSachPhong" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".activity.ActivityDanhSachPhongChuaTaoHoaDon"
             android:exported="false">
@@ -93,7 +93,6 @@
         <activity
             android:name=".activity.ActivityDangNhap"
             android:exported="false" />
-
         <activity
             android:name=".activity.ActivityDangKy"
             android:exported="false">
@@ -110,7 +109,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.ActivityDanhSachHoaDon"
             android:exported="false" />
