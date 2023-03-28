@@ -3,6 +3,8 @@ package h2clt.fpt.quanlynhatro_h2clt_nhom1.database
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.util.Log
+import androidx.core.database.getIntOrNull
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.KhuTro
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
@@ -88,6 +90,28 @@ class NguoiDungDao(context: Context) {
                     trang_thai_o = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_O)),
                     ma_phong = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_PHONG))
                 )
+        }
+        return null
+    }
+    ////tìm kiem theo ten phong
+    @SuppressLint("Range")
+    fun getAllInNguoiDungByTenPhong(id:String):NguoiDung?{
+        val sql="""
+            select * from ${NguoiDung.TB_NAME} join ${Phong.TB_NAME} on ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_PHONG} = ${Phong.TB_NAME}.${Phong.CLM_MA_PHONG} where ${Phong.CLM_TEN_PHONG} ="$id"
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            return NguoiDung(
+                ma_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_NGUOI_DUNG)),
+                ho_ten_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_HO_TEN_NGUOI_DUNG)),
+                cccd = c.getString(c.getColumnIndex(NguoiDung.CLM_CCCD)),
+                nam_sinh = c.getString(c.getColumnIndex(NguoiDung.CLM_NAM_SINH)),
+                sdt_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_SDT_NGUOI_DUNG)),
+                que_quan = c.getString(c.getColumnIndex(NguoiDung.CLM_QUE_QUAN_NGUOI_DUNG)),
+                trang_thai_chu_hop_dong = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_CHU_HOP_DONG)),
+                trang_thai_o = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_O)),
+                ma_phong = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_PHONG))
+            )
         }
         return null
     }
@@ -253,4 +277,117 @@ class NguoiDungDao(context: Context) {
         return null
     }
 
+    @SuppressLint("Range")
+    fun getNguoiDungByTrangThai(trangThai:Int,maPhong: String):String{
+        val sql="""
+           select ${NguoiDung.TB_NAME}.${NguoiDung.CLM_HO_TEN_NGUOI_DUNG} from ${HopDong.TB_NAME}
+            join ${NguoiDung.TB_NAME} ON ${HopDong.TB_NAME}.${HopDong.CLM_MA_NGUOI_DUNG}=${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_NGUOI_DUNG}
+            where ${HopDong.TB_NAME}.${HopDong.CLM_MA_PHONG}="$maPhong" AND ${NguoiDung.TB_NAME}.${NguoiDung.CLM_TRANG_THAI_CHU_HOP_DONG} = ${trangThai}
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            return c.getString(c.getColumnIndex(NguoiDung.CLM_HO_TEN_NGUOI_DUNG))
+
+        }
+        return "null"
+    }
+    /////lay ten nguoi dung
+
+    @SuppressLint("Range")
+    fun getTenNguoiDungByMaPhong(id:String):String{
+        val sql="""
+            select ${NguoiDung.TB_NAME}.${NguoiDung.CLM_HO_TEN_NGUOI_DUNG} from ${NguoiDung.TB_NAME}
+            JOIN ${HopDong.TB_NAME} ON ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_NGUOI_DUNG} = ${HopDong.TB_NAME}.${HopDong.CLM_MA_NGUOI_DUNG}
+            join ${Phong.TB_NAME} ON ${HopDong.TB_NAME}.${HopDong.CLM_MA_PHONG} = ${Phong.TB_NAME}.${Phong.CLM_MA_PHONG}
+             where ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_PHONG}= "$id" 
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            return c.getString(c.getColumnIndex(NguoiDung.CLM_HO_TEN_NGUOI_DUNG))
+        }
+        return "null"
+    }
+    @SuppressLint("Range")
+    fun getSoNguoiDungByMaPhong(id:String):Int{
+        val sql="""
+           select count (${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_NGUOI_DUNG}) from ${NguoiDung.TB_NAME} where ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_PHONG} = "$id"
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            return c.getInt(c.getColumnIndex(c.getColumnName(0)))
+
+        }
+        return 0
+    }
+
+    @SuppressLint("Range")
+    fun getSoNguoiOByMaPhong(id:String):Int{
+        val sql="""
+           select ${Phong.TB_NAME}.${Phong.CLM_SO_NGUOI_O} from ${Phong.TB_NAME} where ${Phong.TB_NAME}.${Phong.CLM_MA_PHONG} = "$id"
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            return c.getInt(c.getColumnIndex(Phong.CLM_SO_NGUOI_O))
+
+        }
+        return 0
+    }
+
+
+
+
+    ////
+    @SuppressLint("Range")
+    fun getListNguoiDungByMaPhong(id: String):List<NguoiDung>{
+        val list= mutableListOf<NguoiDung>()
+        val sql = """
+            select * from ${NguoiDung.TB_NAME} where ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_PHONG} = "$id"
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            do {
+                val nguoiDung=NguoiDung(
+                    ma_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_NGUOI_DUNG)),
+                    ho_ten_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_HO_TEN_NGUOI_DUNG)),
+                    cccd = c.getString(c.getColumnIndex(NguoiDung.CLM_CCCD)),
+                    nam_sinh = c.getString(c.getColumnIndex(NguoiDung.CLM_NAM_SINH)),
+                    sdt_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_SDT_NGUOI_DUNG)),
+                    que_quan = c.getString(c.getColumnIndex(NguoiDung.CLM_QUE_QUAN_NGUOI_DUNG)),
+                    trang_thai_chu_hop_dong = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_CHU_HOP_DONG)),
+                    trang_thai_o = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_O)),
+                    ma_phong = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_PHONG))
+                )
+                list+=nguoiDung
+            }while (c.moveToNext())
+        }
+        return list
+    }
+    @SuppressLint("Range")
+    fun getListTrangThaiHDDungByMaPhong(id: String):List<NguoiDung>{
+        val list= mutableListOf<NguoiDung>()
+        val sql="""
+            select * from ${NguoiDung.TB_NAME}
+            JOIN ${HopDong.TB_NAME} ON ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_NGUOI_DUNG} = ${HopDong.TB_NAME}.${HopDong.CLM_MA_NGUOI_DUNG}
+            join ${Phong.TB_NAME} ON ${HopDong.TB_NAME}.${HopDong.CLM_MA_PHONG} = ${Phong.TB_NAME}.${Phong.CLM_MA_PHONG}
+             where ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_PHONG}= "$id" 
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            do {
+                val nguoiDung=NguoiDung(
+                    ma_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_NGUOI_DUNG)),
+                    ho_ten_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_HO_TEN_NGUOI_DUNG)),
+                    cccd = c.getString(c.getColumnIndex(NguoiDung.CLM_CCCD)),
+                    nam_sinh = c.getString(c.getColumnIndex(NguoiDung.CLM_NAM_SINH)),
+                    sdt_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_SDT_NGUOI_DUNG)),
+                    que_quan = c.getString(c.getColumnIndex(NguoiDung.CLM_QUE_QUAN_NGUOI_DUNG)),
+                    trang_thai_chu_hop_dong = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_CHU_HOP_DONG)),
+                    trang_thai_o = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_O)),
+                    ma_phong = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_PHONG))
+                )
+                list+=nguoiDung
+            }while (c.moveToNext())
+        }
+        return list
+    }
 }

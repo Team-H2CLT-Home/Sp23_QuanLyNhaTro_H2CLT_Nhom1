@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.LoaiDichVuPhongDao
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemPhongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
@@ -18,6 +19,8 @@ class PhongTroTaoHopDongViewHolder(
         binding.tvGiaThue.text=phong.gia_thue.toString()
         binding.chkTrangThaiPhongDaCoc.isChecked= phong.trang_thai_phong==2
         binding.chkTrangThaiPhongTrong.isChecked=phong.trang_thai_phong==0
+        binding.tvGioiHanNguoiO.text = "Tối đa: "+phong.so_nguoi_o.toString()+" người"
+        binding.tvSoNguoiHienTai.text = "có "+ NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(phong.ma_phong).size +" người đang ở"
         binding.tvTenPhong.setOnClickListener {
             val phong=PhongDao(binding.root.context).getPhongById(phong.ma_phong)
             val listLoaiDichVu= phong?.let { it1 ->
