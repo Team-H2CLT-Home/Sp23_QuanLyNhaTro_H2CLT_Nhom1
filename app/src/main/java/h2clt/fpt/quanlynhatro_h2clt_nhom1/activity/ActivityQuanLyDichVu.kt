@@ -37,7 +37,7 @@ class ActivityQuanLyDichVu : AppCompatActivity() {
         maKhu = srf.getString(MA_KHU_KEY, "")!!
         val loaiDichVuPhongDao = LoaiDichVuPhongDao(this)
         val listDichVu = loaiDichVuPhongDao.getAllInLoaiDichVuByKhuTro(maKhu)
-        val adapter = QuanLyDichVuAdapter(listDichVu, this@ActivityQuanLyDichVu)
+        val adapter = QuanLyDichVuAdapter(listDichVu, this@ActivityQuanLyDichVu, maKhu)
         binding.rcvListDichVu.apply {
             this.adapter = adapter
             this.layoutManager = LinearLayoutManager(this@ActivityQuanLyDichVu)
@@ -55,18 +55,16 @@ class ActivityQuanLyDichVu : AppCompatActivity() {
         return super.onOptionsItemSelected(item);
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d("TAG", "onPause: called ")
-    }
-
     override fun onResume() {
         super.onResume()
         Log.d("TAG", "onResume: called ")
+        val loaiDichVuPhongDao = LoaiDichVuPhongDao(this)
+        val listDichVu = loaiDichVuPhongDao.getAllInLoaiDichVuByKhuTro(maKhu)
+        val adapter = QuanLyDichVuAdapter(listDichVu, this@ActivityQuanLyDichVu, maKhu)
+        binding.rcvListDichVu.apply {
+            this.adapter = adapter
+            this.layoutManager = LinearLayoutManager(this@ActivityQuanLyDichVu)
+        }
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        Log.d("TAG", "onRestart: call ")
-    }
 }
