@@ -28,12 +28,10 @@ class HoaDonDaThanhToanViewHolder(
             val phong = PhongDao(binding.root.context).getPhongById(hoaDon.ma_phong)
             binding.tvTenPhong.text = phong?.ten_phong
             // tính tổng
-            tongItem = (hoaDon.gia_thue + hoaDon.gia_dich_vu +
-                    (hoaDon.so_dien*3500) + (hoaDon.so_nuoc*25000) - hoaDon.mien_giam)
 
-            binding.tvTong.text = tongItem.toString()
+            binding.tvTong.text = hoaDon.tong.toString()
             binding.tvTong.setTextColor(Color.argb(200,0,200,0))
-            binding.tvDaThu.text =  tongItem.toString()
+            binding.tvDaThu.text =  hoaDon.tong.toString()
             binding.tvDaThu.setTextColor(Color.argb(200,0,200,0))
             binding.layoutChuyenChiTietHoaDon.setOnClickListener {
                 val bottomSheetDialog = BottomSheetDialog(binding.root.context)
@@ -52,9 +50,8 @@ class HoaDonDaThanhToanViewHolder(
                 dialog.tvNgayHoaDon.text = "Hóa đơn tháng "+date
                 dialog.chkThanhToan.isChecked = true
 
-                sum = (hoaDon.gia_thue + hoaDon.gia_dich_vu + (hoaDon.so_dien*3500) + (hoaDon.so_nuoc*25000) - hoaDon.mien_giam)
-                Log.d("TAG", "bind: "+sum)
-                dialog.tvTongTien.text = sum.toString()+ " Vnd"
+
+                dialog.tvTongTien.text = hoaDon.tong.toString()
                 dialog.tvTongTien.setTextColor(Color.argb(200,0,200,0))
                 dialog.btnDong.setOnClickListener {
                     bottomSheetDialog.dismiss()

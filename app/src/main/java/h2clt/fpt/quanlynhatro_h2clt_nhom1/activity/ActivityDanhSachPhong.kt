@@ -20,7 +20,6 @@ class ActivityDanhSachPhong : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDanhSachPhongBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.tbDanhSachPhong
         setSupportActionBar(binding.tbDanhSachPhong)
         val ab = supportActionBar
         if (ab != null){
@@ -28,10 +27,7 @@ class ActivityDanhSachPhong : AppCompatActivity() {
             ab.setDisplayHomeAsUpEnabled(true);
             ab.setDisplayShowHomeEnabled(true);
         }
-        if (ab != null){
-            ab.setDisplayHomeAsUpEnabled(true);
-            ab.setDisplayShowHomeEnabled(true);
-        }
+
         val adapter = ViewpagerDanhSachPhongAdapter(supportFragmentManager, lifecycle)
         binding.viewpagerDanhSachPhong.adapter = adapter
         TabLayoutMediator(binding.tabDanhSachPhong, binding.viewpagerDanhSachPhong) { tab, pos ->

@@ -31,7 +31,9 @@
             android:exported="true" />
         <activity
             android:name=".activity.ActivityTaoHopDong"
-            android:exported="true" />
+            android:exported="false"
+            />
+
         <activity
             android:name=".activity.ActivityDoanhThu"
             android:exported="false" />
@@ -55,6 +57,9 @@
             android:exported="false" />
         <activity
             android:name=".activity.ActivityDanhSachHopDong"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ActivityTaoHoaDon"
             android:exported="false" />
         <activity
             android:name=".activity.ActivityKetThucHopDong"

@@ -44,7 +44,7 @@ class FragmentQuanLy:Fragment() {
             startActivity(intent)
         }
         binding.taoHoaDon.setOnClickListener {
-            val intent = Intent(context, FragmentTaoHoaDon::class.java)
+            val intent = Intent(context, ActivityTaoHoaDon::class.java)
             startActivity(intent)
         }
         binding.dsPhongThue.setOnClickListener {

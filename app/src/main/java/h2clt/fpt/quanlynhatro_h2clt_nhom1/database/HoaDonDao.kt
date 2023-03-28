@@ -21,6 +21,7 @@ class HoaDonDao(context: Context) {
             put(HoaDon.CLM_MA_PHONG,hoaDon.ma_phong)
             put(HoaDon.CLM_GIA_THUE,hoaDon.gia_thue)
             put(HoaDon.CLM_GIA_DICH_VU,hoaDon.gia_dich_vu)
+            put(HoaDon.CLM_TONG,hoaDon.tong)
 
 
         }
@@ -53,7 +54,8 @@ class HoaDonDao(context: Context) {
                 gia_thue = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_THUE)),
                 gia_dich_vu = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_DICH_VU)),
                 mien_giam = c.getInt(c.getColumnIndex(HoaDon.CLM_MIEN_GIAM)),
-                ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG))
+                ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG)),
+                tong = c.getInt(c.getColumnIndex(HoaDon.CLM_TONG))
             )
         }
         return null
@@ -75,7 +77,8 @@ class HoaDonDao(context: Context) {
                     gia_thue = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_THUE)),
                     gia_dich_vu = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_DICH_VU)),
                     mien_giam = c.getInt(c.getColumnIndex(HoaDon.CLM_MIEN_GIAM)),
-                    ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG))
+                    ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG)),
+                    tong = c.getInt(c.getColumnIndex(HoaDon.CLM_TONG))
                 )
                 list+=hoaDon
             }while (c.moveToNext())
@@ -103,7 +106,8 @@ class HoaDonDao(context: Context) {
                     gia_thue = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_THUE)),
                     gia_dich_vu = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_DICH_VU)),
                     mien_giam = c.getInt(c.getColumnIndex(HoaDon.CLM_MIEN_GIAM)),
-                    ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG))
+                    ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG)),
+                    tong = c.getInt(c.getColumnIndex(HoaDon.CLM_TONG))
                 )
                 list+=hoaDon
             }while (c.moveToNext())
