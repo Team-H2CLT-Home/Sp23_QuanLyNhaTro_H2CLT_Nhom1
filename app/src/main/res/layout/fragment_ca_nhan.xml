@@ -34,6 +34,7 @@
             android:paddingLeft="10dp"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/tvTenChuNha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nguyễn Hoàng Hiệp"
@@ -42,9 +43,10 @@
                 android:textColor="@color/black"
                 />
             <TextView
+                android:id="@+id/tvSDT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Khu A"
+                android:text="02222222"
                 android:textSize="20dp"
                 android:paddingTop="5dp"
                 android:textStyle="italic"
@@ -70,6 +72,7 @@
             android:background="@drawable/boder_tron_colorwhite"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/tvThongTinChuNha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thông tin đại diện chủ nhà"
@@ -103,6 +106,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Giới thiệu"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                />
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#AEAEAE"
+                />
+            <TextView
+                android:id="@+id/tvCaiDat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cài đặt"
                 android:textSize="25dp"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"
