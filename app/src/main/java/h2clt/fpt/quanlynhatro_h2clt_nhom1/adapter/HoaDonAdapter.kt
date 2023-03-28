@@ -20,8 +20,7 @@ class HoaDonViewHolder(
    var binding: LayoutItemHoaDonBinding
 ):RecyclerView.ViewHolder(binding.root){
     fun bind(hoaDon: HoaDon){
-        var sum = 0
-        var tongItem = 0
+
         if (hoaDon.trang_thai_hoa_don==0 ){
             binding.tvTrangThaiHoaDon.isChecked = false
             val phong = PhongDao(binding.root.context).getPhongById(hoaDon.ma_phong)
@@ -35,7 +34,8 @@ class HoaDonViewHolder(
                     trang_thai_hoa_don = 1,
                     ngay_tao_hoa_don = hoaDon.ngay_tao_hoa_don,
                     so_nuoc = hoaDon.so_nuoc,
-                    so_dien = hoaDon.so_dien
+                    so_dien = hoaDon.so_dien,
+                    tong = hoaDon.tong
                 )
                  val builder = AlertDialog.Builder(binding.root.context)
                 builder.setTitle("Thông báo thanh toán")
@@ -53,12 +53,8 @@ class HoaDonViewHolder(
             }
             binding.tvTenPhong.text = phong?.ten_phong
 
-            // tính tổng
-            tongItem = (hoaDon.gia_thue + hoaDon.gia_dich_vu +
-                    (hoaDon.so_dien*3500) + (hoaDon.so_nuoc*25000) - hoaDon.mien_giam)
-
-            binding.tvTong.text = tongItem.toString()
-            binding.tvConLai.text = tongItem.toString()
+            binding.tvTong.text = hoaDon.tong.toString()
+            binding.tvConLai.text = hoaDon.tong.toString()
             binding.layoutChuyenChiTietHoaDon.setOnClickListener {
                 val bottomSheetDialog = BottomSheetDialog(binding.root.context)
                 val dialog = DialogHoaDonChiTietBinding.inflate(LayoutInflater.from(binding.root.context))
@@ -76,9 +72,8 @@ class HoaDonViewHolder(
                 dialog.tvNgayHoaDon.text = "Hóa đơn tháng "+date
                 dialog.chkThanhToan.isChecked = false
 
-                sum = (hoaDon.gia_thue + hoaDon.gia_dich_vu + (hoaDon.so_dien*3500) + (hoaDon.so_nuoc*25000) - hoaDon.mien_giam)
-                Log.d("TAG", "bind: "+sum)
-                dialog.tvTongTien.text = sum.toString()+ " Vnd"
+
+                dialog.tvTongTien.text = hoaDon.tong.toString()
                 dialog.btnDong.setOnClickListener {
                     bottomSheetDialog.dismiss()
                 }

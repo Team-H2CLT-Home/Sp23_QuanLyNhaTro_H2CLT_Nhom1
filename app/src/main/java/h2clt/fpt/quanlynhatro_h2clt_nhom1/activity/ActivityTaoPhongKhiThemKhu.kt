@@ -30,7 +30,7 @@ class ActivityTaoPhongKhiThemKhu : AppCompatActivity() {
        Triple("Tính theo đồng hồ(Phổ biến)", 1, 3000, )
     )
     private val listDichVuNuoc= listOf<Triple<String, Int,Int>>(
-        Triple("Miễn phí/Không sử dung",0, 0), Triple("Tính theo đầu người",2,70_000), Triple("Tính theo phòng",3, 100_00),
+        Triple("Miễn phí/Không sử dung",0, 0), Triple("Tính theo đầu người",2,70_000), Triple("Tính theo phòng",3, 100_000),
         Triple("Tính theo đồng hồ(Phổ biến)", 1 ,20_000, )
     )
     private val listDichVuRac= listOf<Triple<String, Int,Int>>(

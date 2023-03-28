@@ -9,6 +9,7 @@ data class HoaDon(
     val so_nuoc:Int,
     val gia_dich_vu:Int,
     val mien_giam:Int,
+    val tong:Int,
     var ma_phong:String){
     companion object{
         const val TB_NAME="hoa_don"
@@ -20,6 +21,7 @@ data class HoaDon(
         const val CLM_SO_NUOC="so_nuoc"
         const val CLM_GIA_DICH_VU="gia_dich_vu"
         const val CLM_MIEN_GIAM="mien_giam"
+        const val CLM_TONG="tong"
         const val CLM_MA_PHONG="ma_phong"
     }
 
