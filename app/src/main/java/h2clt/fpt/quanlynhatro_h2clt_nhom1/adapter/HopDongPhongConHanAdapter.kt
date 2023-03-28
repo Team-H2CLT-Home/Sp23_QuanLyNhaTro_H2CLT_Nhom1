@@ -1,27 +1,36 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter
 
 import android.app.AlertDialog
+import android.content.Context
 import android.graphics.Color
+import android.text.Editable
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityDanhSachHopDong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HopDongDao
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogChiTietHopDongBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogGiaHanHdBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentHopDongSapHetHanBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemDsHopDongBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentHopDongConHan
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentHopDongDaHetHan
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentHopDongSapHetHan
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class HopDongPhongSapHetHanViewHolder(
+class HopDongPhongConHanViewHolder(
     val binding: LayoutItemDsHopDongBinding
+
 
 ): RecyclerView.ViewHolder(binding.root){
     fun bind(hopDong: HopDong){
@@ -47,6 +56,9 @@ class HopDongPhongSapHetHanViewHolder(
         binding.tvDanhSachHopDongNgayO.text = chuyenDinhDangNgay(hopDong.ngay_o)
         binding.tvDanhSachHopDongNgayKetThuc.text = chuyenDinhDangNgay(hopDong.ngay_hop_dong)
         binding.tvDanhSachHopDongNgayLap.text = chuyenDinhDangNgay(hopDong.ngay_lap_hop_dong)
+//        binding.layoutGiaHan.setOnClickListener {
+//
+//        }
         binding.tvDanhSachHopDongTrangThai.setOnClickListener {
             val ngayHetHan = hopDong.ngay_hop_dong
             val dateFormat: java.text.DateFormat = SimpleDateFormat("yyyy-MM-dd")
@@ -104,7 +116,19 @@ class HopDongPhongSapHetHanViewHolder(
 
 
 
-
+    private fun chuyenDinhDang(text: Editable?): String {
+        var ngay_chuan_dinh_dang = ""
+        try {
+            val sdf = SimpleDateFormat("dd/MM/yyyy")
+            val dateFormat = android.text.format.DateFormat()
+            val objDate = sdf.parse(text.toString().trim { it <= ' ' })
+            ngay_chuan_dinh_dang =
+                android.text.format.DateFormat.format("yyyy-MM-dd", objDate) as String
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return ngay_chuan_dinh_dang
+    }
     private fun chuyenDinhDangNgay(ngay: String):String {
         val sdfNgay = SimpleDateFormat("yyyy-MM-dd")
         val dateFormatNgayO = DateFormat()
@@ -113,23 +137,19 @@ class HopDongPhongSapHetHanViewHolder(
         return ngay
     }
 }
-class HopDongPhongSapHetHanAdapter (val listHopDong: List<HopDong>, val fragment : FragmentHopDongSapHetHan): RecyclerView.Adapter<HopDongPhongSapHetHanViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HopDongPhongSapHetHanViewHolder {
+class HopDongPhongConHanAdapter(val listHopDong: List<HopDong>, val fragment: FragmentHopDongConHan): RecyclerView.Adapter<HopDongPhongConHanViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HopDongPhongConHanViewHolder {
         val inflater= LayoutInflater.from(parent.context)
         val binding = LayoutItemDsHopDongBinding.inflate(inflater,parent,false)
 
-        return  HopDongPhongSapHetHanViewHolder(binding)
+        return  HopDongPhongConHanViewHolder(binding)
     }
     override fun getItemCount()=listHopDong.size
-    override fun onBindViewHolder(holder: HopDongPhongSapHetHanViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HopDongPhongConHanViewHolder, position: Int) {
         val hopDong = listHopDong[position]
         holder.apply {
             bind(hopDong)
         }
-        holder.binding.layoutGiaHan.setOnClickListener {
-            fragment?.giaHanHopDong(hopDong)
-        }
-
         holder.binding.layoutKetThuc.setOnClickListener {
             fragment?.ketThucHopDong(hopDong)
         }

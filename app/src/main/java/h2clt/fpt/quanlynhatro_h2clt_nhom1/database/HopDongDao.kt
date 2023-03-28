@@ -23,6 +23,7 @@ class HopDongDao(context: Context) {
             put(HopDong.CLM_ANH_HOP_DONG,hopDong.anh_hop_dong)
             put(HopDong.CLM_TIEN_COC,hopDong.tien_coc)
             put(HopDong.CLM_TRANG_THAI_HOP_DONG,hopDong.trang_thai_hop_dong)
+            put(HopDong.CLM_HIEU_LUC_HOP_DONG,hopDong.hieu_luc_hop_dong)
             put(HopDong.CLM_MA_PHONG,hopDong.ma_phong)
             put(HopDong.CLM_MA_NGUOI_DUNG,hopDong.ma_nguoi_dung)
         }
@@ -40,6 +41,7 @@ class HopDongDao(context: Context) {
             put(HopDong.CLM_ANH_HOP_DONG,hopDong.anh_hop_dong)
             put(HopDong.CLM_TIEN_COC,hopDong.tien_coc)
             put(HopDong.CLM_TRANG_THAI_HOP_DONG,hopDong.trang_thai_hop_dong)
+            put(HopDong.CLM_HIEU_LUC_HOP_DONG,hopDong.hieu_luc_hop_dong)
             put(HopDong.CLM_MA_PHONG,hopDong.ma_phong)
             put(HopDong.CLM_MA_NGUOI_DUNG,hopDong.ma_nguoi_dung)
         }
@@ -62,6 +64,7 @@ class HopDongDao(context: Context) {
                     anh_hop_dong = c.getString(c.getColumnIndex(HopDong.CLM_ANH_HOP_DONG)),
                     tien_coc = c.getInt(c.getColumnIndex(HopDong.CLM_TIEN_COC)),
                     trang_thai_hop_dong = c.getInt(c.getColumnIndex(HopDong.CLM_TRANG_THAI_HOP_DONG)),
+                    hieu_luc_hop_dong = c.getInt(c.getColumnIndex(HopDong.CLM_HIEU_LUC_HOP_DONG)),
                     ma_phong = c.getString(c.getColumnIndex(HopDong.CLM_MA_PHONG)),
                     ma_nguoi_dung = c.getString(c.getColumnIndex(HopDong.CLM_MA_NGUOI_DUNG))
                 )
@@ -86,6 +89,7 @@ class HopDongDao(context: Context) {
                     anh_hop_dong = c.getString(c.getColumnIndex(HopDong.CLM_ANH_HOP_DONG)),
                     tien_coc = c.getInt(c.getColumnIndex(HopDong.CLM_TIEN_COC)),
                     trang_thai_hop_dong = c.getInt(c.getColumnIndex(HopDong.CLM_TRANG_THAI_HOP_DONG)),
+                    hieu_luc_hop_dong = c.getInt(c.getColumnIndex(HopDong.CLM_HIEU_LUC_HOP_DONG)),
                     ma_phong = c.getString(c.getColumnIndex(HopDong.CLM_MA_PHONG)),
                     ma_nguoi_dung = c.getString(c.getColumnIndex(HopDong.CLM_MA_NGUOI_DUNG))
                 )
@@ -138,13 +142,13 @@ class HopDongDao(context: Context) {
     }
 
     @SuppressLint("Range")
-    fun getAllInHopDongByMaKhu(id: String): List<HopDong> {
+    fun getAllInHopDongByMaKhu(id: String,hieuluc: Int): List<HopDong> {
         val list= mutableListOf<HopDong>()
         val sql = """
             select * from ${HopDong.TB_NAME}
             join ${Phong.TB_NAME} on ${HopDong.TB_NAME}.${HopDong.CLM_MA_PHONG}=${Phong.TB_NAME}.${Phong.CLM_MA_PHONG}
             join ${KhuTro.TB_NAME} ON ${Phong.TB_NAME}.${Phong.CLM_MA_KHU}=${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO}
-            where ${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO} = "$id" 
+            where ${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO} = "$id" AND ${HopDong.TB_NAME}.${HopDong.CLM_HIEU_LUC_HOP_DONG} = ${hieuluc} 
         """.trimIndent()
         val c=db.rawQuery(sql,null)
         if(c.moveToFirst()){
@@ -158,6 +162,7 @@ class HopDongDao(context: Context) {
                     anh_hop_dong = c.getString(c.getColumnIndex(HopDong.CLM_ANH_HOP_DONG)),
                     tien_coc = c.getInt(c.getColumnIndex(HopDong.CLM_TIEN_COC)),
                     trang_thai_hop_dong = c.getInt(c.getColumnIndex(HopDong.CLM_TRANG_THAI_HOP_DONG)),
+                    hieu_luc_hop_dong = c.getInt(c.getColumnIndex(HopDong.CLM_HIEU_LUC_HOP_DONG)),
                     ma_phong = c.getString(c.getColumnIndex(HopDong.CLM_MA_PHONG)),
                     ma_nguoi_dung = c.getString(c.getColumnIndex(HopDong.CLM_MA_NGUOI_DUNG))
                 )
@@ -169,13 +174,13 @@ class HopDongDao(context: Context) {
     }
 
     @SuppressLint("Range")
-    fun getHopDongSapHetHanByMaKhu(maKhu: String,trangThai: Int): List<HopDong> {
+    fun getHopDongSapHetHanByMaKhu(maKhu: String,trangThai: Int, hieuluc: Int): List<HopDong> {
         val list= mutableListOf<HopDong>()
         val sql = """
             select * from ${HopDong.TB_NAME}
             join ${Phong.TB_NAME} on ${HopDong.TB_NAME}.${HopDong.CLM_MA_PHONG}=${Phong.TB_NAME}.${Phong.CLM_MA_PHONG}
             join ${KhuTro.TB_NAME} ON ${Phong.TB_NAME}.${Phong.CLM_MA_KHU}=${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO}
-            where ${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO} = "$maKhu" AND ${HopDong.TB_NAME}.${HopDong.CLM_TRANG_THAI_HOP_DONG} = ${trangThai}
+            where ${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO} = "$maKhu" AND ${HopDong.TB_NAME}.${HopDong.CLM_TRANG_THAI_HOP_DONG} = ${trangThai} AND ${HopDong.TB_NAME}.${HopDong.CLM_HIEU_LUC_HOP_DONG} = ${hieuluc}
         """.trimIndent()
         val c=db.rawQuery(sql,null)
         if(c.moveToFirst()){
@@ -189,6 +194,7 @@ class HopDongDao(context: Context) {
                     anh_hop_dong = c.getString(c.getColumnIndex(HopDong.CLM_ANH_HOP_DONG)),
                     tien_coc = c.getInt(c.getColumnIndex(HopDong.CLM_TIEN_COC)),
                     trang_thai_hop_dong = c.getInt(c.getColumnIndex(HopDong.CLM_TRANG_THAI_HOP_DONG)),
+                    hieu_luc_hop_dong = c.getInt(c.getColumnIndex(HopDong.CLM_HIEU_LUC_HOP_DONG)),
                     ma_phong = c.getString(c.getColumnIndex(HopDong.CLM_MA_PHONG)),
                     ma_nguoi_dung = c.getString(c.getColumnIndex(HopDong.CLM_MA_NGUOI_DUNG))
                 )

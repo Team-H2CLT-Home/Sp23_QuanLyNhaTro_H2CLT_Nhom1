@@ -102,6 +102,7 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${HopDong.CLM_ANH_HOP_DONG}  text NOT NULL,
             ${HopDong.CLM_TIEN_COC} long NOT NULL,
             ${HopDong.CLM_TRANG_THAI_HOP_DONG} integer NOT NULL,
+            ${HopDong.CLM_HIEU_LUC_HOP_DONG} integer NOT NULL,
             ${HopDong.CLM_MA_PHONG} text NOT NULL,
             ${HopDong.CLM_MA_NGUOI_DUNG} text NOT NULL,
             FOREIGN KEY (${HopDong.CLM_MA_PHONG} ) REFERENCES ${Phong.TB_NAME}(${Phong.CLM_MA_PHONG}),
