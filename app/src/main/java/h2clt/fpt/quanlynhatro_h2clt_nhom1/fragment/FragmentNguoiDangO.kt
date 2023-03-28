@@ -134,29 +134,40 @@ class FragmentNguoiDangO: Fragment() {
                         return@setOnClickListener
 
                     }
-                    val maNguoiDung = UUID.randomUUID().toString()
-                    val nguoiDung = NguoiDung(
-                        ma_nguoi_dung = maNguoiDung,
-                        ho_ten_nguoi_dung = dialog.edHoTenThemNguoiDung.text.toString(),
-                        nam_sinh = dialog.edNgaySinhThemNguoiDung.text.toString(),
-                        sdt_nguoi_dung = dialog.edSDTThemNguoiDung.text.toString(),
-                        que_quan = dialog.edQueQuanThemNguoiDung.text.toString(),
-                        cccd = dialog.edCCCDThemNguoiDung.text.toString(),
-                        trang_thai_chu_hop_dong = 0,
-                        trang_thai_o = 1,
-                        ma_phong = maPhong
-                    )
-                    val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
-                    if (dao > 0) {
-                        Snackbar.make(it, "Thêm người dùng thành công", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Snackbar.make(it, "Thêm không thành công", Toast.LENGTH_SHORT).show()
+                    val listNguoiDungByMaPhong = NguoiDungDao(requireActivity()).getListNguoiDungByMaPhong(maPhong)
+                    val soNguoiO = NguoiDungDao(requireActivity()).getSoNguoiOByMaPhong(maPhong)
+//                    Toast.makeText(binding.root.context, soNguoiO, Toast.LENGTH_SHORT).show()
+                    if(listNguoiDungByMaPhong.size<soNguoiO){
+                        val maNguoiDung = UUID.randomUUID().toString()
+                        val nguoiDung = NguoiDung(
+                            ma_nguoi_dung = maNguoiDung,
+                            ho_ten_nguoi_dung = dialog.edHoTenThemNguoiDung.text.toString(),
+                            nam_sinh = dialog.edNgaySinhThemNguoiDung.text.toString(),
+                            sdt_nguoi_dung = dialog.edSDTThemNguoiDung.text.toString(),
+                            que_quan = dialog.edQueQuanThemNguoiDung.text.toString(),
+                            cccd = dialog.edCCCDThemNguoiDung.text.toString(),
+                            trang_thai_chu_hop_dong = 0,
+                            trang_thai_o = 1,
+                            ma_phong = maPhong
+                        )
+                        val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
+                        if (dao > 0) {
+                            Snackbar.make(it, "Thêm người dùng thành công", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Snackbar.make(it, "Thêm không thành công", Toast.LENGTH_SHORT).show()
+                        }
+//                        dialog.edHoTenThemNguoiDung.setText("")
+//                        dialog.edSDTThemNguoiDung.setText("")
+//                        dialog.edCCCDThemNguoiDung.setText("")
+//                        dialog.edNgaySinhThemNguoiDung.setText("")
+//                        dialog.edQueQuanThemNguoiDung.setText("")
+                        build.dismiss()
+                        onResume()
+                    }else{
+                        thongBaoLoi("Phòng đã đủ người")
                     }
-                    dialog.edHoTenThemNguoiDung.setText("")
-                    dialog.edSDTThemNguoiDung.setText("")
-                    dialog.edCCCDThemNguoiDung.setText("")
-                    dialog.edNgaySinhThemNguoiDung.setText("")
-                    dialog.edQueQuanThemNguoiDung.setText("")
+
+
                 }else{
                     thongBaoLoi("Dữ liệu không được để trống!!!")
                 }
@@ -186,7 +197,7 @@ class FragmentNguoiDangO: Fragment() {
         val bundle = androidx.appcompat.app.AlertDialog.Builder(binding.root.context)
         bundle.setTitle("Thông Báo Lỗi")
         bundle.setMessage(loi)
-        bundle.setNegativeButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+        bundle.setNegativeButton("Ok", DialogInterface.OnClickListener { dialog, which ->
             dialog.cancel()
         })
         bundle.show()

@@ -34,6 +34,8 @@ class ActivityDangKy : AppCompatActivity() {
                      sdt = binding.edSoDienThoai.text.toString(),
                      ten_dang_nhap = binding.edTenDangNhapDangKy.text.toString(),
                      ho_ten = binding.edHoVaTen.text.toString(),
+                     stk = binding.edSoTaiKhoan.text.toString(),
+                     ngay_sinh = binding.edNgaySinh.text.toString(),
                      mat_khau = binding.edMatKhauDangKy.text.toString()
                  )
                  val dao = AdminDao(this@ActivityDangKy).insertAdmin(admin)
@@ -67,7 +69,11 @@ class ActivityDangKy : AppCompatActivity() {
         if (binding.edHoVaTen.text.toString().isNotBlank() &&
             binding.edSoDienThoai.text.toString().isNotBlank() &&
             binding.edTenDangNhapDangKy.text.toString().isNotBlank() &&
-                binding.edMatKhauDangKy.text.toString().isNotBlank()) {
+                binding.edMatKhauDangKy.text.toString().isNotBlank()
+            &&
+            binding.edSoTaiKhoan.text.toString().isNotBlank()
+            &&
+            binding.edNgaySinh.text.toString().isNotBlank()) {
             check = 1
         }
         return check

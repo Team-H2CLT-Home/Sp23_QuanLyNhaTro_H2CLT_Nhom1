@@ -6,12 +6,15 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Typeface
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogChiTietNguoiThueBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemNguoiThueBinding
@@ -24,10 +27,20 @@ class NguoiThueViewHolder(
 ):RecyclerView.ViewHolder(binding.root){
     @RequiresApi(Build.VERSION_CODES.O)
     fun bind(nguoiDung: NguoiDung){
+
        binding.tvTenPhong.text =PhongDao(binding.root.context).getTenPhongById(nguoiDung.ma_phong)
         binding.tvSDT.text = "SĐT: "+nguoiDung.sdt_nguoi_dung.toString()
         binding.tvTenNguoiThue.text = "Họ tên: " +nguoiDung.ho_ten_nguoi_dung.toString()
         binding.edTrangThaiO.isChecked = nguoiDung.trang_thai_o==1
+//        if(binding.tvTenNguoiThue.text == NguoiDungDao(binding.root.context).getNguoiDungByTrangThai(nguoiDung.ma_phong,1)){
+        if(binding.tvTenNguoiThue.text=="Họ tên: "+NguoiDungDao(binding.root.context).getTenNguoiDungByMaPhong(nguoiDung.ma_phong)){
+            binding.edTrangThaiChuHopDong.isChecked = true
+////            Log.d("aaaa", "getNguoiDungByTrangThai: "+NguoiDungDao(binding.root.context).getNguoiDungByTrangThai(nguoiDung.ma_phong,1))
+        }else{
+            binding.edTrangThaiChuHopDong.isChecked = false
+
+        }
+        Toast.makeText(binding.root.context, NguoiDungDao(binding.root.context).getTenNguoiDungByMaPhong(nguoiDung.ma_phong), Toast.LENGTH_SHORT).show()
         binding.layoutChuyenChiTietNguoiThue.setOnClickListener {
             val dialog = DialogChiTietNguoiThueBinding.inflate(LayoutInflater.from(binding.root.context))
             val builder = AlertDialog.Builder(binding.root.context).create()
@@ -41,9 +54,11 @@ class NguoiThueViewHolder(
             dialog.btnDongChiTietNguoiThue.setOnClickListener {
                 builder.dismiss()
             }
+
             builder.show()
 
         }
+
     }
 }
 class NguoiThueAdapter(
