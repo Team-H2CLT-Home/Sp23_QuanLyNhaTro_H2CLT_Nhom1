@@ -1,29 +1,30 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter
 
 import android.app.AlertDialog
+import android.content.Context
 import android.graphics.Color
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityDanhSachHopDong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HopDongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogChiTietHopDongBinding
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentHopDongSapHetHanBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemDsHopDongBinding
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentHopDongSapHetHan
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentQuanLy
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class HopDongPhongSapHetHanViewHolder(
+class HopDongPhongSapHetHanTongQuanViewHolder(
     val binding: LayoutItemDsHopDongBinding
 
 ): RecyclerView.ViewHolder(binding.root){
+
+
     fun bind(hopDong: HopDong){
 
 
@@ -32,17 +33,12 @@ class HopDongPhongSapHetHanViewHolder(
         if (hopDong.trang_thai_hop_dong == 0){
             binding.tvDanhSachHopDongTrangThai.text = "Tình trạng hợp đồng: Hết hợp đồng"
             binding.tvDanhSachHopDongTrangThai.setTextColor(Color.RED)
-            binding.layoutGiaHan.isVisible = true
-            binding.layoutKetThuc.isVisible = true
         }else if (hopDong.trang_thai_hop_dong == 1){
             binding.tvDanhSachHopDongTrangThai.text = "Tình trạng hợp đồng: Còn hợp đồng"
             binding.tvDanhSachHopDongTrangThai.setTextColor(Color.BLACK)
-            binding.layoutKetThuc.isVisible = true
         }else{
             binding.tvDanhSachHopDongTrangThai.text = "Tình trạng hợp đồng: Sắp hết hạn"
             binding.tvDanhSachHopDongTrangThai.setTextColor(Color.BLUE)
-            binding.layoutGiaHan.isVisible = true
-            binding.layoutKetThuc.isVisible = true
         }
         binding.tvDanhSachHopDongNgayO.text = chuyenDinhDangNgay(hopDong.ngay_o)
         binding.tvDanhSachHopDongNgayKetThuc.text = chuyenDinhDangNgay(hopDong.ngay_hop_dong)
@@ -103,8 +99,6 @@ class HopDongPhongSapHetHanViewHolder(
     }
 
 
-
-
     private fun chuyenDinhDangNgay(ngay: String):String {
         val sdfNgay = SimpleDateFormat("yyyy-MM-dd")
         val dateFormatNgayO = DateFormat()
@@ -113,25 +107,32 @@ class HopDongPhongSapHetHanViewHolder(
         return ngay
     }
 }
-class HopDongPhongSapHetHanAdapter (val listHopDong: List<HopDong>, val fragment : FragmentHopDongSapHetHan): RecyclerView.Adapter<HopDongPhongSapHetHanViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HopDongPhongSapHetHanViewHolder {
+class HopDongPhongSapHetHanTongQuanAdapter (val listHopDong: List<HopDong>): RecyclerView.Adapter<HopDongPhongSapHetHanTongQuanViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HopDongPhongSapHetHanTongQuanViewHolder {
         val inflater= LayoutInflater.from(parent.context)
         val binding = LayoutItemDsHopDongBinding.inflate(inflater,parent,false)
 
-        return  HopDongPhongSapHetHanViewHolder(binding)
+        return  HopDongPhongSapHetHanTongQuanViewHolder(binding)
     }
     override fun getItemCount()=listHopDong.size
-    override fun onBindViewHolder(holder: HopDongPhongSapHetHanViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HopDongPhongSapHetHanTongQuanViewHolder, position: Int) {
         val hopDong = listHopDong[position]
+
         holder.apply {
+
             bind(hopDong)
-        }
-        holder.binding.layoutGiaHan.setOnClickListener {
-            fragment?.giaHanHopDong(hopDong)
+            //updateHopDong(hopDong)
+
+
+
+            //fragment.updateDSHopDong(hopDong)
+
+
+
         }
 
-        holder.binding.layoutKetThuc.setOnClickListener {
-            fragment?.ketThucHopDong(hopDong)
-        }
+//        holder.binding.tvDanhSachHopDongTrangThai.setOnClickListener {
+//            activity.updateHopDong(hopDong)
+//        }
     }
 }
