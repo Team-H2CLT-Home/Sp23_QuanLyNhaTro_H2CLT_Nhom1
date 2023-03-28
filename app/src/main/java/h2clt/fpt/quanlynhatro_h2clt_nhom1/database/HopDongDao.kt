@@ -29,6 +29,23 @@ class HopDongDao(context: Context) {
         return db.insert(HopDong.TB_NAME,null,values)
     }
 
+    fun updateHopDong(hopDong: HopDong):Int{
+        val values=ContentValues()
+        values.apply {
+            put(HopDong.CLM_MA_HOP_DONG,hopDong.ma_hop_dong)
+            put(HopDong.CLM_THOI_HAN,hopDong.thoi_han)
+            put(HopDong.CLM_NGAY_O,hopDong.ngay_o)
+            put(HopDong.CLM_NGAY_HOP_DONG,hopDong.ngay_hop_dong)
+            put(HopDong.CLM_NGAY_LAP_HOP_DONG,hopDong.ngay_lap_hop_dong)
+            put(HopDong.CLM_ANH_HOP_DONG,hopDong.anh_hop_dong)
+            put(HopDong.CLM_TIEN_COC,hopDong.tien_coc)
+            put(HopDong.CLM_TRANG_THAI_HOP_DONG,hopDong.trang_thai_hop_dong)
+            put(HopDong.CLM_MA_PHONG,hopDong.ma_phong)
+            put(HopDong.CLM_MA_NGUOI_DUNG,hopDong.ma_nguoi_dung)
+        }
+        return db.update(HopDong.TB_NAME,values,"${HopDong.CLM_MA_HOP_DONG}=?", arrayOf(hopDong.ma_hop_dong))
+    }
+
     @SuppressLint("Range")
     fun getAllInHopDongbyID(id:String):HopDong?{
         val sql="""
@@ -150,4 +167,39 @@ class HopDongDao(context: Context) {
         return list
 
     }
+
+    @SuppressLint("Range")
+    fun getHopDongSapHetHanByMaKhu(maKhu: String,trangThai: Int): List<HopDong> {
+        val list= mutableListOf<HopDong>()
+        val sql = """
+            select * from ${HopDong.TB_NAME}
+            join ${Phong.TB_NAME} on ${HopDong.TB_NAME}.${HopDong.CLM_MA_PHONG}=${Phong.TB_NAME}.${Phong.CLM_MA_PHONG}
+            join ${KhuTro.TB_NAME} ON ${Phong.TB_NAME}.${Phong.CLM_MA_KHU}=${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO}
+            where ${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO} = "$maKhu" AND ${HopDong.TB_NAME}.${HopDong.CLM_TRANG_THAI_HOP_DONG} = ${trangThai}
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            do {
+                val hopDong= HopDong(
+                    ma_hop_dong = c.getString(c.getColumnIndex(HopDong.CLM_MA_HOP_DONG)),
+                    thoi_han = c.getInt(c.getColumnIndex(HopDong.CLM_THOI_HAN)),
+                    ngay_o = c.getString(c.getColumnIndex(HopDong.CLM_NGAY_O)),
+                    ngay_hop_dong = c.getString(c.getColumnIndex(HopDong.CLM_NGAY_HOP_DONG)),
+                    ngay_lap_hop_dong = c.getString(c.getColumnIndex(HopDong.CLM_NGAY_LAP_HOP_DONG)),
+                    anh_hop_dong = c.getString(c.getColumnIndex(HopDong.CLM_ANH_HOP_DONG)),
+                    tien_coc = c.getInt(c.getColumnIndex(HopDong.CLM_TIEN_COC)),
+                    trang_thai_hop_dong = c.getInt(c.getColumnIndex(HopDong.CLM_TRANG_THAI_HOP_DONG)),
+                    ma_phong = c.getString(c.getColumnIndex(HopDong.CLM_MA_PHONG)),
+                    ma_nguoi_dung = c.getString(c.getColumnIndex(HopDong.CLM_MA_NGUOI_DUNG))
+                )
+                list+=hopDong
+            }while (c.moveToNext())
+        }
+        return list
+
+    }
+
+
+
+
 }

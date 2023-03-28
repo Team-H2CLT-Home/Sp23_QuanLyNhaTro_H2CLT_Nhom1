@@ -1,7 +1,6 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter
 
 import android.app.AlertDialog
-import android.content.Context
 import android.graphics.Color
 import android.text.format.DateFormat
 import android.util.Log
@@ -13,18 +12,15 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityDanhSachHopDong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HopDongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogChiTietHopDongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemDsHopDongBinding
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentQuanLy
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class HopDongViewHolder(
+class HopDongPhongSapHetHanViewHolder(
     val binding: LayoutItemDsHopDongBinding
 
 ): RecyclerView.ViewHolder(binding.root){
-
-
     fun bind(hopDong: HopDong){
 
 
@@ -99,6 +95,8 @@ class HopDongViewHolder(
     }
 
 
+
+
     private fun chuyenDinhDangNgay(ngay: String):String {
         val sdfNgay = SimpleDateFormat("yyyy-MM-dd")
         val dateFormatNgayO = DateFormat()
@@ -107,32 +105,21 @@ class HopDongViewHolder(
         return ngay
     }
 }
-class HopDongAdapter (val listHopDong: List<HopDong>): RecyclerView.Adapter<HopDongViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HopDongViewHolder {
+class HopDongPhongSapHetHanAdapter (val listHopDong: List<HopDong>): RecyclerView.Adapter<HopDongPhongSapHetHanViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HopDongPhongSapHetHanViewHolder {
         val inflater= LayoutInflater.from(parent.context)
         val binding = LayoutItemDsHopDongBinding.inflate(inflater,parent,false)
 
-        return  HopDongViewHolder(binding)
+        return  HopDongPhongSapHetHanViewHolder(binding)
     }
     override fun getItemCount()=listHopDong.size
-    override fun onBindViewHolder(holder: HopDongViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HopDongPhongSapHetHanViewHolder, position: Int) {
         val hopDong = listHopDong[position]
-
         holder.apply {
 
             bind(hopDong)
-            //updateHopDong(hopDong)
-
-
-
-            //fragment.updateDSHopDong(hopDong)
-
 
 
         }
-
-//        holder.binding.tvDanhSachHopDongTrangThai.setOnClickListener {
-//            activity.updateHopDong(hopDong)
-//        }
     }
 }

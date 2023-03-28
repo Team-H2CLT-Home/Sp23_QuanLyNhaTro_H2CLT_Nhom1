@@ -84,12 +84,12 @@ class PhongDao(context: Context) {
     }
 
     @SuppressLint("Range")
-    fun getPhongChuaCoHopDong(): List<Phong> {
+    fun getPhongChuaCoHopDong(maKhu:String): List<Phong> {
         val list= mutableListOf<Phong>()
         val sql="""
             SELECT DISTINCT *
             FROM Phong
-            WHERE ma_phong NOT IN (SELECT ma_phong FROM Hop_Dong);
+            WHERE ma_phong NOT IN (SELECT ma_phong FROM Hop_Dong) and ${Phong.CLM_MA_KHU} = "$maKhu" 
         """.trimIndent()
         val c=db.rawQuery(sql,null)
 
@@ -111,4 +111,6 @@ class PhongDao(context: Context) {
 
         return list
     }
+
+
 }

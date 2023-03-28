@@ -12,6 +12,12 @@
         android:theme="@style/Theme.QuanLyNhaTro_H2CLT_Nhom1"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ActivityThemDichVu"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ActivityQuanLyDichVu"
+            android:exported="false" />
+        <activity
             android:name=".activity.ActivityPhongTrong"
             android:exported="false" />
 
@@ -20,10 +26,11 @@
             android:exported="false" />
         <activity
             android:name=".activity.ActivityManHinhChinhChuTro"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activity.ActivityTaoHopDong"
-            android:exported="true"></activity>
+            android:exported="true"
+            ></activity
         <activity
             android:name=".activity.ActivityDoanhThu"
             android:exported="false" />
@@ -103,13 +110,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.ActivityDangNhap"
-            android:exported="false" >
-        </activity>
+
         <activity
             android:name=".activity.ActivityDanhSachHoaDon"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
