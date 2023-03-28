@@ -3,6 +3,7 @@ package h2clt.fpt.quanlynhatro_h2clt_nhom1.database
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 
 class PhongDao(context: Context) {
@@ -89,7 +90,7 @@ class PhongDao(context: Context) {
         val sql="""
             SELECT DISTINCT *
             FROM Phong
-            WHERE ma_phong NOT IN (SELECT ma_phong FROM Hop_Dong) and ${Phong.CLM_MA_KHU} = "$maKhu" 
+            WHERE ma_phong NOT IN (SELECT ma_phong FROM Hop_Dong WHERE ${HopDong.CLM_HIEU_LUC_HOP_DONG} = 1) and ${Phong.CLM_MA_KHU} = "$maKhu" 
         """.trimIndent()
         val c=db.rawQuery(sql,null)
 
@@ -111,6 +112,8 @@ class PhongDao(context: Context) {
 
         return list
     }
+
+
 
 
 }

@@ -30,6 +30,22 @@ class NguoiDungDao(context: Context) {
         return db.insert(NguoiDung.TB_NAME,null,values)
     }
 
+    fun updateNguoiDung(nguoiDung: NguoiDung):Int{
+        val values=ContentValues()
+        values.apply {
+            put(NguoiDung.CLM_MA_NGUOI_DUNG,nguoiDung.ma_nguoi_dung)
+            put(NguoiDung.CLM_HO_TEN_NGUOI_DUNG,nguoiDung.ho_ten_nguoi_dung)
+            put(NguoiDung.CLM_CCCD,nguoiDung.cccd)
+            put(NguoiDung.CLM_NAM_SINH,nguoiDung.nam_sinh)
+            put(NguoiDung.CLM_QUE_QUAN_NGUOI_DUNG,nguoiDung.que_quan)
+            put(NguoiDung.CLM_SDT_NGUOI_DUNG,nguoiDung.sdt_nguoi_dung)
+            put(NguoiDung.CLM_TRANG_THAI_CHU_HOP_DONG,nguoiDung.trang_thai_chu_hop_dong)
+            put(NguoiDung.CLM_TRANG_THAI_O,nguoiDung.trang_thai_o)
+            put(NguoiDung.CLM_MA_PHONG,nguoiDung.ma_phong)
+        }
+        return db.update(NguoiDung.TB_NAME,values,"${NguoiDung.CLM_MA_NGUOI_DUNG}=?", arrayOf(nguoiDung.ma_nguoi_dung))
+    }
+
     @SuppressLint("Range")
     fun getAllInNguoiDung():List<NguoiDung>{
       val list= mutableListOf<NguoiDung>()
@@ -216,7 +232,7 @@ class NguoiDungDao(context: Context) {
     fun getNguoiDungByMaPhong(maPhong:String):List<NguoiDung>{
         val list= mutableListOf<NguoiDung>()
         val sql="""
-            select * from ${NguoiDung.TB_NAME} WHERE ${NguoiDung.CLM_MA_PHONG} = "${maPhong}"
+            select * from ${NguoiDung.TB_NAME} WHERE ${NguoiDung.CLM_MA_PHONG} = "${maPhong}" AND ${NguoiDung.CLM_TRANG_THAI_O} = 1
         """.trimIndent()
 
         val c=db.rawQuery(sql, null)
@@ -237,6 +253,28 @@ class NguoiDungDao(context: Context) {
             }while (c.moveToNext())
         }
         return list
+    }
+    @SuppressLint("Range")
+    fun getTenNguoiDungByMaPhong(maPhong:String):NguoiDung? {
+        val sql = """
+            select * from ${NguoiDung.TB_NAME} WHERE ${NguoiDung.CLM_MA_PHONG} = "${maPhong}"
+        """.trimIndent()
+
+        val c = db.rawQuery(sql, null)
+        if (c.moveToFirst()) {
+            return NguoiDung(
+                ma_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_NGUOI_DUNG)),
+                ho_ten_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_HO_TEN_NGUOI_DUNG)),
+                cccd = c.getString(c.getColumnIndex(NguoiDung.CLM_CCCD)),
+                sdt_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_SDT_NGUOI_DUNG)),
+                trang_thai_chu_hop_dong = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_CHU_HOP_DONG)),
+                que_quan = c.getString(c.getColumnIndex(NguoiDung.CLM_QUE_QUAN_NGUOI_DUNG)),
+                trang_thai_o = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_O)),
+                ma_phong = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_PHONG)),
+                nam_sinh = c.getString(c.getColumnIndex(NguoiDung.CLM_NAM_SINH))
+            )
+        }
+        return null
     }
 
     @SuppressLint("Range")

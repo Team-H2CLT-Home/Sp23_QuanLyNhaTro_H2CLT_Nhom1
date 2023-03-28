@@ -26,7 +26,6 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HopDongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityActivitytaoHopDongMoiBinding
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDanhSachHopDongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogThemKhachThueHopDongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
@@ -219,7 +218,6 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
                 mDayNow = c!!.get(Calendar.DAY_OF_MONTH)
                 val cNow = GregorianCalendar(mYearNow, mMonthNow, mDayNow)
                 val maHopDong = UUID.randomUUID().toString()
-
                 // Validate Ngay bat dau o
                 try {
                     // Kiểm tra dữ liệu nhập vào
@@ -260,10 +258,11 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
                     ma_nguoi_dung = maND,
                     thoi_han = binding.edThoiHan.text.toString().toInt(),
                     ngay_o = chuyenDinhDangNgay(binding.edNgayBatDauO.text),
-                    ngay_hop_dong = "2023-03-28",
+                    ngay_hop_dong = "2023-04-01",
                     tien_coc = binding.edTienCoc.text.toString().toInt(),
                     anh_hop_dong = "aaaa",
                     trang_thai_hop_dong = if (binding.chkTrangThai.isChecked) 1 else 0,
+                    hieu_luc_hop_dong = 1,
                     ngay_lap_hop_dong = simpleDateFormatNow.format(cNow!!.time)
                 )
                 val dao = HopDongDao(this).insertHopDong(hopDong)

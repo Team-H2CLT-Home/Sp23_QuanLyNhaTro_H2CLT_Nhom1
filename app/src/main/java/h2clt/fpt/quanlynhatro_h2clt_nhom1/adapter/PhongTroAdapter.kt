@@ -28,7 +28,7 @@ class PhongTroViewHolder(
                 LoaiDichVuPhongDao(binding.root.context).getAllInLoaiDichVuByPhong(
                     it1.ma_phong)
             }
-            Toast.makeText(binding.root.context, listLoaiDichVu?.size.toString(), Toast.LENGTH_LONG).show()
+            Toast.makeText(binding.root.context, listLoaiDichVu?.get(0)?.ten_loai_dich_vu, Toast.LENGTH_LONG).show()
         }
     }
 }

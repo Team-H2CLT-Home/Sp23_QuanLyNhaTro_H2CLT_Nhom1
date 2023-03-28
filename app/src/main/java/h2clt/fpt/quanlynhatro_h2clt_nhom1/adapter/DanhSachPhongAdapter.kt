@@ -11,7 +11,7 @@ class DanhSachPhongViewHolder(
     val binding: LayoutItemPhongBinding
 ): RecyclerView.ViewHolder(binding.root){
     fun bind(phong: Phong){
-        binding.tvTenPhong.text = phong.ten_phong.toString()
+        binding.tvTenPhong.text = phong.ten_phong
         binding.tvGiaThue.text = phong.gia_thue.toString()
         binding.chkTrangThaiPhongTrong.isChecked = phong.trang_thai_phong==0
         binding.tvGioiHanNguoiO.text = "Tối đa: "+phong.so_nguoi_o.toString()+" người"

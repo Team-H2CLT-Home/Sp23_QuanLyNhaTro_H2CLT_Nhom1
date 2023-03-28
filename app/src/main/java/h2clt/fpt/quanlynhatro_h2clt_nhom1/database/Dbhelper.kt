@@ -43,7 +43,9 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${LoaiDichVu.CLM_GIA_DICH_VU} integer NOT NULL,
             ${LoaiDichVu.CLM_MA_PHONG} text NOT NULL ,
             ${LoaiDichVu.CLM_TRANG_THAI_LOAI_DICH_VU} Integer NOT NULL,
-            FOREIGN KEY(${LoaiDichVu.CLM_MA_PHONG})REFERENCES ${Phong.TB_NAME}(${Phong.CLM_MA_PHONG}));
+            ${LoaiDichVu.CLM_MA_KHU_TRO} text not null,
+            FOREIGN KEY(${LoaiDichVu.CLM_MA_KHU_TRO}) REFERENCES ${KhuTro.TB_NAME}(${KhuTro.CLM_MA_KHU_TRO}),
+            FOREIGN KEY(${LoaiDichVu.CLM_MA_PHONG}) REFERENCES ${Phong.TB_NAME}(${Phong.CLM_MA_PHONG}));
         """.trimIndent()
         db?.execSQL(loai_dich_vu)
 
@@ -72,6 +74,7 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${HoaDon.CLM_MIEN_GIAM} integer NOT NULL,
             ${HoaDon.CLM_GIA_DICH_VU} integer not null,
             ${HoaDon.CLM_MA_PHONG} text NOT NULL,
+            ${HoaDon.CLM_TONG} integer NOT NULL,
             FOREIGN KEY (${HoaDon.CLM_MA_PHONG} ) REFERENCES ${Phong.TB_NAME}(${Phong.CLM_MA_PHONG}));
         """.trimIndent()
         db?.execSQL(hoa_don)
@@ -101,6 +104,7 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${HopDong.CLM_ANH_HOP_DONG}  text NOT NULL,
             ${HopDong.CLM_TIEN_COC} long NOT NULL,
             ${HopDong.CLM_TRANG_THAI_HOP_DONG} integer NOT NULL,
+            ${HopDong.CLM_HIEU_LUC_HOP_DONG} integer NOT NULL,
             ${HopDong.CLM_MA_PHONG} text NOT NULL,
             ${HopDong.CLM_MA_NGUOI_DUNG} text NOT NULL,
             FOREIGN KEY (${HopDong.CLM_MA_PHONG} ) REFERENCES ${Phong.TB_NAME}(${Phong.CLM_MA_PHONG}),
@@ -119,6 +123,6 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
         db?.execSQL(thong_bao)
     }
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("Not yet implemented")
+
     }
 }

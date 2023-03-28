@@ -8,7 +8,7 @@
     android:background="@color/mauNenApp"
     >
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tbTaoHoaDon"
+        android:id="@+id/tbTaoHoaDon1"
         style="@style/toolBar"
         app:title="@string/tao_hoa_don"
 
@@ -176,6 +176,7 @@
                         android:id="@+id/edSoDie"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
                         android:background="@drawable/boder_tron_colorwhite"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -227,6 +228,7 @@
                         android:id="@+id/edKhoiNuoc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
                         android:background="@drawable/boder_tron_colorwhite"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -278,6 +280,7 @@
                         android:id="@+id/edGiaDichVu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clickable="false"
                         android:background="@drawable/boder_tron_colorwhite"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -329,6 +332,7 @@
                         android:id="@+id/edTienMienGiam"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
                         android:background="@drawable/boder_tron_colorwhite"
                         />
                 </com.google.android.material.textfield.TextInputLayout>

@@ -2,10 +2,15 @@ package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import com.google.android.material.tabs.TabLayoutMediator
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_PHONG_HOA_DON_KEY
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.ViewpagerDanhSachHoaDonAdapter
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HoaDonDao
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDanhSachHoaDonBinding
 
 
@@ -16,8 +21,13 @@ class ActivityDanhSachHoaDon : AppCompatActivity() {
         binding = ActivityDanhSachHoaDonBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.tbDanhSachHoaDon
+
         setSupportActionBar(binding.tbDanhSachHoaDon)
-        val ab = getSupportActionBar()
+        val ab = supportActionBar
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setDisplayShowHomeEnabled(true);
+        }
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
         val adapter = ViewpagerDanhSachHoaDonAdapter(supportFragmentManager, lifecycle)
@@ -41,7 +51,7 @@ class ActivityDanhSachHoaDon : AppCompatActivity() {
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.getItemId();
         if (id==android.R.id.home)
-            chuyenActivity();
+            finish()
         return super.onOptionsItemSelected(item);
     }
 }

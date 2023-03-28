@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.doOnTextChanged
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.LoaiDichVuPhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
@@ -29,7 +30,7 @@ class ActivityTaoPhongKhiThemKhu : AppCompatActivity() {
        Triple("Tính theo đồng hồ(Phổ biến)", 1, 3000, )
     )
     private val listDichVuNuoc= listOf<Triple<String, Int,Int>>(
-        Triple("Miễn phí/Không sử dung",0, 0), Triple("Tính theo đầu người",2,70_000), Triple("Tính theo phòng",3, 100_00),
+        Triple("Miễn phí/Không sử dung",0, 0), Triple("Tính theo đầu người",2,70_000), Triple("Tính theo phòng",3, 100_000),
         Triple("Tính theo đồng hồ(Phổ biến)", 1 ,20_000, )
     )
     private val listDichVuRac= listOf<Triple<String, Int,Int>>(
@@ -53,6 +54,7 @@ class ActivityTaoPhongKhiThemKhu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivityTaoPhongKhiThemKhuBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val srf=getSharedPreferences(FILE_NAME, MODE_PRIVATE)
         val phongDao=PhongDao(this)
         val loaiDichVuPhongDao=LoaiDichVuPhongDao(this)
         val soLuongPhong=intent.getIntExtra(SO_LUONG_PHONG_KEY, 0)
@@ -67,6 +69,7 @@ class ActivityTaoPhongKhiThemKhu : AppCompatActivity() {
             val listText=listDichVuDien.map { it.first }
             val arrayAdapter=ArrayAdapter(this, R.layout.layout_item_chon_dich_vu, listText)
             dialog.listLoaiDichVu.adapter=arrayAdapter
+            dialog.tvDichVuPhong.text="Dịch vụ điên"
             dialog.listLoaiDichVu.setOnItemClickListener { adapterView, view, i, l ->
                 binding.tvDichVuDien.text=listDichVuDien[i].first
                 trangThaiDichVuDien=listDichVuDien[i].second
@@ -85,11 +88,11 @@ class ActivityTaoPhongKhiThemKhu : AppCompatActivity() {
             val listText=listDichVuNuoc.map { it.first }
             val arrayAdapter=ArrayAdapter(this, R.layout.layout_item_chon_dich_vu, listText)
             dialog.listLoaiDichVu.adapter=arrayAdapter
+            dialog.tvDichVuPhong.text="Dịch vụ nước"
             dialog.listLoaiDichVu.setOnItemClickListener { adapterView, view, i, l ->
                 binding.tvDichVuNuoc.text=listDichVuNuoc[i].first
                 trangThaiDichVuNuoc=listDichVuNuoc[i].second
                 giaNuoc=listDichVuNuoc[i].third
-                Toast.makeText(this, "$trangThaiDichVuNuoc $giaNuoc", Toast.LENGTH_SHORT).show()
                 build.dismiss()
             }
             dialog.btnHuyLoaiDV.setOnClickListener {
@@ -105,6 +108,7 @@ class ActivityTaoPhongKhiThemKhu : AppCompatActivity() {
             val listText=listDichVuRac.map { it.first }
             val arrayAdapter=ArrayAdapter(this, R.layout.layout_item_chon_dich_vu, listText)
             dialog.listLoaiDichVu.adapter=arrayAdapter
+            dialog.tvDichVuPhong.text="Dịch vụ rác"
             dialog.listLoaiDichVu.setOnItemClickListener { adapterView, view, i, l ->
                 binding.tvTienRac.text=listDichVuRac[i].first
                 trangThaiDichVuRac=listDichVuRac[i].second
@@ -124,6 +128,7 @@ class ActivityTaoPhongKhiThemKhu : AppCompatActivity() {
             val listText=listDichVuMang.map { it.first }
             val arrayAdapter=ArrayAdapter(this, R.layout.layout_item_chon_dich_vu, listText)
             dialog.listLoaiDichVu.adapter=arrayAdapter
+            dialog.tvDichVuPhong.text="Dịch vụ mạng/Internet"
             dialog.listLoaiDichVu.setOnItemClickListener { adapterView, view, i, l ->
                 binding.tvDichVuMang.text=listDichVuMang[i].first
                 trangThaiDichVuMang=listDichVuMang[i].second
@@ -157,28 +162,32 @@ class ActivityTaoPhongKhiThemKhu : AppCompatActivity() {
                     trang_thai_loai_dich_vu = trangThaiDichVuDien,
                     ten_loai_dich_vu = "Tiền điện",
                     ma_loai_dich_vu = UUID.randomUUID().toString(),
-                    gia_dich_vu = giaDien
+                    gia_dich_vu = giaDien,
+                    ma_khu_tro = maKhu
                 )
                 val nuoc=LoaiDichVu(
                     ma_phong = idPhong,
                     trang_thai_loai_dich_vu = trangThaiDichVuNuoc,
                     ten_loai_dich_vu = "Tiền nước",
                     ma_loai_dich_vu = UUID.randomUUID().toString(),
-                    gia_dich_vu = giaNuoc
+                    gia_dich_vu = giaNuoc,
+                    ma_khu_tro = maKhu
                 )
                 val rac=LoaiDichVu(
                     ma_phong = idPhong,
                     trang_thai_loai_dich_vu = trangThaiDichVuRac,
                     ten_loai_dich_vu = "Tiền rác",
                     ma_loai_dich_vu = UUID.randomUUID().toString(),
-                    gia_dich_vu = giaRac
+                    gia_dich_vu = giaRac,
+                    ma_khu_tro = maKhu
                 )
                 val mang=LoaiDichVu(
                     ma_phong = idPhong,
                     trang_thai_loai_dich_vu = trangThaiDichVuMang,
-                    ten_loai_dich_vu = "Tiền nước",
+                    ten_loai_dich_vu = "Tiền mạng",
                     ma_loai_dich_vu = UUID.randomUUID().toString(),
-                    gia_dich_vu = giaMang
+                    gia_dich_vu = giaMang,
+                    ma_khu_tro = maKhu
                 )
                 phongDao.insertPhong(phong)
                 loaiDichVuPhongDao.insertLoaiDichVuPhong(dien)

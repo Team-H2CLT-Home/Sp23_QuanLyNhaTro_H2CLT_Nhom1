@@ -44,7 +44,7 @@ class FragmentQuanLy:Fragment() {
             startActivity(intent)
         }
         binding.taoHoaDon.setOnClickListener {
-            val intent = Intent(context, FragmentTaoHoaDon::class.java)
+            val intent = Intent(context, ActivityTaoHoaDon::class.java)
             startActivity(intent)
         }
         binding.dsPhongThue.setOnClickListener {
@@ -64,11 +64,15 @@ class FragmentQuanLy:Fragment() {
             val intent = Intent(context, ActivityDanhSachHopDong::class.java)
             startActivity(intent)
         }
+        binding.quanLyDichVu.setOnClickListener {
+            val intent = Intent(context, ActivityQuanLyDichVu::class.java)
+            startActivity(intent)
+        }
         return binding.root
     }
 
     private fun updateHopDong() {
-            listHopDong = HopDongDao(binding.root.context).getAllInHopDongByMaKhu(maKhu)
+            listHopDong = HopDongDao(binding.root.context).getAllInHopDongByMaKhu(maKhu,1)
             for(i in 0 until  listHopDong.size){
                 val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
 
@@ -126,6 +130,7 @@ class FragmentQuanLy:Fragment() {
             tien_coc = hopDong.tien_coc,
             anh_hop_dong = hopDong.anh_hop_dong,
             trang_thai_hop_dong = 0,
+            hieu_luc_hop_dong = hopDong.hieu_luc_hop_dong,
             ngay_lap_hop_dong = hopDong.ngay_lap_hop_dong
         )
         HopDongDao(binding.root.context).updateHopDong(hopDongNew)
@@ -141,6 +146,7 @@ class FragmentQuanLy:Fragment() {
             tien_coc = hopDong.tien_coc,
             anh_hop_dong = hopDong.anh_hop_dong,
             trang_thai_hop_dong = 2,
+            hieu_luc_hop_dong = hopDong.hieu_luc_hop_dong,
             ngay_lap_hop_dong = hopDong.ngay_lap_hop_dong
         )
         HopDongDao(binding.root.context).updateHopDong(hopDongNew)
