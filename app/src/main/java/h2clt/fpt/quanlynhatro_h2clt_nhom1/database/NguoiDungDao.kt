@@ -362,6 +362,10 @@ class NguoiDungDao(context: Context) {
         }
         return list
     }
+
+
+
+
     @SuppressLint("Range")
     fun getListTrangThaiHDDungByMaPhong(id: String):List<NguoiDung>{
         val list= mutableListOf<NguoiDung>()
