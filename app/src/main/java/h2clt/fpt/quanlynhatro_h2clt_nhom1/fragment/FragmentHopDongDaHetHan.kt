@@ -1,6 +1,7 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityKetThucHopDong
@@ -103,11 +105,7 @@ class FragmentHopDongDaHetHan : Fragment() {
                 android.text.format.DateFormat.format("dd/MM/yyyy", objDate) as String
             dialog.edNgayKetThucHopDongMoi.setText(ngayBatDauO)
         } catch (ex: Exception) {
-            Toast.makeText(
-                binding.root.context,
-                "Ngày kết thúc không đúng định dạng(dd/MM/yyyy)",
-                Toast.LENGTH_SHORT
-            ).show()
+            thongBaoLoi("Ngày kết thúc không đúng định dạng(dd/MM/yyyy)")
             return
         }
         val hopDongNew = HopDong(
@@ -125,14 +123,14 @@ class FragmentHopDongDaHetHan : Fragment() {
         )
         var update = HopDongDao(binding.root.context).updateHopDong(hopDongNew)
         if (update>0){
-            Toast.makeText(
-                binding.root.context,
-                "Gia hạn thành công",
-                Toast.LENGTH_SHORT
-            ).show()
-            reLoadList()
-            builder.dismiss()
-
+//            Toast.makeText(
+//                binding.root.context,
+//                "Gia hạn thành công",
+//                Toast.LENGTH_SHORT
+//            ).show()
+            thongBaoThanhCong("Gia hạn hợp đồng thành công!",builder)
+        }else{
+            thongBaoLoi("Gia hạn không thành công!")
         }
     }
 
@@ -169,5 +167,26 @@ class FragmentHopDongDaHetHan : Fragment() {
         //bundle.putString("")
         intent.putExtra("hopDong",hopDong)
         startActivity(intent)
+    }
+
+    fun thongBaoLoi(loi : String){
+        val bundle = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        bundle.setTitle("Thông Báo Lỗi")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
+    }
+    fun thongBaoThanhCong(loi: String, builder: AlertDialog){
+        val bundle = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        bundle.setTitle("Thông Báo")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            reLoadList()
+            bundle.setCancelable(true)
+            builder.dismiss()
+        })
+        bundle.show()
     }
 }
