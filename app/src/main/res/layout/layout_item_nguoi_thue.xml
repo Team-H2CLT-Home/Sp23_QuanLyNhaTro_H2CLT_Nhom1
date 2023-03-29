@@ -12,6 +12,7 @@
         android:layout_marginLeft="13dp"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
+        android:backgroundTint="#F6EAE3"
         app:cardCornerRadius="10dp"
         >
         <LinearLayout
