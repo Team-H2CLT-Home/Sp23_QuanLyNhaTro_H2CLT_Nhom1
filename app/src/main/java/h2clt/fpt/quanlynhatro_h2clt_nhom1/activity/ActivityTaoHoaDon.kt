@@ -13,13 +13,11 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.DanhSachPhongDaOAdapter
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HoaDonDao
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.LoaiDichVuPhongDao
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.*
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDanhSachTaoHoaDonBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentTaoHoaDonBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HoaDon
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 import java.text.SimpleDateFormat
@@ -28,7 +26,7 @@ import java.util.*
 const val Ma_PHONG_KEY = "Ma Phong"
 class ActivityTaoHoaDon : AppCompatActivity() {
     private lateinit var binding: ActivityDanhSachTaoHoaDonBinding
-    var list = mutableListOf<NguoiDung>()
+    var list = mutableListOf<HopDong>()
     var maKhu = ""
 
 
@@ -45,10 +43,10 @@ class ActivityTaoHoaDon : AppCompatActivity() {
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
 
-        val phongDao= NguoiDungDao(binding.root.context)
+        val phongDao= HopDongDao(binding.root.context)
         val srf=binding.root.context.getSharedPreferences(FILE_NAME, Activity.MODE_PRIVATE)
         maKhu= srf.getString(MA_KHU_KEY, "").toString()
-        list= phongDao.getAllInNguoiDungByMaKhu(maKhu) as MutableList<NguoiDung>
+        list= phongDao.getAllInHopDongByMaKhu(maKhu) as MutableList<HopDong>
 
         val danhSachPhongDaOAdapter = DanhSachPhongDaOAdapter(list)
         binding.recActivityTaoHopDong1.adapter = danhSachPhongDaOAdapter

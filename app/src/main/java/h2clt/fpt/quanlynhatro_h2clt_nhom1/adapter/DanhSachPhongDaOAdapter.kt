@@ -12,6 +12,7 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemPhongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemPhongDangOBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentTaoHoaDon
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 const val MA_PHONG_HOA_DON_KEY="ma phong de lay hoa don"
@@ -19,8 +20,8 @@ const val MA_PHONG_HOA_DON_KEY="ma phong de lay hoa don"
 class DanhSachPhongDaOViewHolder(
     val binding: LayoutItemPhongDangOBinding
 ): RecyclerView.ViewHolder(binding.root){
-    fun bind(phong: NguoiDung){
-        if (phong.trang_thai_o == 1){
+    fun bind(phong: HopDong){
+        if (phong.trang_thai_hop_dong == 1){
             val maPhong = PhongDao(binding.root.context).getPhongById(phong.ma_phong)
             binding.tvTenPhong.text = maPhong?.ten_phong
             binding.tvGiaThue.text = maPhong?.gia_thue.toString()
@@ -42,7 +43,7 @@ fun manHinhHoaDon(context: Context, id:String){
         context.startActivity(intent)
 }
 class DanhSachPhongDaOAdapter(
-    val list:List<NguoiDung>
+    val list:List<HopDong>
 ):RecyclerView.Adapter<DanhSachPhongDaOViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DanhSachPhongDaOViewHolder {
         val inflater = LayoutInflater.from(parent.context)
