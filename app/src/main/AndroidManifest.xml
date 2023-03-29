@@ -20,7 +20,7 @@
         <activity
             android:name=".activity.ActivityPhongTrong"
             android:exported="false" />
-
+        <activity
             android:name=".activity.ActivitySuaDichVu"
             android:exported="false" />
         <activity
@@ -28,9 +28,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.ActivityQuanLyDichVu"
-            android:exported="false" />
-        <activity
-            android:name=".activity.ActivityPhongTrong"
             android:exported="false" />
         <activity
             android:name=".activity.ActivityDanhSachPhong"

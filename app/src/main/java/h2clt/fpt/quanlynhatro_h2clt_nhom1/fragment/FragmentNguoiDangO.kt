@@ -153,6 +153,8 @@ class FragmentNguoiDangO: Fragment() {
                         )
                         val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
                         if (dao > 0) {
+                            PhongDao(binding.root.context).updateTrangThaiPhongThanhDangO(maPhong)
+
                             Snackbar.make(it, "Thêm người dùng thành công", Toast.LENGTH_SHORT).show()
                         } else {
                             Snackbar.make(it, "Thêm không thành công", Toast.LENGTH_SHORT).show()
@@ -215,6 +217,9 @@ class FragmentNguoiDangO: Fragment() {
         binding.rcyNguoiDangO.adapter=nguoiThueAdapter
         binding.rcyNguoiDangO.layoutManager=LinearLayoutManager(context)
     }
-
+//    private fun updateNDTrongPhong(ma:Phong):Int {
+//        val update = NguoiDungDao(binding.root.context).updateNguoiDung(nguoiDungNew)
+//        return update
+//    }
 
 }
