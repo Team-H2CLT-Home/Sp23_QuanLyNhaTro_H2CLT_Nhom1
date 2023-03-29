@@ -43,7 +43,8 @@ class FragmentNguoiDangO: Fragment() {
         // Inflate the layout for this fragment
         val srf = binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
         maKhu = srf.getString(MA_KHU_KEY, "")!!
-        listNguoiDung=NguoiDungDao(requireActivity()).getAllInNguoiDungByMaKhu(maKhu)
+//        listNguoiDung=NguoiDungDao(requireActivity()).getAllInNguoiDungByMaKhu(maKhu)
+        listNguoiDung=NguoiDungDao(requireActivity()).getAllInNguoiDangOByMaKhu(maKhu)
 //        Toast.makeText(activity, maKhu, Toast.LENGTH_SHORT).show()
         //search
         binding.searchTenPhong.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
@@ -92,48 +93,48 @@ class FragmentNguoiDangO: Fragment() {
                     &&dialog.edSDTThemNguoiDung.text.toString().isNotBlank()&&dialog.edCCCDThemNguoiDung.text.toString().isNotBlank()
                     &&dialog.edQueQuanThemNguoiDung.text.toString().isNotBlank()){
                     //check ho ten
-                    val hoTen =  dialog.edHoTenThemNguoiDung.text.toString()
-                    val kiemTraHoTen = ("^[a-zA-Z]")
-                    val pattern3 = Pattern.compile(kiemTraHoTen)
-                    val matcher3 = pattern3.matcher(hoTen)
-                    if(!matcher3.find()){
-                        thongBaoLoi("Nhập lại họ tên khách thuê")
-                        return@setOnClickListener
-
-                    }
-                    ///kiem tra ngay
-                    try{
-                        val spf = SimpleDateFormat("dd/MM/yyyy")
-                        val objDate:Date = spf.parse(dialog.edNgaySinhThemNguoiDung.text.toString().trim())
-                        val dateFormat = android.text.format.DateFormat.format("dd-MM-yyyy",objDate)
-                        val ngay: String = dateFormat.toString()
-//                        val nguoiDung:NguoiDung
-////                        nguoiDung.nam_sinh(ngay)
-
-                    }catch (e:java.lang.Exception){
-                        thongBaoLoi("Ngày sinh không đúng định dạng dd/MM/yyyy")
-                        return@setOnClickListener
-                    }
-                    //check sdt
-                    val sdt =  dialog.edSDTThemNguoiDung.text.toString()
-                    val kiemTraSDT = ("^(0)+[0-9]{9}$")
-                    val pattern1 = Pattern.compile(kiemTraSDT)
-                    val matcher1 = pattern1.matcher(sdt)
-                    if(!matcher1.find()){
-                        thongBaoLoi("Nhập lại số điện thoại khách thuê")
-                        return@setOnClickListener
-
-                    }
-                    //check cccd
-                    val cccd =  dialog.edCCCDThemNguoiDung.text.toString()
-                    val kiemTraCCCD = ("^(0)+[0-9]{11}$")
-                    val pattern2 = Pattern.compile(kiemTraCCCD)
-                    val matcher2 = pattern2.matcher(cccd)
-                    if(!matcher2.find()){
-                        thongBaoLoi("Nhập lại số cccd khách thuê")
-                        return@setOnClickListener
-
-                    }
+//                    val hoTen =  dialog.edHoTenThemNguoiDung.text.toString()
+//                    val kiemTraHoTen = ("^[a-zA-Z]")
+//                    val pattern3 = Pattern.compile(kiemTraHoTen)
+//                    val matcher3 = pattern3.matcher(hoTen)
+//                    if(!matcher3.find()){
+//                        thongBaoLoi("Nhập lại họ tên khách thuê")
+//                        return@setOnClickListener
+//
+//                    }
+//                    ///kiem tra ngay
+//                    try{
+//                        val spf = SimpleDateFormat("dd/MM/yyyy")
+//                        val objDate:Date = spf.parse(dialog.edNgaySinhThemNguoiDung.text.toString().trim())
+//                        val dateFormat = android.text.format.DateFormat.format("dd-MM-yyyy",objDate)
+//                        val ngay: String = dateFormat.toString()
+////                        val nguoiDung:NguoiDung
+//////                        nguoiDung.nam_sinh(ngay)
+//
+//                    }catch (e:java.lang.Exception){
+//                        thongBaoLoi("Ngày sinh không đúng định dạng dd/MM/yyyy")
+//                        return@setOnClickListener
+//                    }
+//                    //check sdt
+//                    val sdt =  dialog.edSDTThemNguoiDung.text.toString()
+//                    val kiemTraSDT = ("^(0)+[0-9]{9}$")
+//                    val pattern1 = Pattern.compile(kiemTraSDT)
+//                    val matcher1 = pattern1.matcher(sdt)
+//                    if(!matcher1.find()){
+//                        thongBaoLoi("Nhập lại số điện thoại khách thuê")
+//                        return@setOnClickListener
+//
+//                    }
+//                    //check cccd
+//                    val cccd =  dialog.edCCCDThemNguoiDung.text.toString()
+//                    val kiemTraCCCD = ("^(0)+[0-9]{11}$")
+//                    val pattern2 = Pattern.compile(kiemTraCCCD)
+//                    val matcher2 = pattern2.matcher(cccd)
+//                    if(!matcher2.find()){
+//                        thongBaoLoi("Nhập lại số cccd khách thuê")
+//                        return@setOnClickListener
+//
+//                    }
                     val listNguoiDungByMaPhong = NguoiDungDao(requireActivity()).getListNguoiDungByMaPhong(maPhong)
                     val soNguoiO = NguoiDungDao(requireActivity()).getSoNguoiOByMaPhong(maPhong)
 //                    Toast.makeText(binding.root.context, soNguoiO, Toast.LENGTH_SHORT).show()
@@ -208,7 +209,8 @@ class FragmentNguoiDangO: Fragment() {
     }
     private fun reload(){
         val nguoiDungDao= activity?.let { NguoiDungDao(it) }!!
-        listNguoiDung=nguoiDungDao.getAllInNguoiDungByMaKhu(maKhu)
+//        listNguoiDung=nguoiDungDao.getAllInNguoiDungByMaKhu(maKhu)
+        listNguoiDung=nguoiDungDao.getAllInNguoiDangOByMaKhu(maKhu)
         val nguoiThueAdapter=NguoiThueAdapter(listNguoiDung)
         binding.rcyNguoiDangO.adapter=nguoiThueAdapter
         binding.rcyNguoiDangO.layoutManager=LinearLayoutManager(context)

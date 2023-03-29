@@ -255,7 +255,7 @@ class NguoiDungDao(context: Context) {
         return list
     }
     @SuppressLint("Range")
-    fun getTenNguoiDungByMaPhong(maPhong:String):NguoiDung? {
+    fun getTenNguoiDungByMaPhong1(maPhong:String):NguoiDung? {
         val sql = """
             select * from ${NguoiDung.TB_NAME} WHERE ${NguoiDung.CLM_MA_PHONG} = "${maPhong}"
         """.trimIndent()
@@ -341,7 +341,7 @@ class NguoiDungDao(context: Context) {
     fun getListNguoiDungByMaPhong(id: String):List<NguoiDung>{
         val list= mutableListOf<NguoiDung>()
         val sql = """
-            select * from ${NguoiDung.TB_NAME} where ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_PHONG} = "$id"
+            select * from ${NguoiDung.TB_NAME} where ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_PHONG} = "$id" AND ${NguoiDung.TB_NAME}.${NguoiDung.CLM_TRANG_THAI_O} =1
         """.trimIndent()
         val c=db.rawQuery(sql,null)
         if(c.moveToFirst()){
@@ -390,4 +390,97 @@ class NguoiDungDao(context: Context) {
         }
         return list
     }
+
+    ///sua select theo trang thai o
+    @SuppressLint("Range")
+    fun getAllInNguoiDangOByMaKhu(id: String):List<NguoiDung>{
+        val list= mutableListOf<NguoiDung>()
+        val sql = """
+            select * from ${NguoiDung.TB_NAME} join ${Phong.TB_NAME} on ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_PHONG}
+             = ${Phong.TB_NAME}.${Phong.CLM_MA_PHONG} join ${KhuTro.TB_NAME} on ${Phong.TB_NAME}.${Phong.CLM_MA_KHU}
+             = ${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO}
+        where ${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO}="$id" AND ${NguoiDung.TB_NAME}.${NguoiDung.CLM_TRANG_THAI_O} = 1
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            do {
+                val nguoiDung=NguoiDung(
+                    ma_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_NGUOI_DUNG)),
+                    ho_ten_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_HO_TEN_NGUOI_DUNG)),
+                    cccd = c.getString(c.getColumnIndex(NguoiDung.CLM_CCCD)),
+                    nam_sinh = c.getString(c.getColumnIndex(NguoiDung.CLM_NAM_SINH)),
+                    sdt_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_SDT_NGUOI_DUNG)),
+                    que_quan = c.getString(c.getColumnIndex(NguoiDung.CLM_QUE_QUAN_NGUOI_DUNG)),
+                    trang_thai_chu_hop_dong = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_CHU_HOP_DONG)),
+                    trang_thai_o = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_O)),
+                    ma_phong = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_PHONG))
+                )
+                list+=nguoiDung
+            }while (c.moveToNext())
+        }
+        return list
+    }
+    ///sua select theo trang thai o
+    @SuppressLint("Range")
+    fun getAllInNguoiDaOByMaKhu(id: String):List<NguoiDung>{
+        val list= mutableListOf<NguoiDung>()
+        val sql = """
+            select * from ${NguoiDung.TB_NAME} join ${Phong.TB_NAME} on ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_PHONG}
+             = ${Phong.TB_NAME}.${Phong.CLM_MA_PHONG} join ${KhuTro.TB_NAME} on ${Phong.TB_NAME}.${Phong.CLM_MA_KHU}
+             = ${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO}
+        where ${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO}="$id" AND ${NguoiDung.TB_NAME}.${NguoiDung.CLM_TRANG_THAI_O} = 0
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            do {
+                val nguoiDung=NguoiDung(
+                    ma_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_NGUOI_DUNG)),
+                    ho_ten_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_HO_TEN_NGUOI_DUNG)),
+                    cccd = c.getString(c.getColumnIndex(NguoiDung.CLM_CCCD)),
+                    nam_sinh = c.getString(c.getColumnIndex(NguoiDung.CLM_NAM_SINH)),
+                    sdt_nguoi_dung = c.getString(c.getColumnIndex(NguoiDung.CLM_SDT_NGUOI_DUNG)),
+                    que_quan = c.getString(c.getColumnIndex(NguoiDung.CLM_QUE_QUAN_NGUOI_DUNG)),
+                    trang_thai_chu_hop_dong = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_CHU_HOP_DONG)),
+                    trang_thai_o = c.getInt(c.getColumnIndex(NguoiDung.CLM_TRANG_THAI_O)),
+                    ma_phong = c.getString(c.getColumnIndex(NguoiDung.CLM_MA_PHONG))
+                )
+                list+=nguoiDung
+            }while (c.moveToNext())
+        }
+        return list
+    }
+    ///////////////////////////////
+    @SuppressLint("Range")
+    fun getTenNguoiDangOByMaPhong(id:String):String{
+        val sql="""
+            select ${NguoiDung.TB_NAME}.${NguoiDung.CLM_HO_TEN_NGUOI_DUNG} from ${NguoiDung.TB_NAME}
+            JOIN ${HopDong.TB_NAME} ON ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_NGUOI_DUNG} = ${HopDong.TB_NAME}.${HopDong.CLM_MA_NGUOI_DUNG}
+            join ${Phong.TB_NAME} ON ${HopDong.TB_NAME}.${HopDong.CLM_MA_PHONG} = ${Phong.TB_NAME}.${Phong.CLM_MA_PHONG}
+             where ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_PHONG}= "$id" AND ${NguoiDung.TB_NAME}.${NguoiDung.CLM_TRANG_THAI_O} = 1
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            return c.getString(c.getColumnIndex(NguoiDung.CLM_HO_TEN_NGUOI_DUNG))
+        }
+        return "null"
+    }
+    ///////////////////////////////
+    @SuppressLint("Range")
+    fun getTenNguoiDaOByMaPhong(id:String):String{
+        val sql="""
+            select ${NguoiDung.TB_NAME}.${NguoiDung.CLM_HO_TEN_NGUOI_DUNG} from ${NguoiDung.TB_NAME}
+            JOIN ${HopDong.TB_NAME} ON ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_NGUOI_DUNG} = ${HopDong.TB_NAME}.${HopDong.CLM_MA_NGUOI_DUNG}
+            join ${Phong.TB_NAME} ON ${HopDong.TB_NAME}.${HopDong.CLM_MA_PHONG} = ${Phong.TB_NAME}.${Phong.CLM_MA_PHONG}
+             where ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_PHONG}= "$id" AND ${NguoiDung.TB_NAME}.${NguoiDung.CLM_TRANG_THAI_O} = 0
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            return c.getString(c.getColumnIndex(NguoiDung.CLM_HO_TEN_NGUOI_DUNG))
+        }
+        return "null"
+    }
+    //   JOIN ${HopDong.TB_NAME} ON ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_NGUOI_DUNG} = ${HopDong.TB_NAME}.${HopDong.CLM_MA_NGUOI_DUNG}
+//             where ${HopDong.TB_NAME}.${HopDong.CLM_TRANG_THAI_HOP_DONG}= 0
+    //            JOIN ${HopDong.TB_NAME} ON ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_NGUOI_DUNG} = ${HopDong.TB_NAME}.${HopDong.CLM_MA_NGUOI_DUNG}
+//            join ${Phong.TB_NAME} ON ${HopDong.TB_NAME}.${HopDong.CLM_MA_PHONG} = ${Phong.TB_NAME}.${Phong.CLM_MA_PHONG}AND ${NguoiDung.TB_NAME}.${NguoiDung.CLM_TRANG_THAI_O} = 0
 }

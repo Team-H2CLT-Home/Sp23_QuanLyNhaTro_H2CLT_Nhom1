@@ -32,15 +32,15 @@ class NguoiThueViewHolder(
         binding.tvSDT.text = "SĐT: "+nguoiDung.sdt_nguoi_dung.toString()
         binding.tvTenNguoiThue.text = "Họ tên: " +nguoiDung.ho_ten_nguoi_dung.toString()
         binding.edTrangThaiO.isChecked = nguoiDung.trang_thai_o==1
-//        if(binding.tvTenNguoiThue.text == NguoiDungDao(binding.root.context).getNguoiDungByTrangThai(nguoiDung.ma_phong,1)){
-        if(binding.tvTenNguoiThue.text=="Họ tên: "+NguoiDungDao(binding.root.context).getTenNguoiDungByMaPhong(nguoiDung.ma_phong)){
+        if(binding.tvTenNguoiThue.text=="Họ tên: "+NguoiDungDao(binding.root.context).getTenNguoiDangOByMaPhong(nguoiDung.ma_phong)){
             binding.edTrangThaiChuHopDong.isChecked = true
-////            Log.d("aaaa", "getNguoiDungByTrangThai: "+NguoiDungDao(binding.root.context).getNguoiDungByTrangThai(nguoiDung.ma_phong,1))
         }else{
             binding.edTrangThaiChuHopDong.isChecked = false
-
         }
-        Toast.makeText(binding.root.context, NguoiDungDao(binding.root.context).getTenNguoiDungByMaPhong(nguoiDung.ma_phong), Toast.LENGTH_SHORT).show()
+//        if(binding.tvTenNguoiThue.text == NguoiDungDao(binding.root.context).getNguoiDungByTrangThai(nguoiDung.ma_phong,1)){
+
+////  ||binding.tvTenNguoiThue.text=="Họ tên: "+NguoiDungDao(binding.root.context).getTenNguoiDaOByMaPhong(nguoiDung.ma_phong)          Log.d("aaaa", "getNguoiDungByTrangThai: "+NguoiDungDao(binding.root.context).getNguoiDungByTrangThai(nguoiDung.ma_phong,1))
+//        Toast.makeText(binding.root.context, NguoiDungDao(binding.root.context).getTenNguoiDaOByMaPhong(nguoiDung.ma_phong), Toast.LENGTH_SHORT).show()
         binding.layoutChuyenChiTietNguoiThue.setOnClickListener {
             val dialog = DialogChiTietNguoiThueBinding.inflate(LayoutInflater.from(binding.root.context))
             val builder = AlertDialog.Builder(binding.root.context).create()
