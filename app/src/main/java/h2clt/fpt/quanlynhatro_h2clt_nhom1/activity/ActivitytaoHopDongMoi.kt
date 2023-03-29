@@ -126,7 +126,6 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
                         )
                         val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
                         if (dao > 0) {
-                            thongBaoThanhCongNguoiDung("Bạn đã thêm thành công!")
                             onResume()
                             onPause()
                             build.dismiss()
@@ -283,85 +282,6 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
         }
     }
 
-//    private fun updateHopDong() {
-//        listHopDong = HopDongDao(this@ActivitytaoHopDongMoi).getAllInHopDongByMaKhu(maKhu)
-//        for(i in 0 until  listHopDong.size){
-//            val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
-//
-//            //============================
-//            val simpleDateFormatNow = SimpleDateFormat("yyyy-MM-dd")
-//            var mYearNow = 0
-//            var mMonthNow = 0
-//            var mDayNow = 0
-//            val c = Calendar.getInstance() as GregorianCalendar?
-//            mYearNow = (c as Calendar).get(Calendar.YEAR)
-//            mMonthNow = c!!.get(Calendar.MONTH)
-//            mDayNow = c!!.get(Calendar.DAY_OF_MONTH)
-//            val cNow = GregorianCalendar(mYearNow, mMonthNow, mDayNow)
-//            for (y in 0..7) {
-//                if (y == 0) {
-//                    if (dateFormat.format(tinhNgaySapHetHanHopDong(listHopDong.get(i), y)!!.time) <= simpleDateFormatNow.format(cNow!!.time)) {
-//                        updateHDHetHan(listHopDong.get(i))
-//                        //reloadDanhSanhHD(binding)
-//                        //reloadDSHopDong()
-//
-//                    }
-//                } else {
-//                    if (dateFormat.format(tinhNgaySapHetHanHopDong(listHopDong.get(i), y)!!.time) == simpleDateFormatNow.format(cNow!!.time)) {
-//                        updateHDSapHetHan(listHopDong.get(i))
-//                        //reloadDSHopDong()
-//
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    fun tinhNgaySapHetHanHopDong(hopDong: HopDong, a:Int): GregorianCalendar {
-//        val ngayHetHan = hopDong.ngay_hop_dong
-//        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
-//        val newDate = dateFormat.parse(ngayHetHan)
-//        val calendar = Calendar.getInstance()
-//        if (newDate != null) {
-//            calendar.time = newDate
-//        }
-//
-//        val monthNgaySapHetHan = calendar.get(Calendar.MONTH)
-//        val dayNgaySapHetHan = calendar.get(Calendar.DAY_OF_MONTH) - a
-//        val yearNgaySapHetHan = calendar.get(Calendar.YEAR)
-//        return GregorianCalendar(yearNgaySapHetHan, monthNgaySapHetHan, dayNgaySapHetHan)
-//    }
-//
-//    fun updateHDHetHan(hopDong: HopDong){
-//        val hopDongNew = HopDong(
-//            ma_hop_dong = hopDong.ma_hop_dong,
-//            ma_phong = hopDong.ma_phong,
-//            ma_nguoi_dung = hopDong.ma_nguoi_dung,
-//            thoi_han = hopDong.thoi_han,
-//            ngay_o = hopDong.ngay_o,
-//            ngay_hop_dong = hopDong.ngay_hop_dong,
-//            tien_coc = hopDong.tien_coc,
-//            anh_hop_dong = hopDong.anh_hop_dong,
-//            trang_thai_hop_dong = 0,
-//            ngay_lap_hop_dong = hopDong.ngay_lap_hop_dong
-//        )
-//        HopDongDao(binding.root.context).updateHopDong(hopDongNew)
-//    }
-//    fun updateHDSapHetHan(hopDong: HopDong){
-//        val hopDongNew = HopDong(
-//            ma_hop_dong = hopDong.ma_hop_dong,
-//            ma_phong = hopDong.ma_phong,
-//            ma_nguoi_dung = hopDong.ma_nguoi_dung,
-//            thoi_han = hopDong.thoi_han,
-//            ngay_o = hopDong.ngay_o,
-//            ngay_hop_dong = hopDong.ngay_hop_dong,
-//            tien_coc = hopDong.tien_coc,
-//            anh_hop_dong = hopDong.anh_hop_dong,
-//            trang_thai_hop_dong = 2,
-//            ngay_lap_hop_dong = hopDong.ngay_lap_hop_dong
-//        )
-//        HopDongDao(binding.root.context).updateHopDong(hopDongNew)
-//    }
 
     // Chuyen Dinh Dang Ngay
     private fun chuyenDinhDangNgay(text: Editable?):String {

@@ -1,5 +1,6 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,8 @@ class ActivityKetThucHopDong : AppCompatActivity() {
         val tenKhu = KhuTroDao(this@ActivityKetThucHopDong).getTenKhuTro()
         binding.tvTenKhuXuLyPhong.setText("Khu: "+tenKhu)
         binding.tvSoTienCocXuLyPhong.setText(""+hopDong.tien_coc)
+        binding.chkThanhToanXuLy.isEnabled = false
+        binding.chkKiemTraXuLyPhong.isEnabled = false
         if (hopDong.trang_thai_hop_dong==0){
             binding.tvThoiHanXuLyHopDong.setText("Hết hạn")
             binding.tvThoiHanXuLyHopDong.setTextColor(Color.RED)
@@ -70,7 +73,7 @@ class ActivityKetThucHopDong : AppCompatActivity() {
             }else{
                 binding.tvTienThietHaiXuLyPhong.setText(""+0)
             }
-            binding.imgXoaKiemTraXuLyPhong.setImageResource(R.drawable.ic_check)
+            binding.chkKiemTraXuLyPhong.isChecked = true
             binding.tvCongViecXuLyPhong.setText(""+1+"/2")
             binding.btnKiemTraTaiSan.setText("Đã thực hiện")
 
@@ -78,7 +81,7 @@ class ActivityKetThucHopDong : AppCompatActivity() {
 
 
         binding.btnDaThucHienXuLyPhong.setOnClickListener {
-            binding.imgXoaThanhToanXuLyPhong.setImageResource(R.drawable.ic_check)
+            binding.chkThanhToanXuLy.isChecked = true
             if(hopDong.trang_thai_hop_dong==0){
                 if (binding.chkThietHai.isChecked){
                     tongTien = hopDong.tien_coc-tienDenBuHopDong
@@ -115,11 +118,14 @@ class ActivityKetThucHopDong : AppCompatActivity() {
         }
 
         binding.btnXoaThongTinPhong.setOnClickListener {
-            updateHD(hopDong,binding)
+            if (binding.chkKiemTraXuLyPhong.isChecked && binding.chkThanhToanXuLy.isChecked){
+                updateHD(hopDong,binding)
+            }else{
+                thongBaoLoi("Hãy thực hiện đủ các thao tác để hoàn thành việc kết thúc hợp đồng!")
+            }
         }
-
-        //binding.tvThoiHanXuLyHopDong.setText()
     }
+
 
     private fun updateHD(hopDong: HopDong, binding: ActivityKetThucHopDongBinding) {
         val hopDongNew = HopDong(
@@ -144,13 +150,7 @@ class ActivityKetThucHopDong : AppCompatActivity() {
         }
         var update = HopDongDao(this.binding.root.context).updateHopDong(hopDongNew)
         if (update>0 && count==listNDTrongPhong.size){
-            Toast.makeText(
-                this.binding.root.context,
-                "Kết thúc hợp đồng thành công",
-                Toast.LENGTH_SHORT
-            ).show()
-            val intent = Intent(this,ActivityXuLyPhong::class.java)
-            startActivity(intent)
+            thongBaoThanhCong("Kết thúc hợp đồng thành công!")
         }
     }
 
@@ -190,5 +190,26 @@ class ActivityKetThucHopDong : AppCompatActivity() {
             e.printStackTrace()
         }
         return ngay_chuan_dinh_dang
+    }
+
+    fun thongBaoLoi(loi : String){
+        val bundle = androidx.appcompat.app.AlertDialog.Builder(this)
+        bundle.setTitle("Thông Báo Lỗi")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
+    }
+    fun thongBaoThanhCong(loi : String){
+        val bundle = androidx.appcompat.app.AlertDialog.Builder(this)
+        bundle.setTitle("Thông Báo")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            val intent = Intent(this@ActivityKetThucHopDong,ActivityXuLyPhong::class.java)
+            startActivity(intent)
+            finish()
+        })
+        bundle.show()
     }
 }
