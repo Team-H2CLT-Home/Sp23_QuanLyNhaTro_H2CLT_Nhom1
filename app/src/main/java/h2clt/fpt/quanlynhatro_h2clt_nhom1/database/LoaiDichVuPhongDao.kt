@@ -18,6 +18,8 @@ class LoaiDichVuPhongDao(context: Context) {
             put(LoaiDichVu.CLM_GIA_DICH_VU,loaiDichVu.gia_dich_vu)
             put(LoaiDichVu.CLM_TRANG_THAI_LOAI_DICH_VU,loaiDichVu.trang_thai_loai_dich_vu)
             put(LoaiDichVu.CLM_MA_PHONG,loaiDichVu.ma_phong)
+            put(LoaiDichVu.CLM_SO_MOI, loaiDichVu.so_moi)
+            put(LoaiDichVu.CLM_SO_CU, loaiDichVu.so_cu)
             put(LoaiDichVu.CLM_MA_KHU_TRO, loaiDichVu.ma_khu_tro)
 
         }
@@ -59,7 +61,9 @@ class LoaiDichVuPhongDao(context: Context) {
                     gia_dich_vu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_GIA_DICH_VU)),
                     trang_thai_loai_dich_vu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_TRANG_THAI_LOAI_DICH_VU)),
                     ma_phong = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_PHONG)),
-                    ma_khu_tro = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_KHU_TRO))
+                    ma_khu_tro = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_KHU_TRO)),
+                    so_cu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_SO_CU)),
+                    so_moi = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_SO_MOI))
                 )
                 list+=loaiDichVu
 
@@ -85,7 +89,9 @@ class LoaiDichVuPhongDao(context: Context) {
                     gia_dich_vu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_GIA_DICH_VU)),
                     trang_thai_loai_dich_vu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_TRANG_THAI_LOAI_DICH_VU)),
                     ma_phong = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_PHONG)),
-                    ma_khu_tro = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_KHU_TRO))
+                    ma_khu_tro = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_KHU_TRO)),
+                    so_cu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_SO_CU)),
+                    so_moi = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_SO_MOI))
                 )
                 list+=loaiDichVu
 
@@ -112,7 +118,9 @@ class LoaiDichVuPhongDao(context: Context) {
                     gia_dich_vu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_GIA_DICH_VU)),
                     trang_thai_loai_dich_vu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_TRANG_THAI_LOAI_DICH_VU)),
                     ma_phong = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_PHONG)),
-                    ma_khu_tro = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_KHU_TRO))
+                    ma_khu_tro = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_KHU_TRO)),
+                    so_cu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_SO_CU)),
+                    so_moi = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_SO_MOI))
                 )
                 list+=loaiDichVu
 
@@ -134,11 +142,11 @@ class LoaiDichVuPhongDao(context: Context) {
                 gia_dich_vu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_GIA_DICH_VU)),
                 trang_thai_loai_dich_vu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_TRANG_THAI_LOAI_DICH_VU)),
                 ma_phong = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_PHONG)),
-                ma_khu_tro = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_KHU_TRO))
+                ma_khu_tro = c.getString(c.getColumnIndex(LoaiDichVu.CLM_MA_KHU_TRO)),
+                so_cu = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_SO_CU)),
+                so_moi = c.getInt(c.getColumnIndex(LoaiDichVu.CLM_SO_MOI))
             )
         }
-
-
         return null
     }
 
