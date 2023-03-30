@@ -163,7 +163,9 @@ class ActivityTaoPhongKhiThemKhu : AppCompatActivity() {
                     ten_loai_dich_vu = "Tiền điện",
                     ma_loai_dich_vu = UUID.randomUUID().toString(),
                     gia_dich_vu = giaDien,
-                    ma_khu_tro = maKhu
+                    ma_khu_tro = maKhu,
+                    so_moi = -1,
+                    so_cu = -1
                 )
                 val nuoc=LoaiDichVu(
                     ma_phong = idPhong,
@@ -171,7 +173,9 @@ class ActivityTaoPhongKhiThemKhu : AppCompatActivity() {
                     ten_loai_dich_vu = "Tiền nước",
                     ma_loai_dich_vu = UUID.randomUUID().toString(),
                     gia_dich_vu = giaNuoc,
-                    ma_khu_tro = maKhu
+                    ma_khu_tro = maKhu,
+                    so_moi = -1,
+                    so_cu = -1
                 )
                 val rac=LoaiDichVu(
                     ma_phong = idPhong,
@@ -179,7 +183,9 @@ class ActivityTaoPhongKhiThemKhu : AppCompatActivity() {
                     ten_loai_dich_vu = "Tiền rác",
                     ma_loai_dich_vu = UUID.randomUUID().toString(),
                     gia_dich_vu = giaRac,
-                    ma_khu_tro = maKhu
+                    ma_khu_tro = maKhu,
+                    so_moi = -1,
+                    so_cu = -1
                 )
                 val mang=LoaiDichVu(
                     ma_phong = idPhong,
@@ -187,7 +193,9 @@ class ActivityTaoPhongKhiThemKhu : AppCompatActivity() {
                     ten_loai_dich_vu = "Tiền mạng",
                     ma_loai_dich_vu = UUID.randomUUID().toString(),
                     gia_dich_vu = giaMang,
-                    ma_khu_tro = maKhu
+                    ma_khu_tro = maKhu,
+                    so_moi = -1,
+                    so_cu = -1
                 )
                 phongDao.insertPhong(phong)
                 loaiDichVuPhongDao.insertLoaiDichVuPhong(dien)
