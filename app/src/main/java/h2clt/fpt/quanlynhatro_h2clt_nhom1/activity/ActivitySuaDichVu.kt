@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -61,7 +62,9 @@ class ActivitySuaDichVu : AppCompatActivity() {
                 gia_dich_vu = giaDichVu,
                 trang_thai_loai_dich_vu = trangThaiLoaiDichVu,
                 ma_khu_tro = maKhu,
-                ma_phong = ""
+                ma_phong = "",
+                so_cu =-1,
+                so_moi  = -1
             )
             val kq= dichVu?.ten_loai_dich_vu?.let { it1 ->
                 loaiDichVuPhongDao.upDateLoaiDichVuByMaKhuVaTen(loaiDichVu!!,

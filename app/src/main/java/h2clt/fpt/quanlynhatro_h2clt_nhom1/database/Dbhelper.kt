@@ -44,6 +44,8 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${LoaiDichVu.CLM_MA_PHONG} text NOT NULL ,
             ${LoaiDichVu.CLM_TRANG_THAI_LOAI_DICH_VU} Integer NOT NULL,
             ${LoaiDichVu.CLM_MA_KHU_TRO} text not null,
+            ${LoaiDichVu.CLM_SO_CU} integer not null,
+            ${LoaiDichVu.CLM_SO_MOI} integer not null,
             FOREIGN KEY(${LoaiDichVu.CLM_MA_KHU_TRO}) REFERENCES ${KhuTro.TB_NAME}(${KhuTro.CLM_MA_KHU_TRO}),
             FOREIGN KEY(${LoaiDichVu.CLM_MA_PHONG}) REFERENCES ${Phong.TB_NAME}(${Phong.CLM_MA_PHONG}));
         """.trimIndent()
