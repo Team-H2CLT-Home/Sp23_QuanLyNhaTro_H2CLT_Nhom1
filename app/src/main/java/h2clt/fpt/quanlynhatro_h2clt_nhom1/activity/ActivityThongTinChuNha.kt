@@ -20,23 +20,26 @@ class ActivityThongTinChuNha : AppCompatActivity() {
 
     private lateinit var binding: ActivityThongTinChuNhaBinding
     var list = listOf<Admin>()
-    val admin = Admin
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        val srf = binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
 //        maKhu = srf.getString(MA_KHU_KEY, "")!!
-        val tenDao = AdminDao(this).getHoTenAdmin()
-        val stdDao = AdminDao(this).getSDTAdmin()
-        val stkDao = AdminDao(this).getSTKAdmin()
-        val ngaySinhDao = AdminDao(this).getNSAdmin()
+        val i = intent
+        val admin:Admin = i.getSerializableExtra("admin") as Admin
+//        val tenDao = AdminDao(this).getHoTenAdmin()
+//        val stdDao = AdminDao(this).getSDTAdmin()
+//        val stkDao = AdminDao(this).getSTKAdmin()
+//        val ngaySinhDao = AdminDao(this).getNSAdmin()
         binding = ActivityThongTinChuNhaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 //        val adminDao = AdminDao(this)
 //        list = adminDao.getAllInAdmin()
-        binding.tvTenChuNha.text = tenDao
-        binding.tvSoDienThoai.text = stdDao
-        binding.tvSoTaiKhoan.text = stkDao
-        binding.tvNgaySinh.text = ngaySinhDao
+        binding.tvTenChuNha.text = admin.ho_ten
+        binding.tvSoDienThoai.text = admin.sdt
+        binding.tvSoTaiKhoan.text = admin.stk
+        binding.tvNgaySinh.text = admin.ngay_sinh
         if(binding.tvSoTaiKhoan.text.equals("")){
             binding.linearSoTaiKhoan.setBackgroundColor(Color.parseColor("#EBEBEB"))
             binding.tvSTK.text = ""

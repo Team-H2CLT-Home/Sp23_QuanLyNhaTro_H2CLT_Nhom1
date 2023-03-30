@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Admin
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 
 class AdminDao(context: Context) {
@@ -70,56 +71,72 @@ class AdminDao(context: Context) {
         }catch (e:java.lang.Exception ){
             false
         }
-
     }
-
+//    @SuppressLint("Range")
+//    fun getHoTenAdmin():String{
+//        val sql="""
+//           select ${Admin.TB_NAME}.${Admin.CLM_HO_TEN} from ${Admin.TB_NAME}
+//        """.trimIndent()
+//        val c=db.rawQuery(sql,null)
+//        if(c.moveToFirst()){
+//            return c.getString(c.getColumnIndex(Admin.CLM_HO_TEN))
+//
+//        }
+//        return "null"
+//    }
+//    @SuppressLint("Range")
+//    fun getSDTAdmin():String{
+//        val sql="""
+//           select ${Admin.TB_NAME}.${Admin.CLM_SDT} from ${Admin.TB_NAME}
+//        """.trimIndent()
+//        val c=db.rawQuery(sql,null)
+//        if(c.moveToFirst()){
+//            return c.getString(c.getColumnIndex(Admin.CLM_SDT))
+//
+//        }
+//        return "null"
+//    }
+//    @SuppressLint("Range")
+//    fun getSTKAdmin():String{
+//        val sql="""
+//           select ${Admin.TB_NAME}.${Admin.CLM_STK} from ${Admin.TB_NAME}
+//        """.trimIndent()
+//        val c=db.rawQuery(sql,null)
+//        if(c.moveToFirst()){
+//            return c.getString(c.getColumnIndex(Admin.CLM_STK))
+//
+//        }
+//        return "null"
+//    }
+//    @SuppressLint("Range")
+//    fun getNSAdmin():String{
+//        val sql="""
+//           select ${Admin.TB_NAME}.${Admin.CLM_NGAY_SINH} from ${Admin.TB_NAME}
+//        """.trimIndent()
+//        val c=db.rawQuery(sql,null)
+//        if(c.moveToFirst()){
+//            return c.getString(c.getColumnIndex(Admin.CLM_NGAY_SINH))
+//
+//        }
+//        return "null"
+//    }
 
     @SuppressLint("Range")
-    fun getHoTenAdmin():String{
-        val sql="""
-           select ${Admin.TB_NAME}.${Admin.CLM_HO_TEN} from ${Admin.TB_NAME} 
+    fun getAdmin(username: String):Admin? {
+        val sql = """
+           select * from ${Admin.TB_NAME} WHERE ${Admin.TB_NAME}.${Admin.CLM_TEN_DANG_NHAP} = "${username}"
         """.trimIndent()
-        val c=db.rawQuery(sql,null)
-        if(c.moveToFirst()){
-            return c.getString(c.getColumnIndex(Admin.CLM_HO_TEN))
-
+        val c = db.rawQuery(sql, null)
+        if (c.moveToFirst()) {
+            return Admin(
+                ten_dang_nhap = c.getString(c.getColumnIndex(Admin.CLM_TEN_DANG_NHAP)),
+                sdt = c.getString(c.getColumnIndex(Admin.CLM_SDT)),
+                ho_ten = c.getString(c.getColumnIndex(Admin.CLM_HO_TEN)),
+                stk = c.getString(c.getColumnIndex(Admin.CLM_STK)),
+                ngay_sinh = c.getString(c.getColumnIndex(Admin.CLM_NGAY_SINH)),
+                mat_khau = c.getString(c.getColumnIndex(Admin.CLM_MAT_KHAU))
+            )
         }
-        return "null"
-    }
-    @SuppressLint("Range")
-    fun getSDTAdmin():String{
-        val sql="""
-           select ${Admin.TB_NAME}.${Admin.CLM_SDT} from ${Admin.TB_NAME} 
-        """.trimIndent()
-        val c=db.rawQuery(sql,null)
-        if(c.moveToFirst()){
-            return c.getString(c.getColumnIndex(Admin.CLM_SDT))
-
-        }
-        return "null"
-    }
-    @SuppressLint("Range")
-    fun getSTKAdmin():String{
-        val sql="""
-           select ${Admin.TB_NAME}.${Admin.CLM_STK} from ${Admin.TB_NAME} 
-        """.trimIndent()
-        val c=db.rawQuery(sql,null)
-        if(c.moveToFirst()){
-            return c.getString(c.getColumnIndex(Admin.CLM_STK))
-
-        }
-        return "null"
-    }
-    @SuppressLint("Range")
-    fun getNSAdmin():String{
-        val sql="""
-           select ${Admin.TB_NAME}.${Admin.CLM_NGAY_SINH} from ${Admin.TB_NAME} 
-        """.trimIndent()
-        val c=db.rawQuery(sql,null)
-        if(c.moveToFirst()){
-            return c.getString(c.getColumnIndex(Admin.CLM_NGAY_SINH))
-
-        }
-        return "null"
+        return null
     }
 }

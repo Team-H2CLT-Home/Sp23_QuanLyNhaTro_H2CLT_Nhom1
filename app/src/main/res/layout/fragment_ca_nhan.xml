@@ -66,11 +66,11 @@
             android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
             android:paddingTop="2dp"
-            android:paddingLeft="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/boder_tron_colorwhite"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="10dp">
             <TextView
                 android:id="@+id/tvThongTinChuNha"
                 android:layout_width="wrap_content"
@@ -78,6 +78,24 @@
                 android:text="Thông tin đại diện chủ nhà"
                 android:textSize="25dp"
                 android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                />
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#AEAEAE"
+                />
+            <TextView
+                android:id="@+id/tvCapNhat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cập nhật thông tin"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 />
@@ -92,6 +110,7 @@
                 android:layout_height="wrap_content"
                 android:text="Phản hồi"
                 android:textSize="25dp"
+                android:layout_marginLeft="20dp"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/black"
@@ -108,6 +127,7 @@
                 android:text="Giới thiệu"
                 android:textSize="25dp"
                 android:textStyle="bold"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 />
@@ -117,21 +137,17 @@
                 android:layout_height="1dp"
                 android:background="#AEAEAE"
                 />
+
             <TextView
-                android:id="@+id/tvCaiDat"
+                android:id="@+id/tvDangXuat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cài đặt"
+                android:text="Đăng xuất"
                 android:textSize="25dp"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/black"
-                />
-            <View
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#AEAEAE"
+                android:layout_marginLeft="20dp"
                 />
 
         </LinearLayout>
@@ -143,18 +159,5 @@
          android:layout_gravity="center"
          >
      </LinearLayout>
-    <Button
-        android:id="@+id/btn_dangXuat"
-        android:layout_gravity="center"
-        style="@style/button"
-        android:text="Đăng xuất"
-        android:background="@drawable/boder_tron"
-        />
-    <View
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#AEAEAE"
-        />
 
 </LinearLayout>
