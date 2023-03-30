@@ -36,12 +36,12 @@ class HoaDonDao(context: Context) {
     }
 
     @SuppressLint("Range")
-    fun getAllInHoaDonByThang(maKhu:String,Thang:String,nam:String):HoaDon?{
+    fun getAllInHoaDonByThang(maKhu:String,Thang:String):HoaDon?{
         val sql="""
             select * from ${HoaDon.TB_NAME} 
             join ${Phong.TB_NAME} on ${HoaDon.TB_NAME}.${HoaDon.CLM_MA_PHONG}=${Phong.TB_NAME}.${Phong.CLM_MA_PHONG}
             join ${KhuTro.TB_NAME} on ${Phong.TB_NAME}.${Phong.CLM_MA_KHU}=${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO}
-            where ${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO} = "$maKhu" and strftime('%m', ${HoaDon.CLM_NGAY_TAO_HOA_DON}) = "$Thang" and strftime("%Y",${HoaDon.CLM_NGAY_TAO_HOA_DON})="$nam"
+            where ${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO} = "$maKhu" and strftime('%m', ${HoaDon.CLM_NGAY_TAO_HOA_DON}) = "$Thang"
         """.trimIndent()
         val c=db.rawQuery(sql,null)
         if(c.moveToFirst()){
@@ -92,34 +92,6 @@ class HoaDonDao(context: Context) {
         val sqlHoaDon="""
             select * from ${HoaDon.TB_NAME} join ${Phong.TB_NAME} on ${HoaDon.TB_NAME}.${HoaDon.CLM_MA_PHONG}
             = ${Phong.TB_NAME}.${Phong.CLM_MA_PHONG} where ${Phong.TB_NAME}.${Phong.CLM_MA_KHU}= "$maKhu"
-       
-        """.trimIndent()
-        val c=db.rawQuery(sqlHoaDon,null)
-        if(c.moveToFirst()){
-            do {
-                val hoaDon=HoaDon(
-                    ma_hoa_don = c.getString(c.getColumnIndex(HoaDon.CLM_MA_HOA_DON)),
-                    ngay_tao_hoa_don = c.getString(c.getColumnIndex(HoaDon.CLM_NGAY_TAO_HOA_DON)),
-                    trang_thai_hoa_don = c.getInt(c.getColumnIndex(HoaDon.CLM_TRANG_THAI_HOA_DON)),
-                    so_dien = c.getInt(c.getColumnIndex(HoaDon.CLM_SO_DIEN)),
-                    so_nuoc = c.getInt(c.getColumnIndex(HoaDon.CLM_SO_NUOC)),
-                    gia_thue = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_THUE)),
-                    gia_dich_vu = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_DICH_VU)),
-                    mien_giam = c.getInt(c.getColumnIndex(HoaDon.CLM_MIEN_GIAM)),
-                    ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG)),
-                    tong = c.getInt(c.getColumnIndex(HoaDon.CLM_TONG))
-                )
-                list+=hoaDon
-            }while (c.moveToNext())
-        }
-        return list
-    }
-    @SuppressLint("Range")
-    fun getAllInHoaDonByMaPhong(maPhong :String): List<HoaDon>{
-        val list= mutableListOf<HoaDon>()
-        val sqlHoaDon="""
-            select * from ${HoaDon.TB_NAME} join ${Phong.TB_NAME} on ${HoaDon.TB_NAME}.${HoaDon.CLM_MA_PHONG}
-            = ${Phong.TB_NAME}.${Phong.CLM_MA_PHONG} where ${Phong.TB_NAME}.${Phong.CLM_MA_KHU}= "$maPhong"
        
         """.trimIndent()
         val c=db.rawQuery(sqlHoaDon,null)

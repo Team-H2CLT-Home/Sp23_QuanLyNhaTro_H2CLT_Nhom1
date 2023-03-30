@@ -59,7 +59,9 @@ class ActivityThemDichVu : AppCompatActivity() {
                     gia_dich_vu = giaDichVu,
                     trang_thai_loai_dich_vu = trangThaiLoaiDichVu,
                     ma_khu_tro = maKhu,
-                    ma_phong = ""
+                    ma_phong = "",
+                     so_moi = -1,
+                     so_cu = -1
                 )
             if(binding.checkAllPhong.isChecked){
                 val listPhong=phongDao.getAllInPhongByMaKhu(maKhu)
@@ -70,7 +72,9 @@ class ActivityThemDichVu : AppCompatActivity() {
                         ma_loai_dich_vu = UUID.randomUUID().toString(),
                         ten_loai_dich_vu =tenDichVu ,
                         gia_dich_vu =giaDichVu ,
-                        trang_thai_loai_dich_vu = trangThaiLoaiDichVu
+                        trang_thai_loai_dich_vu = trangThaiLoaiDichVu,
+                        so_moi = -1,
+                        so_cu = -1
                     )
                     listDichVu?.plusAssign(loaiDichVu)
                 }

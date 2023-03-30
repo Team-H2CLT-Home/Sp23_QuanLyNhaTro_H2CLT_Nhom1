@@ -18,6 +18,8 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${Admin.CLM_SDT} text unique not NULL,
             ${Admin.CLM_TEN_DANG_NHAP} PRIMARY key NOT NULL,
             ${Admin.CLM_HO_TEN} text NOT NULL,
+            ${Admin.CLM_STK} text,
+            ${Admin.CLM_NGAY_SINH} text,
             ${Admin.CLM_MAT_KHAU} text NOT NULL );
         """.trimIndent()
         db?.execSQL(admin)
@@ -42,6 +44,8 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${LoaiDichVu.CLM_MA_PHONG} text NOT NULL ,
             ${LoaiDichVu.CLM_TRANG_THAI_LOAI_DICH_VU} Integer NOT NULL,
             ${LoaiDichVu.CLM_MA_KHU_TRO} text not null,
+            ${LoaiDichVu.CLM_SO_CU} integer not null,
+            ${LoaiDichVu.CLM_SO_MOI} integer not null,
             FOREIGN KEY(${LoaiDichVu.CLM_MA_KHU_TRO}) REFERENCES ${KhuTro.TB_NAME}(${KhuTro.CLM_MA_KHU_TRO}),
             FOREIGN KEY(${LoaiDichVu.CLM_MA_PHONG}) REFERENCES ${Phong.TB_NAME}(${Phong.CLM_MA_PHONG}));
         """.trimIndent()
@@ -102,6 +106,7 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${HopDong.CLM_ANH_HOP_DONG}  text NOT NULL,
             ${HopDong.CLM_TIEN_COC} long NOT NULL,
             ${HopDong.CLM_TRANG_THAI_HOP_DONG} integer NOT NULL,
+            ${HopDong.CLM_HIEU_LUC_HOP_DONG} integer NOT NULL,
             ${HopDong.CLM_MA_PHONG} text NOT NULL,
             ${HopDong.CLM_MA_NGUOI_DUNG} text NOT NULL,
             FOREIGN KEY (${HopDong.CLM_MA_PHONG} ) REFERENCES ${Phong.TB_NAME}(${Phong.CLM_MA_PHONG}),

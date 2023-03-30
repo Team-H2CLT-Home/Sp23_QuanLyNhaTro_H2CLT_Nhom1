@@ -38,7 +38,7 @@ class ActivityDanhSachPhong : AppCompatActivity() {
                 1 -> {
                     tab.text = "Phòng trống"
                 }
-                else -> tab.text = "Phòng đã ở"
+                else -> tab.text = "Phòng đang ở"
             }
         }.attach()
     }
