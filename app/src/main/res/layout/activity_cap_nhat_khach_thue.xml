@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="@color/mauNenApp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.ActivityCapNhatKhachThue">
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Thêm người dùng"
+        android:text="Cập nhật người dùng"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"/>
     <Spinner
-        android:id="@+id/spinnerThemNguoiDung"
+        android:id="@+id/spinnerSuaNguoiDung"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -35,10 +36,10 @@
 
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edHoTenThemNguoiDung"
+                android:id="@+id/edHoTenSuaNguoiDung"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nhập họ và tên"
+                android:hint="Họ và tên"
                 android:background="@drawable/boder_tron_colorwhite"
                 />
         </com.google.android.material.textfield.TextInputLayout>
@@ -52,7 +53,7 @@
 
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edNgaySinhThemNguoiDung"
+                android:id="@+id/edNgaySinhSuaNguoiDung"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ngày sinh"
@@ -70,7 +71,7 @@
 
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edSDTThemNguoiDung"
+                android:id="@+id/edSDTSuaNguoiDung"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Số điện thoại"
@@ -89,7 +90,7 @@
 
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edCCCDThemNguoiDung"
+                android:id="@+id/edCCCDSuaNguoiDung"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Số CCCD"
@@ -107,7 +108,7 @@
 
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edQueQuanThemNguoiDung"
+                android:id="@+id/edQueQuanSuaNguoiDung"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Quê quán"
@@ -122,12 +123,12 @@
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/btnLuuThemNguoiDung"
+            android:id="@+id/btnLuuSuaNguoiDung"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="Lưu"/>
         <Button
-            android:id="@+id/btnHuyThemNguoiDung"
+            android:id="@+id/btnHuySuaNguoiDung"
             android:layout_width="100dp"
             android:layout_marginLeft="50dp"
             android:layout_height="wrap_content"
