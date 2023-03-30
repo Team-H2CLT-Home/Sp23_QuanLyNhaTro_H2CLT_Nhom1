@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.HopDongAdapter
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.HopDongHetHieuLucAdapter
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HopDongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentHopDongConHieuLucBinding
@@ -37,7 +37,7 @@ class FragmentHopDongHetHieuLuc : Fragment() {
         maKhu = srf.getString(MA_KHU_KEY, "")!!
         listHopDongHetHieuLuc = HopDongDao(requireContext()).getAllInHopDongByMaKhu(maKhu,0)
         //listHopDong=HopDongDao(this@ActivityDanhSachHopDong).getAllInHopDong()
-        val hopDongAdapter = HopDongAdapter(listHopDongHetHieuLuc)
+        val hopDongAdapter = HopDongHetHieuLucAdapter(listHopDongHetHieuLuc)
         this.binding.rcyPhongHetHieuLuc.adapter = hopDongAdapter
         this.binding.rcyPhongHetHieuLuc.layoutManager = LinearLayoutManager(requireContext())
     }
