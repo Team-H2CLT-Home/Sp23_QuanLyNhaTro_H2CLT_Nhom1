@@ -103,6 +103,9 @@
             android:name=".activity.ActivityDangNhap"
             android:exported="false" />
         <activity
+            android:name=".activity.ActivityCapNhatHopDong"
+            android:exported="false" />
+        <activity
             android:name=".activity.ActivityDangKy"
             android:exported="false">
             <meta-data
@@ -123,7 +126,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"/>
     </application>
 
 </manifest>
