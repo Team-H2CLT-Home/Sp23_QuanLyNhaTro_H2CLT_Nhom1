@@ -1,16 +1,20 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityChiTietPhong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.LoaiDichVuPhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemPhongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
-import kotlinx.coroutines.processNextEventInCurrentThread
+
+const val MA_PHONG_TRONG_CHI_TIET_PHONG="MA_PHONG_TRONG_CHI_TIET_PHONG"
+
 
 class PhongTroViewHolder(
     val binding:LayoutItemPhongBinding
@@ -38,6 +42,11 @@ class PhongTroViewHolder(
                     it1.ma_phong)
             }
             Toast.makeText(binding.root.context, listLoaiDichVu?.get(0)?.ten_loai_dich_vu, Toast.LENGTH_LONG).show()
+        }
+        binding.lnPhong.setOnClickListener {
+            val intent = Intent(binding.root.context, ActivityChiTietPhong::class.java)
+            intent.putExtra(MA_PHONG_TRONG_CHI_TIET_PHONG,phong.ma_phong)
+            binding.root.context.startActivity(intent)
         }
     }
 }

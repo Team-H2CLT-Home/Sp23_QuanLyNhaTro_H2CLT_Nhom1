@@ -75,9 +75,16 @@ class ActivityThemPhong : AppCompatActivity() {
             }
         }
         binding.btnHuyThemPhong.setOnClickListener{
+            LoaiDichVuPhongDao(this).xoaLoaiDichVuByMaPhong(maPhong)
             finish()
         }
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        LoaiDichVuPhongDao(this).xoaLoaiDichVuByMaPhong(maPhong)
+        finish()
     }
 
     override fun onResume() {

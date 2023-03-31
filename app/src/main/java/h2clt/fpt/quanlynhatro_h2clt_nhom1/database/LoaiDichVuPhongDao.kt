@@ -55,6 +55,13 @@ class LoaiDichVuPhongDao(context: Context) {
             "${LoaiDichVu.CLM_TEN_LOAI_DICH_VU}=? AND ${LoaiDichVu.CLM_MA_KHU_TRO}=?",
             arrayOf(loiDichVu.ten_loai_dich_vu, loiDichVu.ma_khu_tro))
     }
+    fun xoaLoaiDichVuByMaPhong(maPhong: String):Int {
+        return db.delete(
+            LoaiDichVu.TB_NAME,
+            "${LoaiDichVu.CLM_MA_PHONG}=?",
+            arrayOf(maPhong)
+        )
+    }
 
     @SuppressLint("Range")
     fun getAllInLoaiDichVu():List<LoaiDichVu>{

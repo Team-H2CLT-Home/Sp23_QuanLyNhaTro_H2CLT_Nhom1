@@ -24,6 +24,10 @@ class PhongDao(context: Context) {
         }
         return db.insert(Phong.TB_NAME,null,values)
     }
+    fun xoaPhongById(maPhong:String):Int {
+        return db.delete(Phong.TB_NAME, "${Phong.CLM_MA_PHONG}=?", arrayOf(maPhong))
+    }
+
     fun updateTrangThaiPhongThanhDangO(maPhong:String):Int{
         val values=ContentValues()
         values.apply {
