@@ -173,6 +173,7 @@ class FragmentNguoiDangO: Fragment() {
                             Snackbar.make(it, "Thêm không thành công", Toast.LENGTH_SHORT).show()
 //                            thongBaoLoi("Thêm người dùng không thành công")
                         }
+                        ///
 //                        dialog.edHoTenThemNguoiDung.setText("")
 //                        dialog.edSDTThemNguoiDung.setText("")
 //                        dialog.edCCCDThemNguoiDung.setText("")

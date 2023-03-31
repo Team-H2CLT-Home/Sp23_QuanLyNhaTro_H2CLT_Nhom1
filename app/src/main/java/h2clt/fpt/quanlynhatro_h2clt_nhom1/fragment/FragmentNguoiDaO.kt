@@ -81,6 +81,7 @@ class FragmentNguoiDaO : Fragment() {
                         return@setOnClickListener
 
                     }
+                    ////
 //                    ///kiem tra ngay
 //                    try{
 //                        val spf = SimpleDateFormat("dd/MM/yyyy")
