@@ -208,5 +208,5 @@ class FragmentNguoiDaO : Fragment() {
         binding.rcyNguoiDaO.adapter=nguoiThueAdapter
         binding.rcyNguoiDaO.layoutManager= LinearLayoutManager(context)
     }
-
+//
 }
