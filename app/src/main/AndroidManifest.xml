@@ -27,6 +27,9 @@
             android:name=".activity.ActivityDanhSachPhong"
             android:exported="false" />
         <activity
+            android:name=".activity.ActivityChiTietPhong"
+            android:exported="false" />
+        <activity
             android:name=".activity.ActivityManHinhChinhChuTro"
             android:exported="true" />
         <activity

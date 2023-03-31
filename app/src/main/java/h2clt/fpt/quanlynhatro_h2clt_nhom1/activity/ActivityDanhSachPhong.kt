@@ -20,7 +20,6 @@ class ActivityDanhSachPhong : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDanhSachPhongBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.tbDanhSachPhong
         setSupportActionBar(binding.tbDanhSachPhong)
         val ab = supportActionBar
         if (ab != null){
