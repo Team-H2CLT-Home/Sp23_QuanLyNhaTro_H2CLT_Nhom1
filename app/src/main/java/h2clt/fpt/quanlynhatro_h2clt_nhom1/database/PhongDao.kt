@@ -148,5 +148,11 @@ class PhongDao(context: Context) {
         return list
     }
 
-
+    fun updateTrangThaiPhongThanhDaO(maPhong:String):Int{
+        val values=ContentValues()
+        values.apply {
+            put(Phong.CLM_TRANG_THAI_PHONG,0)
+        }
+        return db.update(Phong.TB_NAME,values,  "${Phong.CLM_MA_PHONG}=?", arrayOf(maPhong))
+    }
 }

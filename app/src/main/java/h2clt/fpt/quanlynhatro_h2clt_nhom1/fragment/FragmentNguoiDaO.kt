@@ -3,6 +3,7 @@ package h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,10 +14,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MaPhongSpinner
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.NguoiThueAdapter
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityCapNhatKhachThue
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.*
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogThemKhachThueBinding
@@ -169,7 +168,15 @@ class FragmentNguoiDaO : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val nguoiThueAdapter = NguoiThueAdapter(listNguoiDung)
+        val nguoiThueAdapter = NguoiThueAdapter(listNguoiDung,object : KhachThueInterface {
+            override fun OnClickKhachThue(pos: Int) {
+                val nguoiDung = listNguoiDung.get(pos)
+                val intent = Intent(requireContext(), ActivityCapNhatKhachThue::class.java)
+                intent.putExtra("hopDong",nguoiDung)
+                startActivity(intent)
+            }
+
+        })
         binding.rcyNguoiDaO.adapter = nguoiThueAdapter
         binding.rcyNguoiDaO.layoutManager = LinearLayoutManager(activity)
     }
@@ -189,7 +196,15 @@ class FragmentNguoiDaO : Fragment() {
     private fun reload(){
         val nguoiDungDao= activity?.let { NguoiDungDao(it) }!!
         listNguoiDung=nguoiDungDao.getAllInNguoiDaOByMaKhu(maKhu)
-        val nguoiThueAdapter= NguoiThueAdapter(listNguoiDung)
+        val nguoiThueAdapter= NguoiThueAdapter(listNguoiDung,object :KhachThueInterface{
+            override fun OnClickKhachThue(pos: Int) {
+                val nguoiDung = listNguoiDung.get(pos)
+                val intent = Intent(requireContext(), ActivityCapNhatKhachThue::class.java)
+                intent.putExtra("khachThue",nguoiDung)
+                startActivity(intent)
+            }
+
+        })
         binding.rcyNguoiDaO.adapter=nguoiThueAdapter
         binding.rcyNguoiDaO.layoutManager= LinearLayoutManager(context)
     }

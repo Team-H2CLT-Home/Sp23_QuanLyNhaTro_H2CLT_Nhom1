@@ -35,14 +35,27 @@ class NguoiThueViewHolder(
     fun bind(nguoiDung: NguoiDung){
 
        binding.tvTenPhong.text =PhongDao(binding.root.context).getTenPhongById(nguoiDung.ma_phong)
+        binding.tvMaNguoiDung.text = nguoiDung.ma_nguoi_dung
         binding.tvSDT.text = "SĐT: "+nguoiDung.sdt_nguoi_dung.toString()
         binding.tvTenNguoiThue.text = "Họ tên: " +nguoiDung.ho_ten_nguoi_dung.toString()
         binding.edTrangThaiO.isChecked = nguoiDung.trang_thai_o==1
-        if(binding.tvTenNguoiThue.text=="Họ tên: "+NguoiDungDao(binding.root.context).getTenNguoiDangOByMaPhong(nguoiDung.ma_phong)){
+//        if(binding.tvTenNguoiThue.text=="Họ tên: "+NguoiDungDao(binding.root.context).getTenNguoiDangOByMaPhong(nguoiDung.ma_phong)){
+//            binding.edTrangThaiChuHopDong.isChecked = true
+//        }else{
+//            binding.edTrangThaiChuHopDong.isChecked = false
+//        }
+
+        if(binding.tvMaNguoiDung.text== NguoiDungDao(binding.root.context).getMaNguoiDangOByMaPhong(nguoiDung.ma_phong)){
             binding.edTrangThaiChuHopDong.isChecked = true
         }else{
             binding.edTrangThaiChuHopDong.isChecked = false
         }
+//
+//        if(binding.tvSDT.text=="SĐT: "+NguoiDungDao(binding.root.context).getSDTNguoiDangOByMaPhong(nguoiDung.ma_phong)){
+//            binding.edTrangThaiChuHopDong.isChecked = true
+//        }else{
+//            binding.edTrangThaiChuHopDong.isChecked = false
+//        }
 //        if(binding.tvTenNguoiThue.text == NguoiDungDao(binding.root.context).getNguoiDungByTrangThai(nguoiDung.ma_phong,1)){
 
 ////  ||binding.tvTenNguoiThue.text=="Họ tên: "+NguoiDungDao(binding.root.context).getTenNguoiDaOByMaPhong(nguoiDung.ma_phong)          Log.d("aaaa", "getNguoiDungByTrangThai: "+NguoiDungDao(binding.root.context).getNguoiDungByTrangThai(nguoiDung.ma_phong,1))
