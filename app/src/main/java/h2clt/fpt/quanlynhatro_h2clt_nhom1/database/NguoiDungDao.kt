@@ -487,4 +487,19 @@ class NguoiDungDao(context: Context) {
 //             where ${HopDong.TB_NAME}.${HopDong.CLM_TRANG_THAI_HOP_DONG}= 0
     //            JOIN ${HopDong.TB_NAME} ON ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_NGUOI_DUNG} = ${HopDong.TB_NAME}.${HopDong.CLM_MA_NGUOI_DUNG}
 //            join ${Phong.TB_NAME} ON ${HopDong.TB_NAME}.${HopDong.CLM_MA_PHONG} = ${Phong.TB_NAME}.${Phong.CLM_MA_PHONG}AND ${NguoiDung.TB_NAME}.${NguoiDung.CLM_TRANG_THAI_O} = 0
+
+    @SuppressLint("Range")
+    fun getMaNguoiDangOByMaPhong(id:String):String{
+        val sql="""
+            select ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_NGUOI_DUNG} from ${NguoiDung.TB_NAME}
+            JOIN ${HopDong.TB_NAME} ON ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_NGUOI_DUNG} = ${HopDong.TB_NAME}.${HopDong.CLM_MA_NGUOI_DUNG}
+            join ${Phong.TB_NAME} ON ${HopDong.TB_NAME}.${HopDong.CLM_MA_PHONG} = ${Phong.TB_NAME}.${Phong.CLM_MA_PHONG}
+             where ${NguoiDung.TB_NAME}.${NguoiDung.CLM_MA_PHONG}= "$id" AND ${NguoiDung.TB_NAME}.${NguoiDung.CLM_TRANG_THAI_O} = 1
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToFirst()){
+            return c.getString(c.getColumnIndex(NguoiDung.CLM_MA_NGUOI_DUNG))
+        }
+        return "null"
+    }
 }
