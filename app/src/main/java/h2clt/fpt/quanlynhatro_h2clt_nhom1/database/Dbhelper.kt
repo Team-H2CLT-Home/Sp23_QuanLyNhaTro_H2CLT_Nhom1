@@ -76,7 +76,7 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${HoaDon.CLM_MIEN_GIAM} integer NOT NULL,
             ${HoaDon.CLM_GIA_DICH_VU} integer not null,
             ${HoaDon.CLM_MA_PHONG} text NOT NULL,
-            ${HoaDon.CLM_TONG} integer NOT NULL,
+            ${HoaDon.CLM_TONG} long NOT NULL,
             FOREIGN KEY (${HoaDon.CLM_MA_PHONG} ) REFERENCES ${Phong.TB_NAME}(${Phong.CLM_MA_PHONG}));
         """.trimIndent()
         db?.execSQL(hoa_don)
