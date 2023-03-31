@@ -22,6 +22,15 @@ class PhongTroViewHolder(
         binding.chkTrangThaiPhongTrong.isChecked=phong.trang_thai_phong==0
         binding.tvGioiHanNguoiO.text = "Tối đa: "+phong.so_nguoi_o.toString()+" người"
         binding.tvSoNguoiHienTai.text = "có "+ NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(phong.ma_phong).size +" người đang ở"
+        if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(phong.ma_phong)
+                .isNotEmpty()
+        ){
+            binding.chkTrangThaiPhongDaCoc.isChecked = true
+            binding.chkTrangThaiPhongTrong.isChecked = false
+        }else{
+            binding.chkTrangThaiPhongDaCoc.isChecked = false
+            binding.chkTrangThaiPhongTrong.isChecked = true
+        }
         binding.tvTenPhong.setOnClickListener {
             val phong=PhongDao(binding.root.context).getPhongById(phong.ma_phong)
             val listLoaiDichVu= phong?.let { it1 ->
