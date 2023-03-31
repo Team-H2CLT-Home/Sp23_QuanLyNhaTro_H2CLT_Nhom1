@@ -1,22 +1,11 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter
-import android.app.AlertDialog
-import android.app.Dialog
-import android.content.Context
-import android.content.Intent
-import android.content.res.Resources
-import android.graphics.Typeface
+
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityCapNhatKhachThue
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogChiTietNguoiThueBinding
@@ -33,7 +22,7 @@ class NguoiThueViewHolder(
     @RequiresApi(Build.VERSION_CODES.O)
     fun bind(nguoiDung: NguoiDung){
 
-        binding.tvTenPhong.text =PhongDao(binding.root.context).getTenPhongById(nguoiDung.ma_phong)
+       binding.tvTenPhong.text =PhongDao(binding.root.context).getTenPhongById(nguoiDung.ma_phong)
         binding.tvMaNguoiDung.text = nguoiDung.ma_nguoi_dung
         binding.tvSDT.text = "SĐT: "+nguoiDung.sdt_nguoi_dung.toString()
         binding.tvTenNguoiThue.text = "Họ tên: " +nguoiDung.ho_ten_nguoi_dung.toString()
@@ -94,13 +83,9 @@ class NguoiThueViewHolder(
         }
 
     }
-    fun truyenDuLieu(context:Context){
-        val intent = Intent(context,ActivityCapNhatKhachThue::class.java)
-        context.startActivity(intent)
-    }
 }
 class NguoiThueAdapter(
-    val listNguoiDung:List<NguoiDung>,val onCLick:KhachThueInterface
+    val listNguoiDung: List<NguoiDung>, val onClick:KhachThueInterface
 ):RecyclerView.Adapter<NguoiThueViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NguoiThueViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -115,12 +100,28 @@ class NguoiThueAdapter(
         val user = listNguoiDung[position]
         holder.apply {
             bind(user)
-            //updateHopDong(hopDong)
-            //fragment.updateDSHopDong(hopDong)
         }
         holder.itemView.setOnClickListener {
 
-            onCLick.OnClickKhachThue(position)
+           onClick.OnClickKhachThue(position)
         }
     }
 }
+
+
+//class DanhSachPhongAdapter(
+//    val list:List<Phong>
+//): RecyclerView.Adapter<DanhSachPhongViewHolder>() {
+//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DanhSachPhongViewHolder {
+//        val inflater = LayoutInflater.from(parent.context)
+//        val binding = LayoutItemPhongBinding.inflate(inflater,parent,false)
+//        return DanhSachPhongViewHolder(binding)
+//    }
+//
+//    override fun getItemCount()= list.size
+//
+//    override fun onBindViewHolder(holder: DanhSachPhongViewHolder, position: Int) {
+//        val user = list[position]
+//        holder.bind(user)
+//    }
+//}

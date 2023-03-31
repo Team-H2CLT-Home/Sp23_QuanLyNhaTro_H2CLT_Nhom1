@@ -97,7 +97,7 @@
                     <CheckBox
                         android:id="@+id/chkTrangThaiPhongDaCoc"
                         style="@style/chk_trang_thai"
-                        android:text="Chưa cọc"
+                        android:text="Dang o"
                         android:textColor="#DC0727"
                         android:clickable="false"
                         android:layout_marginLeft="20dp"

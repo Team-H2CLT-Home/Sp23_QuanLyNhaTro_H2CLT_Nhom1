@@ -109,6 +109,9 @@
             android:name=".activity.ActivityCapNhatHopDong"
             android:exported="false" />
         <activity
+            android:name=".activity.ActivityCapNhatKhachThue"
+            android:exported="false" />
+        <activity
             android:name=".activity.ActivityDangKy"
             android:exported="false">
             <meta-data

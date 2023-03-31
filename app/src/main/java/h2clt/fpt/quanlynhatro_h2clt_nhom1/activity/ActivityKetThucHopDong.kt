@@ -141,6 +141,8 @@ class ActivityKetThucHopDong : AppCompatActivity() {
             hieu_luc_hop_dong = 0,
             ngay_lap_hop_dong = hopDong.ngay_lap_hop_dong
         )
+        val updatePhong = PhongDao(this@ActivityKetThucHopDong).updateTrangThaiPhongThanhDaO(hopDong.ma_phong)
+
         var count =0
         val listNDTrongPhong = NguoiDungDao(this).getNguoiDungByMaPhong(hopDong.ma_phong)
         for (i in 0 until listNDTrongPhong.size){
@@ -149,7 +151,7 @@ class ActivityKetThucHopDong : AppCompatActivity() {
             }
         }
         var update = HopDongDao(this.binding.root.context).updateHopDong(hopDongNew)
-        if (update>0 && count==listNDTrongPhong.size){
+        if (update>0 && count==listNDTrongPhong.size && updatePhong>0){
             thongBaoThanhCong("Kết thúc hợp đồng thành công!")
         }
     }
