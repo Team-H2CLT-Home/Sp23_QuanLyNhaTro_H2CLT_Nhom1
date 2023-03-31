@@ -265,7 +265,8 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
                     ngay_lap_hop_dong = simpleDateFormatNow.format(cNow!!.time)
                 )
                 val dao = HopDongDao(this).insertHopDong(hopDong)
-                if (dao > 0) {
+                val updatePhong = PhongDao(this@ActivitytaoHopDongMoi).updateTrangThaiPhongThanhDangO(maPhong)
+                if (dao > 0 && updatePhong>0) {
                     thongBaoThanhCong("Bạn đã thêm thành công!")
                     //updateHopDong()
                 } else {

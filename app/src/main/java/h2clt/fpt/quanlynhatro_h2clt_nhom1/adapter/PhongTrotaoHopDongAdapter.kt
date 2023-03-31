@@ -17,7 +17,7 @@ class PhongTroTaoHopDongViewHolder(
     fun bind(phong: Phong){
         binding.tvTenPhong.text=phong.ten_phong
         binding.tvGiaThue.text=phong.gia_thue.toString()
-        binding.chkTrangThaiPhongDaCoc.isChecked= phong.trang_thai_phong==2
+        binding.chkTrangThaiPhongDaCoc.isChecked= phong.trang_thai_phong==1
         binding.chkTrangThaiPhongTrong.isChecked=phong.trang_thai_phong==0
         binding.tvGioiHanNguoiO.text = "Tối đa: "+phong.so_nguoi_o.toString()+" người"
         binding.tvSoNguoiHienTai.text = "có "+ NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(phong.ma_phong).size +" người đang ở"

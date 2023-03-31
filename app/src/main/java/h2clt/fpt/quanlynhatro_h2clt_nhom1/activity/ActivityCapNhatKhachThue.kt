@@ -154,7 +154,6 @@ class ActivityCapNhatKhachThue : AppCompatActivity() {
                         if (dao > 0) {
                             if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhongCu).isEmpty()){
                                 PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDaO(maPhongCu)
-
                             }
 //                            thongBaoThanhCong("Thêm người dùng thành công")
                             Snackbar.make(it, "Sửa khách thuê thành công", Toast.LENGTH_SHORT).show()
