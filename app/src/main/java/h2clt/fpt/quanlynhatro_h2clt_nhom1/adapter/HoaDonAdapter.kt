@@ -1,7 +1,7 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter
 
 import android.content.DialogInterface
-import android.util.Log
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class HoaDonViewHolder(
-   var binding: LayoutItemHoaDonBinding
+    var binding: LayoutItemHoaDonBinding
 ):RecyclerView.ViewHolder(binding.root){
     fun bind(hoaDon: HoaDon){
 
@@ -37,39 +37,53 @@ class HoaDonViewHolder(
                     so_dien = hoaDon.so_dien,
                     tong = hoaDon.tong
                 )
-                 val builder = AlertDialog.Builder(binding.root.context)
+                val builder = AlertDialog.Builder(binding.root.context)
                 builder.setTitle("Thông báo thanh toán")
                 builder.setMessage("Xác nhận thanh toán!")
-            builder.setPositiveButton("Xác nhận", DialogInterface.OnClickListener { dialog, which ->
+                builder.setPositiveButton("Xác nhận", DialogInterface.OnClickListener { dialog, which ->
                     val dao = HoaDonDao(binding.root.context).update(hoaDon)
                     dialog.cancel()
-            })
-                 builder.setNegativeButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
-                     dialog.dismiss()
-                     binding.tvTrangThaiHoaDon.isChecked = false
-                 })
+                })
+                builder.setNegativeButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+                    dialog.dismiss()
+                    binding.tvTrangThaiHoaDon.isChecked = false
+                })
 
-            builder.show()
+                builder.show()
             }
             binding.tvTenPhong.text = phong?.ten_phong
 
             binding.tvTong.text = hoaDon.tong.toString()
             binding.tvConLai.text = hoaDon.tong.toString()
+
+            val dateFormat: java.text.DateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val newDate = dateFormat.parse(hoaDon.ngay_tao_hoa_don)
+            val calendar = Calendar.getInstance()
+            if (newDate != null) {
+                calendar.time = newDate
+            }
+            val month = calendar.get(Calendar.MONTH)+1
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+            val year = calendar.get(Calendar.YEAR)
+
+            binding.tvThang.setText("T${month.toString()}")
+            binding.tvNam.setText(year.toString())
+
+
             binding.layoutChuyenChiTietHoaDon.setOnClickListener {
                 val bottomSheetDialog = BottomSheetDialog(binding.root.context)
                 val dialog = DialogHoaDonChiTietBinding.inflate(LayoutInflater.from(binding.root.context))
                 bottomSheetDialog.setContentView(dialog.root)
-                val simpleDateFormat = SimpleDateFormat("MM-yyyy")
-                val date: String = simpleDateFormat.format(Date())
+
 
                 dialog.tvTenPhong.text = phong?.ten_phong
-                dialog.tvNgay.text = hoaDon.ngay_tao_hoa_don
+                dialog.tvNgay.text = chuyenNgay1(hoaDon.ngay_tao_hoa_don)
                 dialog.tvTienPhong.text = hoaDon.gia_thue.toString() + " Vnd"
                 dialog.tvGiaDichVu.text = hoaDon.gia_dich_vu.toString() +" Vnd"
                 dialog.tvSoDien.text = hoaDon.so_dien.toString() + " Số"
                 dialog.tvKhoiNuoc.text = hoaDon.so_nuoc.toString() + " Khối"
                 dialog.tvTienMienGiam.text = hoaDon.mien_giam.toString() + " Vnd"
-                dialog.tvNgayHoaDon.text = "Hóa đơn tháng "+date
+                dialog.tvNgayHoaDon.text = "Hóa đơn tháng "+ chuyenNgay1(hoaDon.ngay_tao_hoa_don)
                 dialog.chkThanhToan.isChecked = false
 
 
@@ -85,15 +99,21 @@ class HoaDonViewHolder(
         }
     }
 }
+fun chuyenNgay1(ngay : String ):String{
+    val sdfNgay = SimpleDateFormat("yyyy-MM-dd")
+    val objDate = sdfNgay.parse(ngay)
+    val ngay =  DateFormat.format("MM-yyyy",objDate) as String
+    return ngay
+}
 class HoaDonAdapter(val list: List<HoaDon>): RecyclerView.Adapter<HoaDonViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoaDonViewHolder {
-      val infa = LayoutInflater.from(parent.context)
+        val infa = LayoutInflater.from(parent.context)
         val binding = LayoutItemHoaDonBinding.inflate(infa,parent,false)
         return HoaDonViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: HoaDonViewHolder, position: Int) {
-       val hoaDon = list[position]
+        val hoaDon = list[position]
         holder.apply {
             bind(hoaDon)
         }

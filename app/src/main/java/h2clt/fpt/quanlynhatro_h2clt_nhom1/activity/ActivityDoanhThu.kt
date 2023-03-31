@@ -106,9 +106,9 @@ class ActivityDoanhThu : AppCompatActivity() {
 
         binding.btnTongDoanhThu.setOnClickListener {
 
-            val sum=HoaDonDao(binding.root.context).getAllInHoaDonByDate(ngayDau,ngayCuoi)
+            val sum=HoaDonDao(binding.root.context).getAllInHoaDonByDate(ngayDau,ngayCuoi,maKhu).toLong()
             binding.tvTongDoanhThu.text = "tổng là: $sum đ"
-            if(sum!=0){
+            if(sum!=0L){
                 val srf=binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
                 maKhu= srf.getString(MA_KHU_KEY, "")!!
                 reload()

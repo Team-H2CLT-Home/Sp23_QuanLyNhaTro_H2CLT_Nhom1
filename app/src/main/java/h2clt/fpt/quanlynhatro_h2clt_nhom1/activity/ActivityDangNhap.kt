@@ -104,4 +104,9 @@ class ActivityDangNhap : AppCompatActivity() {
         edit.putBoolean(CHECKBOX_KEY,status)
         edit.commit()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Loading(this@ActivityDangNhap).dismiss()
+    }
 }
