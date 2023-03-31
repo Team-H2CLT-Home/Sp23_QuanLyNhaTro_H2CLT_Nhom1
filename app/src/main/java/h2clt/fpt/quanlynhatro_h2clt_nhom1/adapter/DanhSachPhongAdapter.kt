@@ -3,6 +3,7 @@ package h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemPhongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 
@@ -13,6 +14,8 @@ class DanhSachPhongViewHolder(
         binding.tvTenPhong.text = phong.ten_phong
         binding.tvGiaThue.text = phong.gia_thue.toString()
         binding.chkTrangThaiPhongTrong.isChecked = phong.trang_thai_phong==0
+        binding.tvGioiHanNguoiO.text = "Tối đa: "+phong.so_nguoi_o.toString()+" người"
+        binding.tvSoNguoiHienTai.text = "có "+ NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(phong.ma_phong).size +" người đang ở"
         binding.chkTrangThaiPhongDaCoc.isChecked = false
     }
 }

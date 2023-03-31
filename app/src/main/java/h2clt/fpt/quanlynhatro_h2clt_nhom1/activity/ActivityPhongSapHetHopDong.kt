@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.HopDongAdapter
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.HopDongPhongSapHetHanAdapter
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.*
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HopDongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityPhongDangThueBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityPhongSapHetHopDongBinding
@@ -32,9 +29,9 @@ class ActivityPhongSapHetHopDong : AppCompatActivity() {
 
         val srf = binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
         maKhu = srf.getString(MA_KHU_KEY, "")!!
-        listHopDongSapHetHan = HopDongDao(this@ActivityPhongSapHetHopDong).getHopDongSapHetHanByMaKhu(maKhu,2)
+        listHopDongSapHetHan = HopDongDao(this@ActivityPhongSapHetHopDong).getHopDongSapHetHanByMaKhu(maKhu,2,1)
         //listHopDong=HopDongDao(this@ActivityDanhSachHopDong).getAllInHopDong()
-        val hopDongAdapter= HopDongPhongSapHetHanAdapter(listHopDongSapHetHan)
+        val hopDongAdapter= HopDongPhongSapHetHanTongQuanAdapter(listHopDongSapHetHan)
         binding.rcyPhongSapHetHopDong.adapter=hopDongAdapter
         binding.rcyPhongSapHetHopDong.layoutManager= LinearLayoutManager(this)
     }

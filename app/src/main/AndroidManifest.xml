@@ -12,6 +12,12 @@
         android:theme="@style/Theme.QuanLyNhaTro_H2CLT_Nhom1"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ActivityThongTinChuNha"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ActivityPhongTrong"
+            android:exported="false" />
+        <activity
             android:name=".activity.ActivitySuaDichVu"
             android:exported="false" />
         <activity
@@ -19,9 +25,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.ActivityQuanLyDichVu"
-            android:exported="false" />
-        <activity
-            android:name=".activity.ActivityPhongTrong"
             android:exported="false" />
         <activity
             android:name=".activity.ActivityDanhSachPhong"
@@ -34,7 +37,7 @@
             android:exported="true" />
         <activity
             android:name=".activity.ActivityTaoHopDong"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".activity.ActivityDoanhThu"
             android:exported="false" />
@@ -54,10 +57,13 @@
             android:name=".activity.ActivitytaoHopDongMoi"
             android:exported="false" />
         <activity
-            android:name=".fragment.FragmentTaoHoaDon"
+            android:name=".activity.ActivityTaoHoaDon"
             android:exported="false" />
         <activity
             android:name=".activity.ActivityDanhSachHopDong"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ActivityDanhSachPhongTHD"
             android:exported="false" />
         <activity
             android:name=".activity.ActivityKetThucHopDong"
@@ -95,6 +101,12 @@
             android:exported="false" />
         <activity
             android:name=".activity.ActivityDangNhap"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ActivityCapNhatThongTinChuNha"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ActivityCapNhatHopDong"
             android:exported="false" />
         <activity
             android:name=".activity.ActivityDangKy"

@@ -2,6 +2,7 @@ package h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,11 @@ import androidx.fragment.app.Fragment
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.*
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.list
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HoaDonDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HopDongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.TablayoutTongquanBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HoaDon
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -21,6 +25,7 @@ class FragmentTongQuan:Fragment() {
     private lateinit var binding: TablayoutTongquanBinding
     var listHopDongSapHetHan = listOf<HopDong>()
     var listHopDong= listOf<HopDong>()
+    var listHoaDon = listOf<HoaDon>()
     private var maKhu=""
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +33,12 @@ class FragmentTongQuan:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = TablayoutTongquanBinding.inflate(layoutInflater)
+
+
+        val srf = binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
+        maKhu = srf.getString(MA_KHU_KEY, "")!!
+
+
         binding.phongTrong.setOnClickListener {
             val intent = Intent(context,ActivityPhongTrong::class.java)
             startActivity(intent)
@@ -40,6 +51,11 @@ class FragmentTongQuan:Fragment() {
             val intent = Intent(context, ActivityPhongSapHetHopDong::class.java)
             startActivity(intent)
         }
+
+        val sdf = SimpleDateFormat("yyyy-MM")
+        val ngay = sdf.format(Date())
+        listHoaDon = HoaDonDao(binding.root.context).getAllInHoaDonByMaKhu(maKhu).filter { it.trang_thai_hoa_don == 0 && ngay in it.ngay_tao_hoa_don }
+        binding.slPhongChuaDongTien.setText(""+listHoaDon.size)
         binding.phongChuaDongTien.setOnClickListener {
             val intent = Intent(context,ActivityPhongChuaDongTien::class.java)
             startActivity(intent)
@@ -53,16 +69,15 @@ class FragmentTongQuan:Fragment() {
             startActivity(intent)
         }
 
-        val srf = binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
-        maKhu = srf.getString(MA_KHU_KEY, "")!!
+
         updateHopDong()
-        listHopDongSapHetHan = HopDongDao(binding.root.context).getHopDongSapHetHanByMaKhu(maKhu,2)
+        listHopDongSapHetHan = HopDongDao(binding.root.context).getHopDongSapHetHanByMaKhu(maKhu,2,1)
         binding.tvPhongSapHetHanHD.setText(""+listHopDongSapHetHan.size)
         return binding.root
     }
 
     private fun updateHopDong() {
-        listHopDong = HopDongDao(binding.root.context).getAllInHopDongByMaKhu(maKhu)
+        listHopDong = HopDongDao(binding.root.context).getAllInHopDongByMaKhu(maKhu,1)
         for(i in 0 until  listHopDong.size){
             val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
 
@@ -120,6 +135,7 @@ class FragmentTongQuan:Fragment() {
             tien_coc = hopDong.tien_coc,
             anh_hop_dong = hopDong.anh_hop_dong,
             trang_thai_hop_dong = 0,
+            hieu_luc_hop_dong = hopDong.hieu_luc_hop_dong,
             ngay_lap_hop_dong = hopDong.ngay_lap_hop_dong
         )
         HopDongDao(binding.root.context).updateHopDong(hopDongNew)
@@ -135,6 +151,7 @@ class FragmentTongQuan:Fragment() {
             tien_coc = hopDong.tien_coc,
             anh_hop_dong = hopDong.anh_hop_dong,
             trang_thai_hop_dong = 2,
+            hieu_luc_hop_dong = hopDong.hieu_luc_hop_dong,
             ngay_lap_hop_dong = hopDong.ngay_lap_hop_dong
         )
         HopDongDao(binding.root.context).updateHopDong(hopDongNew)

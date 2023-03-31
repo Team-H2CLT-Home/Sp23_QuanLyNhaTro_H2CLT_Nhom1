@@ -146,6 +146,7 @@
                        style="@style/image_tabLayout"
                        android:src="@drawable/icon_price_tq" />
                    <TextView
+                       android:id="@+id/sl_PhongChuaDongTien"
                        style="@style/textView_tabLayout"
                        android:textSize="40dp"
                        android:paddingLeft="20dp"

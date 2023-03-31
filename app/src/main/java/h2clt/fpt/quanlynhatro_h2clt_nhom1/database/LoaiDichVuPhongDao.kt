@@ -26,9 +26,17 @@ class LoaiDichVuPhongDao(context: Context) {
         return db.insert(LoaiDichVu.TB_NAME,null,values)
     }
     fun xoaLoaiDichVuByTenVaMaPhong(loiDichVu: LoaiDichVu):Int{
-      return  db.delete(LoaiDichVu.TB_NAME,
-          "${LoaiDichVu.CLM_TEN_LOAI_DICH_VU}=? AND ${LoaiDichVu.CLM_MA_PHONG}=?",
-          arrayOf(loiDichVu.ten_loai_dich_vu, loiDichVu.ma_phong))
+        return  db.delete(LoaiDichVu.TB_NAME,
+            "${LoaiDichVu.CLM_TEN_LOAI_DICH_VU}=? AND ${LoaiDichVu.CLM_MA_PHONG}=?",
+            arrayOf(loiDichVu.ten_loai_dich_vu, loiDichVu.ma_phong))
+    }
+    fun updateLoaiDichVu(id:String, soCu:Int, soMoi:Int):Int{
+        val values=ContentValues()
+        values.apply {
+            put(LoaiDichVu.CLM_SO_CU,soCu )
+            put(LoaiDichVu.CLM_SO_MOI,soMoi)
+        }
+        return db.update(LoaiDichVu.TB_NAME, values, "${LoaiDichVu.CLM_MA_LOAI_DICH_VU}=?", arrayOf(id))
     }
     fun upDateLoaiDichVuByMaKhuVaTen(loaiDichVu: LoaiDichVu, ten:String):Int{
         val values=ContentValues()

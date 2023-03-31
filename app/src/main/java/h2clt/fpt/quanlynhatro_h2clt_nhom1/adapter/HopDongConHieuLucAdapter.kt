@@ -1,7 +1,5 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter
 
-import android.app.AlertDialog
-import android.content.Context
 import android.graphics.Color
 import android.text.format.DateFormat
 import android.util.Log
@@ -9,17 +7,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityDanhSachHopDong
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HopDongDao
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogChiTietHopDongBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogChiTietHopDong2Binding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemDsHopDongBinding
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentQuanLy
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class HopDongViewHolder(
+class HopDongConHieuLucViewHolder(
     val binding: LayoutItemDsHopDongBinding
 
 ): RecyclerView.ViewHolder(binding.root){
@@ -70,26 +67,37 @@ class HopDongViewHolder(
         }
 
         binding.tvChiTietDanhSachHD.setOnClickListener {
-              val build = AlertDialog.Builder(binding.root.context).create()
-              val dialog = DialogChiTietHopDongBinding.inflate(LayoutInflater.from(binding.root.context))
-            build.setView(dialog.root)
-            dialog.tvChiTietHDTenPhong.setText("Phòng:"+ HopDongDao(binding.root.context).getTenPhongByIDHopDong(hopDong.ma_hop_dong))
-            dialog.tvChiTietHDTenNguoiDung.setText("Họ và tên:"+ HopDongDao(binding.root.context).getTenNguoiDungByIDHopDong(hopDong.ma_hop_dong))
-            dialog.tvChiTietHDThoiHan.setText("Thời hạn: "+ hopDong.thoi_han + " tháng")
-            dialog.tvChiTietHDNgayO.setText("Ngày ở: "+ chuyenDinhDangNgay(hopDong.ngay_o))
-            dialog.tvChiTietHDNgayHopDong.setText("Ngày kết thúc: "+ chuyenDinhDangNgay(hopDong.ngay_hop_dong))
-            dialog.tvNgayLapHopDong.setText("Ngày lập hợp đồng: "+ chuyenDinhDangNgay(hopDong.ngay_lap_hop_dong))
-            dialog.tvChiTietHDTienCoc.setText("Tiền cọc: "+ hopDong.tien_coc)
+              val build = BottomSheetDialog(binding.root.context)
+              val dialog = DialogChiTietHopDong2Binding.inflate(LayoutInflater.from(binding.root.context))
+            build.setContentView(dialog.root)
+            dialog.tvTenPhong.setText(""+ HopDongDao(binding.root.context).getTenPhongByIDHopDong(hopDong.ma_hop_dong))
+            dialog.tvTenChuHopDong.setText(""+ HopDongDao(binding.root.context).getTenNguoiDungByIDHopDong(hopDong.ma_hop_dong))
+            dialog.tvThoiHan.setText(""+ hopDong.thoi_han + " tháng")
+            dialog.tvNgayO.setText(""+ chuyenDinhDangNgay(hopDong.ngay_o))
+            dialog.tvNgayKetThuc.setText(""+ chuyenDinhDangNgay(hopDong.ngay_hop_dong))
+            dialog.tvThongTin.setText("Thông tin chi tiết về hợp đồng của phòng "+HopDongDao(binding.root.context).getTenPhongByIDHopDong(hopDong.ma_hop_dong))
+            dialog.tvNgay.setText(""+ chuyenDinhDangNgay(hopDong.ngay_lap_hop_dong))
+            dialog.tvTienCoc.setText(""+ hopDong.tien_coc)
             if (hopDong.trang_thai_hop_dong==1){
-                dialog.tvChiTietHDTrangThai.setText("Tình trạng hợp đồng: Còn hợp đồng")
+                dialog.chkThoiHan.setText("Còn hợp đồng")
+                dialog.chkThoiHan.isChecked = true
             }else if(hopDong.trang_thai_hop_dong==0){
-                dialog.tvChiTietHDTrangThai.setText("Tình trạng hợp đồng: Hết hợp đồng")
+                dialog.chkThoiHan.setText("Hết hợp đồng")
+                dialog.chkThoiHan.isChecked = false
             }else{
-                dialog.tvChiTietHDTrangThai.setText("Tình trạng hợp đồng: Sắp hết hợp đồng")
+                dialog.chkThoiHan.setText("Sắp hết hợp đồng")
+                dialog.chkThoiHan.isChecked = true
+            }
+            if (hopDong.hieu_luc_hop_dong==1){
+                dialog.chkHieuLuc.setText("Còn hiệu lực")
+                dialog.chkHieuLuc.isChecked = true
+            }else{
+                dialog.chkHieuLuc.setText("Hết hiệu lực")
+                dialog.chkHieuLuc.isChecked = false
             }
             Toast.makeText(dialog.root.context,""+hopDong.trang_thai_hop_dong,Toast.LENGTH_SHORT).show()
 
-            dialog.btnDongChiTietHopDong.setOnClickListener {
+            dialog.btnDong.setOnClickListener {
 
                 build.dismiss()
             }
@@ -107,28 +115,24 @@ class HopDongViewHolder(
         return ngay
     }
 }
-class HopDongAdapter (val listHopDong: List<HopDong>): RecyclerView.Adapter<HopDongViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HopDongViewHolder {
+class HopDongConHieuLucAdapter (val listHopDong: List<HopDong>,val onCLick:HopDongInterface): RecyclerView.Adapter<HopDongConHieuLucViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HopDongConHieuLucViewHolder {
         val inflater= LayoutInflater.from(parent.context)
         val binding = LayoutItemDsHopDongBinding.inflate(inflater,parent,false)
 
-        return  HopDongViewHolder(binding)
+        return  HopDongConHieuLucViewHolder(binding)
     }
     override fun getItemCount()=listHopDong.size
-    override fun onBindViewHolder(holder: HopDongViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HopDongConHieuLucViewHolder, position: Int) {
         val hopDong = listHopDong[position]
 
         holder.apply {
-
             bind(hopDong)
             //updateHopDong(hopDong)
-
-
-
             //fragment.updateDSHopDong(hopDong)
-
-
-
+        }
+        holder.itemView.setOnClickListener {
+            onCLick.OnClickHopDong(position)
         }
 
 //        holder.binding.tvDanhSachHopDongTrangThai.setOnClickListener {

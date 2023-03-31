@@ -6,10 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayoutMediator
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.HopDongAdapter
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.*
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HopDongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDanhSachHopDongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentQuanLy
@@ -31,9 +30,23 @@ class ActivityDanhSachHopDong : AppCompatActivity() {
         val ab = getSupportActionBar()
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
-        val srf = this.binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
-        maKhu = srf.getString(MA_KHU_KEY, "")!!
-        reloadDSHopDong()
+//        val srf = this.binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
+//        maKhu = srf.getString(MA_KHU_KEY, "")!!
+//        reloadDSHopDong()
+        val adapter = ViewpagerDanhSachHopDongDSAdapter(supportFragmentManager, lifecycle)
+        binding.viewpagerDanhSachHopDong.adapter = adapter
+        TabLayoutMediator(binding.tabDanhSachHopDong, binding.viewpagerDanhSachHopDong) { tab, pos ->
+            when (pos) {
+                0 -> {
+                    tab.text = "Còn hiệu lực"
+                }
+                1 -> {
+                    tab.text = "Hết hiệu lực"
+                }
+
+                else -> tab.text = "Còn hiệu lực"
+            }
+        }.attach()
     }
 
 
@@ -127,14 +140,14 @@ class ActivityDanhSachHopDong : AppCompatActivity() {
 //        }
 
 
-    fun reloadDSHopDong(){
-        val srf = this.binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
-        maKhu = srf.getString(MA_KHU_KEY, "")!!
-        listHopDong = HopDongDao(this@ActivityDanhSachHopDong).getAllInHopDongByMaKhu(maKhu)
-        //listHopDong=HopDongDao(this@ActivityDanhSachHopDong).getAllInHopDong()
-        val hopDongAdapter = HopDongAdapter(listHopDong)
-        this.binding.recyclerDanhSachHopDong.adapter = hopDongAdapter
-        this.binding.recyclerDanhSachHopDong.layoutManager = LinearLayoutManager(this)
-    }
+//    fun reloadDSHopDong(){
+//        val srf = this.binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
+//        maKhu = srf.getString(MA_KHU_KEY, "")!!
+//        listHopDong = HopDongDao(this@ActivityDanhSachHopDong).getAllInHopDongByMaKhu(maKhu)
+//        //listHopDong=HopDongDao(this@ActivityDanhSachHopDong).getAllInHopDong()
+//        val hopDongAdapter = HopDongAdapter(listHopDong)
+//        this.binding.recyclerDanhSachHopDong.adapter = hopDongAdapter
+//        this.binding.recyclerDanhSachHopDong.layoutManager = LinearLayoutManager(this)
+//    }
 
 }

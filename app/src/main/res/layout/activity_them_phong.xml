@@ -201,6 +201,9 @@
                  android:layout_height="wrap_content"
                  android:layout_gravity="center"
                  android:layout_marginTop="20dp"
+                 android:textColor="@color/white"
+                 android:layout_marginBottom="10dp"
+                 android:backgroundTint="@color/mauChinhApp"
                  android:text="Thêm hoặc xóa dịch vụ" />
          </LinearLayout>
 
@@ -215,7 +218,10 @@
                  android:layout_width="150dp"
                  android:layout_weight="1"
                  android:layout_height="wrap_content"
+                 android:textColor="@color/white"
+
                  android:layout_margin="10dp"
+                 android:backgroundTint="@color/mauChinhApp"
                  android:text="Lưu" />
 
              <Button
@@ -223,6 +229,9 @@
                  android:id="@+id/btnHuyThemPhong"
                  android:layout_width="150dp"
                  android:layout_margin="10dp"
+                 android:textColor="@color/white"
+
+                 android:backgroundTint="@color/mauChinhApp"
                  android:layout_height="wrap_content"
                  android:text="Đóng" />
          </LinearLayout>

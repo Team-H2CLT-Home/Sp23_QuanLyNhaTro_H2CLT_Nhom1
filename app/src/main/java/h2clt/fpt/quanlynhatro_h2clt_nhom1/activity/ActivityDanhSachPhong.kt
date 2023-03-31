@@ -27,10 +27,7 @@ class ActivityDanhSachPhong : AppCompatActivity() {
             ab.setDisplayHomeAsUpEnabled(true);
             ab.setDisplayShowHomeEnabled(true);
         }
-        if (ab != null){
-            ab.setDisplayHomeAsUpEnabled(true);
-            ab.setDisplayShowHomeEnabled(true);
-        }
+
         val adapter = ViewpagerDanhSachPhongAdapter(supportFragmentManager, lifecycle)
         binding.viewpagerDanhSachPhong.adapter = adapter
         TabLayoutMediator(binding.tabDanhSachPhong, binding.viewpagerDanhSachPhong) { tab, pos ->
@@ -41,7 +38,7 @@ class ActivityDanhSachPhong : AppCompatActivity() {
                 1 -> {
                     tab.text = "Phòng trống"
                 }
-                else -> tab.text = "Phòng đã ở"
+                else -> tab.text = "Phòng đang ở"
             }
         }.attach()
     }

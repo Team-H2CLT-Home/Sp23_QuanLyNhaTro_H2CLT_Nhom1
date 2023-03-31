@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.KhuTro
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 
 class KhuTroDao(context: Context) {
     val dbHelper= DbHelper(context)
@@ -57,5 +58,19 @@ class KhuTroDao(context: Context) {
             }while (c.moveToNext())
         }
         return list
+    }
+
+    @SuppressLint("Range")
+    fun getTenKhuTro():String{
+        val sql="""
+            select ${KhuTro.CLM_TEN_KHU_TRO} from ${KhuTro.TB_NAME} 
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+
+        if(c.moveToFirst()) {
+            return c.getString(c.getColumnIndex(KhuTro.CLM_TEN_KHU_TRO))
+        }
+
+        return "null"
     }
 }
