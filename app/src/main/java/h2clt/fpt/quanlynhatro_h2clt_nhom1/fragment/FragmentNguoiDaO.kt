@@ -12,7 +12,6 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MaPhongSpinner
@@ -21,9 +20,7 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogThemKhachThueBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentNguoiDaOBinding
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentNguoiDangOBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
-import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 

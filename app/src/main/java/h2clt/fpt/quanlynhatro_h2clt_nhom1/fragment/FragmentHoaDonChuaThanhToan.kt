@@ -8,23 +8,87 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.*
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HoaDonDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentHoaDonChuaThanhToanBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HoaDon
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class FragmentHoaDonChuaThanhToan : Fragment() {
     private lateinit var binding : FragmentHoaDonChuaThanhToanBinding
     private var maKhu = ""
     private var list = listOf<HoaDon>()
+    private var count=0
+    var currentYear=""
+    var curentMonth=""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHoaDonChuaThanhToanBinding.inflate(layoutInflater)
+
+
+        val sfp = SimpleDateFormat("yyyy-MM-dd")
+        val data = sfp.format(Date())
+
+        val dateFormat: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val newDate = dateFormat.parse(data)
+        val calendar = Calendar.getInstance()
+        if (newDate != null) {
+            calendar.time = newDate
+        }
+        val thang = (calendar.get(Calendar.MONTH)+1).toString()
+        currentYear = calendar.get(Calendar.YEAR).toString()
+        curentMonth= if(thang.length==1) "0$thang" else thang
+        binding.tvThangDSHD.text ="Tháng ${thang},${currentYear}"
+        binding.icPreviousDSHD.setOnClickListener {
+            count-=1
+            val sfp = SimpleDateFormat("yyyy-MM-dd")
+            val data = sfp.format(Date())
+            val dateFormat: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val newDate = dateFormat.parse(data)
+            val dFormat= SimpleDateFormat("yyyy-MM")
+            val calendar = Calendar.getInstance()
+            if (newDate != null) {
+                calendar.time = newDate
+            }
+            val thang = calendar.get(Calendar.MONTH)+count
+            val year = calendar.get(Calendar.YEAR)
+            val c1 = GregorianCalendar(year, thang, 1)
+            val m=(c1.get(Calendar.MONTH)+1).toString()
+            val y=(c1.get(Calendar.YEAR)).toString()
+            val newM= if(m.length==1) "0$m" else m
+            hienThiThangCu(binding.root.context,maKhu,"$y-$newM")
+            binding.tvThangDSHD.text ="Tháng ${m},${y}"
+
+        }
+
+        binding.icNextDSHD.setOnClickListener {
+            count+=1
+            val sfp = SimpleDateFormat("yyyy-MM-dd")
+            val data = sfp.format(Date())
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val dFormat= SimpleDateFormat("yyyy-MM")
+            val newDate = dateFormat.parse(data)
+            val calendar = Calendar.getInstance()
+            if (newDate != null) {
+                calendar.time = newDate
+            }
+            val thang = calendar.get(Calendar.MONTH)+count
+            val year = calendar.get(Calendar.YEAR)
+
+            val c1 = GregorianCalendar(year, thang, 1)
+            val  m=(c1.get(Calendar.MONTH)+1).toString()
+            val y=c1.get(Calendar.YEAR).toString()
+            val newM= if(m.length==1) "0$m" else m
+            hienThiThangCu(binding.root.context,maKhu,"$y-$newM")
+            binding.tvThangDSHD.text ="Tháng ${m},${y}"
+
+        }
+
         val srf=binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
         maKhu= srf.getString(MA_KHU_KEY, "")!!
         list = activity?.let { HoaDonDao(it).getAllInHoaDonByMaKhu(maKhu) }!!
@@ -33,24 +97,21 @@ class FragmentHoaDonChuaThanhToan : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val hoaDonDaThanhToanAdapter  = HoaDonDaThanhToanAdapter(list)
-        binding.rcyHoaDonChuaThanhToan.adapter = hoaDonDaThanhToanAdapter
-        hoaDonDaThanhToanAdapter.notifyDataSetChanged()
+        hienThiThangCu(binding.root.context,maKhu, "$currentYear-$curentMonth")
+
     }
+
     override fun onResume() {
         super.onResume()
-        reload()
-    }
-    private fun reload(){
-        list = HoaDonDao(binding.root.context).getAllInHoaDonByMaKhu(maKhu)
-        val hoaDonAdapter  = HoaDonAdapter(list)
-        val hd = HoaDonDao(binding.root.context).getAllInHoaDonByMaKhu(maKhu).filter { it.trang_thai_hoa_don == 0 }
+        hienThiThangCu(binding.root.context,maKhu, "$currentYear-$curentMonth")
 
-        val listND = NguoiDungDao(binding.root.context).getAllInNguoiDungByMaKhu(maKhu)
-        val nguoiThueAdapter = NguoiThueAdapter(listND)
+    }
+    private fun hienThiThangCu(context: Context, maKhu : String, date:String){
+        val hoaDonDao = HoaDonDao(context)
+        list = hoaDonDao.getAllInHoaDonByMaKhu(maKhu).filter {date in it.ngay_tao_hoa_don}
+        val hoaDonAdapter = HoaDonAdapter(list)
         binding.rcyHoaDonChuaThanhToan.adapter = hoaDonAdapter
         hoaDonAdapter.notifyDataSetChanged()
-       // Toast.makeText(binding.root.context,""+hd, Toast.LENGTH_LONG).show()
-        Log.d("chech", "reload: "+hd.size)
+
     }
 }

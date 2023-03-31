@@ -55,7 +55,7 @@ class HoaDonDao(context: Context) {
                 gia_dich_vu = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_DICH_VU)),
                 mien_giam = c.getInt(c.getColumnIndex(HoaDon.CLM_MIEN_GIAM)),
                 ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG)),
-                tong = c.getInt(c.getColumnIndex(HoaDon.CLM_TONG))
+                tong = c.getLong(c.getColumnIndex(HoaDon.CLM_TONG))
             )
         }
         return null
@@ -78,7 +78,7 @@ class HoaDonDao(context: Context) {
                     gia_dich_vu = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_DICH_VU)),
                     mien_giam = c.getInt(c.getColumnIndex(HoaDon.CLM_MIEN_GIAM)),
                     ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG)),
-                    tong = c.getInt(c.getColumnIndex(HoaDon.CLM_TONG))
+                    tong = c.getLong(c.getColumnIndex(HoaDon.CLM_TONG))
                 )
                 list+=hoaDon
             }while (c.moveToNext())
@@ -107,11 +107,31 @@ class HoaDonDao(context: Context) {
                     gia_dich_vu = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_DICH_VU)),
                     mien_giam = c.getInt(c.getColumnIndex(HoaDon.CLM_MIEN_GIAM)),
                     ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG)),
-                    tong = c.getInt(c.getColumnIndex(HoaDon.CLM_TONG))
+                    tong = c.getLong(c.getColumnIndex(HoaDon.CLM_TONG))
                 )
                 list+=hoaDon
             }while (c.moveToNext())
         }
         return list
+    }
+
+    @SuppressLint("Range")
+    fun getAllInHoaDonByDate(dateStart:String, dateEnd:String): Int {
+        val list= mutableListOf<Int>()
+        val sql="""
+            select sum(${HoaDon.CLM_TONG}) as tong from ${HoaDon.TB_NAME} 
+            where ${HoaDon.CLM_NGAY_TAO_HOA_DON} BETWEEN ? AND ?
+        """.trimIndent()
+        val c=db.rawQuery(sql, arrayOf(dateStart,dateEnd))
+        if(c.moveToFirst()){
+            do {
+                try {
+                    list.add(c.getInt(c.getColumnIndex(HoaDon.CLM_TONG)))
+                } catch (e: Exception) {
+                    list.add(0)
+                }
+            }while (c.moveToNext())
+        }
+        return list[0]
     }
 }

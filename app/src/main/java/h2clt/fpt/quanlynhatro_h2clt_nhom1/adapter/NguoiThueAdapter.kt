@@ -1,23 +1,11 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter
 
-import android.app.AlertDialog
-import android.app.Dialog
-import android.content.Context
-import android.content.Intent
-import android.content.res.Resources
-import android.graphics.Typeface
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityCapNhatKhachThue
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogChiTietNguoiThueBinding
@@ -82,13 +70,9 @@ class NguoiThueViewHolder(
         }
 
     }
-    fun truyenDuLieu(context:Context){
-        val intent = Intent(context,ActivityCapNhatKhachThue::class.java)
-        context.startActivity(intent)
-    }
 }
 class NguoiThueAdapter(
-    val listNguoiDung:List<NguoiDung>,val onCLick:KhachThueInterface
+    val listNguoiDung: List<NguoiDung>
 ):RecyclerView.Adapter<NguoiThueViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NguoiThueViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -103,12 +87,10 @@ class NguoiThueAdapter(
         val user = listNguoiDung[position]
         holder.apply {
             bind(user)
-            //updateHopDong(hopDong)
-            //fragment.updateDSHopDong(hopDong)
         }
         holder.itemView.setOnClickListener {
 
-            onCLick.OnClickKhachThue(position)
+         //   onCLick.OnClickKhachThue(position)
         }
     }
 }

@@ -7,28 +7,25 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.Loading
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityTaoHoaDon
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemPhongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemPhongDangOBinding
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentTaoHoaDon
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
+
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
-const val MA_PHONG_HOA_DON_KEY="ma phong de lay hoa don"
+const val MA_PHONG_HOA_DON_KEY="ma_phong_de_lay_hoa_don"
 
 class DanhSachPhongDaOViewHolder(
     val binding: LayoutItemPhongDangOBinding
 ): RecyclerView.ViewHolder(binding.root){
-    fun bind(phong: HopDong){
-        if (phong.trang_thai_hop_dong == 1){
+    fun bind(phong: NguoiDung, context: Context){
+        if (phong.trang_thai_o == 1){
             val maPhong = PhongDao(binding.root.context).getPhongById(phong.ma_phong)
             binding.tvTenPhong.text = maPhong?.ten_phong
             binding.tvGiaThue.text = maPhong?.gia_thue.toString()
             binding.chkTrangThaiPhongTrong.isChecked = false
             binding.chkTrangThaiPhongTrong.isEnabled = false
             binding.linnerLayoutItemPhong.setOnClickListener {
-              manHinhHoaDon(binding.root.context,phong.ma_phong)
+                manHinhHoaDon(context,phong.ma_phong)
             }
         }else{
             binding.linnerLayoutItemPhong.isVisible = false
@@ -36,14 +33,15 @@ class DanhSachPhongDaOViewHolder(
     }
 }
 fun manHinhHoaDon(context: Context, id:String){
-        val intent = Intent(context,FragmentTaoHoaDon::class.java)
-        intent.apply {
-            putExtra(MA_PHONG_HOA_DON_KEY, id)
-        }
-        context.startActivity(intent)
+    val intent = Intent(context,ActivityTaoHoaDon::class.java)
+    intent.apply {
+        putExtra(MA_PHONG_HOA_DON_KEY, id)
+    }
+    context.startActivity(intent)
 }
 class DanhSachPhongDaOAdapter(
-    val list:List<HopDong>
+    val list:List<NguoiDung>,
+   val context: Context
 ):RecyclerView.Adapter<DanhSachPhongDaOViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DanhSachPhongDaOViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -55,6 +53,6 @@ class DanhSachPhongDaOAdapter(
 
     override fun onBindViewHolder(holder: DanhSachPhongDaOViewHolder, position: Int) {
         val user = list[position]
-        holder.bind(user)
+        holder.bind(user, context)
     }
 }
