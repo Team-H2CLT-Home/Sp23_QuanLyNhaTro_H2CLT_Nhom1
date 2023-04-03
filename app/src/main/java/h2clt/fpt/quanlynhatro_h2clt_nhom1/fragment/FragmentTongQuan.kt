@@ -60,10 +60,7 @@ class FragmentTongQuan:Fragment() {
             val intent = Intent(context,ActivityPhongChuaDongTien::class.java)
             startActivity(intent)
         }
-        binding.phongDaCoc.setOnClickListener {
-            val intent = Intent(context,ActivityPhongDaCocGiuCho::class.java)
-            startActivity(intent)
-        }
+
         binding.doanhThu.setOnClickListener {
             val intent = Intent(context,ActivityDoanhThu::class.java)
             startActivity(intent)
