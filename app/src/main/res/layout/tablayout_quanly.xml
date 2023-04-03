@@ -42,6 +42,7 @@
 
                 <ImageView
                     style="@style/image_tabLayout"
+                    android:layout_marginLeft="15dp"
                     android:src="@drawable/icon_dichvu" />
 
                 <TextView
