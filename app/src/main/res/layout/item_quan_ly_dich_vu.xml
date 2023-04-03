@@ -5,30 +5,31 @@
     android:orientation="vertical"
     android:layout_marginRight="5dp"
     android:layout_marginLeft="5dp"
-    android:layout_marginTop="5dp"
+    android:layout_marginTop="10dp"
     android:layout_height="wrap_content">
     <androidx.cardview.widget.CardView
         android:id="@+id/cardDichVu"
         android:layout_width="match_parent"
         app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="#FFFFFF"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:paddingTop="5dp"
-            android:paddingLeft="10dp"
-            android:paddingBottom="5dp"
             android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
+                android:background="#F48FB1"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/tenLoaiDichVu"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"
+                    android:textColor="#F6F3F3"
                     android:layout_height="wrap_content"
                     android:text="Tiền điện"
                     android:textStyle="bold"
@@ -38,6 +39,7 @@
                     android:src="@drawable/baseline_clear_24"
                     android:layout_gravity="center"
                     android:layout_width="40dp"
+
                     android:paddingRight="10dp"
                     android:layout_height="40dp"/>
             </LinearLayout>
@@ -47,6 +49,9 @@
                 android:id="@+id/tvGiaDichVu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingBottom="5dp"
                 android:textColor="@color/black"
                 android:text="3000 Đồng / Số"
                 android:textSize="20sp" />
@@ -54,7 +59,10 @@
                 android:id="@+id/tvInfo"
                 android:text="Áp dụng phòng?"
                 android:textSize="18sp"
-                android:textColor="#F43636"
+                android:textColor="#EC3535"
+                android:paddingTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

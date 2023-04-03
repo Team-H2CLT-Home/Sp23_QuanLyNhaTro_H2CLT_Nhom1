@@ -19,16 +19,38 @@
         android:layout_height="wrap_content"
 
         />
+
+
     <LinearLayout
+        android:id="@+id/lyCapNhat"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="10dp"
         android:background="@drawable/boder_nen">
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/lyTenPhong"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:visibility="gone"-->
+<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--            >-->
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/edTenPhong"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Tên phòng"-->
+<!--                android:enabled="false"-->
+<!--                android:background="@drawable/boder_tron_colorwhite"-->
+<!--                />-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -99,6 +121,7 @@
                 />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lyQueQuanSuaNguoiDung"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -112,6 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Quê quán"
+                android:layout_marginBottom="15dp"
                 android:background="@drawable/boder_tron_colorwhite"
                 />
         </com.google.android.material.textfield.TextInputLayout>
