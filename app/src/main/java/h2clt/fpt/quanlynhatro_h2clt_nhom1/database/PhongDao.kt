@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.KhuTro
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 
@@ -40,6 +41,32 @@ class PhongDao(context: Context) {
         val list= mutableListOf<Phong>()
         val sql="""
            select * from ${Phong.TB_NAME} where ${Phong.CLM_MA_KHU} = "$maKhu" 
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+
+        if(c.moveToFirst()){
+            do {
+                val phong= Phong(
+                    ma_phong = c.getString(c.getColumnIndex(Phong.CLM_MA_PHONG)),
+                    ten_phong = c.getString(c.getColumnIndex(Phong.CLM_TEN_PHONG)),
+                    dien_tich = c.getInt(c.getColumnIndex(Phong.CLM_DIEN_TICH)),
+                    gia_thue = c.getLong(c.getColumnIndex(Phong.CLM_GIA_THUE)),
+                    so_nguoi_o = c.getInt(c.getColumnIndex(Phong.CLM_SO_NGUOI_O)),
+                    trang_thai_phong = c.getInt(c.getColumnIndex(Phong.CLM_TRANG_THAI_PHONG)),
+                    ma_khu = c.getString(c.getColumnIndex(Phong.CLM_MA_KHU)),
+                )
+                list+=phong
+            }while (c.moveToNext())
+        }
+
+        return list
+    }
+    @SuppressLint("Range")
+    fun getAllInPhongByTenKhuTro(tenKhuTro:String):List<Phong>{
+        val list= mutableListOf<Phong>()
+        val sql="""
+           select * from ${Phong.TB_NAME} JOIN ${KhuTro.TB_NAME} ON ${KhuTro.TB_NAME}.${KhuTro.CLM_MA_KHU_TRO} = ${Phong.TB_NAME}.${Phong.CLM_MA_KHU}
+            WHERE ${KhuTro.TB_NAME}.${KhuTro.CLM_TEN_KHU_TRO} = "$tenKhuTro"
         """.trimIndent()
         val c=db.rawQuery(sql,null)
 
@@ -158,5 +185,18 @@ class PhongDao(context: Context) {
             put(Phong.CLM_TRANG_THAI_PHONG,0)
         }
         return db.update(Phong.TB_NAME,values,  "${Phong.CLM_MA_PHONG}=?", arrayOf(maPhong))
+    }
+
+    @SuppressLint("Range")
+    fun demSoPhong(maKhu:String):Int{
+        val list = mutableListOf<Int>()
+        val sql="""
+            select COUNT(${Phong.CLM_MA_PHONG}) as SoPhong from ${Phong.TB_NAME} where ${Phong.TB_NAME}.${Phong.CLM_MA_KHU}= "$maKhu"
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+        if(c.moveToNext()){
+                c.getInt(c.getColumnIndex("SoPhong"))
+        }
+        return c.getInt(c.getColumnIndex("SoPhong"))
     }
 }

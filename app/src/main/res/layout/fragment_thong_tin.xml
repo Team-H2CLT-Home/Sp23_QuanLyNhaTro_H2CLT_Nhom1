@@ -336,7 +336,9 @@
                     android:layout_marginEnd="50dp"
                     android:layout_weight="1"
                     android:text="Tên và giá dịch vụ"
-                    android:textSize="16sp" />
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
