@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -32,6 +33,11 @@ class ActivityCapNhatKhachThue : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCapNhatKhachThueBinding.inflate(layoutInflater)
+
+        setSupportActionBar(binding.tbCapNhatKhachThue)
+        val ab = getSupportActionBar()
+        ab?.setHomeAsUpIndicator(R.drawable.black_left)
+        ab?.setDisplayHomeAsUpEnabled(true)
         val srf = binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
         maKhu = srf.getString(MA_KHU_KEY, "")!!
 //        listNguoiDung=NguoiDungDao(requireActivity()).getAllInNguoiDungByMaKhu(maKhu)
@@ -239,6 +245,13 @@ class ActivityCapNhatKhachThue : AppCompatActivity() {
             }
 
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id: Int = item.getItemId();
+        if (id == android.R.id.home)
+            finish()
+        return super.onOptionsItemSelected(item);
     }
 
 }

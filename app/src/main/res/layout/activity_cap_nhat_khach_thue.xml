@@ -6,13 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.ActivityCapNhatKhachThue">
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Cập nhật người dùng"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbCapNhatKhachThue"
+        style="@style/toolBar"
+        app:title="Cập Nhật Khách Thuê"
+
+        />
     <Spinner
         android:id="@+id/spinnerSuaNguoiDung"
         android:layout_width="match_parent"

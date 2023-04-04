@@ -20,7 +20,7 @@ class ActivityCapNhatThongTinChuNha : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.tbDangKy
-        setSupportActionBar(binding.tbDangKy )
+        setSupportActionBar(binding.tbDangKy)
         val ab = getSupportActionBar()
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
@@ -76,7 +76,7 @@ class ActivityCapNhatThongTinChuNha : AppCompatActivity() {
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.getItemId();
         if (id==android.R.id.home)
-            chuyenActivity();
+            finish()
         return super.onOptionsItemSelected(item);
     }
     fun validate(): Int {

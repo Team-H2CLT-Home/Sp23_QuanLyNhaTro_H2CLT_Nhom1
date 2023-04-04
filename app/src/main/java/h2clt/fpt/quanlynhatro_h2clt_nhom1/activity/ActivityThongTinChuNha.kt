@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
@@ -26,6 +27,12 @@ class ActivityThongTinChuNha : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 //        val srf = binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
 //        maKhu = srf.getString(MA_KHU_KEY, "")!!
+
+        setSupportActionBar(binding.tbThongTinChuNha)
+        val ab = getSupportActionBar()
+        ab?.setHomeAsUpIndicator(R.drawable.black_left)
+        ab?.setDisplayHomeAsUpEnabled(true)
+
         val i = intent
         val admin:Admin = i.getSerializableExtra("admin") as Admin
 //        val tenDao = AdminDao(this).getHoTenAdmin()
@@ -54,6 +61,13 @@ class ActivityThongTinChuNha : AppCompatActivity() {
 
 //        list = AdminDao(binding.root.context).getAllInAdmin() as MutableList<Admin>
 //        list.filter { it.ho_ten==binding.tvTenChuNha.text }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id: Int = item.getItemId();
+        if (id == android.R.id.home)
+            finish()
+        return super.onOptionsItemSelected(item);
     }
 
 }
