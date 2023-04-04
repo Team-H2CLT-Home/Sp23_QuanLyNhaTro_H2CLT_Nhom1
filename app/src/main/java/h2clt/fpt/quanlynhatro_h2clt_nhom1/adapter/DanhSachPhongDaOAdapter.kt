@@ -20,7 +20,7 @@ class DanhSachPhongDaOViewHolder(
     val binding: LayoutItemPhongDangOBinding
 ): RecyclerView.ViewHolder(binding.root){
     fun bind(phong: Phong, context: Context){
-        if (phong.trang_thai_phong == 1){
+
           //  val maPhong = PhongDao(binding.root.context).getPhongById(phong.ma_phong)
             binding.tvTenPhong.text = phong.ten_phong
             binding.tvGiaThue.text = phong.gia_thue.toString()
@@ -29,9 +29,7 @@ class DanhSachPhongDaOViewHolder(
             binding.linnerLayoutItemPhong.setOnClickListener {
                 manHinhHoaDon(context,phong.ma_phong)
             }
-        }else{
-            binding.linnerLayoutItemPhong.isVisible = false
-        }
+
     }
 }
 fun manHinhHoaDon(context: Context, id:String){

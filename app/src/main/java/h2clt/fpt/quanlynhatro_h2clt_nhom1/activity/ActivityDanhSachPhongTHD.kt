@@ -46,9 +46,9 @@ class ActivityDanhSachPhongTHD : AppCompatActivity() {
         super.onResume()
         val phongDao= NguoiDungDao(binding.root.context)
         list= phongDao.getAllInPhongByMaKhu(maKhu).filter { it.trang_thai_phong == 1} as MutableList<Phong>
-        val phongTroAdapter = PhongTroAdapter(list)
-        binding.recActivityTaoHopDong1.adapter = phongTroAdapter
-        phongTroAdapter.notifyDataSetChanged()
+        val danhSachPhongDaOAdapter= DanhSachPhongDaOAdapter(list,binding.root.context)
+        binding.recActivityTaoHopDong1.adapter = danhSachPhongDaOAdapter
+        danhSachPhongDaOAdapter.notifyDataSetChanged()
 
     }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
