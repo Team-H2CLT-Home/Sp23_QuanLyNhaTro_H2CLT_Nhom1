@@ -26,6 +26,7 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HopDongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityActivitytaoHopDongMoiBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogThemKhachThueBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogThemKhachThueHopDongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
@@ -112,32 +113,40 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
                         thongBaoLoi("Nhập đầy đủ dữ liệu!")
                         return@setOnClickListener
                     }else{
-                        val maNguoiDung = UUID.randomUUID().toString()
-                        val nguoiDung = NguoiDung(
-                            ma_nguoi_dung = maNguoiDung,
-                            ho_ten_nguoi_dung = dialog.edHoTenThemNguoiDung.text.toString(),
-                            nam_sinh = dialog.edNgaySinhThemNguoiDung.text.toString(),
-                            sdt_nguoi_dung = dialog.edSDTThemNguoiDung.text.toString(),
-                            que_quan = dialog.edQueQuanThemNguoiDung.text.toString(),
-                            cccd = dialog.edCCCDThemNguoiDung.text.toString(),
-                            trang_thai_chu_hop_dong = 0,
-                            trang_thai_o = 1,
-                            ma_phong = maPhong
-                        )
-                        val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
-                        if (dao > 0) {
-                            onResume()
-                            onPause()
-                            build.dismiss()
+                        val listNguoiDungByMaPhong = NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhong)
+                        val soNguoiO = NguoiDungDao(binding.root.context).getSoNguoiOByMaPhong(maPhong)
 
-                        } else {
-                            thongBaoLoi("Bạn thêm không thành công!")
+                        if(listNguoiDungByMaPhong.size<soNguoiO || soNguoiO==0){
+                            val maNguoiDung = UUID.randomUUID().toString()
+                            val nguoiDung = NguoiDung(
+                                ma_nguoi_dung = maNguoiDung,
+                                ho_ten_nguoi_dung = dialog.edHoTenThemNguoiDung.text.toString(),
+                                nam_sinh = dialog.edNgaySinhThemNguoiDung.text.toString(),
+                                sdt_nguoi_dung = dialog.edSDTThemNguoiDung.text.toString(),
+                                que_quan = dialog.edQueQuanThemNguoiDung.text.toString(),
+                                cccd = dialog.edCCCDThemNguoiDung.text.toString(),
+                                trang_thai_chu_hop_dong = 0,
+                                trang_thai_o = 1,
+                                ma_phong = maPhong
+                            )
+                            val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
+                            if (dao > 0) {
+                                onResume()
+                                onPause()
+                                build.dismiss()
+
+                            } else {
+                                thongBaoLoi("Bạn thêm không thành công!")
+                            }
+                            dialog.edHoTenThemNguoiDung.setText("")
+                            dialog.edSDTThemNguoiDung.setText("")
+                            dialog.edCCCDThemNguoiDung.setText("")
+                            dialog.edNgaySinhThemNguoiDung.setText("")
+                            dialog.edQueQuanThemNguoiDung.setText("")
+                        }else{
+                            thongBaoLoi("Phòng đã đủ người")
                         }
-                        dialog.edHoTenThemNguoiDung.setText("")
-                        dialog.edSDTThemNguoiDung.setText("")
-                        dialog.edCCCDThemNguoiDung.setText("")
-                        dialog.edNgaySinhThemNguoiDung.setText("")
-                        dialog.edQueQuanThemNguoiDung.setText("")
+
                     }
                 }
                 dialog.btnHuyThemNguoiDung.setOnClickListener {
@@ -257,7 +266,7 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
                     ma_nguoi_dung = maND,
                     thoi_han = binding.edThoiHan.text.toString().toInt(),
                     ngay_o = chuyenDinhDangNgay(binding.edNgayBatDauO.text),
-                    ngay_hop_dong = "2023-04-01",
+                    ngay_hop_dong = "2023-04-05",
                     tien_coc = binding.edTienCoc.text.toString().toInt(),
                     anh_hop_dong = "aaaa",
                     trang_thai_hop_dong = if (binding.chkTrangThai.isChecked) 1 else 0,
@@ -350,7 +359,7 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
         })
         bundle.show()
     }
-    fun thongBaoThanhCongNguoiDung(loi : String){
+    fun thongBaoThanhCongNguoiDung(loi: String, build: AlertDialog){
         val bundle = androidx.appcompat.app.AlertDialog.Builder(this)
         bundle.setTitle("Thông Báo")
         bundle.setMessage(loi)
@@ -358,10 +367,42 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
         })
         bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
             dialog.cancel()
+            build.dismiss()
         })
         bundle.show()
     }
 
+    private fun themNguoiDung(dialog: DialogThemKhachThueBinding, build: AlertDialog, view: View) {
+        val maNguoiDung = UUID.randomUUID().toString()
+        val nguoiDung = NguoiDung(
+            ma_nguoi_dung = maNguoiDung,
+            ho_ten_nguoi_dung = dialog.edHoTenThemNguoiDung.text.toString(),
+            nam_sinh = dialog.edNgaySinhThemNguoiDung.text.toString(),
+            sdt_nguoi_dung = dialog.edSDTThemNguoiDung.text.toString(),
+            que_quan = dialog.edQueQuanThemNguoiDung.text.toString(),
+            cccd = dialog.edCCCDThemNguoiDung.text.toString(),
+            trang_thai_chu_hop_dong = 0,
+            trang_thai_o = 1,
+            ma_phong = maPhong
+        )
+        val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
+        val updatePhong = PhongDao(binding.root.context).updateTrangThaiPhongThanhDangO(maPhong)
+        if (dao > 0 && updatePhong >0) {
+
+            thongBaoThanhCongNguoiDung("Thêm người dùng thành công",build)
+            //Snackbar.make(view, "Thêm người dùng thành công", Toast.LENGTH_SHORT).show()
+        } else {
+            //Snackbar.make(view, "Thêm không thành công", Toast.LENGTH_SHORT).show()
+            thongBaoLoi("Thêm người dùng không thành công")
+        }
+        ///
+//                        dialog.edHoTenThemNguoiDung.setText("")
+//                        dialog.edSDTThemNguoiDung.setText("")
+//                        dialog.edCCCDThemNguoiDung.setText("")
+//                        dialog.edNgaySinhThemNguoiDung.setText("")
+//                        dialog.edQueQuanThemNguoiDung.setText("")
+
+    }
     fun chuyenActivity() {
         val intent = Intent(this@ActivitytaoHopDongMoi, ActivityTaoHopDong::class.java)
         startActivity(intent)

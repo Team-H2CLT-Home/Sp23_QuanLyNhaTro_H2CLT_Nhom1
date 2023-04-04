@@ -73,6 +73,7 @@
                        style="@style/image_tabLayout"
                        android:src="@drawable/icon_homered_tq" />
                    <TextView
+                       android:id="@+id/tvPhongTrong"
                        style="@style/textView_tabLayout"
                        android:textSize="40dp"
                        android:paddingLeft="20dp"
@@ -99,6 +100,7 @@
                        style="@style/image_tabLayout"
                        android:src="@drawable/icon_homegreen_tq" />
                    <TextView
+                       android:id="@+id/tvPhongDangThue"
                        style="@style/textView_tabLayout"
                        android:textSize="40dp"
                        android:paddingLeft="20dp"
