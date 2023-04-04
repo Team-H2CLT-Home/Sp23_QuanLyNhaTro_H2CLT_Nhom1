@@ -70,6 +70,7 @@ class HoaDonDaThanhToanViewHolder(
 
             binding.thongBaoHoaDon.setOnClickListener {
         //   Toast.makeText(binding.root.context,"Sdt ${sdt_ND} và ${message_ND}",Toast.LENGTH_SHORT).show()
+
             nhanTinHD(sdt_ND.toString(),message_ND,binding.root.context)
             }
             binding.goiDienHoaDon.setOnClickListener {
@@ -113,6 +114,7 @@ fun chuyenNgay(ngay : String ):String{
     val ngay =  DateFormat.format("MM-yyyy",objDate) as String
     return ngay
 }
+
 fun nhanTinHD(sdt:String, message:String, context: Context){
 
     val uri = Uri.parse("smsto:+$sdt")
@@ -131,6 +133,7 @@ fun nhanTinHD(sdt:String, message:String, context: Context){
     }
 }
 fun goiDienHD(sdt:String, context:Context){
+
     val dialIntent = Intent(Intent.ACTION_DIAL)
     dialIntent.data = Uri.parse("tel:$sdt")
     context.startActivity(dialIntent)
