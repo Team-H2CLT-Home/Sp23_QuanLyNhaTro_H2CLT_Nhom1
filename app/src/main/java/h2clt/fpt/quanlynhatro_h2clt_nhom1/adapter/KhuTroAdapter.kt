@@ -14,8 +14,10 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityManHinhChinhChuTro
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.KhuTroDao
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemKhuTroBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.KhuTro
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 
 const val MA_KHU_KEY="ma_khu"
 const val TEN_KHU_KEY="ten_khu_tro"
@@ -27,9 +29,14 @@ class  KhuTroViewHolder(
     fun bind(khuTro: KhuTro){
         val pre = binding.root.context.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE)
         val maKhu = pre.getString(MA_KHU_KEY,"")
+        var listPhongTrong: List<Phong> = listOf<Phong>()
+        var listPhong = listOf<Phong>()
+        listPhong = PhongDao(binding.root.context).getAllInPhongByTenKhuTro(khuTro.ten_khu_tro)
+        listPhongTrong=PhongDao(binding.root.context).getAllInPhongByTenKhuTro(khuTro.ten_khu_tro).filter { it.trang_thai_phong==0 }
         binding.tvTenKhuTro.text ="Khu: " + khuTro.ten_khu_tro
-        binding.tvSoPhongKhuTro.text ="Số phòng: " +khuTro.so_luong_phong.toString()
+        binding.tvSoPhongKhuTro.text ="Tổng số phòng: " +listPhong.size
         binding.tvDiaChiKhuTro.text ="Địa chỉ: "+ khuTro.dia_chi
+        binding.tvSoPhongKhuTroConTrong.text = ""+listPhongTrong.size + " phòng trống"
         binding.btnQuanLyKhuTro.setOnClickListener {
             val intent=Intent(binding.root.context, ActivityManHinhChinhChuTro::class.java)
             intent.putExtra(MA_KHU_KEY, khuTro.ma_khu_tro)

@@ -1,5 +1,7 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
+import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -68,10 +70,10 @@ class ActivityThemPhong : AppCompatActivity() {
                     ma_khu = maKhu
                 )
                 phongDao.insertPhong(phong)
-                Snackbar.make(it, "Thêm phòng thành công", Snackbar.LENGTH_SHORT).show()
+                thongBaoThanhCong("Thêm phòng thành công")
             }
             else{
-                Toast.makeText(this, "Không thêm được phòng vì chưa chọn loại dịch vụ", Toast.LENGTH_SHORT).show()
+                thongBaoLoi("Không thêm được phòng vì chưa chọn loại dịch vụ")
             }
         }
         binding.btnHuyThemPhong.setOnClickListener{
@@ -93,6 +95,30 @@ class ActivityThemPhong : AppCompatActivity() {
         val listDichVuTrongPhongAdapter=ListDichVuTrongPhongAdapter(listLoaiDichVu, this@ActivityThemPhong)
         binding.rcvListLoaiDichVu.adapter=listDichVuTrongPhongAdapter
         binding.rcvListLoaiDichVu.layoutManager=LinearLayoutManager(this)
+    }
+
+    fun thongBaoLoi(loi : String){
+        val bundle = androidx.appcompat.app.AlertDialog.Builder(this)
+        bundle.setTitle("Thông Báo Lỗi")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
+    }
+    fun thongBaoThanhCong(loi : String){
+        val bundle = androidx.appcompat.app.AlertDialog.Builder(this)
+        bundle.setTitle("Thông Báo")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            val intent = Intent(this@ActivityThemPhong,ActivityDanhSachPhong::class.java)
+            startActivity(intent)
+            finish()
+        })
+        bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
     }
 
 
