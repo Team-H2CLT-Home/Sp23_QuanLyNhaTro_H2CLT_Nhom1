@@ -6,6 +6,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.view.MenuItem
 import android.widget.Toast
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HopDongDao
@@ -34,6 +35,14 @@ class ActivityKetThucHopDong : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityKetThucHopDongBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        setSupportActionBar(binding.tbKetThucHopDong)
+        val ab = getSupportActionBar()
+        ab?.setHomeAsUpIndicator(R.drawable.black_left)
+        ab?.setDisplayHomeAsUpEnabled(true)
+
+
         val c = Calendar.getInstance() as GregorianCalendar?
         mYearNow = (c as Calendar).get(Calendar.YEAR)
         mMonthNow = c!!.get(Calendar.MONTH)
@@ -126,6 +135,12 @@ class ActivityKetThucHopDong : AppCompatActivity() {
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id: Int = item.getItemId();
+        if (id == android.R.id.home)
+            finish()
+        return super.onOptionsItemSelected(item);
+    }
 
     private fun updateHD(hopDong: HopDong, binding: ActivityKetThucHopDongBinding) {
         val hopDongNew = HopDong(

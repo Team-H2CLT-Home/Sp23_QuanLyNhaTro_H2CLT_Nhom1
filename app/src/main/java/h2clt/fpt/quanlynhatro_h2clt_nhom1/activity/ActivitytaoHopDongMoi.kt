@@ -15,6 +15,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
@@ -34,6 +36,7 @@ import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class ActivitytaoHopDongMoi : AppCompatActivity() {
     private lateinit var binding: ActivityActivitytaoHopDongMoiBinding
@@ -75,12 +78,11 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
         maKhu = srf.getString(MA_KHU_KEY, "")!!
         val i = intent
         val bundle = i.extras
-
         if (bundle != null) {
             tenPhong = bundle.getString("tenPhong").toString()
             maPhong = bundle.getString("maPhong").toString()
             listND = NguoiDungDao(this@ActivitytaoHopDongMoi).getNguoiDungByMaPhong(maPhong)
-            Toast.makeText(this@ActivitytaoHopDongMoi, "" + listND.size, Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this@ActivitytaoHopDongMoi, "" + listND.size, Toast.LENGTH_SHORT).show()
             binding.edTenPhongTro.setText(tenPhong)
             val spinner = NguoiThueSpinnerAdapter(this, listND)
             binding.spinnerNguoiDung.adapter = spinner
@@ -98,7 +100,6 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
-
             }
         }
         if (listND.size == 0) {
@@ -152,6 +153,8 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
                 dialog.btnHuyThemNguoiDung.setOnClickListener {
                     build.dismiss()
                     onResume()
+                    onPause()
+
                 }
                 build.setView(dialog.root)
                 build.show()
@@ -290,6 +293,7 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
         binding.btnHuyHopDong.setOnClickListener {
             xoaTrang()
         }
+
     }
 
 
@@ -409,9 +413,9 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
         finish()
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id: Int = item.getItemId();
+        val id: Int = item.itemId;
         if (id == android.R.id.home)
-            chuyenActivity();
+           finish()
         return super.onOptionsItemSelected(item);
     }
     override fun onResume() {
@@ -439,5 +443,6 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
         Log.d("TAG", "onPause: ")
         binding.tvThemNguoiThue.isVisible = false
     }
+
 }
 
