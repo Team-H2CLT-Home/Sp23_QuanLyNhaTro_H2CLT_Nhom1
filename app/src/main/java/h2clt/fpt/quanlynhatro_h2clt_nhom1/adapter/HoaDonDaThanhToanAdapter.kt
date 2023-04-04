@@ -39,10 +39,8 @@ class HoaDonDaThanhToanViewHolder(
             val phong = PhongDao(binding.root.context).getPhongById(hoaDon.ma_phong)
             binding.tvTenPhong.text = phong?.ten_phong
             // tính tổng
-            val list = phong?.ten_phong?.let {
-                NguoiDungDao(binding.root.context).getAllInNguoiDungByTenPhong(
-                    it
-                )
+            val chuHopDong= phong?.let { phong ->
+                NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(phong.ma_phong).find { it.trang_thai_chu_hop_dong==1 }
             }
 
             binding.tvTong.text = hoaDon.tong.toString()
@@ -64,17 +62,18 @@ class HoaDonDaThanhToanViewHolder(
             binding.tvNam.setText(year.toString())
 
 
+            if (chuHopDong!=null) {
+                val sdt_ND = chuHopDong.sdt_nguoi_dung
+                val message_ND =
+                    "Thông báo hóa đơn tháng ${chuyenNgay(hoaDon.ngay_tao_hoa_don)} tổng tiền là ${hoaDon.tong}"
+                binding.thongBaoHoaDon.setOnClickListener {
+                    //   Toast.makeText(binding.root.context,"Sdt ${sdt_ND} và ${message_ND}",Toast.LENGTH_SHORT).show()
 
-            val sdt_ND = list?.sdt_nguoi_dung
-            val message_ND = "Thông báo hóa đơn tháng ${chuyenNgay(hoaDon.ngay_tao_hoa_don)} tổng tiền là ${hoaDon.tong}"
-
-            binding.thongBaoHoaDon.setOnClickListener {
-        //   Toast.makeText(binding.root.context,"Sdt ${sdt_ND} và ${message_ND}",Toast.LENGTH_SHORT).show()
-
-            nhanTinHD(sdt_ND.toString(),message_ND,binding.root.context)
-            }
-            binding.goiDienHoaDon.setOnClickListener {
-            goiDienHD(sdt_ND.toString(),binding.root.context)
+                    nhanTinHD(sdt_ND.toString(), message_ND, binding.root.context)
+                }
+                binding.goiDienHoaDon.setOnClickListener {
+                    goiDienHD(sdt_ND, binding.root.context)
+                }
             }
 
 
@@ -82,7 +81,7 @@ class HoaDonDaThanhToanViewHolder(
                 val bottomSheetDialog = BottomSheetDialog(binding.root.context)
                 val dialog = DialogHoaDonChiTietBinding.inflate(LayoutInflater.from(binding.root.context))
                 bottomSheetDialog.setContentView(dialog.root)
-
+//                Toast.makeText(binding.root.context,sdt_ND.toString(),Toast.LENGTH_SHORT).show()
 
                 dialog.tvTenPhong.text = phong?.ten_phong
                 dialog.tvNgay.text = chuyenNgay(hoaDon.ngay_tao_hoa_don)
