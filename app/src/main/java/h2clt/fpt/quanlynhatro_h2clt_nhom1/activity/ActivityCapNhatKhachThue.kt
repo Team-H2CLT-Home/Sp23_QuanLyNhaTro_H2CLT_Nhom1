@@ -126,6 +126,12 @@ class ActivityCapNhatKhachThue : AppCompatActivity() {
                                 PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDaO(maPhongCu)
 
                             }
+                            if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhong)
+                                    .isNotEmpty()
+                            ){
+                                PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDangO(maPhong)
+
+                            }
 //                        PhongDao(binding.root.context).updateTrangThaiPhongThanhDangO(maPhong)
 //                            thongBaoThanhCong("Thêm người dùng thành công")
                             Snackbar.make(it, "Sửa khách thuê thành công", Toast.LENGTH_SHORT).show()
@@ -154,6 +160,12 @@ class ActivityCapNhatKhachThue : AppCompatActivity() {
                         if (dao > 0) {
                             if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhongCu).isEmpty()){
                                 PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDaO(maPhongCu)
+                            }
+                            if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhong)
+                                    .isNotEmpty()
+                            ){
+                                PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDangO(maPhong)
+
                             }
 //                            thongBaoThanhCong("Thêm người dùng thành công")
                             Snackbar.make(it, "Sửa khách thuê thành công", Toast.LENGTH_SHORT).show()

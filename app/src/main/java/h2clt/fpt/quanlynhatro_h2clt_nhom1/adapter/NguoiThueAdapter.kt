@@ -1,6 +1,10 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
+import android.provider.Telephony
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
@@ -37,6 +41,12 @@ class NguoiThueViewHolder(
             binding.edTrangThaiChuHopDong.isChecked = true
         }else{
             binding.edTrangThaiChuHopDong.isChecked = false
+        }
+        binding.layoutPhone.setOnClickListener {
+            goiDien(nguoiDung.sdt_nguoi_dung,binding.root.context)
+        }
+        binding.layoutMessage.setOnClickListener {
+            nhanTin(nguoiDung.sdt_nguoi_dung,"",binding.root.context)
         }
 //
 //        if(binding.tvSDT.text=="SĐT: "+NguoiDungDao(binding.root.context).getSDTNguoiDangOByMaPhong(nguoiDung.ma_phong)){
@@ -106,9 +116,48 @@ class NguoiThueAdapter(
            onClick.OnClickKhachThue(position)
         }
     }
+    fun nhanTin(sdt:String, message:String, context: Context){
+
+        val uri = Uri.parse("smsto:+$sdt")
+        val intent = Intent(Intent.ACTION_SENDTO, uri)
+        with(intent) {
+            putExtra("address", "+$sdt")
+            putExtra("sms_body", message)
+        }
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT -> {
+                val defaultSmsPackageName = Telephony.Sms.getDefaultSmsPackage(context)
+                if (defaultSmsPackageName != null) intent.setPackage(defaultSmsPackageName)
+                context.startActivity(intent)
+            }
+            else -> context.startActivity(intent)
+        }
+    }
+
 }
 
+fun nhanTin(sdt:String, message:String, context: Context){
 
+    val uri = Uri.parse("smsto:+$sdt")
+    val intent = Intent(Intent.ACTION_SENDTO, uri)
+    with(intent) {
+        putExtra("address", "+$sdt")
+        putExtra("sms_body", message)
+    }
+    when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT -> {
+            val defaultSmsPackageName = Telephony.Sms.getDefaultSmsPackage(context)
+            if (defaultSmsPackageName != null) intent.setPackage(defaultSmsPackageName)
+            context.startActivity(intent)
+        }
+        else -> context.startActivity(intent)
+    }
+}
+fun goiDien(sdt:String, context:Context){
+    val dialIntent = Intent(Intent.ACTION_DIAL)
+    dialIntent.data = Uri.parse("tel:$sdt")
+    context.startActivity(dialIntent)
+}
 //class DanhSachPhongAdapter(
 //    val list:List<Phong>
 //): RecyclerView.Adapter<DanhSachPhongViewHolder>() {
