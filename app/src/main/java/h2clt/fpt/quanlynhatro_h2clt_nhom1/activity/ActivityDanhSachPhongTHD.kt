@@ -8,14 +8,16 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.DanhSachPhongDaOAdapter
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.PhongTroAdapter
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDanhSachTaoHoaDonBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 
 const val Ma_PHONG_KEY = "Ma Phong"
 class ActivityDanhSachPhongTHD : AppCompatActivity() {
     private lateinit var binding: ActivityDanhSachTaoHoaDonBinding
-    var list = mutableListOf<NguoiDung>()
+    var list = mutableListOf<Phong>()
     var maKhu = ""
 
 
@@ -32,15 +34,21 @@ class ActivityDanhSachPhongTHD : AppCompatActivity() {
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
 
-        val phongDao= NguoiDungDao(binding.root.context)
+
         val srf=binding.root.context.getSharedPreferences(FILE_NAME, Activity.MODE_PRIVATE)
         maKhu= srf.getString(MA_KHU_KEY, "").toString()
-        list= phongDao.getAllInNguoiDungByMaKhu(maKhu) as MutableList<NguoiDung>
 
-        val danhSachPhongDaOAdapter = DanhSachPhongDaOAdapter(list,this@ActivityDanhSachPhongTHD)
-        binding.recActivityTaoHopDong1.adapter = danhSachPhongDaOAdapter
-        danhSachPhongDaOAdapter.notifyDataSetChanged()
+        onResume()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val phongDao= NguoiDungDao(binding.root.context)
+        list= phongDao.getAllInPhongByMaKhu(maKhu).filter { it.trang_thai_phong == 1} as MutableList<Phong>
+        val phongTroAdapter = PhongTroAdapter(list)
+        binding.recActivityTaoHopDong1.adapter = phongTroAdapter
+        phongTroAdapter.notifyDataSetChanged()
 
     }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {

@@ -1,6 +1,11 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter
 
+import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import android.provider.Telephony
 import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +14,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HoaDonDao
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogHoaDonChiTietBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemHoaDonBinding
@@ -24,6 +30,22 @@ class HoaDonViewHolder(
         if (hoaDon.trang_thai_hoa_don==0 ){
             binding.tvTrangThaiHoaDon.isChecked = false
             val phong = PhongDao(binding.root.context).getPhongById(hoaDon.ma_phong)
+            val list = phong?.ten_phong?.let {
+                NguoiDungDao(binding.root.context).getAllInNguoiDungByTenPhong(
+                    it
+                )
+            }
+            val sdt_ND = list?.sdt_nguoi_dung
+            val message_ND = "[Thông báo] Phòng ${phong?.ten_phong} hóa đơn tháng ${chuyenNgay(hoaDon.ngay_tao_hoa_don)} tổng tiền là ${hoaDon.tong}" +
+                    ". Thanh toán trước 5 ngày theo quy định."
+
+            binding.thongBaoHoaDon.setOnClickListener {
+                //   Toast.makeText(binding.root.context,"Sdt ${sdt_ND} và ${message_ND}",Toast.LENGTH_SHORT).show()
+                nhanTin1(sdt_ND.toString(),message_ND,binding.root.context)
+            }
+            binding.goiDienHoaDon.setOnClickListener {
+                goiDien1(sdt_ND.toString(),binding.root.context)
+            }
             binding.tvTrangThaiHoaDon.setOnClickListener {
                 val hoaDon = HoaDon(
                     ma_phong = hoaDon.ma_phong,
@@ -98,6 +120,28 @@ class HoaDonViewHolder(
             binding.linerLayoutItemHD.isVisible  = false
         }
     }
+}
+fun nhanTin1(sdt:String, message:String, context: Context){
+
+    val uri = Uri.parse("smsto:+$sdt")
+    val intent = Intent(Intent.ACTION_SENDTO, uri)
+    with(intent) {
+        putExtra("address", "+$sdt")
+        putExtra("sms_body", message)
+    }
+    when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT -> {
+            val defaultSmsPackageName = Telephony.Sms.getDefaultSmsPackage(context)
+            if (defaultSmsPackageName != null) intent.setPackage(defaultSmsPackageName)
+            context.startActivity(intent)
+        }
+        else -> context.startActivity(intent)
+    }
+}
+fun goiDien1(sdt:String, context: Context){
+    val dialIntent = Intent(Intent.ACTION_DIAL)
+    dialIntent.data = Uri.parse("tel:$sdt")
+    context.startActivity(dialIntent)
 }
 fun chuyenNgay1(ngay : String ):String{
     val sdfNgay = SimpleDateFormat("yyyy-MM-dd")

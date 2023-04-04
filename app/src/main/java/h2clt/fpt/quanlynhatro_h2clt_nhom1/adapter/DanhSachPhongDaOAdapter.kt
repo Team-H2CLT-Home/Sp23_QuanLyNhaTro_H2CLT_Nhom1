@@ -12,18 +12,20 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemPhongDangOBinding
 
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
+
 const val MA_PHONG_HOA_DON_KEY="ma_phong_de_lay_hoa_don"
 
 class DanhSachPhongDaOViewHolder(
     val binding: LayoutItemPhongDangOBinding
 ): RecyclerView.ViewHolder(binding.root){
-    fun bind(phong: NguoiDung, context: Context){
-        if (phong.trang_thai_o == 1){
-            val maPhong = PhongDao(binding.root.context).getPhongById(phong.ma_phong)
-            binding.tvTenPhong.text = maPhong?.ten_phong
-            binding.tvGiaThue.text = maPhong?.gia_thue.toString()
-            binding.chkTrangThaiPhongTrong.isChecked = false
-            binding.chkTrangThaiPhongTrong.isEnabled = false
+    fun bind(phong: Phong, context: Context){
+        if (phong.trang_thai_phong == 1){
+          //  val maPhong = PhongDao(binding.root.context).getPhongById(phong.ma_phong)
+            binding.tvTenPhong.text = phong.ten_phong
+            binding.tvGiaThue.text = phong.gia_thue.toString()
+            binding.chkTrangThaiPhongTrong.isChecked = true
+            binding.chkTrangThaiPhongTrong.isClickable = false
             binding.linnerLayoutItemPhong.setOnClickListener {
                 manHinhHoaDon(context,phong.ma_phong)
             }
@@ -40,7 +42,7 @@ fun manHinhHoaDon(context: Context, id:String){
     context.startActivity(intent)
 }
 class DanhSachPhongDaOAdapter(
-    val list:List<NguoiDung>,
+    val list:List<Phong>,
    val context: Context
 ):RecyclerView.Adapter<DanhSachPhongDaOViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DanhSachPhongDaOViewHolder {

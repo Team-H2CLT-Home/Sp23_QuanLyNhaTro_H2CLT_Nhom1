@@ -1,25 +1,37 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
+import android.os.Build
+import android.provider.Telephony
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogHoaDonChiTietBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.LayoutItemHoaDonBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HoaDon
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 import java.text.SimpleDateFormat
 import java.util.*
 
 class HoaDonDaThanhToanViewHolder(
     var binding: LayoutItemHoaDonBinding
+
 ):RecyclerView.ViewHolder(binding.root){
     fun bind(hoaDon: HoaDon){
+
 
         if (hoaDon.trang_thai_hoa_don==1 ){
             binding.tvTrangThaiHoaDon.isChecked = true
@@ -27,6 +39,11 @@ class HoaDonDaThanhToanViewHolder(
             val phong = PhongDao(binding.root.context).getPhongById(hoaDon.ma_phong)
             binding.tvTenPhong.text = phong?.ten_phong
             // tính tổng
+            val list = phong?.ten_phong?.let {
+                NguoiDungDao(binding.root.context).getAllInNguoiDungByTenPhong(
+                    it
+                )
+            }
 
             binding.tvTong.text = hoaDon.tong.toString()
             binding.tvTong.setTextColor(Color.argb(200,0,200,0))
@@ -45,6 +62,19 @@ class HoaDonDaThanhToanViewHolder(
 
             binding.tvThang.setText("T${month.toString()}")
             binding.tvNam.setText(year.toString())
+
+
+
+            val sdt_ND = list?.sdt_nguoi_dung
+            val message_ND = "Thông báo hóa đơn tháng ${chuyenNgay(hoaDon.ngay_tao_hoa_don)} tổng tiền là ${hoaDon.tong}"
+
+            binding.thongBaoHoaDon.setOnClickListener {
+        //   Toast.makeText(binding.root.context,"Sdt ${sdt_ND} và ${message_ND}",Toast.LENGTH_SHORT).show()
+            nhanTin(sdt_ND.toString(),message_ND,binding.root.context)
+            }
+            binding.goiDienHoaDon.setOnClickListener {
+            goiDien(sdt_ND.toString(),binding.root.context)
+            }
 
 
             binding.layoutChuyenChiTietHoaDon.setOnClickListener {
@@ -83,6 +113,29 @@ fun chuyenNgay(ngay : String ):String{
     val ngay =  DateFormat.format("MM-yyyy",objDate) as String
     return ngay
 }
+fun nhanTin(sdt:String, message:String, context: Context){
+
+    val uri = Uri.parse("smsto:+$sdt")
+    val intent = Intent(Intent.ACTION_SENDTO, uri)
+    with(intent) {
+        putExtra("address", "+$sdt")
+        putExtra("sms_body", message)
+    }
+    when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT -> {
+            val defaultSmsPackageName = Telephony.Sms.getDefaultSmsPackage(context)
+            if (defaultSmsPackageName != null) intent.setPackage(defaultSmsPackageName)
+            context.startActivity(intent)
+        }
+        else -> context.startActivity(intent)
+    }
+}
+fun goiDien(sdt:String, context:Context){
+    val dialIntent = Intent(Intent.ACTION_DIAL)
+    dialIntent.data = Uri.parse("tel:$sdt")
+    context.startActivity(dialIntent)
+}
+
 class HoaDonDaThanhToanAdapter(val list: List<HoaDon>): RecyclerView.Adapter<HoaDonDaThanhToanViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoaDonDaThanhToanViewHolder {
         val infa = LayoutInflater.from(parent.context)
