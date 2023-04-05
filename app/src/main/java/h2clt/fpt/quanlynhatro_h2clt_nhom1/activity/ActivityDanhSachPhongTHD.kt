@@ -9,6 +9,7 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.DanhSachPhongDaOAdapter
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.PhongTroAdapter
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HoaDonDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDanhSachTaoHoaDonBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung

@@ -52,33 +52,29 @@ class ActivityTaoHoaDon : AppCompatActivity() {
         val loaiDichVuPhongDao=LoaiDichVuPhongDao(this@ActivityTaoHoaDon)
         binding.edGiaDichVu.setText((dichVuTheoDauNguoi*soNguoiO+dichVuTheoPhong).toString())
         if(dichVuDien!=null && dichVuNuoc!=null){
-            if(dichVuDien.so_cu<0){
-                binding.edSoDienCu.setText("")
-            }
-            if (dichVuNuoc.so_cu<0){
-                binding.edSoNuocCu.setText("")
-            }
-            else if(dichVuNuoc.trang_thai_loai_dich_vu !=1){
-                binding.edSoNuocCu.apply {
-                    this.setText("0")
-                    this.visibility=View.INVISIBLE
+            when {
+                dichVuDien.so_cu<0 -> {
+                    binding.edSoDienCu.setText("")
                 }
-                binding.edSoNuocMoi.apply {
-                    this.setText("0")
-                    this.visibility=View.INVISIBLE
+                dichVuNuoc.so_cu<0 -> {
+                    binding.edSoNuocCu.setText("")
                 }
-            }
-            else{
-                binding.edSoDienCu.setText(dichVuDien.so_moi.toString())
-                binding.edSoNuocCu.setText(dichVuNuoc.so_moi.toString())
+                dichVuNuoc.trang_thai_loai_dich_vu !=1 -> {
+                    binding.edSoNuocCu.apply {
+                        this.setText("0")
+                        this.visibility=View.INVISIBLE
+                    }
+                    binding.edSoNuocMoi.apply {
+                        this.setText("0")
+                        this.visibility=View.INVISIBLE
+                    }
+                }
+                else -> {
+                    binding.edSoDienCu.setText(dichVuDien.so_moi.toString())
+                    binding.edSoNuocCu.setText(dichVuNuoc.so_moi.toString())
+                }
             }
         }
-//        if (dichVuDien != null) {
-//            binding.edSoDienCu.setText(dichVuDien.so_moi.toString())
-//        }
-//        if (dichVuNuoc != null) {
-//            binding.edSoNuocCu.setText(dichVuNuoc.so_moi.toString())
-//        }
 
         binding.edTenPhongTro.setText(phong.ten_phong)
         binding.edGiaThue.setText("${phong.gia_thue} VND")
@@ -157,7 +153,6 @@ class ActivityTaoHoaDon : AppCompatActivity() {
 
                     if (daoHoaDon > 0) {
                         thongBaoXacNhan("Thêm Thành Công")
-                        finish()
                     } else {
                         thongBaoLoi("Thêm Không Thành Công")
                     }
