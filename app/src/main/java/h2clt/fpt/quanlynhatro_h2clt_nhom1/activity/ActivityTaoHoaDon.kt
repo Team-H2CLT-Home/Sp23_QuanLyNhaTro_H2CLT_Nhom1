@@ -157,6 +157,7 @@ class ActivityTaoHoaDon : AppCompatActivity() {
 
                     if (daoHoaDon > 0) {
                         thongBaoXacNhan("Thêm Thành Công")
+                        finish()
                     } else {
                         thongBaoLoi("Thêm Không Thành Công")
                     }
@@ -169,6 +170,7 @@ class ActivityTaoHoaDon : AppCompatActivity() {
             binding.edTienMienGiam.setText("")
             binding.chkDaThanhToan.isChecked  = false
         }
+
     }
     fun validate(): Int {
         var check = -1
