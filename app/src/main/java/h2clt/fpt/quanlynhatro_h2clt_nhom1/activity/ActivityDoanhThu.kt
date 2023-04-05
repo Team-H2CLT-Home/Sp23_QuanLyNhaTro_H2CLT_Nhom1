@@ -131,7 +131,7 @@ class ActivityDoanhThu : AppCompatActivity() {
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.getItemId();
         if (id==android.R.id.home)
-            chuyenActivity();
+            finish()
         return super.onOptionsItemSelected(item);
     }
     override fun onResume() {

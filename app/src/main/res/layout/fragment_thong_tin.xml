@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/mauNenApp"
     android:orientation="vertical"
     android:layout_margin="5dp">
@@ -24,7 +24,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mã khu"
+                    android:text="Tên Khu"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="16sp"/>
@@ -32,7 +32,7 @@
                     android:id="@+id/tvChiTietMaKhu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mã khu"
+                    android:text="Tên Khu"
                     android:layout_marginLeft="10dp"
                     android:textSize="16sp"/>
 
@@ -43,225 +43,238 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:background="#656464"/>
-            <CheckBox
+            <TextView
                 android:id="@+id/chkChiTietPhong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="6dp"
+                android:textSize="20sp"
                 android:text="Đang trống"/>
         </LinearLayout>
         <!--        ///li1-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:background="@drawable/boder_nen"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="10dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Mã khu"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"/>
 
-                <ImageView
-                    android:id="@+id/imgChiTietThongTinPhong"
-                    android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/btnXemHopDong"
+                    style="@style/button_maudo"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_more_vert_24"
-                    />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/boder_tron_maudo"
+                    android:text="Xem thông tin hợp đồng" />
+
 
             </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Thông tin cơ bản phòng trọ"
-                android:textSize="16sp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="2dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="2dp"
-                android:background="#656464"/>
+                android:background="#656464" />
             <!--        ///lingang-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/boder_line_phong"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Tên phòng"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tvChiTietTenPhong"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_marginTop="5dp"
+                        android:gravity="center"
                         android:text="A101"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/boder_line_phong"
                     android:layout_marginLeft="25dp"
+                    android:background="@drawable/boder_line_phong"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Diện tích"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tvChiTietDienTich"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_marginTop="5dp"
+                        android:gravity="center"
                         android:text="20m2"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
-<!--            //dòng 2-->
+            <!--            //dòng 2-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/boder_line_phong"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Giá thuê"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tvChiTietGiaThue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_marginTop="5dp"
+                        android:gravity="center"
                         android:text="2.500.000đ"
                         android:textColor="@color/mauDo"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="150dp"
-                    android:layout_marginLeft="25dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
                     android:background="@drawable/boder_line_phong"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Ngày lập hóa đơn"
+                        android:text="Số người hiện tại"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
+
                     <TextView
-                        android:id="@+id/tvChiTietNgayLapHoaDon"
+                        android:id="@+id/tvSoNguoiHienTai"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_marginTop="5dp"
-                        android:text="2022-03-03"
+                        android:gravity="center"
+                        android:text="2"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
-<!--            ////line2-->
+            <!--            ////line2-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/boder_line_phong"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Số người"
+                        android:text="Số người tối đa"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tvChiTietSoNguoi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_marginTop="5dp"
+                        android:gravity="center"
                         android:text="3 "
                         android:textColor="@color/black"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="150dp"
-                    android:layout_marginLeft="25dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
                     android:background="@drawable/boder_line_phong"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Thời hạn hợp đồng"
+                        android:text="Số lượng dịch vụ"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tvChiTietThoiHanHopDong"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_marginTop="5dp"
-                        android:text="6 tháng"
+                        android:gravity="center"
+                        android:text="4"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
-<!--            //dong 3-->
+            <!--            //dong 3-->
         </LinearLayout>
 <!--            ///linea thu 3-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="290dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/boder_nen"
         android:orientation="vertical">
@@ -303,123 +316,55 @@
             android:background="#656464"/>
 <!--        //dong2 line3-->
         <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="15dp"
             android:background="@drawable/boder_nen"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
+
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="50dp"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:text="Tên và giá dịch vụ"
-                    android:layout_marginRight="50dp"
-                    android:textSize="16sp"/>
-
-                <TextView
-                    android:text="chỉ số sử dụng"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_more_vert_24"
-                    />
-
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:background="@drawable/boder_line_phong"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="18dp"
-                        android:layout_marginRight="50dp"
-                        android:text="Tiền điện"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/tvChiTietTienDien"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="50dp"
-                        android:text="3.500đ/1 kwh"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvChiTietTrangThaiTienDien"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="12dp"
-                    android:text="chưa có"/>
-            </LinearLayout>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="2dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="2dp"
-                android:background="#656464"/>
-<!--            ///them trang thai-->
-            <LinearLayout
+                android:background="#656464" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvLoaiDichVu"
                 android:layout_width="match_parent"
+                android:layout_height="400dp" />
+
+            <Button
+                android:id="@+id/btnThemHoacXoaDichVu"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:background="@drawable/boder_line_phong"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="18dp"
-                        android:layout_marginRight="50dp"
-                        android:text="Tiền nước"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/tvChiTietTienNuoc"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="50dp"
-                        android:text="2500đ/1 khối"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvChiTietTrangThai"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="12dp"
-                    android:text="chưa có"/>
-            </LinearLayout>
-
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                 android:layout_marginBottom="10dp"
+                android:text="Thêm hoặc xóa dịch vụ" />
         </LinearLayout>
+
     </LinearLayout>
+
         <Button
             android:id="@+id/tvChiTietXoaPhong"
             android:layout_width="200dp"
@@ -427,7 +372,5 @@
             android:text="Xóa phòng"
             android:layout_margin="30dp"
             android:layout_gravity="center"/>
-
-<!--        ///liAll-->
     </LinearLayout>
 </ScrollView>

@@ -3,35 +3,29 @@ package h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.ActivityCapNhatKhachThue
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.*
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogThemKhachThueBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentNguoiDangOBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 import java.util.*
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 
 
 class FragmentNguoiDangO: Fragment() {
-     private lateinit var binding: FragmentNguoiDangOBinding
-     private var maKhu=""
+    private lateinit var binding: FragmentNguoiDangOBinding
+    private var maKhu=""
     private var maPhong=""
     var listNguoiDung= listOf<NguoiDung>()
     override fun onCreateView(
@@ -47,6 +41,7 @@ class FragmentNguoiDangO: Fragment() {
         listNguoiDung=NguoiDungDao(requireActivity()).getAllInNguoiDangOByMaKhu(maKhu)
 //        Toast.makeText(activity, maKhu, Toast.LENGTH_SHORT).show()
         //search
+//        binding.rcyNguoiDangO.setOn
         binding.searchTenPhong.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -57,7 +52,15 @@ class FragmentNguoiDangO: Fragment() {
                 if(newText!=null){
                     list= NguoiDung.timkiemUser(list,newText)
                 }
-                val adapter = NguoiThueAdapter(list)
+                val adapter = NguoiThueAdapter(list,object :KhachThueInterface{
+                    override fun OnClickKhachThue(pos: Int) {
+                        val nguoiDung = listNguoiDung.get(pos)
+                        val intent = Intent(requireContext(), ActivityCapNhatKhachThue::class.java)
+                        intent.putExtra("khachThue",nguoiDung)
+                        startActivity(intent)
+                    }
+
+                })
                 binding.rcyNguoiDangO.adapter = adapter
                 return false
 
@@ -137,35 +140,9 @@ class FragmentNguoiDangO: Fragment() {
 //                    }
                     val listNguoiDungByMaPhong = NguoiDungDao(requireActivity()).getListNguoiDungByMaPhong(maPhong)
                     val soNguoiO = NguoiDungDao(requireActivity()).getSoNguoiOByMaPhong(maPhong)
-//                    Toast.makeText(binding.root.context, soNguoiO, Toast.LENGTH_SHORT).show()
-                    if(listNguoiDungByMaPhong.size<soNguoiO){
-                        val maNguoiDung = UUID.randomUUID().toString()
-                        val nguoiDung = NguoiDung(
-                            ma_nguoi_dung = maNguoiDung,
-                            ho_ten_nguoi_dung = dialog.edHoTenThemNguoiDung.text.toString(),
-                            nam_sinh = dialog.edNgaySinhThemNguoiDung.text.toString(),
-                            sdt_nguoi_dung = dialog.edSDTThemNguoiDung.text.toString(),
-                            que_quan = dialog.edQueQuanThemNguoiDung.text.toString(),
-                            cccd = dialog.edCCCDThemNguoiDung.text.toString(),
-                            trang_thai_chu_hop_dong = 0,
-                            trang_thai_o = 1,
-                            ma_phong = maPhong
-                        )
-                        val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
-                        if (dao > 0) {
-                            PhongDao(binding.root.context).updateTrangThaiPhongThanhDangO(maPhong)
 
-                            Snackbar.make(it, "Thêm người dùng thành công", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Snackbar.make(it, "Thêm không thành công", Toast.LENGTH_SHORT).show()
-                        }
-//                        dialog.edHoTenThemNguoiDung.setText("")
-//                        dialog.edSDTThemNguoiDung.setText("")
-//                        dialog.edCCCDThemNguoiDung.setText("")
-//                        dialog.edNgaySinhThemNguoiDung.setText("")
-//                        dialog.edQueQuanThemNguoiDung.setText("")
-                        build.dismiss()
-                        onResume()
+                    if(listNguoiDungByMaPhong.size<soNguoiO || soNguoiO==0){
+                        themNguoiDung(dialog,build,it)
                     }else{
                         thongBaoLoi("Phòng đã đủ người")
                     }
@@ -190,9 +167,48 @@ class FragmentNguoiDangO: Fragment() {
         return  binding.root
     }
 
+    private fun themNguoiDung(dialog: DialogThemKhachThueBinding, build: AlertDialog, view: View) {
+        val maNguoiDung = UUID.randomUUID().toString()
+        val nguoiDung = NguoiDung(
+            ma_nguoi_dung = maNguoiDung,
+            ho_ten_nguoi_dung = dialog.edHoTenThemNguoiDung.text.toString(),
+            nam_sinh = dialog.edNgaySinhThemNguoiDung.text.toString(),
+            sdt_nguoi_dung = dialog.edSDTThemNguoiDung.text.toString(),
+            que_quan = dialog.edQueQuanThemNguoiDung.text.toString(),
+            cccd = dialog.edCCCDThemNguoiDung.text.toString(),
+            trang_thai_chu_hop_dong = 0,
+            trang_thai_o = 1,
+            ma_phong = maPhong
+        )
+        val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
+        val updatePhong = PhongDao(binding.root.context).updateTrangThaiPhongThanhDangO(maPhong)
+        if (dao > 0 && updatePhong >0) {
+            thongBaoThanhCong("Thêm người dùng thành công",build)
+            //Snackbar.make(view, "Thêm người dùng thành công", Toast.LENGTH_SHORT).show()
+        } else {
+            //Snackbar.make(view, "Thêm không thành công", Toast.LENGTH_SHORT).show()
+           thongBaoLoi("Thêm người dùng không thành công")
+        }
+        ///
+//                        dialog.edHoTenThemNguoiDung.setText("")
+//                        dialog.edSDTThemNguoiDung.setText("")
+//                        dialog.edCCCDThemNguoiDung.setText("")
+//                        dialog.edNgaySinhThemNguoiDung.setText("")
+//                        dialog.edQueQuanThemNguoiDung.setText("")
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val nguoiThueAdapter = NguoiThueAdapter(listNguoiDung)
+        val nguoiThueAdapter = NguoiThueAdapter(listNguoiDung,object :KhachThueInterface{
+            override fun OnClickKhachThue(pos: Int) {
+                val nguoiDung = listNguoiDung.get(pos)
+                val intent = Intent(requireContext(), ActivityCapNhatKhachThue::class.java)
+                intent.putExtra("khachThue",nguoiDung)
+                startActivity(intent)
+            }
+
+        })
         binding.rcyNguoiDangO.adapter = nguoiThueAdapter
         binding.rcyNguoiDangO.layoutManager = LinearLayoutManager(activity)
     }
@@ -201,6 +217,7 @@ class FragmentNguoiDangO: Fragment() {
         bundle.setTitle("Thông Báo Lỗi")
         bundle.setMessage(loi)
         bundle.setNegativeButton("Ok", DialogInterface.OnClickListener { dialog, which ->
+
             dialog.cancel()
         })
         bundle.show()
@@ -213,9 +230,33 @@ class FragmentNguoiDangO: Fragment() {
         val nguoiDungDao= activity?.let { NguoiDungDao(it) }!!
 //        listNguoiDung=nguoiDungDao.getAllInNguoiDungByMaKhu(maKhu)
         listNguoiDung=nguoiDungDao.getAllInNguoiDangOByMaKhu(maKhu)
-        val nguoiThueAdapter=NguoiThueAdapter(listNguoiDung)
+        val nguoiThueAdapter=NguoiThueAdapter(listNguoiDung,object :KhachThueInterface{
+            override fun OnClickKhachThue(pos: Int) {
+                val nguoiDung = listNguoiDung.get(pos)
+                val intent = Intent(requireContext(), ActivityCapNhatKhachThue::class.java)
+                intent.putExtra("khachThue",nguoiDung)
+                startActivity(intent)
+            }
+
+        })
         binding.rcyNguoiDangO.adapter=nguoiThueAdapter
         binding.rcyNguoiDangO.layoutManager=LinearLayoutManager(context)
+    }
+    fun thongBaoThanhCong(loi: String, build: AlertDialog){
+        val bundle = androidx.appcompat.app.AlertDialog.Builder(binding.root.context)
+        bundle.setTitle("Thông Báo")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+            build.dismiss()
+            onResume()
+//            onResume()
+
+        })
+//        bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+//            dialog.cancel()
+//        })
+        bundle.show()
     }
 //    private fun updateNDTrongPhong(ma:Phong):Int {
 //        val update = NguoiDungDao(binding.root.context).updateNguoiDung(nguoiDungNew)

@@ -30,7 +30,7 @@ class FragmentTatCaPhong : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentTatCaPhongBinding.inflate(LayoutInflater.from(context))
         val phongDao= activity?.let { PhongDao(it) }!!

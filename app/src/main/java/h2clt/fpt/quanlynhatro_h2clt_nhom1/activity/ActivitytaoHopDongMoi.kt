@@ -15,6 +15,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
@@ -26,6 +28,7 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HopDongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityActivitytaoHopDongMoiBinding
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogThemKhachThueBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogThemKhachThueHopDongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.HopDong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.NguoiDung
@@ -33,6 +36,7 @@ import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class ActivitytaoHopDongMoi : AppCompatActivity() {
     private lateinit var binding: ActivityActivitytaoHopDongMoiBinding
@@ -74,12 +78,11 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
         maKhu = srf.getString(MA_KHU_KEY, "")!!
         val i = intent
         val bundle = i.extras
-
         if (bundle != null) {
             tenPhong = bundle.getString("tenPhong").toString()
             maPhong = bundle.getString("maPhong").toString()
             listND = NguoiDungDao(this@ActivitytaoHopDongMoi).getNguoiDungByMaPhong(maPhong)
-            Toast.makeText(this@ActivitytaoHopDongMoi, "" + listND.size, Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this@ActivitytaoHopDongMoi, "" + listND.size, Toast.LENGTH_SHORT).show()
             binding.edTenPhongTro.setText(tenPhong)
             val spinner = NguoiThueSpinnerAdapter(this, listND)
             binding.spinnerNguoiDung.adapter = spinner
@@ -97,7 +100,6 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
-
             }
         }
         if (listND.size == 0) {
@@ -112,37 +114,47 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
                         thongBaoLoi("Nhập đầy đủ dữ liệu!")
                         return@setOnClickListener
                     }else{
-                        val maNguoiDung = UUID.randomUUID().toString()
-                        val nguoiDung = NguoiDung(
-                            ma_nguoi_dung = maNguoiDung,
-                            ho_ten_nguoi_dung = dialog.edHoTenThemNguoiDung.text.toString(),
-                            nam_sinh = dialog.edNgaySinhThemNguoiDung.text.toString(),
-                            sdt_nguoi_dung = dialog.edSDTThemNguoiDung.text.toString(),
-                            que_quan = dialog.edQueQuanThemNguoiDung.text.toString(),
-                            cccd = dialog.edCCCDThemNguoiDung.text.toString(),
-                            trang_thai_chu_hop_dong = 0,
-                            trang_thai_o = 1,
-                            ma_phong = maPhong
-                        )
-                        val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
-                        if (dao > 0) {
-                            onResume()
-                            onPause()
-                            build.dismiss()
+                        val listNguoiDungByMaPhong = NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhong)
+                        val soNguoiO = NguoiDungDao(binding.root.context).getSoNguoiOByMaPhong(maPhong)
 
-                        } else {
-                            thongBaoLoi("Bạn thêm không thành công!")
+                        if(listNguoiDungByMaPhong.size<soNguoiO || soNguoiO==0){
+                            val maNguoiDung = UUID.randomUUID().toString()
+                            val nguoiDung = NguoiDung(
+                                ma_nguoi_dung = maNguoiDung,
+                                ho_ten_nguoi_dung = dialog.edHoTenThemNguoiDung.text.toString(),
+                                nam_sinh = dialog.edNgaySinhThemNguoiDung.text.toString(),
+                                sdt_nguoi_dung = dialog.edSDTThemNguoiDung.text.toString(),
+                                que_quan = dialog.edQueQuanThemNguoiDung.text.toString(),
+                                cccd = dialog.edCCCDThemNguoiDung.text.toString(),
+                                trang_thai_chu_hop_dong = 0,
+                                trang_thai_o = 1,
+                                ma_phong = maPhong
+                            )
+                            val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
+                            if (dao > 0) {
+                                onResume()
+                                onPause()
+                                build.dismiss()
+
+                            } else {
+                                thongBaoLoi("Bạn thêm không thành công!")
+                            }
+                            dialog.edHoTenThemNguoiDung.setText("")
+                            dialog.edSDTThemNguoiDung.setText("")
+                            dialog.edCCCDThemNguoiDung.setText("")
+                            dialog.edNgaySinhThemNguoiDung.setText("")
+                            dialog.edQueQuanThemNguoiDung.setText("")
+                        }else{
+                            thongBaoLoi("Phòng đã đủ người")
                         }
-                        dialog.edHoTenThemNguoiDung.setText("")
-                        dialog.edSDTThemNguoiDung.setText("")
-                        dialog.edCCCDThemNguoiDung.setText("")
-                        dialog.edNgaySinhThemNguoiDung.setText("")
-                        dialog.edQueQuanThemNguoiDung.setText("")
+
                     }
                 }
                 dialog.btnHuyThemNguoiDung.setOnClickListener {
                     build.dismiss()
                     onResume()
+                    onPause()
+
                 }
                 build.setView(dialog.root)
                 build.show()
@@ -257,7 +269,7 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
                     ma_nguoi_dung = maND,
                     thoi_han = binding.edThoiHan.text.toString().toInt(),
                     ngay_o = chuyenDinhDangNgay(binding.edNgayBatDauO.text),
-                    ngay_hop_dong = "2023-04-01",
+                    ngay_hop_dong = "2023-04-05",
                     tien_coc = binding.edTienCoc.text.toString().toInt(),
                     anh_hop_dong = "aaaa",
                     trang_thai_hop_dong = if (binding.chkTrangThai.isChecked) 1 else 0,
@@ -265,7 +277,8 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
                     ngay_lap_hop_dong = simpleDateFormatNow.format(cNow!!.time)
                 )
                 val dao = HopDongDao(this).insertHopDong(hopDong)
-                if (dao > 0) {
+                val updatePhong = PhongDao(this@ActivitytaoHopDongMoi).updateTrangThaiPhongThanhDangO(maPhong)
+                if (dao > 0 && updatePhong>0) {
                     thongBaoThanhCong("Bạn đã thêm thành công!")
                     //updateHopDong()
                 } else {
@@ -275,11 +288,13 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
                 //activityDanhSachHopDong.updateHopDong(hopDong)
             }
 
+
         }
 
         binding.btnHuyHopDong.setOnClickListener {
             xoaTrang()
         }
+
     }
 
 
@@ -340,8 +355,6 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
         bundle.setTitle("Thông Báo")
         bundle.setMessage(loi)
         bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
-            val intent = Intent(this@ActivitytaoHopDongMoi,ActivityTaoHopDong::class.java)
-            startActivity(intent)
             finish()
         })
         bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
@@ -349,27 +362,60 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
         })
         bundle.show()
     }
-    fun thongBaoThanhCongNguoiDung(loi : String){
+    fun thongBaoThanhCongNguoiDung(loi: String, build: AlertDialog){
         val bundle = androidx.appcompat.app.AlertDialog.Builder(this)
         bundle.setTitle("Thông Báo")
         bundle.setMessage(loi)
         bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            finish()
         })
         bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
             dialog.cancel()
+            build.dismiss()
         })
         bundle.show()
     }
 
+    private fun themNguoiDung(dialog: DialogThemKhachThueBinding, build: AlertDialog, view: View) {
+        val maNguoiDung = UUID.randomUUID().toString()
+        val nguoiDung = NguoiDung(
+            ma_nguoi_dung = maNguoiDung,
+            ho_ten_nguoi_dung = dialog.edHoTenThemNguoiDung.text.toString(),
+            nam_sinh = dialog.edNgaySinhThemNguoiDung.text.toString(),
+            sdt_nguoi_dung = dialog.edSDTThemNguoiDung.text.toString(),
+            que_quan = dialog.edQueQuanThemNguoiDung.text.toString(),
+            cccd = dialog.edCCCDThemNguoiDung.text.toString(),
+            trang_thai_chu_hop_dong = 0,
+            trang_thai_o = 1,
+            ma_phong = maPhong
+        )
+        val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
+        val updatePhong = PhongDao(binding.root.context).updateTrangThaiPhongThanhDangO(maPhong)
+        if (dao > 0 && updatePhong >0) {
+
+            thongBaoThanhCongNguoiDung("Thêm người dùng thành công",build)
+            //Snackbar.make(view, "Thêm người dùng thành công", Toast.LENGTH_SHORT).show()
+        } else {
+            //Snackbar.make(view, "Thêm không thành công", Toast.LENGTH_SHORT).show()
+            thongBaoLoi("Thêm người dùng không thành công")
+        }
+        ///
+//                        dialog.edHoTenThemNguoiDung.setText("")
+//                        dialog.edSDTThemNguoiDung.setText("")
+//                        dialog.edCCCDThemNguoiDung.setText("")
+//                        dialog.edNgaySinhThemNguoiDung.setText("")
+//                        dialog.edQueQuanThemNguoiDung.setText("")
+
+    }
     fun chuyenActivity() {
-        val intent = Intent(this@ActivitytaoHopDongMoi, ActivityTaoHopDong::class.java)
-        startActivity(intent)
+//        val intent = Intent(this@ActivitytaoHopDongMoi, ActivityTaoHopDong::class.java)
+//        startActivity(intent)
         finish()
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id: Int = item.getItemId();
+        val id: Int = item.itemId;
         if (id == android.R.id.home)
-            chuyenActivity();
+           finish()
         return super.onOptionsItemSelected(item);
     }
     override fun onResume() {
@@ -397,5 +443,6 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
         Log.d("TAG", "onPause: ")
         binding.tvThemNguoiThue.isVisible = false
     }
+
 }
 

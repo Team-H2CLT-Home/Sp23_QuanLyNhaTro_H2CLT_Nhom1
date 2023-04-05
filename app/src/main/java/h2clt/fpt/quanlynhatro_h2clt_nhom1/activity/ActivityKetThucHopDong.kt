@@ -3,10 +3,13 @@ package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.view.MenuItem
+import android.widget.CompoundButton
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.HopDongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.KhuTroDao
@@ -34,6 +37,14 @@ class ActivityKetThucHopDong : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityKetThucHopDongBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        setSupportActionBar(binding.tbKetThucHopDong)
+        val ab = getSupportActionBar()
+        ab?.setHomeAsUpIndicator(R.drawable.black_left)
+        ab?.setDisplayHomeAsUpEnabled(true)
+
+
         val c = Calendar.getInstance() as GregorianCalendar?
         mYearNow = (c as Calendar).get(Calendar.YEAR)
         mMonthNow = c!!.get(Calendar.MONTH)
@@ -67,16 +78,25 @@ class ActivityKetThucHopDong : AppCompatActivity() {
             binding.tvSoTienDenBuHopDong.setText(""+tienCocDenBu)
         }
 
+
+        binding.chkThietHai.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { compoundButton, b -> //Code khi trạng thái check thay đổi
+            binding.layoutTienDenBu.isVisible = true
+        })
+
         binding.btnKiemTraTaiSan.setOnClickListener {
             if (binding.chkThietHai.isChecked) {
-                binding.tvTienThietHaiXuLyPhong.setText(""+tienDenBuHopDong)
+                if(binding.edTienThietHai.text.toString().isNotBlank()){
+                    binding.tvTienThietHaiXuLyPhong.setText(""+binding.edTienThietHai.text.toString())
+                }else{
+                    thongBaoLoi("Bạn cần điền số tiền thiệt hại trước khi kiểm tra!")
+                    return@setOnClickListener
+                }
+
             }else{
                 binding.tvTienThietHaiXuLyPhong.setText(""+0)
             }
             binding.chkKiemTraXuLyPhong.isChecked = true
             binding.tvCongViecXuLyPhong.setText(""+1+"/2")
-            binding.btnKiemTraTaiSan.setText("Đã thực hiện")
-
         }
 
 
@@ -84,7 +104,7 @@ class ActivityKetThucHopDong : AppCompatActivity() {
             binding.chkThanhToanXuLy.isChecked = true
             if(hopDong.trang_thai_hop_dong==0){
                 if (binding.chkThietHai.isChecked){
-                    tongTien = hopDong.tien_coc-tienDenBuHopDong
+                    tongTien = hopDong.tien_coc-binding.tvTienThietHaiXuLyPhong.text.toString().toInt()
                     binding.tvTongTien.setText("Tiền thanh toán cho khách: ")
                     binding.tvTienConLaiXuLyPhong.setText(""+tongTien)
                 }else{
@@ -94,7 +114,7 @@ class ActivityKetThucHopDong : AppCompatActivity() {
                 }
             }else if (hopDong.trang_thai_hop_dong==1){
                 if (binding.chkThietHai.isChecked){
-                    tongTien = tienCocDenBu+tienDenBuHopDong
+                    tongTien = tienCocDenBu+binding.tvTienThietHaiXuLyPhong.text.toString().toInt()
                     binding.tvTongTien.setText("Tiền cần thu của khách: ")
                     binding.tvTienConLaiXuLyPhong.setText(""+tongTien)
                 }else{
@@ -104,7 +124,7 @@ class ActivityKetThucHopDong : AppCompatActivity() {
                 }
             }else if (hopDong.trang_thai_hop_dong==2){
                 if (binding.chkThietHai.isChecked){
-                    tongTien = hopDong.tien_coc-tienDenBuHopDong
+                    tongTien = hopDong.tien_coc-binding.tvTienThietHaiXuLyPhong.text.toString().toInt()
                     binding.tvTongTien.setText("Tiền thanh toán cho khách: ")
                     binding.tvTienConLaiXuLyPhong.setText(""+tongTien)
                 }else{
@@ -114,7 +134,6 @@ class ActivityKetThucHopDong : AppCompatActivity() {
                 }
             }
             binding.tvCongViecXuLyPhong.setText(""+2+"/2")
-            binding.btnDaThucHienXuLyPhong.setText("Đã thực hiện")
         }
 
         binding.btnXoaThongTinPhong.setOnClickListener {
@@ -126,6 +145,12 @@ class ActivityKetThucHopDong : AppCompatActivity() {
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id: Int = item.getItemId();
+        if (id == android.R.id.home)
+            finish()
+        return super.onOptionsItemSelected(item);
+    }
 
     private fun updateHD(hopDong: HopDong, binding: ActivityKetThucHopDongBinding) {
         val hopDongNew = HopDong(
@@ -141,6 +166,8 @@ class ActivityKetThucHopDong : AppCompatActivity() {
             hieu_luc_hop_dong = 0,
             ngay_lap_hop_dong = hopDong.ngay_lap_hop_dong
         )
+        val updatePhong = PhongDao(this@ActivityKetThucHopDong).updateTrangThaiPhongThanhDaO(hopDong.ma_phong)
+
         var count =0
         val listNDTrongPhong = NguoiDungDao(this).getNguoiDungByMaPhong(hopDong.ma_phong)
         for (i in 0 until listNDTrongPhong.size){
@@ -149,7 +176,7 @@ class ActivityKetThucHopDong : AppCompatActivity() {
             }
         }
         var update = HopDongDao(this.binding.root.context).updateHopDong(hopDongNew)
-        if (update>0 && count==listNDTrongPhong.size){
+        if (update>0 && count==listNDTrongPhong.size && updatePhong>0){
             thongBaoThanhCong("Kết thúc hợp đồng thành công!")
         }
     }
@@ -206,8 +233,8 @@ class ActivityKetThucHopDong : AppCompatActivity() {
         bundle.setTitle("Thông Báo")
         bundle.setMessage(loi)
         bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
-            val intent = Intent(this@ActivityKetThucHopDong,ActivityXuLyPhong::class.java)
-            startActivity(intent)
+//            val intent = Intent(this@ActivityKetThucHopDong,ActivityXuLyPhong::class.java)
+//            startActivity(intent)
             finish()
         })
         bundle.show()

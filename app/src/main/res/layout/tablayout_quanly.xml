@@ -37,16 +37,18 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/CocGiuCho"
+                android:id="@+id/quanLyDichVu"
                 style="@style/Tablayout_Linner">
 
                 <ImageView
                     style="@style/image_tabLayout"
-                    android:src="@drawable/icon_coctien" />
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/icon_dichvu"
+                    />
 
                 <TextView
                     style="@style/textView_tabLayout"
-                    android:text="Cọc giữ chỗ" />
+                    android:text="Dịch vụ" />
             </LinearLayout>
 
 
@@ -144,41 +146,7 @@
                     android:text="Danh sách hợp đồng" />
             </LinearLayout>
         </GridLayout>
-        <LinearLayout
-            android:id="@+id/quanLyDichVu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:orientation="horizontal"
-            android:background="@drawable/boder_tron_colorwhite"
-            android:layout_marginRight="15dp">
-            <ImageView
-                android:layout_marginLeft="10dp"
-                android:layout_width="50dp"
-                android:layout_height="90dp"
-                android:src="@drawable/img_soluongcoc"
-                />
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center">
-                <TextView
-                    style="@style/textView_tabLayout"
-                    android:layout_gravity="center"
-                    android:textSize="28sp"
-                    android:text="Quản lý loại dịch vụ"
-                    />
 
-            </LinearLayout>
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="90dp"
-                android:src="@drawable/black_right"
-                />
-        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

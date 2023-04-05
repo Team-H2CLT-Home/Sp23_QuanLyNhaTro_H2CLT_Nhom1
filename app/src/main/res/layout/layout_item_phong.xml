@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lnPhong"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -96,7 +97,7 @@
                     <CheckBox
                         android:id="@+id/chkTrangThaiPhongDaCoc"
                         style="@style/chk_trang_thai"
-                        android:text="Chưa cọc"
+                        android:text="Đang ở"
                         android:textColor="#DC0727"
                         android:clickable="false"
                         android:layout_marginLeft="20dp"

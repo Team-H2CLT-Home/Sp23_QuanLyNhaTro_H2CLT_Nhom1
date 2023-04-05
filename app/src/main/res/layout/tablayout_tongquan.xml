@@ -26,6 +26,7 @@
                <TextView
                    style="@style/tv_soLuong_tongquan"
                    android:text="Khu A"
+                   android:id="@+id/tvTenKhuTongQuan"
                    />
            </LinearLayout>
            <LinearLayout
@@ -37,6 +38,7 @@
                    />
                <TextView
                    style="@style/tv_soLuong_tongquan"
+                   android:id="@+id/tvSoPhongTongQuan"
                    android:text="30"
                    />
            </LinearLayout>
@@ -71,6 +73,7 @@
                        style="@style/image_tabLayout"
                        android:src="@drawable/icon_homered_tq" />
                    <TextView
+                       android:id="@+id/tvPhongTrong"
                        style="@style/textView_tabLayout"
                        android:textSize="40dp"
                        android:paddingLeft="20dp"
@@ -97,6 +100,7 @@
                        style="@style/image_tabLayout"
                        android:src="@drawable/icon_homegreen_tq" />
                    <TextView
+                       android:id="@+id/tvPhongDangThue"
                        style="@style/textView_tabLayout"
                        android:textSize="40dp"
                        android:paddingLeft="20dp"
@@ -146,6 +150,7 @@
                        style="@style/image_tabLayout"
                        android:src="@drawable/icon_price_tq" />
                    <TextView
+                       android:id="@+id/sl_PhongChuaDongTien"
                        style="@style/textView_tabLayout"
                        android:textSize="40dp"
                        android:paddingLeft="20dp"
@@ -158,44 +163,7 @@
            </LinearLayout>
        </GridLayout>
 
-       <LinearLayout
-           android:id="@+id/phongDaCoc"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="10dp"
-           android:layout_marginLeft="15dp"
-           android:orientation="horizontal"
-           android:background="@drawable/boder_tron_colorwhite"
-           android:layout_marginRight="15dp">
-           <ImageView
-               android:layout_marginLeft="10dp"
-               android:layout_width="50dp"
-               android:layout_height="90dp"
-               android:src="@drawable/img_soluongcoc"
-               />
-           <LinearLayout
-               android:layout_width="0dp"
-               android:layout_weight="1"
-               android:layout_height="wrap_content"
-               android:orientation="vertical"
-               android:gravity="center">
-               <TextView
-                   style="@style/textView_tabLayout"
-                   android:text="Số phòng đã cọc giữ chỗ"
-                   />
-               <TextView
-                   style="@style/textView_tabLayout"
-                   android:textSize="35dp"
-                   android:text="2"
 
-                   />
-           </LinearLayout>
-           <ImageView
-               android:layout_width="50dp"
-               android:layout_height="90dp"
-               android:src="@drawable/black_right"
-               />
-       </LinearLayout>
        <TextView
            style="@style/textView_Tieude"
            android:text="Thống kê tài chính"

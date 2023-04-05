@@ -55,7 +55,7 @@ class HoaDonDao(context: Context) {
                 gia_dich_vu = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_DICH_VU)),
                 mien_giam = c.getInt(c.getColumnIndex(HoaDon.CLM_MIEN_GIAM)),
                 ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG)),
-                tong = c.getInt(c.getColumnIndex(HoaDon.CLM_TONG))
+                tong = c.getLong(c.getColumnIndex(HoaDon.CLM_TONG))
             )
         }
         return null
@@ -78,7 +78,7 @@ class HoaDonDao(context: Context) {
                     gia_dich_vu = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_DICH_VU)),
                     mien_giam = c.getInt(c.getColumnIndex(HoaDon.CLM_MIEN_GIAM)),
                     ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG)),
-                    tong = c.getInt(c.getColumnIndex(HoaDon.CLM_TONG))
+                    tong = c.getLong(c.getColumnIndex(HoaDon.CLM_TONG))
                 )
                 list+=hoaDon
             }while (c.moveToNext())
@@ -107,7 +107,7 @@ class HoaDonDao(context: Context) {
                     gia_dich_vu = c.getInt(c.getColumnIndex(HoaDon.CLM_GIA_DICH_VU)),
                     mien_giam = c.getInt(c.getColumnIndex(HoaDon.CLM_MIEN_GIAM)),
                     ma_phong = c.getString(c.getColumnIndex(HoaDon.CLM_MA_PHONG)),
-                    tong = c.getInt(c.getColumnIndex(HoaDon.CLM_TONG))
+                    tong = c.getLong(c.getColumnIndex(HoaDon.CLM_TONG))
                 )
                 list+=hoaDon
             }while (c.moveToNext())
@@ -116,11 +116,11 @@ class HoaDonDao(context: Context) {
     }
 
     @SuppressLint("Range")
-    fun getAllInHoaDonByDate(dateStart:String, dateEnd:String,maKhu:String): Int {
+    fun getAllInHoaDonByDate(dateStart:String, dateEnd:String,maKhu:String): Long {
         val list= mutableListOf<Int>()
         val sql="""
             select sum(${HoaDon.CLM_TONG}) as tong from ${HoaDon.TB_NAME} 
-            where ${HoaDon.CLM_NGAY_TAO_HOA_DON} BETWEEN ? AND ? and ?
+            where ${HoaDon.CLM_NGAY_TAO_HOA_DON} BETWEEN ? AND ? AND ?
         """.trimIndent()
         val c=db.rawQuery(sql, arrayOf(dateStart,dateEnd,maKhu))
         if(c.moveToFirst()){
@@ -132,6 +132,6 @@ class HoaDonDao(context: Context) {
                 }
             }while (c.moveToNext())
         }
-        return list[0]
+        return list[0].toLong()
     }
 }

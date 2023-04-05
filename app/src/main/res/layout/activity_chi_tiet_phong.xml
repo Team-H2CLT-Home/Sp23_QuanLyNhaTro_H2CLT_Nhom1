@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbChiTietPhong"
         style="@style/toolBar"
         app:title="@string/chi_tiet_phong"
 
