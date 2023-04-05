@@ -354,8 +354,6 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
         bundle.setTitle("Thông Báo")
         bundle.setMessage(loi)
         bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
-            val intent = Intent(this@ActivitytaoHopDongMoi,ActivityTaoHopDong::class.java)
-            startActivity(intent)
             finish()
         })
         bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
@@ -368,6 +366,7 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
         bundle.setTitle("Thông Báo")
         bundle.setMessage(loi)
         bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            finish()
         })
         bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
             dialog.cancel()
@@ -408,8 +407,8 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
 
     }
     fun chuyenActivity() {
-        val intent = Intent(this@ActivitytaoHopDongMoi, ActivityTaoHopDong::class.java)
-        startActivity(intent)
+//        val intent = Intent(this@ActivitytaoHopDongMoi, ActivityTaoHopDong::class.java)
+//        startActivity(intent)
         finish()
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

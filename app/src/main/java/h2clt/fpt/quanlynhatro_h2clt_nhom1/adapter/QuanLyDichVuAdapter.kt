@@ -51,15 +51,15 @@ class QuanLyDichVuAdapter(
         when{
             phongSize<=dichVuTrongPhongSize->{
                 holder.binding.tvInfo.text="Áp dụng cho tất cả phòng"
-                holder.binding.tvInfo.setTextColor(Color.MAGENTA)
+                holder.binding.tvInfo.setTextColor(Color.parseColor("#ED061F"))
             }
             dichVuTrongPhongSize in 2 until phongSize ->{
                 holder.binding.tvInfo.text="Áp dụng cho một số phòng"
-                holder.binding.tvInfo.setTextColor(Color.BLUE)
+                holder.binding.tvInfo.setTextColor(Color.parseColor("#FF5C00"))
             }
             else ->{
                 holder.binding.tvInfo.text="Chưa áp dụng phòng nào"
-                holder.binding.tvInfo.setTextColor(Color.RED)
+                holder.binding.tvInfo.setTextColor(Color.BLACK)
             }
         }
 

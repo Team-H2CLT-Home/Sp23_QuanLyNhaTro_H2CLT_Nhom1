@@ -28,9 +28,8 @@ class ActivityTaoHopDong : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTaoHopDongBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.tbDanhSachPhong
         setSupportActionBar(binding.tbDanhSachPhong)
-        val ab = getSupportActionBar()
+        val ab = supportActionBar
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
         //=======================================
@@ -73,13 +72,11 @@ class ActivityTaoHopDong : AppCompatActivity() {
         binding.rcyPhongTrongCanTaoHopDong.adapter = adapter
     }
 
-    fun chuyenActivity(){
-        val intent = Intent(this@ActivityTaoHopDong, ActivityManHinhChinhChuTro::class.java)
-        startActivity(intent)
-        finish()
-    }
+//    fun chuyenActivity(){
+//        finish()
+//    }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
-        val id : Int = item.getItemId();
+        val id : Int = item.itemId;
         if (id==android.R.id.home)
             finish()
         return super.onOptionsItemSelected(item);
