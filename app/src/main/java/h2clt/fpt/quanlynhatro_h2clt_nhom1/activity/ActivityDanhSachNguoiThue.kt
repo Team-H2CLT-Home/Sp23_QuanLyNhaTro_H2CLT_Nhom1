@@ -38,6 +38,7 @@ class ActivityDanhSachNguoiThue : AppCompatActivity() {
     fun chuyenActivity(){
         val intent = Intent(this@ActivityDanhSachNguoiThue, ActivityManHinhChinhChuTro::class.java)
         startActivity(intent)
+        finish()
     }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.getItemId();

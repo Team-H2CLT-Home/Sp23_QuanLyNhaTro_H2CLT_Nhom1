@@ -139,11 +139,11 @@ class ActivityCapNhatKhachThue : AppCompatActivity() {
 
                             }
 //                        PhongDao(binding.root.context).updateTrangThaiPhongThanhDangO(maPhong)
-//                            thongBaoThanhCong("Thêm người dùng thành công")
-                            Snackbar.make(it, "Sửa khách thuê thành công", Toast.LENGTH_SHORT).show()
+                            thongBaoThanhCong("Sửa người dùng thành công")
+//                            Snackbar.make(it, "Sửa khách thuê thành công", Toast.LENGTH_SHORT).show()
                         } else {
-                            Snackbar.make(it, "Sửa khách thuê thành công", Toast.LENGTH_SHORT).show()
-//                            thongBaoLoi("Thêm người dùng không thành công")
+//                            Snackbar.make(it, "Sửa khách thuê thành công", Toast.LENGTH_SHORT).show()
+                            thongBaoLoi("Sửa người dùng không thành công")
                         }
 //                        if(NguoiDungDao(this).getListNguoiDungByMaPhong(maPhong).size ==0){
 //                            PhongDao(binding.root.context).updateTrangThaiPhongThanhDaO(maPhong)
@@ -173,11 +173,11 @@ class ActivityCapNhatKhachThue : AppCompatActivity() {
                                 PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDangO(maPhong)
 
                             }
-//                            thongBaoThanhCong("Thêm người dùng thành công")
-                            Snackbar.make(it, "Sửa khách thuê thành công", Toast.LENGTH_SHORT).show()
+                            thongBaoThanhCong("Sửa người dùng thành công")
+//                            Snackbar.make(it, "Sửa khách thuê thành công", Toast.LENGTH_SHORT).show()
                         } else {
-                            Snackbar.make(it, "Sửa khách thuê ko thành công", Toast.LENGTH_SHORT).show()
-//                            thongBaoLoi("Thêm người dùng không thành công")
+//                            Snackbar.make(it, "Sửa khách thuê ko thành công", Toast.LENGTH_SHORT).show()
+                            thongBaoLoi("Sửa người dùng không thành công")
                         }
 
 //                        return@setOnClickListener
@@ -193,12 +193,12 @@ class ActivityCapNhatKhachThue : AppCompatActivity() {
                 thongBaoLoi("Dữ liệu không được để trống!!!")
             }
 
-            val intent = Intent(this@ActivityCapNhatKhachThue,ActivityDanhSachNguoiThue::class.java)
-            startActivity(intent)
+
         }
         binding.btnHuySuaNguoiDung.setOnClickListener {
-            val intent = Intent(this@ActivityCapNhatKhachThue,ActivityDanhSachNguoiThue::class.java)
-            startActivity(intent)
+//            val intent = Intent(this@ActivityCapNhatKhachThue,ActivityDanhSachNguoiThue::class.java)
+//            startActivity(intent)
+            finish()
         }
 //        binding.edHoTenSuaNguoiDung.text =
 
@@ -210,6 +210,9 @@ class ActivityCapNhatKhachThue : AppCompatActivity() {
         bundle.setTitle("Thông Báo")
         bundle.setMessage(loi)
         bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+//            val intent = Intent(this@ActivityCapNhatKhachThue,ActivityDanhSachNguoiThue::class.java)
+//            startActivity(intent)
+            finish()
             dialog.cancel()
 //            onResume()
 

@@ -19,7 +19,7 @@
             android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:background="#F48FB1"
+                android:background="#FFFFFF"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
@@ -29,7 +29,7 @@
                     android:paddingTop="5dp"
                     android:paddingLeft="10dp"
                     android:paddingBottom="5dp"
-                    android:textColor="#F6F3F3"
+                    android:textColor="#100101"
                     android:layout_height="wrap_content"
                     android:text="Tiền điện"
                     android:textStyle="bold"
@@ -43,6 +43,11 @@
                     android:paddingRight="10dp"
                     android:layout_height="40dp"/>
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="2dp"
+                android:background="#7E7C7C"/>
 
 
             <TextView
@@ -63,6 +68,7 @@
                 android:paddingTop="5dp"
                 android:paddingLeft="10dp"
                 android:paddingBottom="5dp"
+                android:textStyle="italic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

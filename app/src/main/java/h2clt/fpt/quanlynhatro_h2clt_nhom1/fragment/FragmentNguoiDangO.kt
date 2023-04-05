@@ -183,12 +183,11 @@ class FragmentNguoiDangO: Fragment() {
         val dao = NguoiDungDao(dialog.root.context).insertNguoiDung(nguoiDung)
         val updatePhong = PhongDao(binding.root.context).updateTrangThaiPhongThanhDangO(maPhong)
         if (dao > 0 && updatePhong >0) {
-
-                            thongBaoThanhCong("Thêm người dùng thành công",build)
+            thongBaoThanhCong("Thêm người dùng thành công",build)
             //Snackbar.make(view, "Thêm người dùng thành công", Toast.LENGTH_SHORT).show()
         } else {
             //Snackbar.make(view, "Thêm không thành công", Toast.LENGTH_SHORT).show()
-                            thongBaoLoi("Thêm người dùng không thành công")
+           thongBaoLoi("Thêm người dùng không thành công")
         }
         ///
 //                        dialog.edHoTenThemNguoiDung.setText("")
@@ -218,6 +217,7 @@ class FragmentNguoiDangO: Fragment() {
         bundle.setTitle("Thông Báo Lỗi")
         bundle.setMessage(loi)
         bundle.setNegativeButton("Ok", DialogInterface.OnClickListener { dialog, which ->
+
             dialog.cancel()
         })
         bundle.show()
