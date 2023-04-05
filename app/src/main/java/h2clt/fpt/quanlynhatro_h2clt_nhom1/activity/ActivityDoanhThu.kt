@@ -34,6 +34,7 @@ class ActivityDoanhThu : AppCompatActivity() {
     var dateEnd:Any?=null
     var ngayDau=""
     var ngayCuoi=""
+    var sum=0
     private var maKhu = ""
     private var list = mutableListOf<HoaDon>()
     private val simpleDateFormatNow = SimpleDateFormat("yyyy-MM-dd")
@@ -50,6 +51,9 @@ class ActivityDoanhThu : AppCompatActivity() {
         //====================================================
         binding.edNgayBatDauDoanhThu.isVisible = true
         binding.edNgayKetThucDoanhThu.isVisible = true
+        binding.recyclerDoanhThu.isVisible=false
+        val srf=binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
+        maKhu= srf.getString(MA_KHU_KEY, "")!!
 
         binding.imgNgayBatDauDoanhThu.setOnClickListener {
             val c = Calendar.getInstance() as GregorianCalendar?
@@ -102,18 +106,19 @@ class ActivityDoanhThu : AppCompatActivity() {
             ngayCuoi=simpleDateFormat.format(c!!.time)
         }
 
+
+
         //=======nút doanh thu
+        Toast.makeText(binding.root.context, ""+sum, Toast.LENGTH_SHORT).show()
 
         binding.btnTongDoanhThu.setOnClickListener {
-
-            val sum=HoaDonDao(binding.root.context).getAllInHoaDonByDate(ngayDau,ngayCuoi)
-            binding.tvTongDoanhThu.text = "tổng là: $sum đ"
-            if(sum!=0){
-                val srf=binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
-                maKhu= srf.getString(MA_KHU_KEY, "")!!
-                reload()
-            }else{
+            sum=HoaDonDao(binding.root.context).getAllInHoaDonByDate(ngayDau,ngayCuoi,maKhu)
+            if(sum==0){
                 binding.recyclerDoanhThu.isVisible=false
+            }else{
+                binding.tvTongDoanhThu.text = "tổng là: $sum đ"
+                binding.recyclerDoanhThu.isVisible=true
+                reload()
             }
             Toast.makeText(binding.root.context, ""+sum, Toast.LENGTH_SHORT).show()
         }
@@ -137,7 +142,8 @@ class ActivityDoanhThu : AppCompatActivity() {
         list = HoaDonDao(binding.root.context).getAllInHoaDonByMaKhu(maKhu) as MutableList<HoaDon>
         val hoaDonDaThanhToanAdapter  = HoaDonDaThanhToanAdapter(list)
         binding.recyclerDoanhThu.adapter = hoaDonDaThanhToanAdapter
-        binding.recyclerDoanhThu.isVisible=true
+
         hoaDonDaThanhToanAdapter.notifyDataSetChanged()
     }
+
 }
