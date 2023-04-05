@@ -120,9 +120,9 @@ class HoaDonDao(context: Context) {
         val list= mutableListOf<Int>()
         val sql="""
             select sum(${HoaDon.CLM_TONG}) as tong from ${HoaDon.TB_NAME} 
-            where ${HoaDon.CLM_NGAY_TAO_HOA_DON} BETWEEN ? AND ? AND "$maKhu"
+            where ${HoaDon.CLM_NGAY_TAO_HOA_DON} BETWEEN ? AND ? AND ?
         """.trimIndent()
-        val c=db.rawQuery(sql, arrayOf(dateStart,dateEnd))
+        val c=db.rawQuery(sql, arrayOf(dateStart,dateEnd,maKhu))
         if(c.moveToFirst()){
             do {
                 try {
