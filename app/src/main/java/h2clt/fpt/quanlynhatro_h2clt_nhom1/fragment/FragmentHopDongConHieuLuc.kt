@@ -32,7 +32,7 @@ class FragmentHopDongConHieuLuc : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHopDongConHieuLucBinding.inflate(LayoutInflater.from(context))
-        reloadDS()
+        onResume()
         return binding.root
     }
 
@@ -53,6 +53,11 @@ class FragmentHopDongConHieuLuc : Fragment() {
         })
         this.binding.rcyPhongConHieuLuc.adapter = hopDongAdapter
         this.binding.rcyPhongConHieuLuc.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        reloadDS()
     }
 
 }
