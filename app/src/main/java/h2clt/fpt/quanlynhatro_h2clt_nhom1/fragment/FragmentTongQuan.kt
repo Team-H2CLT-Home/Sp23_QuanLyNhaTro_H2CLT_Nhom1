@@ -73,10 +73,7 @@ class FragmentTongQuan:Fragment() {
             startActivity(intent)
         }
 
-        val sdf = SimpleDateFormat("yyyy-MM")
-        val ngay = sdf.format(Date())
-        listHoaDon = HoaDonDao(binding.root.context).getAllInHoaDonByMaKhu(maKhu).filter { it.trang_thai_hoa_don == 0 && ngay in it.ngay_tao_hoa_don }
-        binding.slPhongChuaDongTien.setText(""+listHoaDon.size)
+
         binding.phongChuaDongTien.setOnClickListener {
             val intent = Intent(context,ActivityPhongChuaDongTien::class.java)
             startActivity(intent)
@@ -181,5 +178,11 @@ class FragmentTongQuan:Fragment() {
         binding.tvSoPhongTongQuan.setText(""+listPhong.size)
         binding.tvPhongTrong.setText(""+listPhongTrong.size)
         binding.tvPhongDangThue.setText(""+listPhongDangThue.size)
+
+
+        val sdf = SimpleDateFormat("yyyy-MM")
+        val ngay = sdf.format(Date())
+        listHoaDon = HoaDonDao(binding.root.context).getAllInHoaDonByMaKhu(maKhu).filter { it.trang_thai_hoa_don == 0 && ngay in it.ngay_tao_hoa_don }
+        binding.slPhongChuaDongTien.setText(""+listHoaDon.size)
     }
 }

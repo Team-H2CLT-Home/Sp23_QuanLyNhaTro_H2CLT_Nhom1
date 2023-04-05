@@ -50,6 +50,7 @@ class ActivityDanhSachPhongTHD : AppCompatActivity() {
         binding.recActivityTaoHopDong1.adapter = danhSachPhongDaOAdapter
         danhSachPhongDaOAdapter.notifyDataSetChanged()
 
+
     }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {
         val id : Int = item.getItemId();

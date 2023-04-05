@@ -288,6 +288,7 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
                 //activityDanhSachHopDong.updateHopDong(hopDong)
             }
 
+
         }
 
         binding.btnHuyHopDong.setOnClickListener {
