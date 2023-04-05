@@ -233,8 +233,8 @@ class ActivityKetThucHopDong : AppCompatActivity() {
         bundle.setTitle("Thông Báo")
         bundle.setMessage(loi)
         bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
-            val intent = Intent(this@ActivityKetThucHopDong,ActivityXuLyPhong::class.java)
-            startActivity(intent)
+//            val intent = Intent(this@ActivityKetThucHopDong,ActivityXuLyPhong::class.java)
+//            startActivity(intent)
             finish()
         })
         bundle.show()
