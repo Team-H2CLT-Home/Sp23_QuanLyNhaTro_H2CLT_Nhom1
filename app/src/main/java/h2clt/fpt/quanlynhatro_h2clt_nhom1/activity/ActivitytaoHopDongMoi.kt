@@ -5,17 +5,14 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
-import android.window.OnBackInvokedDispatcher
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -167,6 +164,21 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
 
         binding.edTenPhongTro.setTextColor(Color.BLACK)
         binding.edNgayHetHan.setTextColor(Color.BLACK)
+        binding.imgCalendar.setOnClickListener {
+            val c = Calendar.getInstance() as GregorianCalendar?
+            mYear = (c as Calendar).get(Calendar.YEAR)
+            mMonth = c!!.get(Calendar.MONTH)
+            mDay = c!!.get(Calendar.DAY_OF_MONTH)
+            val d = DatePickerDialog(
+                this,
+                0,
+                mDateNgayO as DatePickerDialog.OnDateSetListener?,
+                mYear,
+                mMonth,
+                mDay
+            )
+            d.show()
+        }
         binding.edNgayBatDauO.setOnClickListener {
             val c = Calendar.getInstance() as GregorianCalendar?
             mYear = (c as Calendar).get(Calendar.YEAR)
@@ -268,8 +280,8 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
                     ma_phong = maPhong,
                     ma_nguoi_dung = maND,
                     thoi_han = binding.edThoiHan.text.toString().toInt(),
-                    ngay_o = chuyenDinhDangNgay(binding.edNgayBatDauO.text),
-                    ngay_hop_dong = "2023-04-05",
+                    ngay_o = chuyenDinhDangNgay(binding.edNgayBatDauO.getText().toString()),
+                    ngay_hop_dong = "2023-04-02",
                     tien_coc = binding.edTienCoc.text.toString().toInt(),
                     anh_hop_dong = "aaaa",
                     trang_thai_hop_dong = if (binding.chkTrangThai.isChecked) 1 else 0,
@@ -299,7 +311,7 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
 
 
     // Chuyen Dinh Dang Ngay
-    private fun chuyenDinhDangNgay(text: Editable?):String {
+    private fun chuyenDinhDangNgay(text: String):String {
         var ngay_chuan_dinh_dang = ""
         try {
             val sdf = SimpleDateFormat("dd/MM/yyyy")
