@@ -80,9 +80,7 @@ class  KhuTroViewHolder(
             intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TOP
             binding.root.context.startActivity(intent)
         })
-        bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
-            dialog.cancel()
-        })
+
         bundle.show()
     }
 }

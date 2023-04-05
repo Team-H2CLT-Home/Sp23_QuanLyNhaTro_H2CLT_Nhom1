@@ -25,32 +25,37 @@ class ActivityThongTinChuNha : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val srf = binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
-//        maKhu = srf.getString(MA_KHU_KEY, "")!!
         binding = ActivityThongTinChuNhaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+//        val srf = binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
+//        maKhu = srf.getString(MA_KHU_KEY, "")!!
+
         setSupportActionBar(binding.tbThongTinChuNha)
         val ab = getSupportActionBar()
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
 
         val i = intent
-        val admin = i.getSerializableExtra("admin") as Admin
+        val admin:Admin = i.getSerializableExtra("admin") as Admin
+//        val tenDao = AdminDao(this).getHoTenAdmin()
+//        val stdDao = AdminDao(this).getSDTAdmin()
+//        val stkDao = AdminDao(this).getSTKAdmin()
+//        val ngaySinhDao = AdminDao(this).getNSAdmin()
+
 //        val adminDao = AdminDao(this)
 //        list = adminDao.getAllInAdmin()
         binding.tvTenChuNha.text = admin.ho_ten
         binding.tvSoDienThoai.text = admin.sdt
         binding.tvSoTaiKhoan.text = admin.stk
-        binding.tvNganHang.text = admin.ngan_hang
         binding.tvNgaySinh.text = admin.ngay_sinh
-//        if(binding.tvSoTaiKhoan.text.equals("")){
-//            binding.linearSoTaiKhoan.setBackgroundColor(Color.parseColor("#EBEBEB"))
-//            binding.tvSTK.text = ""
-//        }
-//        if(binding.tvNgaySinh.text.equals("")){
-//            binding.linearNgaySinh.setBackgroundColor(Color.parseColor("#EBEBEB"))
-//            binding.tvNS.text = ""
-//        }
+        if(binding.tvSoTaiKhoan.text.equals("")){
+            binding.linearSoTaiKhoan.setBackgroundColor(Color.parseColor("#EBEBEB"))
+            binding.tvSTK.text = ""
+        }
+        if(binding.tvNgaySinh.text.equals("")){
+            binding.linearNgaySinh.setBackgroundColor(Color.parseColor("#EBEBEB"))
+            binding.tvNS.text = ""
+        }
 //        val adapter = ThongTinChuNhaAdapter(list)
 //        binding.rcyThongTinChuNha.adapter = adapter
 
@@ -65,6 +70,5 @@ class ActivityThongTinChuNha : AppCompatActivity() {
             finish()
         return super.onOptionsItemSelected(item);
     }
-
 
 }
