@@ -81,7 +81,7 @@ class ActivityCapNhatHopDong : AppCompatActivity() {
         binding.edThoiHan.setText("" +hopDong.thoi_han)
         binding.edNgayHetHan.setText("" + chuyenDinhDangNgay(hopDong.ngay_hop_dong))
         binding.edTienCoc.setText("" + hopDong.tien_coc)
-        binding.chkTrangThai.isChecked = if (hopDong.trang_thai_hop_dong == 1 && hopDong.trang_thai_hop_dong==2) false else true
+        binding.chkTrangThai.isChecked = if (hopDong.trang_thai_hop_dong == 1 || hopDong.trang_thai_hop_dong==2) true else false
         binding.chkTrangThai.isClickable = false
         val spinner = NguoiThueSpinnerAdapter(this, listND)
         binding.spinnerNguoiDung.adapter = spinner
@@ -163,6 +163,22 @@ class ActivityCapNhatHopDong : AppCompatActivity() {
         binding.edTenPhongTro.setTextColor(Color.BLACK)
         binding.edNgayHetHan.setTextColor(Color.BLACK)
 
+
+        binding.imgCalendar.setOnClickListener {
+            val c = Calendar.getInstance() as GregorianCalendar?
+            mYear = (c as Calendar).get(Calendar.YEAR)
+            mMonth = c!!.get(Calendar.MONTH)
+            mDay = c!!.get(Calendar.DAY_OF_MONTH)
+            val d = DatePickerDialog(
+                this,
+                0,
+                mDateNgayO as DatePickerDialog.OnDateSetListener?,
+                mYear,
+                mMonth,
+                mDay
+            )
+            d.show()
+        }
         binding.edNgayBatDauO.setOnClickListener {
             val c = Calendar.getInstance() as GregorianCalendar?
             mYear = (c as Calendar).get(Calendar.YEAR)
@@ -192,6 +208,7 @@ class ActivityCapNhatHopDong : AppCompatActivity() {
                 val day = calendar.get(Calendar.DAY_OF_MONTH)
                 val year = calendar.get(Calendar.YEAR)
                 val c1 = GregorianCalendar(year, month, day)
+                binding.chkTrangThai.isChecked = true
                 binding.edNgayHetHan.setText(simpleDateFormat.format(c1!!.time))
             }
         }
@@ -261,8 +278,8 @@ class ActivityCapNhatHopDong : AppCompatActivity() {
                     ma_phong = hopDong.ma_phong,
                     ma_nguoi_dung = maND,
                     thoi_han = binding.edThoiHan.text.toString().toInt(),
-                    ngay_o = chuyenDinhDangNgayChuan(binding.edNgayBatDauO.text),
-                    ngay_hop_dong = chuyenDinhDangNgayChuan(binding.edNgayHetHan.text),
+                    ngay_o = chuyenDinhDangNgayChuan(binding.edNgayBatDauO.getText().toString()),
+                    ngay_hop_dong = chuyenDinhDangNgayChuan(binding.edNgayHetHan.getText().toString()),
                     tien_coc = binding.edTienCoc.text.toString().toInt(),
                     anh_hop_dong = "aaaa",
                     trang_thai_hop_dong = if (binding.chkTrangThai.isChecked) 1 else 0,
@@ -295,7 +312,7 @@ class ActivityCapNhatHopDong : AppCompatActivity() {
         return ngay
     }
     // Chuyen Dinh Dang Ngay
-    private fun chuyenDinhDangNgayChuan(text: Editable?): String {
+    private fun chuyenDinhDangNgayChuan(text: String): String {
         var ngay_chuan_dinh_dang = ""
         try {
             val sdf = SimpleDateFormat("dd/MM/yyyy")
@@ -345,8 +362,6 @@ class ActivityCapNhatHopDong : AppCompatActivity() {
         bundle.setTitle("Thông Báo")
         bundle.setMessage(loi)
         bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
-            val intent = Intent(this@ActivityCapNhatHopDong, ActivityDanhSachHopDong::class.java)
-            startActivity(intent)
             finish()
         })
         bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->

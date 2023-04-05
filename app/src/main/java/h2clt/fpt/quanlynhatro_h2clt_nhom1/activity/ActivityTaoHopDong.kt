@@ -35,28 +35,19 @@ class ActivityTaoHopDong : AppCompatActivity() {
         //=======================================
         val srf = binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
         maKhu = srf.getString(MA_KHU_KEY, "")!!
-//        listMaPhong = HopDongDao(this@ActivityTaoHopDong).getMaPhongByHopDong()
-//        listPhong = PhongDao(this@ActivityTaoHopDong).getAllInPhongByMaKhu(maKhu)
+        onResume()
+    }
+
+    override fun  onOptionsItemSelected(item : MenuItem): Boolean {
+        val id : Int = item.itemId;
+        if (id==android.R.id.home)
+            finish()
+        return super.onOptionsItemSelected(item);
+    }
+
+    override fun onResume() {
+        super.onResume()
         listPhongChuaCoHopDong = PhongDao(this@ActivityTaoHopDong).getPhongChuaCoHopDong(maKhu) as MutableList<Phong>
-
-//        var count = 0
-//        if (listMaPhong.size==0){
-//            listPhongChuaCoHopDong = listPhong as MutableList<Phong>
-//        }else{
-//            for (i in listMaPhong){
-//                for (y in listPhong){
-//                    if (y.ma_phong == i){
-//                        count++
-//                    }else{
-//                        listPhongChuaCoHopDong+=y
-//                    }
-//                }
-//            }
-//        }
-//        Toast.makeText(this@ActivityTaoHopDong,""+listPhong.size,Toast.LENGTH_SHORT).show()
-        //Toast.makeText(this@ActivityTaoHopDong,""+count,Toast.LENGTH_SHORT).show()
-        //Toast.makeText(this@ActivityTaoHopDong,""+listPhongChuaCoHopDong.size,Toast.LENGTH_SHORT).show()
-
         val adapter = PhongTrotaoHopDongAdapter(listPhongChuaCoHopDong, object : PhongInteface{
             override fun OnCLickPhong(pos: Int) {
                 val intent = Intent(this@ActivityTaoHopDong,ActivitytaoHopDongMoi::class.java)
@@ -70,15 +61,5 @@ class ActivityTaoHopDong : AppCompatActivity() {
         })
         binding.rcyPhongTrongCanTaoHopDong.layoutManager = LinearLayoutManager(this)
         binding.rcyPhongTrongCanTaoHopDong.adapter = adapter
-    }
-
-//    fun chuyenActivity(){
-//        finish()
-//    }
-    override fun  onOptionsItemSelected(item : MenuItem): Boolean {
-        val id : Int = item.itemId;
-        if (id==android.R.id.home)
-            finish()
-        return super.onOptionsItemSelected(item);
     }
 }
