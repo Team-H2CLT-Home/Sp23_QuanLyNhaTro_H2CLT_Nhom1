@@ -14,8 +14,6 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.AdminDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.KhuTroDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentCaNhanBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Admin
-
-
 class FragmentCaNhan:Fragment() {
     private lateinit var binding: FragmentCaNhanBinding
     private var username = ""
@@ -29,12 +27,18 @@ class FragmentCaNhan:Fragment() {
 //        val sdtDao = AdminDao(binding.root.context).getSDTAdmin()
 //        binding.tvTenChuNha.text = tenDao
 //        binding.tvSDT.text = "SĐT: "+sdtDao
+        onResume()
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
         val pref  = binding.root.context.getSharedPreferences(
             THONG_TIN_DANG_NHAP,
             AppCompatActivity.MODE_PRIVATE
         )
         username =pref.getString(USERNAME_KEY,"")!!
-        val admin  = AdminDao(binding.root.context).getAdmin(username)
+        var admin  = AdminDao(binding.root.context).getAdmin(username) as Admin
         binding.tvTenChuNha.setText(""+admin?.ho_ten)
         binding.tvSDT.setText(""+admin?.sdt)
         binding.tvDangXuat.setOnClickListener {
@@ -61,6 +65,6 @@ class FragmentCaNhan:Fragment() {
             intent.putExtra("admin",admin)
             startActivity(intent)
         }
-        return binding.root
+
     }
 }

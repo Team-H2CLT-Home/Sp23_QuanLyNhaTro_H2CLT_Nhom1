@@ -18,6 +18,7 @@ class AdminDao(context: Context) {
             put(Admin.CLM_SDT, admin.sdt)
             put(Admin.CLM_HO_TEN, admin.ho_ten)
             put(Admin.CLM_STK, admin.stk)
+            put(Admin.CLM_NGAN_HANG, admin.ngan_hang)
             put(Admin.CLM_NGAY_SINH, admin.ngay_sinh)
             put(Admin.CLM_HO_TEN, admin.ho_ten)
             put(Admin.CLM_MAT_KHAU, admin.mat_khau)
@@ -32,6 +33,7 @@ class AdminDao(context: Context) {
             put(Admin.CLM_SDT, admin.sdt)
             put(Admin.CLM_HO_TEN, admin.ho_ten)
             put(Admin.CLM_STK, admin.stk)
+            put(Admin.CLM_NGAN_HANG, admin.ngan_hang)
             put(Admin.CLM_NGAY_SINH, admin.ngay_sinh)
             put(Admin.CLM_HO_TEN, admin.ho_ten)
             put(Admin.CLM_MAT_KHAU, admin.mat_khau)
@@ -52,6 +54,7 @@ class AdminDao(context: Context) {
                     sdt= c.getString(c.getColumnIndex(Admin.CLM_SDT)),
                     ho_ten = c.getString(c.getColumnIndex(Admin.CLM_HO_TEN)),
                     stk = c.getString(c.getColumnIndex(Admin.CLM_STK)),
+                    ngan_hang = c.getString(c.getColumnIndex(Admin.CLM_NGAN_HANG)),
                     ngay_sinh = c.getString(c.getColumnIndex(Admin.CLM_NGAY_SINH)),
                     mat_khau = c.getString(c.getColumnIndex(Admin.CLM_MAT_KHAU))
                 )
@@ -133,6 +136,7 @@ class AdminDao(context: Context) {
                 sdt = c.getString(c.getColumnIndex(Admin.CLM_SDT)),
                 ho_ten = c.getString(c.getColumnIndex(Admin.CLM_HO_TEN)),
                 stk = c.getString(c.getColumnIndex(Admin.CLM_STK)),
+                ngan_hang = c.getString(c.getColumnIndex(Admin.CLM_NGAN_HANG)),
                 ngay_sinh = c.getString(c.getColumnIndex(Admin.CLM_NGAY_SINH)),
                 mat_khau = c.getString(c.getColumnIndex(Admin.CLM_MAT_KHAU))
             )

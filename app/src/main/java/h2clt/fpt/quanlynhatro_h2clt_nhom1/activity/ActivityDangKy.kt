@@ -34,7 +34,8 @@ class ActivityDangKy : AppCompatActivity() {
                      sdt = binding.edSoDienThoai.text.toString(),
                      ten_dang_nhap = binding.edTenDangNhapDangKy.text.toString(),
                      ho_ten = binding.edHoVaTen.text.toString(),
-                     stk = binding.edSoTaiKhoan.text.toString(),
+                     stk = "",
+                     ngan_hang = "",
                      ngay_sinh = binding.edNgaySinh.text.toString(),
                      mat_khau = binding.edMatKhauDangKy.text.toString()
                  )
@@ -70,8 +71,6 @@ class ActivityDangKy : AppCompatActivity() {
             binding.edSoDienThoai.text.toString().isNotBlank() &&
             binding.edTenDangNhapDangKy.text.toString().isNotBlank() &&
                 binding.edMatKhauDangKy.text.toString().isNotBlank()
-            &&
-            binding.edSoTaiKhoan.text.toString().isNotBlank()
             &&
             binding.edNgaySinh.text.toString().isNotBlank()) {
             check = 1
