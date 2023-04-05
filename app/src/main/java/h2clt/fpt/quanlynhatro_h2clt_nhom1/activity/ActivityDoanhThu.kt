@@ -34,7 +34,7 @@ class ActivityDoanhThu : AppCompatActivity() {
     var dateEnd:Any?=null
     var ngayDau=""
     var ngayCuoi=""
-    var sum=0
+    var sum=0L
     private var maKhu = ""
     private var list = mutableListOf<HoaDon>()
     private val simpleDateFormatNow = SimpleDateFormat("yyyy-MM-dd")
@@ -95,7 +95,7 @@ class ActivityDoanhThu : AppCompatActivity() {
             dayStart = i2
             val c = GregorianCalendar(yearStart, monthStart, dayStart)
             binding.edNgayBatDauDoanhThu.setText(simpleDateFormat.format(c!!.time))
-            ngayDau=simpleDateFormat.format(c!!.time)
+            ngayDau=simpleDateFormatNow.format(c!!.time)
         }
         dateEnd = DatePickerDialog.OnDateSetListener { datePicker, i, i1, i2 ->
             yearEnd = i
@@ -103,7 +103,7 @@ class ActivityDoanhThu : AppCompatActivity() {
             dayEnd = i2
             val c = GregorianCalendar(yearEnd, monthEnd, dayEnd)
             binding.edNgayKetThucDoanhThu.setText(simpleDateFormat.format(c!!.time))
-            ngayCuoi=simpleDateFormat.format(c!!.time)
+            ngayCuoi=simpleDateFormatNow.format(c!!.time)
         }
 
 
@@ -112,11 +112,12 @@ class ActivityDoanhThu : AppCompatActivity() {
         Toast.makeText(binding.root.context, ""+sum, Toast.LENGTH_SHORT).show()
 
         binding.btnTongDoanhThu.setOnClickListener {
-            sum=HoaDonDao(binding.root.context).getAllInHoaDonByDate(ngayDau,ngayCuoi,maKhu)
-            if(sum==0){
+            sum=HoaDonDao(binding.root.context).getAllInHoaDonByDate(ngayDau,ngayCuoi,maKhu).toLong()
+            if(sum==0L){
                 binding.recyclerDoanhThu.isVisible=false
+                binding.tvTongDoanhThu.text = "Tổng là: $sum đ"
             }else{
-                binding.tvTongDoanhThu.text = "tổng là: $sum đ"
+                binding.tvTongDoanhThu.text = "Tổng là: $sum đ"
                 binding.recyclerDoanhThu.isVisible=true
                 reload()
             }
