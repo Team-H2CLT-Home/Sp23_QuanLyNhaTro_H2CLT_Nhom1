@@ -281,7 +281,7 @@ class ActivitytaoHopDongMoi : AppCompatActivity() {
                     ma_nguoi_dung = maND,
                     thoi_han = binding.edThoiHan.text.toString().toInt(),
                     ngay_o = chuyenDinhDangNgay(binding.edNgayBatDauO.getText().toString()),
-                    ngay_hop_dong = "2023-04-02",
+                    ngay_hop_dong = chuyenDinhDangNgay(binding.edNgayHetHan.getText().toString()),
                     tien_coc = binding.edTienCoc.text.toString().toInt(),
                     anh_hop_dong = "aaaa",
                     trang_thai_hop_dong = if (binding.chkTrangThai.isChecked) 1 else 0,

@@ -18,7 +18,6 @@ class ActivityCapNhatThongTinChuNha : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCapNhatThongTinChuNhaBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.tbDangKy
         setSupportActionBar(binding.tbDangKy)
         val ab = getSupportActionBar()
@@ -31,6 +30,7 @@ class ActivityCapNhatThongTinChuNha : AppCompatActivity() {
         binding.edMatKhauDangKy.setText(admin.mat_khau)
         binding.edSoDienThoai.setText(admin.sdt)
         binding.edSoTaiKhoan.setText(admin.stk)
+        binding.edNganHang.setText(admin.ngan_hang)
         binding.edTenDangNhapDangKy.setText(admin.ten_dang_nhap)
         binding.edTenDangNhapDangKy.isEnabled = false
         binding.edTenDangNhapDangKy.setTextColor(Color.BLACK)
@@ -44,6 +44,7 @@ class ActivityCapNhatThongTinChuNha : AppCompatActivity() {
                     ten_dang_nhap = admin.ten_dang_nhap,
                     ho_ten = binding.edHoVaTen.text.toString(),
                     stk = binding.edSoTaiKhoan.text.toString(),
+                    ngan_hang = binding.edNganHang.text.toString(),
                     ngay_sinh = binding.edNgaySinh.text.toString(),
                     mat_khau = binding.edMatKhauDangKy.text.toString()
                 )
@@ -108,8 +109,8 @@ class ActivityCapNhatThongTinChuNha : AppCompatActivity() {
         bundle.setTitle("Thông Báo")
         bundle.setMessage(loi)
         bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
-            val intent = Intent(this@ActivityCapNhatThongTinChuNha,ActivityManHinhChinhChuTro::class.java)
-            startActivity(intent)
+//            val intent = Intent(this@ActivityCapNhatThongTinChuNha,ActivityManHinhChinhChuTro::class.java)
+//            startActivity(intent)
             finish()
         })
         bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
