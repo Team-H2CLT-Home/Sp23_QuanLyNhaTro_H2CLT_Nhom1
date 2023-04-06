@@ -121,8 +121,6 @@ class ActivityThemPhong : AppCompatActivity() {
         bundle.setTitle("Thông Báo")
         bundle.setMessage(loi)
         bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
-            val intent = Intent(this@ActivityThemPhong,ActivityDanhSachPhong::class.java)
-            startActivity(intent)
             finish()
         })
         bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->

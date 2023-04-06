@@ -181,8 +181,6 @@ class ActivityTaoHoaDon : AppCompatActivity() {
         bundle.setTitle("Thông Báo")
         bundle.setMessage(loi)
         bundle.setPositiveButton("Ok", DialogInterface.OnClickListener { dialog, which ->
-            val intent = Intent(this@ActivityTaoHoaDon,ActivityDanhSachPhongTHD::class.java)
-            startActivity(intent)
             dialog.dismiss()
             finish()
         })

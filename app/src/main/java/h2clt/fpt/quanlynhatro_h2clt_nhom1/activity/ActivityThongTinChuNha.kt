@@ -5,6 +5,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
@@ -46,7 +47,16 @@ class ActivityThongTinChuNha : AppCompatActivity() {
 //        list = adminDao.getAllInAdmin()
         binding.tvTenChuNha.text = admin.ho_ten
         binding.tvSoDienThoai.text = admin.sdt
-        binding.tvSoTaiKhoan.text = admin.stk
+        if (admin.ngan_hang.equals("") && admin.stk.equals("")){
+            binding.linearSoTaiKhoan.isVisible = false
+            binding.linearNganHang.isVisible = false
+        }else{
+            binding.linearSoTaiKhoan.isVisible = true
+            binding.linearNganHang.isVisible = true
+            binding.tvSoTaiKhoan.text = admin.stk
+            binding.tvNganHang.text = admin.ngan_hang
+        }
+
         binding.tvNgaySinh.text = admin.ngay_sinh
         if(binding.tvSoTaiKhoan.text.equals("")){
             binding.linearSoTaiKhoan.setBackgroundColor(Color.parseColor("#EBEBEB"))
