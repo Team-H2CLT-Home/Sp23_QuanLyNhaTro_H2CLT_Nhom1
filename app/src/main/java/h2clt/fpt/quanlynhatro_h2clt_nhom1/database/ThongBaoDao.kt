@@ -7,8 +7,8 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.ThongBao
 
 
 class ThongBaoDao(context: Context) {
-    val dbHelper= DbHelper(context)
-    val db=dbHelper.writableDatabase
+    private val dbHelper= DbHelper(context)
+    private val db =dbHelper.writableDatabase
 
     fun insertThongBao(thongBao: ThongBao):Long{
         val values=ContentValues()
@@ -17,6 +17,8 @@ class ThongBaoDao(context: Context) {
             put(ThongBao.CLM_TIEU_DE,thongBao.tieu_de)
             put(ThongBao.CLM_NGAY_THONG_BAO,thongBao.ngay_thong_bao)
             put(ThongBao.CLM_NOI_DUNG,thongBao.noi_dung)
+            put(ThongBao.CLM_MA_KHU,thongBao.ma_khu)
+            put(ThongBao.CLM_LOAI_THONG_BAO, thongBao.loai_thong_bao)
         }
         return db.insert(ThongBao.TB_NAME,null,values)
     }
@@ -28,17 +30,19 @@ class ThongBaoDao(context: Context) {
         """.trimIndent()
         val c=db.rawQuery(sql,null)
 
-            if(c.moveToFirst()){
-                do {
+        if(c.moveToFirst()){
+            do {
                 val thongBao=ThongBao(
                     ma_thong_bao = c.getString(c.getColumnIndex(ThongBao.CLM_MA_THONG_BAO)),
                     tieu_de = c.getString(c.getColumnIndex(ThongBao.CLM_TIEU_DE)),
                     ngay_thong_bao = c.getString(c.getColumnIndex(ThongBao.CLM_NGAY_THONG_BAO)),
-                    noi_dung = c.getString(c.getColumnIndex(ThongBao.CLM_NOI_DUNG))
+                    noi_dung = c.getString(c.getColumnIndex(ThongBao.CLM_NOI_DUNG)),
+                    ma_khu = c.getString(c.getColumnIndex(ThongBao.CLM_MA_KHU)),
+                    loai_thong_bao = c.getInt(c.getColumnIndex(ThongBao.CLM_LOAI_THONG_BAO))
                 )
                 list+=thongBao
-                }while (c.moveToNext())
-            }
+            }while (c.moveToNext())
+        }
 
 
         return list
@@ -50,12 +54,14 @@ class ThongBaoDao(context: Context) {
         """.trimIndent()
         val c=db.rawQuery(sql,null)
         if(c.moveToFirst()){
-                val thongBao=ThongBao(
-                    ma_thong_bao = c.getString(c.getColumnIndex(ThongBao.CLM_MA_THONG_BAO)),
-                    tieu_de = c.getString(c.getColumnIndex(ThongBao.CLM_TIEU_DE)),
-                    ngay_thong_bao = c.getString(c.getColumnIndex(ThongBao.CLM_NGAY_THONG_BAO)),
-                    noi_dung = c.getString(c.getColumnIndex(ThongBao.CLM_NOI_DUNG))
-                )
+            val thongBao=ThongBao(
+                ma_thong_bao = c.getString(c.getColumnIndex(ThongBao.CLM_MA_THONG_BAO)),
+                tieu_de = c.getString(c.getColumnIndex(ThongBao.CLM_TIEU_DE)),
+                ngay_thong_bao = c.getString(c.getColumnIndex(ThongBao.CLM_NGAY_THONG_BAO)),
+                noi_dung = c.getString(c.getColumnIndex(ThongBao.CLM_NOI_DUNG)),
+                ma_khu = c.getString(c.getColumnIndex(ThongBao.CLM_MA_KHU)),
+                loai_thong_bao = c.getInt(c.getColumnIndex(ThongBao.CLM_LOAI_THONG_BAO))
+            )
         }
         return null
     }
