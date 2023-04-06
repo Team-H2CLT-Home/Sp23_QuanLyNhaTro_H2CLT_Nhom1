@@ -502,4 +502,12 @@ class NguoiDungDao(context: Context) {
         }
         return "null"
     }
+
+    fun updateTrangThaiNguoiDungThanhDaO(maPhong:String):Int{
+        val values=ContentValues()
+        values.apply {
+            put(NguoiDung.CLM_TRANG_THAI_O,0)
+        }
+        return db.update(NguoiDung.TB_NAME,values,  "${NguoiDung.CLM_MA_NGUOI_DUNG}=?", arrayOf(maPhong))
+    }
 }
