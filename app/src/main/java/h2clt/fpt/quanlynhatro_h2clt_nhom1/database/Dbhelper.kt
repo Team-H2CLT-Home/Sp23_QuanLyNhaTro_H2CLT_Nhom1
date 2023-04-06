@@ -19,6 +19,7 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${Admin.CLM_TEN_DANG_NHAP} PRIMARY key NOT NULL,
             ${Admin.CLM_HO_TEN} text NOT NULL,
             ${Admin.CLM_STK} text,
+            ${Admin.CLM_NGAN_HANG} text,
             ${Admin.CLM_NGAY_SINH} text,
             ${Admin.CLM_MAT_KHAU} text NOT NULL );
         """.trimIndent()
