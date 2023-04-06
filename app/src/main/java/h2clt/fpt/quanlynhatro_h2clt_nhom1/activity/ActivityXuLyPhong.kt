@@ -61,8 +61,8 @@ class ActivityXuLyPhong : AppCompatActivity() {
     }
 
     fun chuyenActivity(){
-        val intent = Intent(this@ActivityXuLyPhong, ActivityManHinhChinhChuTro::class.java)
-        startActivity(intent)
+//        val intent = Intent(this@ActivityXuLyPhong, ActivityManHinhChinhChuTro::class.java)
+//        startActivity(intent)
         finish()
     }
     override fun  onOptionsItemSelected(item : MenuItem): Boolean {

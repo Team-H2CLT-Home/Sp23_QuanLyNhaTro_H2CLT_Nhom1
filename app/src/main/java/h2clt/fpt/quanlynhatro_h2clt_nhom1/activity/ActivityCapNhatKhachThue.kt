@@ -101,97 +101,112 @@ class ActivityCapNhatKhachThue : AppCompatActivity() {
         }else{
             binding.spinnerSuaNguoiDung.visibility = View.VISIBLE
             binding.spinnerSuaNguoiDung.isEnabled = false
+            binding.chkTrangThaiKhachThue.isEnabled = false
 //            binding.spinnerSuaNguoiDung
 //            binding.lyTenPhong.visibility = View.VISIBLE
 //            binding.edTenPhong.setText(PhongDao(this).getTenPhongById(nguoiDung.ma_phong))
         }
+
+
         binding.btnLuuSuaNguoiDung.setOnClickListener {
-            if(binding.edHoTenSuaNguoiDung.text.toString().isNotBlank()&&binding.edNgaySinhSuaNguoiDung.text.toString().isNotBlank()
-                &&binding.edSDTSuaNguoiDung.text.toString().isNotBlank()&&binding.edCCCDSuaNguoiDung.text.toString().isNotBlank()
-                &&binding.edQueQuanSuaNguoiDung.text.toString().isNotBlank()){
-                val listNguoiDungByMaPhong = NguoiDungDao(this).getListNguoiDungByMaPhong(maPhong)
-                val soNguoiO = NguoiDungDao(this).getSoNguoiOByMaPhong(maPhong)
+            if(binding.chkTrangThaiKhachThue.isChecked){
+                NguoiDungDao(binding.root.context).updateTrangThaiNguoiDungThanhDaO(nguoiDung.ma_nguoi_dung)
+                thongBaoXoa("Xóa thành công ")
+                if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhongCu).isEmpty()){
+                    PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDaO(maPhongCu)
+                }
+            }else{
+                if(binding.edHoTenSuaNguoiDung.text.toString().isNotBlank()&&binding.edNgaySinhSuaNguoiDung.text.toString().isNotBlank()
+                    &&binding.edSDTSuaNguoiDung.text.toString().isNotBlank()&&binding.edCCCDSuaNguoiDung.text.toString().isNotBlank()
+                    &&binding.edQueQuanSuaNguoiDung.text.toString().isNotBlank()){
+                    val listNguoiDungByMaPhong = NguoiDungDao(this).getListNguoiDungByMaPhong(maPhong)
+                    val soNguoiO = NguoiDungDao(this).getSoNguoiOByMaPhong(maPhong)
 //                    Toast.makeText(binding.root.context, soNguoiO, Toast.LENGTH_SHORT).show()
-                if(listNguoiDungByMaPhong.size<soNguoiO){
+
+                    if(listNguoiDungByMaPhong.size<soNguoiO){
 //                    val maNguoiDung = UUID.randomUUID().toString()
-                    if(nguoiDung.ma_nguoi_dung!=(NguoiDungDao(this).getMaNguoiDangOByMaPhong(nguoiDung.ma_phong)) ){
-                        val nguoiDungMoi = NguoiDung(
-                            ma_nguoi_dung = nguoiDung.ma_nguoi_dung,
-                            ho_ten_nguoi_dung = binding.edHoTenSuaNguoiDung.text.toString(),
-                            nam_sinh = binding.edNgaySinhSuaNguoiDung.text.toString(),
-                            sdt_nguoi_dung = binding.edSDTSuaNguoiDung.text.toString(),
-                            que_quan = binding.edQueQuanSuaNguoiDung.text.toString(),
-                            cccd = binding.edCCCDSuaNguoiDung.text.toString(),
-                            trang_thai_chu_hop_dong = 0,
-                            trang_thai_o = 1,
-                            ma_phong = maPhong
-                        )
-                        val dao = NguoiDungDao(this).updateNguoiDung(nguoiDungMoi)
-                        if (dao > 0) {
-                            if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhongCu).isEmpty()){
-                                PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDaO(maPhongCu)
+                        if(nguoiDung.ma_nguoi_dung!=(NguoiDungDao(this).getMaNguoiDangOByMaPhong(nguoiDung.ma_phong)) ){
 
-                            }
-                            if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhong)
-                                    .isNotEmpty()
-                            ){
-                                PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDangO(maPhong)
+                            val nguoiDungMoi = NguoiDung(
+                                ma_nguoi_dung = nguoiDung.ma_nguoi_dung,
+                                ho_ten_nguoi_dung = binding.edHoTenSuaNguoiDung.text.toString(),
+                                nam_sinh = binding.edNgaySinhSuaNguoiDung.text.toString(),
+                                sdt_nguoi_dung = binding.edSDTSuaNguoiDung.text.toString(),
+                                que_quan = binding.edQueQuanSuaNguoiDung.text.toString(),
+                                cccd = binding.edCCCDSuaNguoiDung.text.toString(),
+                                trang_thai_chu_hop_dong = 0,
+                                trang_thai_o = 1,
+                                ma_phong = maPhong
+                            )
 
-                            }
+                            val dao = NguoiDungDao(this).updateNguoiDung(nguoiDungMoi)
+                            if (dao > 0) {
+                                if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhongCu).isEmpty()){
+                                    PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDaO(maPhongCu)
+
+                                }
+                                if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhong)
+                                        .isNotEmpty()
+                                ){
+                                    PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDangO(maPhong)
+
+                                }
 //                        PhongDao(binding.root.context).updateTrangThaiPhongThanhDangO(maPhong)
-                            thongBaoThanhCong("Sửa người dùng thành công")
+                                thongBaoThanhCong("Sửa người dùng thành công")
 //                            Snackbar.make(it, "Sửa khách thuê thành công", Toast.LENGTH_SHORT).show()
-                        } else {
+                            } else {
 //                            Snackbar.make(it, "Sửa khách thuê thành công", Toast.LENGTH_SHORT).show()
-                            thongBaoLoi("Sửa người dùng không thành công")
-                        }
+                                thongBaoLoi("Sửa người dùng không thành công")
+                            }
 //                        if(NguoiDungDao(this).getListNguoiDungByMaPhong(maPhong).size ==0){
 //                            PhongDao(binding.root.context).updateTrangThaiPhongThanhDaO(maPhong)
 //                        }
-                       }else{
+                        }else{
 //                        thongBaoLoi("Không được sửa thông tin chủ hợp đồng")
 //                           if(nguoiDung.ma_phong==)
-                        val nguoiDungMoi = NguoiDung(
-                            ma_nguoi_dung = nguoiDung.ma_nguoi_dung,
-                            ho_ten_nguoi_dung = binding.edHoTenSuaNguoiDung.text.toString(),
-                            nam_sinh = binding.edNgaySinhSuaNguoiDung.text.toString(),
-                            sdt_nguoi_dung = binding.edSDTSuaNguoiDung.text.toString(),
-                            que_quan = binding.edQueQuanSuaNguoiDung.text.toString(),
-                            cccd = binding.edCCCDSuaNguoiDung.text.toString(),
-                            trang_thai_chu_hop_dong = 1,
-                            trang_thai_o = 1,
-                            ma_phong = maPhong
-                        )
-                        val dao = NguoiDungDao(this).updateNguoiDung(nguoiDungMoi)
-                        if (dao > 0) {
-                            if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhongCu).isEmpty()){
-                                PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDaO(maPhongCu)
-                            }
-                            if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhong)
-                                    .isNotEmpty()
-                            ){
-                                PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDangO(maPhong)
+                            val nguoiDungMoi = NguoiDung(
+                                ma_nguoi_dung = nguoiDung.ma_nguoi_dung,
+                                ho_ten_nguoi_dung = binding.edHoTenSuaNguoiDung.text.toString(),
+                                nam_sinh = binding.edNgaySinhSuaNguoiDung.text.toString(),
+                                sdt_nguoi_dung = binding.edSDTSuaNguoiDung.text.toString(),
+                                que_quan = binding.edQueQuanSuaNguoiDung.text.toString(),
+                                cccd = binding.edCCCDSuaNguoiDung.text.toString(),
+                                trang_thai_chu_hop_dong = 1,
+                                trang_thai_o = 1,
+                                ma_phong = maPhong
+                            )
+                            val dao = NguoiDungDao(this).updateNguoiDung(nguoiDungMoi)
+                            if (dao > 0) {
+                                if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhongCu).isEmpty()){
+                                    PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDaO(maPhongCu)
+                                }
+                                if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhong)
+                                        .isNotEmpty()
+                                ){
+                                    PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDangO(maPhong)
 
-                            }
-                            thongBaoThanhCong("Sửa người dùng thành công")
+                                }
+                                thongBaoThanhCong("Sửa người dùng thành công")
 //                            Snackbar.make(it, "Sửa khách thuê thành công", Toast.LENGTH_SHORT).show()
-                        } else {
+                            } else {
 //                            Snackbar.make(it, "Sửa khách thuê ko thành công", Toast.LENGTH_SHORT).show()
-                            thongBaoLoi("Sửa người dùng không thành công")
-                        }
+                                thongBaoLoi("Sửa người dùng không thành công")
+                            }
 
 //                        return@setOnClickListener
-                    }
+                        }
 //                    onResume()
+                    }else{
+                        thongBaoLoi("Phòng đã đủ người")
+                        return@setOnClickListener
+                    }
+
+
                 }else{
-                    thongBaoLoi("Phòng đã đủ người")
-                    return@setOnClickListener
+                    thongBaoLoi("Dữ liệu không được để trống!!!")
                 }
-
-
-            }else{
-                thongBaoLoi("Dữ liệu không được để trống!!!")
             }
+
 
 
         }
@@ -204,6 +219,23 @@ class ActivityCapNhatKhachThue : AppCompatActivity() {
 
         setContentView(binding.root)
 
+    }
+    fun thongBaoXoa(loi : String){
+        val bundle = androidx.appcompat.app.AlertDialog.Builder(binding.root.context)
+        bundle.setTitle("Thông báo xóa!!!")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("Xác nhận xóa", DialogInterface.OnClickListener { dialog, which ->
+//            val intent = Intent(this@ActivityCapNhatKhachThue,ActivityDanhSachNguoiThue::class.java)
+//            startActivity(intent)
+            finish()
+            dialog.cancel()
+//            onResume()
+
+        })
+        bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
     }
     fun thongBaoThanhCong(loi : String){
         val bundle = androidx.appcompat.app.AlertDialog.Builder(binding.root.context)
