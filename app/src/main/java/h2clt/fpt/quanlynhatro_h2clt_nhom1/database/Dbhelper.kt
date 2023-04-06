@@ -19,7 +19,6 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${Admin.CLM_TEN_DANG_NHAP} PRIMARY key NOT NULL,
             ${Admin.CLM_HO_TEN} text NOT NULL,
             ${Admin.CLM_STK} text,
-            ${Admin.CLM_NGAN_HANG} text,
             ${Admin.CLM_NGAY_SINH} text,
             ${Admin.CLM_MAT_KHAU} text NOT NULL );
         """.trimIndent()
@@ -120,7 +119,10 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${ThongBao.CLM_MA_THONG_BAO} text PRIMARY KEY NOT NULL,
             ${ThongBao.CLM_TIEU_DE} text NOT NULL,
             ${ThongBao.CLM_NGAY_THONG_BAO} text NOT NULL,
-            ${ThongBao.CLM_NOI_DUNG} text NOT NULL
+            ${ThongBao.CLM_NOI_DUNG} text NOT NULL,
+            ${ThongBao.CLM_MA_KHU} text NOT NULL,
+            ${ThongBao.CLM_LOAI_THONG_BAO} integer NOT NULL,
+            FOREIGN KEY (${ThongBao.CLM_MA_KHU} ) REFERENCES ${KhuTro.TB_NAME}(${KhuTro.CLM_MA_KHU_TRO})
             );
         """.trimIndent()
         db?.execSQL(thong_bao)

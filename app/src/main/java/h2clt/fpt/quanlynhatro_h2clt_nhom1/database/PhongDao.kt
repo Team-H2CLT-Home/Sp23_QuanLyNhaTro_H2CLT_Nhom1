@@ -28,6 +28,16 @@ class PhongDao(context: Context) {
     fun xoaPhongById(maPhong:String):Int {
         return db.delete(Phong.TB_NAME, "${Phong.CLM_MA_PHONG}=?", arrayOf(maPhong))
     }
+    fun updatePhong(phong:Phong):Int{
+        val values=ContentValues()
+        with(values){
+            put(Phong.CLM_TEN_PHONG,phong.ten_phong)
+            put(Phong.CLM_DIEN_TICH,phong.dien_tich)
+            put(Phong.CLM_GIA_THUE,phong.gia_thue)
+            put(Phong.CLM_SO_NGUOI_O,phong.so_nguoi_o)
+        }
+        return db.update(Phong.TB_NAME, values, "${Phong.CLM_MA_PHONG}=?", arrayOf(phong.ma_phong))
+    }
 
     fun updateTrangThaiPhongThanhDangO(maPhong:String):Int{
         val values=ContentValues()
@@ -195,7 +205,7 @@ class PhongDao(context: Context) {
         """.trimIndent()
         val c=db.rawQuery(sql,null)
         if(c.moveToNext()){
-                c.getInt(c.getColumnIndex("SoPhong"))
+            c.getInt(c.getColumnIndex("SoPhong"))
         }
         return c.getInt(c.getColumnIndex("SoPhong"))
     }

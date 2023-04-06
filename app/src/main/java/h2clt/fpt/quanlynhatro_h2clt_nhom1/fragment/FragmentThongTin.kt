@@ -1,6 +1,7 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.activity.THONG_TIN_PHONG
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.*
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.LoaiDichVuPhongDao
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.NguoiDungDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogThemLoaiDichVuBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.FragmentThongTinBinding
@@ -47,11 +49,12 @@ class FragmentThongTin : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvChiTietTenPhong.text = phong.ten_phong
-        binding.tvChiTietDienTich.text=phong.dien_tich.toString()
-        binding.tvChiTietGiaThue.text=phong.gia_thue.toString()
-        binding.tvChiTietSoNguoi.text=phong.so_nguoi_o.toString()
+        binding.edChiTietTenPhong.setText(phong.ten_phong)
+        binding.edChiTietDienTich.setText(phong.dien_tich.toString())
+        binding.edGiaThue.setText(phong.gia_thue.toString())
+        binding.edSoNguoiOToiDa.setText(phong.so_nguoi_o.toString())
         listDichTrongPhong=LoaiDichVuPhongDao(context).getAllInLoaiDichVuByPhong(maPhong)
+        binding.edSoDichVu.setText(listDichTrongPhong.size.toString())
         listLoaiDichVu=LoaiDichVuPhongDao(context).getAllInLoaiDichVuByKhuTro(maKhu)
         val listDichVuTrongPhongAdapter= ListDichVuTrongPhongAdapter(listDichTrongPhong, context)
         binding.rcvLoaiDichVu.adapter=listDichVuTrongPhongAdapter
@@ -72,10 +75,35 @@ class FragmentThongTin : Fragment() {
             build.setView(dialog.root)
             build.show()
         }
-        binding.tvChiTietXoaPhong.setOnClickListener {
-            phongDao.xoaPhongById(maPhong)
-            LoaiDichVuPhongDao(context).xoaLoaiDichVuByMaPhong(maPhong)
-            activity?.finish()
+        binding.btnXoaPhong.setOnClickListener {
+            val soNguoiTrongPhong=NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhong).size
+            if(soNguoiTrongPhong<=0) {
+                phongDao.xoaPhongById(maPhong)
+                LoaiDichVuPhongDao(context).xoaLoaiDichVuByMaPhong(maPhong)
+                activity?.finish()
+            }
+            else{
+                thongBaoLoi("Không thể xoá phòng có thông tin!!!")
+            }
+        }
+        binding.btnCapNhapPhong.setOnClickListener {
+            val tenPhong=binding.edChiTietTenPhong.text.toString()
+            val dienTich=binding.edChiTietDienTich.text.toString().toInt()
+            val giaThue=binding.edGiaThue.text.toString().toLong()
+            val soNguoiOToiDa=binding.edSoNguoiOToiDa.text.toString().toInt()
+            val phong=Phong(
+                ma_phong = maPhong,
+                ma_khu = maKhu,
+                dien_tich = dienTich,
+                gia_thue = giaThue,
+                ten_phong = tenPhong,
+                so_nguoi_o = soNguoiOToiDa,
+                trang_thai_phong = 1
+            )
+            PhongDao(binding.root.context).updatePhong(phong)
+            if ( PhongDao(binding.root.context).updatePhong(phong)>0){
+                activity?.finish()
+            }
         }
 
     }
@@ -88,5 +116,13 @@ class FragmentThongTin : Fragment() {
         binding.rcvLoaiDichVu.layoutManager= LinearLayoutManager(context)
 
     }
-
+    fun thongBaoLoi(loi : String){
+        val bundle = AlertDialog.Builder(binding.root.context)
+        bundle.setTitle("Thông Báo Lỗi")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("Ok", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
+    }
 }

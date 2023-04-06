@@ -38,7 +38,11 @@ class ActivityChiTietPhong : AppCompatActivity() {
                     tab.setIcon(R.drawable.home_icon)
                     tab.text = "Thông tin"
                 }
-                else -> tab.text = "Hóa đơn"
+
+                else -> {
+                    tab.setIcon(R.drawable.icon_nguoi_thue)
+                    tab.text = "Người Thuê"
+                }
             }
 
         }.attach()
