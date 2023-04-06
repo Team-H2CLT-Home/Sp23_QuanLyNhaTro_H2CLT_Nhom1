@@ -22,7 +22,7 @@
                 android:textColor="#FFFCFC"
                 android:textStyle="bold"
                 android:layout_marginLeft="40dp"
-                android:text="Thông tin cọc giữ chỗ"
+                android:text="Thông tin chi tiết khách thuê"
                 />
             <TextView
                 android:id="@+id/tvChiTietNguoiDungTenPhong"
