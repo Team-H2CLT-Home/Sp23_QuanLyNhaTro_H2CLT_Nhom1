@@ -52,6 +52,7 @@ class ActivityDoanhThu : AppCompatActivity() {
         binding.edNgayBatDauDoanhThu.isVisible = true
         binding.edNgayKetThucDoanhThu.isVisible = true
         binding.recyclerDoanhThu.isVisible=false
+
         val srf=binding.root.context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
         maKhu= srf.getString(MA_KHU_KEY, "")!!
 
@@ -112,12 +113,13 @@ class ActivityDoanhThu : AppCompatActivity() {
         Toast.makeText(binding.root.context, ""+sum, Toast.LENGTH_SHORT).show()
 
         binding.btnTongDoanhThu.setOnClickListener {
-            sum=HoaDonDao(binding.root.context).getAllInHoaDonByDate(ngayDau,ngayCuoi,maKhu).toLong()
+            sum=HoaDonDao(binding.root.context).getAllInHoaDonByDate(ngayDau,ngayCuoi,maKhu)
+            val sumFormat =String.format("%,d",sum).replace(',','.')
             if(sum==0L){
                 binding.recyclerDoanhThu.isVisible=false
-                binding.tvTongDoanhThu.text = "Tổng là: $sum đ"
+                binding.tvTongDoanhThu.text = "tổng là: $sumFormat đ"
             }else{
-                binding.tvTongDoanhThu.text = "Tổng là: $sum đ"
+                binding.tvTongDoanhThu.text = "tổng là: $sumFormat đ"
                 binding.recyclerDoanhThu.isVisible=true
                 reload()
             }
@@ -143,7 +145,6 @@ class ActivityDoanhThu : AppCompatActivity() {
         list = HoaDonDao(binding.root.context).getAllInHoaDonByMaKhu(maKhu) as MutableList<HoaDon>
         val hoaDonDaThanhToanAdapter  = HoaDonDaThanhToanAdapter(list)
         binding.recyclerDoanhThu.adapter = hoaDonDaThanhToanAdapter
-
         hoaDonDaThanhToanAdapter.notifyDataSetChanged()
     }
 
