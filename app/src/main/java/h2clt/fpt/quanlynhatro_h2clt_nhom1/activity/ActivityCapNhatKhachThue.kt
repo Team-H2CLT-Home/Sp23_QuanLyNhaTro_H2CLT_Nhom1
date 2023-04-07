@@ -111,7 +111,7 @@ class ActivityCapNhatKhachThue : AppCompatActivity() {
         binding.btnLuuSuaNguoiDung.setOnClickListener {
             if(binding.chkTrangThaiKhachThue.isChecked){
                 NguoiDungDao(binding.root.context).updateTrangThaiNguoiDungThanhDaO(nguoiDung.ma_nguoi_dung)
-                thongBaoXoa("Xóa thành công ")
+                thongBaoXoa("Xác nhận xoá? ")
                 if(NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(maPhongCu).isEmpty()){
                     PhongDao(this@ActivityCapNhatKhachThue).updateTrangThaiPhongThanhDaO(maPhongCu)
                 }

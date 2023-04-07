@@ -49,9 +49,11 @@ class FragmentThongTin : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val soNguoiO=NguoiDungDao(binding.root.context).getNguoiDungByMaPhong(maPhong).size
         binding.edChiTietTenPhong.setText(phong.ten_phong)
         binding.edChiTietDienTich.setText(phong.dien_tich.toString())
         binding.edGiaThue.setText(phong.gia_thue.toString())
+        binding.tvSoNguoiHienTai.setText(soNguoiO.toString())
         binding.edSoNguoiOToiDa.setText(phong.so_nguoi_o.toString())
         listDichTrongPhong=LoaiDichVuPhongDao(context).getAllInLoaiDichVuByPhong(maPhong)
         binding.edSoDichVu.setText(listDichTrongPhong.size.toString())

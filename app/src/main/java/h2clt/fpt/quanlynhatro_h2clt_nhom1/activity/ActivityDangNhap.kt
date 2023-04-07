@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.AdminDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.KhuTroDao
@@ -56,6 +57,7 @@ class ActivityDangNhap : AppCompatActivity() {
                             val intent = Intent(this@ActivityDangNhap, ActivityManHinhChinhChuTro::class.java)
                             startActivity(intent)
                             finish()
+                            Loading(this).cancel()
                         },2000)
                         rememberUser(userName,passWord,check.isChecked)
 
@@ -107,6 +109,7 @@ class ActivityDangNhap : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Loading(this@ActivityDangNhap).dismiss()
+        Loading(this@ActivityDangNhap).cancel()
     }
+
 }

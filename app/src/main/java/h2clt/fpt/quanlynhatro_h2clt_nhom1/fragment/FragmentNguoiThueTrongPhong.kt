@@ -3,6 +3,7 @@ package h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +50,23 @@ class FragmentNguoiThueTrongPhong : Fragment() {
         })
         binding.rcyNguoiDangOTrongPhong.adapter = nguoiThueAdapter
         binding.rcyNguoiDangOTrongPhong.layoutManager = LinearLayoutManager(activity)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        listNguoiDung= NguoiDungDao(requireActivity()).getAllInNguoiDangOByMaKhu(maKhu).filter { it.ma_phong==maPhong }
+        val nguoiThueAdapter = NguoiThueAdapter(listNguoiDung,object : KhachThueInterface {
+            override fun OnClickKhachThue(pos: Int) {
+                val nguoiDung = listNguoiDung[pos]
+                val intent = Intent(requireContext(), ActivityCapNhatKhachThue::class.java)
+                intent.putExtra("khachThue",nguoiDung)
+                startActivity(intent)
+            }
+
+        })
+        binding.rcyNguoiDangOTrongPhong.adapter = nguoiThueAdapter
+        binding.rcyNguoiDangOTrongPhong.layoutManager = LinearLayoutManager(activity)
+        Log.d("aaaa", "onResume: called ")
     }
 }
 

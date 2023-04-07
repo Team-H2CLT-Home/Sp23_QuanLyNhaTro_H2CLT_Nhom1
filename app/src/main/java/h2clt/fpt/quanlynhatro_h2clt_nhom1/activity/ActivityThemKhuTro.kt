@@ -40,7 +40,6 @@ class ActivityThemKhuTro : AppCompatActivity() {
             if(b) {
                 binding.SoPhongParent.visibility = View.VISIBLE
                 binding.tvTuDongTaoPhong.visibility = View.VISIBLE
-                binding.edSoPhong.setText("")
             }
             else{
                 binding.tvTuDongTaoPhong.visibility=View.GONE
@@ -49,34 +48,30 @@ class ActivityThemKhuTro : AppCompatActivity() {
             }
         }
         binding.btnTiepTuc.setOnClickListener {
-            val id = UUID.randomUUID().toString()
-                val khuTro = KhuTro(
+            if(!validate()){
+                thongBaoLoi("Vui lòng nhập đủ thông tin!!!")
+            }else{
+                val id=UUID.randomUUID().toString()
+                val khuTro=KhuTro(
                     ma_khu_tro = id,
                     ten_khu_tro = binding.edTenKhuTro.text.toString(),
                     so_luong_phong = binding.edSoPhong.text.toString().toInt(),
                     dia_chi = binding.edDiaChi.text.toString(),
                     ten_dang_nhap = admin
                 )
-                val dao = KhuTroDao(this@ActivityThemKhuTro).insertKhuTro(khuTro)
-                if (dao > 0) {
-                    if (binding.edSoPhong.text.toString().isBlank() || binding.edSoPhong.text.toString().toInt()==0) {
-                        val intent = Intent(this@ActivityThemKhuTro, ActivityManHinhChinhChuTro::class.java)
-                        intent.putExtra(MA_KHU_KEY, id)
-                        startActivity(intent)
-                        finishAffinity()
-                    }
-                    else{
-                    val intent = Intent(this@ActivityThemKhuTro, ActivityTaoPhongKhiThemKhu::class.java)
+                val dao=KhuTroDao(this@ActivityThemKhuTro).insertKhuTro(khuTro)
+                if(dao>0){
+                    val intent=Intent(this@ActivityThemKhuTro, ActivityTaoPhongKhiThemKhu::class.java)
                     intent.putExtra(SO_LUONG_PHONG_KEY, binding.edSoPhong.text.toString().toInt())
                     intent.putExtra(MA_KHU_TU_TAO_KHU, id)
                     startActivity(intent)
                     finishAffinity()
-                    }
-                }
-                else {
+                }else{
                     thongBaoLoi("lưu thất bại")
                 }
             }
+        }
+
     }
 
     fun validate():Boolean{

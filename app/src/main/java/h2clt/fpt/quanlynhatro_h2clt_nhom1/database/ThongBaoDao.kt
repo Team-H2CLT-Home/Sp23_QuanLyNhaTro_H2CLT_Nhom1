@@ -23,10 +23,33 @@ class ThongBaoDao(context: Context) {
         return db.insert(ThongBao.TB_NAME,null,values)
     }
     @SuppressLint("Range", "SuspiciousIndentation")
-    fun getAllInThongBao():List<ThongBao>{
+    fun getAllInThongBao():List<ThongBao> {
+        val list = mutableListOf<ThongBao>()
+        val sql = """
+            select*from ${ThongBao.TB_NAME} 
+        """.trimIndent()
+        val c = db.rawQuery(sql, null)
+
+        if (c.moveToFirst()) {
+            do {
+                val thongBao = ThongBao(
+                    ma_thong_bao = c.getString(c.getColumnIndex(ThongBao.CLM_MA_THONG_BAO)),
+                    tieu_de = c.getString(c.getColumnIndex(ThongBao.CLM_TIEU_DE)),
+                    ngay_thong_bao = c.getString(c.getColumnIndex(ThongBao.CLM_NGAY_THONG_BAO)),
+                    noi_dung = c.getString(c.getColumnIndex(ThongBao.CLM_NOI_DUNG)),
+                    ma_khu = c.getString(c.getColumnIndex(ThongBao.CLM_MA_KHU)),
+                    loai_thong_bao = c.getInt(c.getColumnIndex(ThongBao.CLM_LOAI_THONG_BAO))
+                )
+                list += thongBao
+            } while (c.moveToNext())
+        }
+        return list
+    }
+    @SuppressLint("Range", "SuspiciousIndentation")
+    fun getAllInThongBaoByMaKhu(maKhu:String):List<ThongBao>{
         val list= mutableListOf<ThongBao>()
         val sql="""
-            select*from ${ThongBao.TB_NAME} 
+            select*from ${ThongBao.TB_NAME} where ${ThongBao.CLM_MA_KHU} = "$maKhu" 
         """.trimIndent()
         val c=db.rawQuery(sql,null)
 
@@ -43,8 +66,6 @@ class ThongBaoDao(context: Context) {
                 list+=thongBao
             }while (c.moveToNext())
         }
-
-
         return list
     }
     @SuppressLint("Range")
