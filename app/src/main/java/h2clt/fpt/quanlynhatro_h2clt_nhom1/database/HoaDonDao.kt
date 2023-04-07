@@ -117,16 +117,17 @@ class HoaDonDao(context: Context) {
 
     @SuppressLint("Range")
     fun getAllInHoaDonByDate(dateStart:String, dateEnd:String,maKhu:String): Long {
-        val list= mutableListOf<Int>()
+        val list= mutableListOf<Long>()
         val sql="""
-            select sum(${HoaDon.CLM_TONG}) as tong from ${HoaDon.TB_NAME} 
-            where ${HoaDon.CLM_NGAY_TAO_HOA_DON} BETWEEN "$dateStart" AND "$dateEnd" AND "$maKhu"
+            select sum(${HoaDon.TB_NAME}.${HoaDon.CLM_TONG}) as tong from ${HoaDon.TB_NAME} 
+            join ${Phong.TB_NAME} on ${HoaDon.TB_NAME}.${HoaDon.CLM_MA_PHONG}=${Phong.TB_NAME}.${Phong.CLM_MA_PHONG}
+            where ${HoaDon.TB_NAME}.${HoaDon.CLM_NGAY_TAO_HOA_DON} BETWEEN ? AND ? AND ${Phong.TB_NAME}.${Phong.CLM_MA_KHU}="$maKhu"
         """.trimIndent()
-        val c=db.rawQuery(sql, null)
+        val c=db.rawQuery(sql, arrayOf(dateStart,dateEnd))
         if(c.moveToFirst()){
             do {
                 try {
-                    list.add(c.getInt(c.getColumnIndex(HoaDon.CLM_TONG)))
+                    list.add(c.getLong(c.getColumnIndex(HoaDon.CLM_TONG)))
                 } catch (e: Exception) {
                     list.add(0)
                 }
