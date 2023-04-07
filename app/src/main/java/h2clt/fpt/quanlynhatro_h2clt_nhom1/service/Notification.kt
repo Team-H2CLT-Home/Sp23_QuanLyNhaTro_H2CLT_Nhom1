@@ -11,22 +11,22 @@ import java.util.UUID
 
 
 const val notificationID=1
-const val channelID="ChanelID"
-const val titleExtras="titleExtras"
-const val messExtras="messExtras"
-const val maKhu="maKhu"
-const val date="ngayThongBao"
-const val loaiThongBao="loaiThongBao"
+const val CHANNEL_ID="channel1"
+const val TITLE_EXTRAS="titleExtras"
+const val MESS_EXTRAS="messExtras"
+const val MA_KHU="maKhu"
+const val DATE="ngayThongBao"
+const val LOAI_THONG_BAO="loaiThongBao"
 
 class Notification: BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        val maKhu=intent.getStringExtra(maKhu)!!
-        val tieuDe=intent.getStringExtra(titleExtras)!!
-        val noiDung=intent.getStringExtra(messExtras)!!
-        val channel=intent.getStringExtra(channelID)!!
-        val ngayThongBao=intent.getStringExtra(date)!!
-        val loai=intent.getIntExtra(loaiThongBao, 0)
-        val notification=NotificationCompat.Builder(context,channel)
+        val maKhu=intent.getStringExtra(MA_KHU)!!
+        val tieuDe=intent.getStringExtra(TITLE_EXTRAS)!!
+        val noiDung=intent.getStringExtra(MESS_EXTRAS)!!
+        val ngayThongBao=intent.getStringExtra(DATE)!!
+        val channel=intent.getStringExtra(CHANNEL_ID)!!
+        val loai=intent.getIntExtra(LOAI_THONG_BAO, 0)
+        val notification=NotificationCompat.Builder(context, channel)
             .setSmallIcon(androidx.core.R.drawable.notification_bg)
             .setContentTitle(tieuDe)
             .setContentText(noiDung).build()

@@ -20,9 +20,8 @@ class ActivityDangKy : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDangKyBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.tbDangKy
         setSupportActionBar(binding.tbDangKy )
-        val ab = getSupportActionBar()
+        val ab = supportActionBar
         ab?.setHomeAsUpIndicator(R.drawable.black_left)
         ab?.setDisplayHomeAsUpEnabled(true)
         binding.btnLuuDK.setOnClickListener {
