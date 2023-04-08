@@ -43,9 +43,9 @@ class HoaDonDaThanhToanViewHolder(
                 NguoiDungDao(binding.root.context).getListNguoiDungByMaPhong(phong.ma_phong).find { it.trang_thai_chu_hop_dong==1 }
             }
 
-            binding.tvTong.text = hoaDon.tong.toString()
+            binding.tvTong.text = dinhDangTien(hoaDon.tong.toString())
             binding.tvTong.setTextColor(Color.argb(200,0,200,0))
-            binding.tvDaThu.text =  hoaDon.tong.toString()
+            binding.tvDaThu.text =  dinhDangTien(hoaDon.tong.toString())
             binding.tvDaThu.setTextColor(Color.argb(200,0,200,0))
 
             val dateFormat: java.text.DateFormat = SimpleDateFormat("yyyy-MM-dd")
@@ -60,6 +60,7 @@ class HoaDonDaThanhToanViewHolder(
 
             binding.tvThang.setText("T${month.toString()}")
             binding.tvNam.setText(year.toString())
+            binding.textViewHoaDOn.text = "Thu tiền tháng ${month.toString()}"
 
 
             if (chuHopDong!=null) {
@@ -85,16 +86,16 @@ class HoaDonDaThanhToanViewHolder(
 
                 dialog.tvTenPhong.text = phong?.ten_phong
                 dialog.tvNgay.text = chuyenNgay(hoaDon.ngay_tao_hoa_don)
-                dialog.tvTienPhong.text = hoaDon.gia_thue.toString() + " Vnd"
-                dialog.tvGiaDichVu.text = hoaDon.gia_dich_vu.toString() +" Vnd"
-                dialog.tvSoDien.text = hoaDon.so_dien.toString() + " Số"
-                dialog.tvKhoiNuoc.text = hoaDon.so_nuoc.toString() + " Khối"
-                dialog.tvTienMienGiam.text = hoaDon.mien_giam.toString() + " Vnd"
+                dialog.tvTienPhong.text =   "${dinhDangTien(hoaDon.gia_thue.toString())} Vnd"
+                dialog.tvGiaDichVu.text = "${dinhDangTien(hoaDon.gia_dich_vu.toString())} Vnd"
+                dialog.tvSoDien.text =  "${dinhDangTien(hoaDon.so_dien.toString())} Số"
+                dialog.tvKhoiNuoc.text =   "${hoaDon.so_nuoc.toString()} Khối"
+                dialog.tvTienMienGiam.text =  "${hoaDon.mien_giam.toString()} Vnd"
                 dialog.tvNgayHoaDon.text = "Hóa đơn tháng "+ chuyenNgay(hoaDon.ngay_tao_hoa_don)
                 dialog.chkThanhToan.isChecked = true
 
 
-                dialog.tvTongTien.text = hoaDon.tong.toString()
+                dialog.tvTongTien.text = dinhDangTien(hoaDon.tong.toString())
                 dialog.tvTongTien.setTextColor(Color.argb(200,0,200,0))
                 dialog.btnDong.setOnClickListener {
                     bottomSheetDialog.dismiss()
@@ -105,6 +106,7 @@ class HoaDonDaThanhToanViewHolder(
         else{
             binding.linerLayoutItemHD.isVisible  = false
         }
+        binding.lnThongBaoHoaDon.isVisible = false
     }
 }
 fun chuyenNgay(ngay : String ):String{
@@ -112,6 +114,10 @@ fun chuyenNgay(ngay : String ):String{
     val objDate = sdfNgay.parse(ngay)
     val ngay =  DateFormat.format("MM-yyyy",objDate) as String
     return ngay
+}
+fun dinhDangTien(gia : String): String{
+    val tienFormat = String.format("%,d",gia.toLong()).replace(",",".")
+    return tienFormat
 }
 
 fun nhanTinHD(sdt:String, message:String, context: Context){

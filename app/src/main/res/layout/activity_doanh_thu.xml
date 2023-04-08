@@ -15,37 +15,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="vertical">
+            android:background="@color/white"
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp">
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="Ngày bắt đầu"
-                    android:textColor="@color/black"/>
+                    android:text="Chọn ngày đầu"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    />
                 <androidx.cardview.widget.CardView
                     android:id="@+id/CardViewchonNgayBatDauDoanhThu"
-                    android:layout_width="200dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:backgroundTint="@color/white"
-                    app:cardCornerRadius="10dp">
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginBottom="5dp"
+                    android:backgroundTint="@color/mauNoiBatNen"
+                    app:cardCornerRadius="5dp">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+                        android:layout_marginLeft="15dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -53,43 +55,50 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="1dp"
+                            android:layout_margin="3dp"
                             android:src="@drawable/icon_ngay" />
 
                         <EditText
                             android:id="@+id/edNgayBatDauDoanhThu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_margin="5dp"
+                            android:padding="3dp"
                             android:enabled="false"
-                            android:hint="2022-12-02"
+                            android:textSize="19dp"
+                            android:hint="dd-MM-yyyy"
                             android:textColor="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp">
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="Ngày kết thúc"
-                    android:textColor="@color/black"/>
+                    android:text="Chọn ngày cuối"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:padding="4dp"
+                    android:textStyle="bold"
+                    />
                 <androidx.cardview.widget.CardView
                     android:id="@+id/CardViewNgayKetThucDoanhThu"
-                    android:layout_width="200dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:backgroundTint="@color/white"
-                    app:cardCornerRadius="10dp">
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:backgroundTint="@color/mauNoiBatNen"
+                    app:cardCornerRadius="5dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+                        android:layout_marginLeft="10dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -97,16 +106,18 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="1dp"
+                            android:layout_margin="3dp"
                             android:src="@drawable/icon_ngay" />
 
                         <EditText
                             android:id="@+id/edNgayKetThucDoanhThu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_margin="5dp"
                             android:enabled="false"
-                            android:hint="2022-12-02"
+                            android:textSize="19dp"
+                            android:hint="dd-MM-yyyy"
+                            android:padding="3dp"
                             android:textColor="@color/black" />
 
 
@@ -129,13 +140,14 @@
             android:layout_weight="1"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:padding="3dp"
+        android:background="@color/white"
         android:orientation="horizontal">
         <Button
             android:id="@+id/btnTongDoanhThu"
@@ -147,14 +159,33 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
-        <TextView
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Tổng tiền"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:paddingLeft="10dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"/>
+            <TextView
             android:id="@+id/tvTongDoanhThu"
             android:layout_width="wrap_content"
-            android:text="Tổng là: 0 đ"
+            android:layout_gravity="center"
+            android:text=" 0 đ"
             android:layout_marginRight="10dp"
             android:textColor="@color/mauDo"
             android:textSize="20sp"
+                android:paddingLeft="10dp"
             android:layout_height="wrap_content"/>
+        </LinearLayout>
+
 
 
     </LinearLayout>

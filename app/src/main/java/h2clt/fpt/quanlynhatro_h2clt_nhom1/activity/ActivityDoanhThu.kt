@@ -113,13 +113,13 @@ class ActivityDoanhThu : AppCompatActivity() {
         Toast.makeText(binding.root.context, ""+sum, Toast.LENGTH_SHORT).show()
 
         binding.btnTongDoanhThu.setOnClickListener {
-            sum=HoaDonDao(binding.root.context).getAllInHoaDonByDate(ngayDau,ngayCuoi,maKhu)
+            sum=HoaDonDao(binding.root.context).getAllInHoaDonByDate(ngayDau,ngayCuoi,maKhu,1)
             val sumFormat =String.format("%,d",sum).replace(',','.')
             if(sum==0L){
                 binding.recyclerDoanhThu.isVisible=false
-                binding.tvTongDoanhThu.text = "tổng là: $sumFormat đ"
+                binding.tvTongDoanhThu.text = "$sumFormat đ"
             }else{
-                binding.tvTongDoanhThu.text = "tổng là: $sumFormat đ"
+                binding.tvTongDoanhThu.text = "$sumFormat đ"
                 binding.recyclerDoanhThu.isVisible=true
                 reload()
             }

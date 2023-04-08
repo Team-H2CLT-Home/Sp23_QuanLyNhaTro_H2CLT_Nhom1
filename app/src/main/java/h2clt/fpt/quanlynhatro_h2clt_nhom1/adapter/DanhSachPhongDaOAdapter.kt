@@ -23,7 +23,7 @@ class DanhSachPhongDaOViewHolder(
 
           //  val maPhong = PhongDao(binding.root.context).getPhongById(phong.ma_phong)
             binding.tvTenPhong.text = phong.ten_phong
-            binding.tvGiaThue.text = phong.gia_thue.toString()
+            binding.tvGiaThue.text = dinhDangTienPhongDaO(phong.gia_thue.toString())
             binding.chkTrangThaiPhongTrong.isChecked = true
             binding.chkTrangThaiPhongTrong.isClickable = false
             binding.linnerLayoutItemPhong.setOnClickListener {
@@ -38,6 +38,10 @@ fun manHinhHoaDon(context: Context, id:String){
         putExtra(MA_PHONG_HOA_DON_KEY, id)
     }
     context.startActivity(intent)
+}
+fun dinhDangTienPhongDaO(gia : String): String{
+    val tienFormat = String.format("%,d",gia.toLong()).replace(",",".")
+    return tienFormat
 }
 class DanhSachPhongDaOAdapter(
     val list:List<Phong>,
