@@ -136,6 +136,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <LinearLayout
+                    android:id="@+id/lnSoDienCu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -176,6 +177,7 @@
                             android:id="@+id/edSoDienCu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:inputType="number"
                             android:background="@drawable/boder_tron_colorwhite"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -186,6 +188,7 @@
                     android:background="@color/black"
                     android:layout_marginTop="10dp"/>
                 <LinearLayout
+                    android:id="@+id/lnSoDienMoi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -226,6 +229,7 @@
                             android:id="@+id/edSoDienMoi"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:inputType="number"
                             android:background="@drawable/boder_tron_colorwhite"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -237,6 +241,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <LinearLayout
+                    android:id="@+id/lnSoNuocCu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -260,7 +265,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:text="Đơn giá: 3500đ/KHw * Số điện"
+                            android:text="Số nước của tháng trước"
                             android:textSize="18dp"
                             android:textColor="#636363"
                             />
@@ -289,6 +294,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <LinearLayout
+                    android:id="@+id/lnSoNuocMoi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -312,7 +318,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:text="Đơn giá: 25.000đ/khối hoặc tính theo đầu người"
+                            android:text="Số nước của tháng mới"
                             android:textSize="18dp"
                             android:textColor="#636363"
                             />

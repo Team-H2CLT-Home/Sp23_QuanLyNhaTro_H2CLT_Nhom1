@@ -75,8 +75,8 @@ class HoaDonViewHolder(
             }
             binding.tvTenPhong.text = phong?.ten_phong
 
-            binding.tvTong.text = hoaDon.tong.toString()
-            binding.tvConLai.text = hoaDon.tong.toString()
+            binding.tvTong.text = dinhDangTien(hoaDon.tong.toString())
+            binding.tvConLai.text = dinhDangTien(hoaDon.tong.toString())
 
             val dateFormat: java.text.DateFormat = SimpleDateFormat("yyyy-MM-dd")
             val newDate = dateFormat.parse(hoaDon.ngay_tao_hoa_don)
@@ -100,16 +100,16 @@ class HoaDonViewHolder(
 
                 dialog.tvTenPhong.text = phong?.ten_phong
                 dialog.tvNgay.text = chuyenNgay1(hoaDon.ngay_tao_hoa_don)
-                dialog.tvTienPhong.text = hoaDon.gia_thue.toString() + " Vnd"
-                dialog.tvGiaDichVu.text = hoaDon.gia_dich_vu.toString() +" Vnd"
-                dialog.tvSoDien.text = hoaDon.so_dien.toString() + " Số"
-                dialog.tvKhoiNuoc.text = hoaDon.so_nuoc.toString() + " Khối"
-                dialog.tvTienMienGiam.text = hoaDon.mien_giam.toString() + " Vnd"
+                dialog.tvTienPhong.text =   "${dinhDangTien(hoaDon.gia_thue.toString())} Vnd"
+                dialog.tvGiaDichVu.text = "${dinhDangTien(hoaDon.gia_dich_vu.toString())} Vnd"
+                dialog.tvSoDien.text =  "${dinhDangTien(hoaDon.so_dien.toString())} Số"
+                dialog.tvKhoiNuoc.text =   "${hoaDon.so_nuoc.toString()} Khối"
+                dialog.tvTienMienGiam.text =  "${hoaDon.mien_giam.toString()} Vnd"
                 dialog.tvNgayHoaDon.text = "Hóa đơn tháng "+ chuyenNgay1(hoaDon.ngay_tao_hoa_don)
                 dialog.chkThanhToan.isChecked = false
 
 
-                dialog.tvTongTien.text = hoaDon.tong.toString()
+                dialog.tvTongTien.text = dinhDangTien(hoaDon.tong.toString())
                 dialog.btnDong.setOnClickListener {
                     bottomSheetDialog.dismiss()
                 }
@@ -120,6 +120,10 @@ class HoaDonViewHolder(
             binding.linerLayoutItemHD.isVisible  = false
         }
     }
+}
+fun dinhDangTien1(gia : String): String{
+    val tienFormat = String.format("%,d",gia.toLong()).replace(",",".")
+    return tienFormat
 }
 fun nhanTin1(sdt:String, message:String, context: Context){
 

@@ -50,7 +50,7 @@ class ActivityTaoHoaDon : AppCompatActivity() {
         val dichVuTheoDauNguoi=listDV.filter { it.trang_thai_loai_dich_vu==2 }.sumOf { it.gia_dich_vu *soNguoiO }
         val dichVuTheoPhong=listDV.filter { it.trang_thai_loai_dich_vu==3 }.sumOf { it.gia_dich_vu }
         val loaiDichVuPhongDao=LoaiDichVuPhongDao(this@ActivityTaoHoaDon)
-        binding.edGiaDichVu.setText((dichVuTheoDauNguoi*soNguoiO+dichVuTheoPhong).toString())
+        binding.edGiaDichVu.setText(dinhDangTienTaoHoaDon((dichVuTheoDauNguoi*soNguoiO+dichVuTheoPhong).toString()))
         if(dichVuDien!=null && dichVuNuoc!=null){
             when {
                 dichVuDien.so_cu<0 -> {
@@ -58,6 +58,7 @@ class ActivityTaoHoaDon : AppCompatActivity() {
                 }
                 dichVuNuoc.so_cu<0 -> {
                     binding.edSoNuocCu.setText("")
+
                 }
                 dichVuNuoc.trang_thai_loai_dich_vu !=1 -> {
                     binding.edSoNuocCu.apply {
@@ -70,31 +71,32 @@ class ActivityTaoHoaDon : AppCompatActivity() {
                     }
                 }
                 else -> {
-                    binding.edSoDienCu.setText(dichVuDien.so_moi.toString())
-                    binding.edSoNuocCu.setText(dichVuNuoc.so_moi.toString())
+                    binding.edSoDienCu.setText(dinhDangTienTaoHoaDon(dichVuDien.so_moi.toString()))
+                    binding.edSoNuocCu.setText(dinhDangTienTaoHoaDon(dichVuNuoc.so_moi.toString()))
                 }
             }
         }
 
         binding.edTenPhongTro.setText(phong.ten_phong)
-        binding.edGiaThue.setText("${phong.gia_thue} VND")
+        binding.edGiaThue.setText("${dinhDangTienTaoHoaDon(phong.gia_thue.toString())} VND")
         binding.btnLuuHoaDon.setOnClickListener {
-            val soDienCu=binding.edSoDienCu.text.toString().toInt()
-            val soDienMoi=binding.edSoDienMoi.text.toString().toInt()
-            val soNuocCu=binding.edSoNuocCu.text.toString().toInt()
-            val soNuocMoi=binding.edSoNuocMoi.text.toString().toInt()
-            val mienGiam=binding.edTienMienGiam.text.toString().toInt()
-            if(dichVuDien!=null && dichVuNuoc !=null) {
-                val tong=(dichVuDien.gia_dich_vu*(soDienMoi-soDienCu))+
-                        (dichVuNuoc.gia_dich_vu * (soNuocMoi-soNuocCu))+
-                        phong.gia_thue.toInt()+
-                        dichVuTheoDauNguoi*soNguoiO+dichVuTheoPhong-mienGiam
-                Toast.makeText(binding.root.context, tong.toString(), Toast.LENGTH_SHORT).show()
-                val spf = SimpleDateFormat("yyyy-MM-dd")
-                val date = spf.format(Date())
-                if (validate() < 1) {
-                    thongBaoLoi("Nhập đầy đủ thông tin")
-                } else {
+            if (validate() <1) {
+                thongBaoLoi("Nhập đầy đủ thông tin")
+            }else{
+
+                val soDienCu=binding.edSoDienCu.text.toString().toInt()
+                val soDienMoi=binding.edSoDienMoi.text.toString().toInt()
+                val soNuocCu=binding.edSoNuocCu.text.toString().toInt()
+                val soNuocMoi=binding.edSoNuocMoi.text.toString().toInt()
+                val mienGiam=binding.edTienMienGiam.text.toString().toInt()
+                if(dichVuDien!=null && dichVuNuoc !=null) {
+                    val tong=(dichVuDien.gia_dich_vu*(soDienMoi-soDienCu))+
+                            (dichVuNuoc.gia_dich_vu * (soNuocMoi-soNuocCu))+
+                            phong.gia_thue.toInt()+
+                            dichVuTheoDauNguoi*soNguoiO+dichVuTheoPhong-mienGiam
+                    // Toast.makeText(binding.root.context, tong.toString(), Toast.LENGTH_SHORT).show()
+                    val spf = SimpleDateFormat("yyyy-MM-dd")
+                    val date = spf.format(Date())
                     val id = UUID.randomUUID().toString()
                     val check: Int = if (binding.chkDaThanhToan.isChecked) {
                         1
@@ -160,6 +162,7 @@ class ActivityTaoHoaDon : AppCompatActivity() {
             }
         }
         binding.btnHuyHoaDon.setOnClickListener {
+
             binding.edSoDienMoi.setText("")
             binding.edSoNuocMoi.setText("")
             binding.edTienMienGiam.setText("")
@@ -167,9 +170,16 @@ class ActivityTaoHoaDon : AppCompatActivity() {
         }
 
     }
+    fun dinhDangTienTaoHoaDon(gia : String): String{
+        val tienFormat = String.format("%,d",gia.toLong()).replace(",",".")
+        return tienFormat
+    }
     fun validate(): Int {
         var check = -1
-        if (binding.edSoDienMoi.text.toString().isNotBlank() &&
+
+        if (binding.edSoDienCu.text.toString().isNotBlank() &&
+            binding.edSoNuocCu.text.toString().isNotBlank() &&
+            binding.edSoDienMoi.text.toString().isNotBlank() &&
             binding.edSoNuocMoi.text.toString().isNotBlank() &&
             binding.edTienMienGiam.text.toString().isNotBlank()) {
             check = 1
