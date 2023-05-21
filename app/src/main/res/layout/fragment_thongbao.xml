@@ -4,28 +4,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/mauNenApp"
-
     android:orientation="vertical">
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayoutThongBao"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabTextAppearance="@style/MyCustomTabText"
-        android:background="@drawable/boder_nen"
-        android:layout_marginTop="5dp"
-        />
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager2ThongBao"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="10dp"
-        />
-    <View
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#AEAEAE"
-        />
+        android:padding="5dp"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

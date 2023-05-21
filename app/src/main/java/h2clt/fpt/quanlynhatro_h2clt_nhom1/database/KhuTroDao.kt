@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.KhuTro
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 
 class KhuTroDao(context: Context) {
     val dbHelper= DbHelper(context)
@@ -19,6 +20,22 @@ class KhuTroDao(context: Context) {
             put(KhuTro.CLM_TEN_DANG_NHAP,khuTro.ten_dang_nhap)
         }
         return db.insert(KhuTro.TB_NAME,null,values)
+    }
+
+    fun updateInKhuTro(khuTro: KhuTro):Int{
+        val values=ContentValues()
+        values.apply {
+            put(KhuTro.CLM_MA_KHU_TRO,khuTro.ma_khu_tro)
+            put(KhuTro.CLM_TEN_KHU_TRO,khuTro.ten_khu_tro)
+            put(KhuTro.CLM_DIA_CHI,khuTro.dia_chi)
+            put(KhuTro.CLM_SO_LUONG_PHONG,khuTro.so_luong_phong)
+            put(KhuTro.CLM_TEN_DANG_NHAP,khuTro.ten_dang_nhap)
+        }
+        return db.update(KhuTro.TB_NAME,values,"${KhuTro.CLM_MA_KHU_TRO}", arrayOf(khuTro.ma_khu_tro))
+    }
+
+    fun deleteKhuTro(khuTro: KhuTro):Int{
+        return db.delete(KhuTro.TB_NAME,"${KhuTro.CLM_MA_KHU_TRO} =?", arrayOf<String>(khuTro.ma_khu_tro) )
     }
 
     @SuppressLint("Range")
@@ -41,5 +58,19 @@ class KhuTroDao(context: Context) {
             }while (c.moveToNext())
         }
         return list
+    }
+
+    @SuppressLint("Range")
+    fun getTenKhuTro():String{
+        val sql="""
+            select ${KhuTro.CLM_TEN_KHU_TRO} from ${KhuTro.TB_NAME} 
+        """.trimIndent()
+        val c=db.rawQuery(sql,null)
+
+        if(c.moveToFirst()) {
+            return c.getString(c.getColumnIndex(KhuTro.CLM_TEN_KHU_TRO))
+        }
+
+        return "null"
     }
 }

@@ -1,23 +1,25 @@
 package h2clt.fpt.quanlynhatro_h2clt_nhom1.activity
 
+import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
-import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.R
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.FILE_NAME
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.ListDichVuTrongPhongAdapter
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.ListLoaiDichVuAdapter
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.adapter.MA_KHU_KEY
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.DichVuPhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.LoaiDichVuPhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.PhongDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityThemPhongBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.DialogThemLoaiDichVuBinding
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.DichVuPhong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.LoaiDichVu
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.Phong
 import java.util.UUID
@@ -25,98 +27,113 @@ import java.util.UUID
 class ActivityThemPhong : AppCompatActivity() {
     private lateinit var binding:ActivityThemPhongBinding
     private var maKhu=""
-    private var soPhong:Int?=null
-    private  var soTang=""
-    private var loaiDichVuThem=LoaiDichVu(ma_loai_dich_vu ="",
-    ten_loai_dich_vu = "",
-    gia_dich_vu = 0,
-    trang_thai_loai_dich_vu = 0,
-    ma_dich_vu = "")
+    private var maPhong=""
+    private var check=false
+    private var listLoaiDichVu= listOf<LoaiDichVu>()
+    private var listLoaiDichVuPhong= listOf<LoaiDichVu>()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding= ActivityThemPhongBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+
+        setSupportActionBar(binding.tbThemPhong)
+        val ab = getSupportActionBar()
+        ab?.setHomeAsUpIndicator(R.drawable.black_left)
+        ab?.setDisplayHomeAsUpEnabled(true)
+
+
+        maPhong=UUID.randomUUID().toString()
         val phongDao=PhongDao(this)
         val loaiDichVuDao=LoaiDichVuPhongDao(this)
-        val dichVuPhongDao=DichVuPhongDao(this)
         val srf=getSharedPreferences(FILE_NAME, MODE_PRIVATE)
         maKhu=srf.getString(MA_KHU_KEY, "")!!
-        binding.cbTaoTuDong.setOnCheckedChangeListener { compoundButton, b ->
-            if (b){
-                binding.themSoPhongParrent.visibility=View.VISIBLE
-            }
-            else{
-                binding.themSoPhongParrent.visibility=View.GONE
-                binding.edSoPhongTro.setText("")
-            }
-        }
-        binding.switchTuDongTang.setOnCheckedChangeListener { p0, p1 ->
-            if (p1) {
-                binding.soTangParrent.visibility = View.VISIBLE
-            }
-            else{
-                binding.soTangParrent.visibility = View.GONE
-                binding.edSoTang.setText("")
-            }
-        }
+        val listLoaiDichVu=loaiDichVuDao.getAllInLoaiDichVuByKhuTro(maKhu)
+
         binding.btnThemDichVu.setOnClickListener {
+            check=true
             val build = AlertDialog.Builder(this).create()
             val dialog = DialogThemLoaiDichVuBinding.inflate(LayoutInflater.from(this))
-            build.setView(dialog.root)
-            dialog.btnLuuLoaiDV.setOnClickListener {
-                if (dialog.edTenLoaiDV.text.toString()
-                        .isNotBlank() && dialog.edGiaTienLoaiDV.text.toString().isNotBlank()
-                ) {
-                   loaiDichVuThem=loaiDichVuThem.copy(ten_loai_dich_vu = dialog.edTenLoaiDV.text.toString())
-                    loaiDichVuThem=loaiDichVuThem.copy(gia_dich_vu = dialog.edGiaTienLoaiDV.text.toString().toInt())
-
-                }
-                dialog.btnHuyLoaiDV.setOnClickListener {
-                    build.dismiss()
-                }
+            val listLoaiDichVuAdapter=ListLoaiDichVuAdapter(listLoaiDichVu,
+                this@ActivityThemPhong, maPhong)
+            dialog.listLoaiDichVu.adapter=listLoaiDichVuAdapter
+            dialog.btnHuyLoaiDV.setOnClickListener {
+                onResume()
+                build.dismiss()
             }
+                build.setView(dialog.root)
                 build.show()
         }
+
         binding.btnLuuThemPhong.setOnClickListener {
-            soPhong=binding.edSoPhongTro.text.toString().toIntOrNull() ?: 1
-            soTang=binding.edSoTang.text.toString()
-            repeat(soPhong!!){
-                val tenMacDinh=binding.edTenPhongTro.text.toString()
-                val maDichVuPhong=UUID.randomUUID().toString()
-                val phong=Phong(
-                    ma_phong = UUID.randomUUID().toString(),
-                    ten_phong = "$tenMacDinh$soTang${it+1}",
+           listLoaiDichVuPhong= loaiDichVuDao.getAllInLoaiDichVuByPhong(maPhong)
+            if (check && listLoaiDichVuPhong.isNotEmpty()) {
+                val soPhong = binding.edSoNguoiOToiDa.text.toString().toIntOrNull() ?: 0
+                val tenMacDinh = binding.edTenPhongTro.text.toString()
+                val phong = Phong(
+                    ma_phong = maPhong,
+                    ten_phong = tenMacDinh,
                     dien_tich = binding.edDienTichPhong.text.toString().toInt(),
                     gia_thue = binding.edGiaThue.text.toString().toLong(),
-                    so_nguoi_o = 0,
+                    so_nguoi_o = soPhong,
                     trang_thai_phong = 0,
-                    ma_khu = maKhu,
-                    ma_dich_vu = maDichVuPhong
-                )
-                val dichVuPhong=DichVuPhong(
-                    ma_dich_vu = maDichVuPhong,
-                    ten_dich_vu = "$tenMacDinh$soTang${it+1}"
-                )
-                val giaDien=LoaiDichVu(
-                    ma_dich_vu = maDichVuPhong,
-                    ma_loai_dich_vu = UUID.randomUUID().toString(),
-                    gia_dich_vu = binding.edGiaDien.text.toString().toInt(),
-                    trang_thai_loai_dich_vu = 0,
-                    ten_loai_dich_vu = "Giá điện"
-                )
-                val giaNuoc=LoaiDichVu(
-                    ma_dich_vu = maDichVuPhong,
-                    ma_loai_dich_vu = UUID.randomUUID().toString(),
-                    gia_dich_vu = binding.edGiaNuoc.text.toString().toInt(),
-                    trang_thai_loai_dich_vu = 0,
-                    ten_loai_dich_vu = "Giá nươc"
+                    ma_khu = maKhu
                 )
                 phongDao.insertPhong(phong)
-                dichVuPhongDao.insertDichVuPhong(dichVuPhong)
-                loaiDichVuDao.insertLoaiDichVuPhong(giaDien)
-                loaiDichVuDao.insertLoaiDichVuPhong(giaNuoc)
+                thongBaoThanhCong("Thêm phòng thành công")
+            }
+            else{
+                thongBaoLoi("Không thêm được phòng vì chưa chọn loại dịch vụ")
             }
         }
+        binding.btnHuyThemPhong.setOnClickListener{
+            LoaiDichVuPhongDao(this).xoaLoaiDichVuByMaPhong(maPhong)
+            finish()
+        }
+
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        LoaiDichVuPhongDao(this).xoaLoaiDichVuByMaPhong(maPhong)
+        finish()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        listLoaiDichVu=LoaiDichVuPhongDao(this@ActivityThemPhong).getAllInLoaiDichVuByPhong(maPhong)
+        val listDichVuTrongPhongAdapter=ListDichVuTrongPhongAdapter(listLoaiDichVu, this@ActivityThemPhong)
+        binding.rcvListLoaiDichVu.adapter=listDichVuTrongPhongAdapter
+        binding.rcvListLoaiDichVu.layoutManager=LinearLayoutManager(this)
+    }
+
+    fun thongBaoLoi(loi : String){
+        val bundle = androidx.appcompat.app.AlertDialog.Builder(this)
+        bundle.setTitle("Thông Báo Lỗi")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
+    }
+    fun thongBaoThanhCong(loi : String){
+        val bundle = androidx.appcompat.app.AlertDialog.Builder(this)
+        bundle.setTitle("Thông Báo")
+        bundle.setMessage(loi)
+        bundle.setNegativeButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            finish()
+        })
+        bundle.setPositiveButton("Hủy", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+        })
+        bundle.show()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id: Int = item.getItemId();
+        if (id == android.R.id.home)
+            finish()
+        return super.onOptionsItemSelected(item);
     }
 
 

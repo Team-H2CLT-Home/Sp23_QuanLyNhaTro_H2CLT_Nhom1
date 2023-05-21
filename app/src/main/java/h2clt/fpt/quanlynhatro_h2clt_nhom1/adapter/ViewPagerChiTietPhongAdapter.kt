@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentHoaDon
+import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentNguoiThueTrongPhong
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.fragment.FragmentThongTin
 
 class ViewPagerChiTietPhongAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle)
@@ -19,7 +19,7 @@ class ViewPagerChiTietPhongAdapter(fragmentManager: FragmentManager, lifecycle: 
                 FragmentThongTin()
             }
             else ->{
-                FragmentHoaDon()
+                FragmentNguoiThueTrongPhong()
             }
 
         }

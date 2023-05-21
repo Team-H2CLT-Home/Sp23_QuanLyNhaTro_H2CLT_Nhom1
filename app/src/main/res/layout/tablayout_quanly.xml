@@ -37,16 +37,18 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/CocGiuCho"
+                android:id="@+id/quanLyDichVu"
                 style="@style/Tablayout_Linner">
 
                 <ImageView
                     style="@style/image_tabLayout"
-                    android:src="@drawable/icon_coctien" />
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/icon_dichvu"
+                    />
 
                 <TextView
                     style="@style/textView_tabLayout"
-                    android:text="Cọc giữ chỗ" />
+                    android:text="Dịch vụ" />
             </LinearLayout>
 
 
@@ -61,7 +63,7 @@
 
                 <TextView
                     style="@style/textView_tabLayout"
-                    android:text="Xử lý" />
+                    android:text="Xử lý hợp đồng" />
             </LinearLayout>
 
             <LinearLayout
@@ -144,6 +146,7 @@
                     android:text="Danh sách hợp đồng" />
             </LinearLayout>
         </GridLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -151,5 +154,6 @@
             android:background="#C6C6C6"
             />
     </LinearLayout>
+
 
 </ScrollView>

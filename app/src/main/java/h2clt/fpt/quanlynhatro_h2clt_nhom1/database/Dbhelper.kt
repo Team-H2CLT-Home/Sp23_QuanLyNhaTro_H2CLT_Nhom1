@@ -10,7 +10,7 @@ import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.*
 class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VERSION) {
     object H2CLT{
         const val DB_NAME="MyDB"
-        const val DB_VERSION=1
+        const val DB_VERSION=2
     }
     override fun onCreate(db: SQLiteDatabase?) {
         val admin="""
@@ -18,6 +18,9 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${Admin.CLM_SDT} text unique not NULL,
             ${Admin.CLM_TEN_DANG_NHAP} PRIMARY key NOT NULL,
             ${Admin.CLM_HO_TEN} text NOT NULL,
+            ${Admin.CLM_STK} text,
+            ${Admin.CLM_NGAN_HANG} text,
+            ${Admin.CLM_NGAY_SINH} text,
             ${Admin.CLM_MAT_KHAU} text NOT NULL );
         """.trimIndent()
         db?.execSQL(admin)
@@ -33,21 +36,19 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
         """.trimIndent()
         db?.execSQL(khu_tro)
 
-        val dich_vu_phong="""
-            CREATE TABLE ${DichVuPhong.TB_NAME}(
-            ${DichVuPhong.CLM_MA_DICH_VU} text PRIMARY KEY NOT NULL,
-            ${DichVuPhong.CLM_TEN_DICH_VU} text NOT NULL);
-        """.trimIndent()
-        db?.execSQL(dich_vu_phong)
 
         val loai_dich_vu="""
             CREATE TABLE ${LoaiDichVu.TB_NAME}(
             ${LoaiDichVu.CLM_MA_LOAI_DICH_VU} text PRIMARY KEY NOT NULL,
             ${LoaiDichVu.CLM_TEN_LOAI_DICH_VU} text  NOT NULL,
             ${LoaiDichVu.CLM_GIA_DICH_VU} integer NOT NULL,
-            ${LoaiDichVu.CLM_MA_DICH_VU} text NOT NULL ,
+            ${LoaiDichVu.CLM_MA_PHONG} text NOT NULL ,
             ${LoaiDichVu.CLM_TRANG_THAI_LOAI_DICH_VU} Integer NOT NULL,
-            FOREIGN KEY(${LoaiDichVu.CLM_MA_DICH_VU})REFERENCES ${DichVuPhong.TB_NAME}( ${DichVuPhong.CLM_MA_DICH_VU}));
+            ${LoaiDichVu.CLM_MA_KHU_TRO} text not null,
+            ${LoaiDichVu.CLM_SO_CU} integer not null,
+            ${LoaiDichVu.CLM_SO_MOI} integer not null,
+            FOREIGN KEY(${LoaiDichVu.CLM_MA_KHU_TRO}) REFERENCES ${KhuTro.TB_NAME}(${KhuTro.CLM_MA_KHU_TRO}),
+            FOREIGN KEY(${LoaiDichVu.CLM_MA_PHONG}) REFERENCES ${Phong.TB_NAME}(${Phong.CLM_MA_PHONG}));
         """.trimIndent()
         db?.execSQL(loai_dich_vu)
 
@@ -60,9 +61,7 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${Phong.CLM_SO_NGUOI_O} integer NOT NULL,
             ${Phong.CLM_TRANG_THAI_PHONG} integer NOT NULL,
             ${Phong.CLM_MA_KHU} text NOT NULL,
-            ${Phong.CLM_MA_DICH_VU} text NOT NULL,
-            FOREIGN KEY(${Phong.CLM_MA_KHU})REFERENCES ${KhuTro.TB_NAME}(${KhuTro.CLM_MA_KHU_TRO}),
-            FOREIGN KEY (${Phong.CLM_MA_DICH_VU} ) REFERENCES ${DichVuPhong.TB_NAME}(${DichVuPhong.CLM_MA_DICH_VU} )); 
+            FOREIGN KEY(${Phong.CLM_MA_KHU})REFERENCES ${KhuTro.TB_NAME}(${KhuTro.CLM_MA_KHU_TRO})); 
         """.trimIndent()
         db?.execSQL(phong)
 
@@ -71,11 +70,14 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             CREATE table ${HoaDon.TB_NAME}(
             ${HoaDon.CLM_MA_HOA_DON} text PRIMARY KEY NOT NULL,
             ${HoaDon.CLM_NGAY_TAO_HOA_DON} text NOT NULL,
+            ${HoaDon.CLM_GIA_THUE} integer not null,
             ${HoaDon.CLM_SO_DIEN} integer NOT NULL,
             ${HoaDon.CLM_SO_NUOC} integer NOT NULL,
             ${HoaDon.CLM_TRANG_THAI_HOA_DON} integer NOT NULL,
-            ${HoaDon.CLM_MIEN_GIAM}integer NOT NULL,
+            ${HoaDon.CLM_MIEN_GIAM} integer NOT NULL,
+            ${HoaDon.CLM_GIA_DICH_VU} integer not null,
             ${HoaDon.CLM_MA_PHONG} text NOT NULL,
+            ${HoaDon.CLM_TONG} long NOT NULL,
             FOREIGN KEY (${HoaDon.CLM_MA_PHONG} ) REFERENCES ${Phong.TB_NAME}(${Phong.CLM_MA_PHONG}));
         """.trimIndent()
         db?.execSQL(hoa_don)
@@ -85,6 +87,8 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${NguoiDung.CLM_MA_NGUOI_DUNG} text PRIMARY key NOT NULL,
             ${NguoiDung.CLM_HO_TEN_NGUOI_DUNG} text NOT NULL,
             ${NguoiDung.CLM_CCCD} text NOT NULL,
+            ${NguoiDung.CLM_NAM_SINH} text not null,
+            ${NguoiDung.CLM_QUE_QUAN_NGUOI_DUNG} text not null,
             ${NguoiDung.CLM_SDT_NGUOI_DUNG} text unique NOT NULL,
             ${NguoiDung.CLM_MA_PHONG} text NOT NULL,
             ${NguoiDung.CLM_TRANG_THAI_O} integer not NULL,
@@ -99,9 +103,11 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${HopDong.CLM_THOI_HAN} integer NOT NULL,
             ${HopDong.CLM_NGAY_O} text NOT NULL,
             ${HopDong.CLM_NGAY_HOP_DONG} text NOT NULL,
+            ${HopDong.CLM_NGAY_LAP_HOP_DONG} text NOT NULL,
             ${HopDong.CLM_ANH_HOP_DONG}  text NOT NULL,
             ${HopDong.CLM_TIEN_COC} long NOT NULL,
             ${HopDong.CLM_TRANG_THAI_HOP_DONG} integer NOT NULL,
+            ${HopDong.CLM_HIEU_LUC_HOP_DONG} integer NOT NULL,
             ${HopDong.CLM_MA_PHONG} text NOT NULL,
             ${HopDong.CLM_MA_NGUOI_DUNG} text NOT NULL,
             FOREIGN KEY (${HopDong.CLM_MA_PHONG} ) REFERENCES ${Phong.TB_NAME}(${Phong.CLM_MA_PHONG}),
@@ -114,13 +120,15 @@ class   DbHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null,DB_VER
             ${ThongBao.CLM_MA_THONG_BAO} text PRIMARY KEY NOT NULL,
             ${ThongBao.CLM_TIEU_DE} text NOT NULL,
             ${ThongBao.CLM_NGAY_THONG_BAO} text NOT NULL,
-            ${ThongBao.CLM_NOI_DUNG} text NOT NULL
+            ${ThongBao.CLM_NOI_DUNG} text NOT NULL,
+            ${ThongBao.CLM_MA_KHU} text NOT NULL,
+            ${ThongBao.CLM_LOAI_THONG_BAO} integer NOT NULL,
+            FOREIGN KEY (${ThongBao.CLM_MA_KHU} ) REFERENCES ${KhuTro.TB_NAME}(${KhuTro.CLM_MA_KHU_TRO})
             );
         """.trimIndent()
         db?.execSQL(thong_bao)
     }
-
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("Not yet implemented")
+
     }
 }

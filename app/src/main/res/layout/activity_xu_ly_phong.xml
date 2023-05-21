@@ -7,14 +7,34 @@
     android:layout_height="match_parent"
     android:background="@color/mauNenApp">
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbXuLyPhong"
         style="@style/toolBar"
         app:title="Xử Lý Hợp Đồng"
 
         />
-    <androidx.recyclerview.widget.RecyclerView
+    <!--<androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerXuLyPhong"
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
         android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>-->
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        >
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabDanhSachHopDong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/viewpagerDanhSachHopDong"/>
 </LinearLayout>

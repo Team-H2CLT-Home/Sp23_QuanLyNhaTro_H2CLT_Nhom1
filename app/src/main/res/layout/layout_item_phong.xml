@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lnPhong"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,6 +8,7 @@
     android:layout_margin="5dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/linnerLayoutItemPhong"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp">
@@ -34,6 +36,25 @@
                     android:textSize="20dp"
                     android:text="Phòng: A101"
                     android:textColor="@color/black"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tvGioiHanNguoiO"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tối đa: 5 người"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/tvSoNguoiHienTai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:text="Có 2 người đang ở"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -76,7 +97,7 @@
                     <CheckBox
                         android:id="@+id/chkTrangThaiPhongDaCoc"
                         style="@style/chk_trang_thai"
-                        android:text="Chưa cọc"
+                        android:text="Đang ở"
                         android:textColor="#DC0727"
                         android:clickable="false"
                         android:layout_marginLeft="20dp"

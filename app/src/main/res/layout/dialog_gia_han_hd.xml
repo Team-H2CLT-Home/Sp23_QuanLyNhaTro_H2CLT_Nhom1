@@ -9,11 +9,11 @@
         style="@style/toolBar"
         app:title="Gia hạn hợp đồng"
         />
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="Chỉ chọn 1 trong 2 cách gia hạn hợp đồng"/>
+        android:text="Chỉ chọn 1 trong 2 cách gia hạn hợp đồng"/>-->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,6 +71,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Thời hạn hợp đồng cũ"
                             android:enabled="false"
+                            android:textColor="@color/black"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -96,17 +97,69 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Thời hạn hợp đồng mới"
+                        android:inputType="number"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
             </androidx.cardview.widget.CardView>
-            <Spinner
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="#E4E2E2">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/boder_nen"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edNgayKetThucHopDongCu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ngày kết thúc hợp đồng cũ"
+                        android:enabled="false"
+                        android:textColor="@color/black"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="#E4E2E2">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/boder_nen"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edNgayKetThucHopDongMoi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ngày kết thúc hợp đồng mới"
+                        android:enabled="false"
+                        android:textColor="@color/black"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <!--<Spinner
                 android:id="@+id/spinnerChonThangGiaHan"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                />-->
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

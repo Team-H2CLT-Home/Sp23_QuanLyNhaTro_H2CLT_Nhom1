@@ -5,11 +5,13 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.AdminDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.database.KhuTroDao
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.databinding.ActivityDangNhapBinding
 import h2clt.fpt.quanlynhatro_h2clt_nhom1.model.KhuTro
+import java.util.logging.Handler
 
 
 const val THONG_TIN_DANG_NHAP="Thon_tin_dang_nhap"
@@ -27,7 +29,7 @@ class ActivityDangNhap : AppCompatActivity() {
         setContentView(binding.root)
         val adminDao=AdminDao(applicationContext)
         val khuTroDao=KhuTroDao(applicationContext)
-         val pref : SharedPreferences = getSharedPreferences(THONG_TIN_DANG_NHAP, MODE_PRIVATE)
+        val pref : SharedPreferences = getSharedPreferences(THONG_TIN_DANG_NHAP, MODE_PRIVATE)
         admin =pref.getString(USERNAME_KEY,"")!!
         binding.edTenDangNhap.setText(pref.getString(USERNAME_KEY,""))
         if (pref.getBoolean(CHECKBOX_KEY, false)) {
@@ -49,9 +51,14 @@ class ActivityDangNhap : AppCompatActivity() {
             if (userName.isNotBlank()&& passWord.isNotBlank()){
                 if (adminDao.checkLogin(userName,passWord)){
                     if (listKhuTro.isNotEmpty()){
-                        val intent = Intent(this@ActivityDangNhap, ActivityManHinhChinhChuTro::class.java)
-                        startActivity(intent)
-                        finish()
+                        Loading(this).show()
+                        val handler = android.os.Handler()
+                        handler.postDelayed(Runnable {
+                            val intent = Intent(this@ActivityDangNhap, ActivityManHinhChinhChuTro::class.java)
+                            startActivity(intent)
+                            finish()
+                            Loading(this).cancel()
+                        },2000)
                         rememberUser(userName,passWord,check.isChecked)
 
                     }else{
@@ -99,4 +106,10 @@ class ActivityDangNhap : AppCompatActivity() {
         edit.putBoolean(CHECKBOX_KEY,status)
         edit.commit()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Loading(this@ActivityDangNhap).cancel()
+    }
+
 }
